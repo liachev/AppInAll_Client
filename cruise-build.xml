@@ -1,0 +1,141 @@
+<project name="WAO-cruise-build" basedir=".">
+
+    <import file="./imported.xml"/>
+    <import file="./build-utils.xml"/>
+
+    <property name="out.dir" value="${offline.module.root}/out"/>
+    <property name="out.common" value="${offline.module.root}/out_common"/>
+    <property name="out.portal" value="${offline.module.root}/out_portal"/>
+    <property name="out.offline" value="${offline.module.root}/out_offline"/>
+
+    <target name="initArtifacts">
+        <delete dir="${artifacts.dir}" quiet="true"/>
+        <mkdir dir="${artifacts.dir}"/>
+    </target>
+
+    <target name="showTime">
+        <tstamp>
+            <format property="TODAY" pattern="d-MMMM-yyyy hh:mm:ss" locale="en,US"/>
+        </tstamp>
+        <echo message="File: ${ant.file} Task ${name} starts at ${TODAY}"/>
+    </target>
+
+    <target name="copyFiles">
+        <delete dir="${out.dir}" failonerror="false" includeEmptyDirs="true" quiet="true"/>
+        <copy-base-files out.dir="${out.dir}"/>
+    </target>
+
+    <target name="buildCss" depends="copyFiles">
+        <build-css-files out.dir="${out.dir}"/>
+    </target>
+
+    <target name="buildJs" depends="copyFiles">
+        <concat-js-files out.dir="${out.dir}"/>
+    </target>
+
+    <target name="compress" if="${do.compress}">
+        <compress-files static.dir="${out.dir}"/>
+    </target>
+
+    <target name="compressCommon" if="${do.compress}">
+        <compress-files static.dir="${out.common}"/>
+    </target>
+
+    <target name="copyAlternativeIndex" if="alternative.index.file">
+        <echo message="copyAlternativeIndex"/>
+        <echo message="alternative.index.file=${alternative.index.file}"/>
+        <echo message="index.file.to.replace=${index.file.to.replace}"/>
+        <copy tofile="${index.file.to.replace}" file="${alternative.index.file}" overwrite="true"/>
+    </target>
+
+    <target name="copyStaticCommonFiles" depends="buildCss, buildJs">
+        <echo message="out.dir=${out.dir}"/>
+        <echo message="out.common=${out.common}"/>
+        <delete dir="${out.common}" failonerror="false" includeEmptyDirs="true" quiet="true"/>
+        <mkdir dir="${out.common}"/>
+        <sync todir="${out.common}">
+            <fileset dir="${out.dir}">
+                <include name="css/**/*.*"/>
+                <include name="js/**/*.*"/>
+                <include name="**/*.html"/>
+                <include name="**/*.manifest"/>
+            </fileset>
+        </sync>
+        <echo message="alternative.index.file=${alternative.index.file}"/>
+        <antcall target="copyAlternativeIndex">
+            <param name='index.file.to.replace' value="${out.common}/index.html"/>
+        </antcall>
+        <replace file="${out.common}/index.html" value="${android.app.title}">
+            <replacetoken>#app.title#</replacetoken>
+        </replace>
+        <replace file="${out.common}/index.html" value="${app.logo}" >
+            <replacetoken>#app.logo#</replacetoken>
+        </replace>
+        <replace file="${out.common}/index.html" value="${app.major.version} (${build.number})">
+            <replacetoken>#mobileVersion#</replacetoken>
+        </replace>
+        <replace file="${out.common}/index.html" value="${app.major.version}">
+            <replacetoken>#appMajorVersion#</replacetoken>
+        </replace>
+        <replace file="${out.dir}/index.html" value="${app.version}">
+            <replacetoken>#app.identifier#</replacetoken>
+        </replace>
+
+        <replace file="${out.common}/index.html" value="${app.version.number.ios}.${build.number}">
+            <replacetoken>#appVersion#</replacetoken>
+        </replace>
+        <replace file="${out.common}/index.html" value="">
+            <replacetoken>#phonegap#</replacetoken>
+        </replace>
+    </target>
+
+    <target name="copyStaticOfflineReplace">
+        <echo message="out.offline=${out.offline}"/>
+        <delete dir="${out.offline}" failonerror="false" includeEmptyDirs="true" quiet="true"/>
+        <mkdir dir="${out.offline}"/>
+        <sync todir="${out.offline}">
+            <fileset dir="${out.common}"/>
+        </sync>
+        <replace file="${out.offline}/index.html" value="manifest='/api0/offline/appcache/full.manifest'">
+            <replacetoken>#manifest#</replacetoken>
+        </replace>
+    </target>
+
+    <target name="copyStatic" depends="copyStaticCommonFiles, compressCommon, copyStaticOfflineReplace">
+    </target>
+
+    <target name="copyStaticUncompressed" depends="copyStaticCommonFiles, copyStaticOfflineReplace">
+    </target>
+
+    <target name="copyStaticDev" depends="copyStaticOfflineReplace">
+    </target>
+
+    <target name="copyStaticOnlineReplace">
+        <echo message="out.portal=${out.portal}"/>
+        <delete dir="${out.portal}" failonerror="false" includeEmptyDirs="true" quiet="true"/>
+        <mkdir dir="${out.portal}"/>
+        <sync todir="${out.portal}">
+            <fileset dir="${out.common}"/>
+        </sync>
+        <replace file="${out.portal}/index.html" value=" ">
+            <replacetoken>#manifest#</replacetoken>
+        </replace>
+        <replace file="${out.portal}/index.html" value="true">
+            <replacetoken>#isOnlineOption#</replacetoken>
+        </replace>
+    </target>
+
+    <target name="copyStaticOnline" depends="copyStaticCommonFiles, compressCommon, copyStaticOnlineReplace">
+    </target>
+
+    <target name="copyStaticOnlineUncompressed" depends="copyStaticCommonFiles, copyStaticOnlineReplace">
+    </target>
+
+    <target name="copyStaticOnlineDev" depends="copyStaticOnlineReplace">
+    </target>
+
+
+
+
+
+</project>

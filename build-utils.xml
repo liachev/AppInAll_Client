@@ -1,0 +1,267 @@
+<project name="mobile-macro" basedir=".">
+
+    <import file="./imported.xml"/>
+
+    <echo message="offline.module.root: ${offline.module.root}"/>
+
+    <taskdef resource="net/sf/antcontrib/antcontrib.properties">
+        <classpath>
+            <pathelement location="${offline.module.root}/tools/ant-contrib.jar"/>
+        </classpath>
+    </taskdef>
+
+    <property name="ios.proj.out" value="${android.out.dir}/platforms/ios"/>
+
+    <macrodef name="copy-to-out">
+        <attribute name="out.dir"/>
+        <attribute name="from.dir"/>
+        <sequential>
+            <copy todir="@{out.dir}" overwrite="true">
+                <fileset dir="${offline.module.root}/ionic/src/main/@{from.dir}">
+                    <include name="**/*.*"/>
+                </fileset>
+            </copy>
+        </sequential>
+    </macrodef>
+
+    <macrodef name="build-css-files">
+        <attribute name="out.dir"/>
+        <sequential>
+            <echo message="build css"/>
+            <mkdir dir="@{out.dir}/css"/>
+
+            <concat destfile="@{out.dir}/css/styles.css">
+                <filelist dir="@{out.dir}">
+                    <file name="stylesheets/styles.css"/>
+                </filelist>
+            </concat>
+
+        </sequential>
+    </macrodef>
+
+    <macrodef name="concat-js-files-app">
+        <attribute name="out.dir"/>
+        <sequential>
+            <echo message="concat js files"/>
+            <mkdir dir="@{out.dir}/js"/>
+            <mkdir dir="@{out.dir}/js/lib"/>
+            <copy todir="@{out.dir}/js/lib">
+                <fileset dir="@{out.dir}/javascripts/lib">
+                    <include name="jquery.js"/>
+                </fileset>
+            </copy>
+            <concat destfile="@{out.dir}/js/app.js" ignoreempty="true">
+                <filelist dir="@{out.dir}">
+                    <file name="javascripts/js/app.js"/>
+                </filelist>
+            </concat>
+            <concat destfile="@{out.dir}/js/controllers.js" ignoreempty="true">
+                <filelist dir="@{out.dir}">
+                    <file name="javascripts/js/controllers.js"/>
+                </filelist>
+            </concat>
+            <concat destfile="@{out.dir}/js/script.js" ignoreempty="true">
+                <filelist dir="@{out.dir}">
+                    <file name="javascripts/js/controllers/signup.js"/>
+                    <file name="javascripts/js/controllers/agreements.js"/>
+                    <file name="javascripts/js/modules/data/Agreements.js"/>
+                    <file name="javascripts/js/modules/data/Users.js"/>
+                    <file name="javascripts/js/modules/directives/ng-compare-to-directive.js"/>
+                    <file name="javascripts/js/modules/directives/ng-unique-directive.js"/>
+                    <file name="javascripts/js/services/auth-service.js"/>
+                    <file name="javascripts/js/services/ParseServices.js"/>
+                    <file name="javascripts/js/patch/parse-angular.js"/>
+                </filelist>
+            </concat>
+        </sequential>
+    </macrodef>
+
+    <macrodef name="copy-base-files">
+        <attribute name="out.dir"/>
+        <sequential>
+            <delete quiet="true" includeEmptyDirs="true" dir="@{out.dir}"/>
+            <mkdir dir="@{out.dir}"/>
+            <copy-to-out out.dir="@{out.dir}" from.dir="code"/>
+        </sequential>
+    </macrodef>
+
+
+    <macrodef name="concat-js-files">
+        <attribute name="out.dir"/>
+        <sequential>
+            <mkdir dir="@{out.dir}/templates"/>
+            <copy todir="@{out.dir}/templates">
+
+            </copy>
+            <echo message="concat js files"/>
+            <mkdir dir="@{out.dir}/js"/>
+            <copy todir="@{out.dir}/js">
+                <fileset dir="@{out.dir}/javascripts/lib">
+                    <include name="jquery.js"/>
+                </fileset>
+            </copy>
+            <concat destfile="@{out.dir}/js/script.js" ignoreempty="true">
+                <filelist dir="@{out.dir}">
+                    <file name="javascripts/js/controllers/signup.js"/>
+                    <file name="javascripts/js/controllers/agreements.js"/>
+                    <file name="javascripts/js/modules/data/Agreements.js"/>
+                    <file name="javascripts/js/modules/data/Users.js"/>
+                    <file name="javascripts/js/modules/directives/ng-compare-to-directive.js"/>
+                    <file name="javascripts/js/modules/directives/ng-unique-directive.js"/>
+                    <file name="javascripts/js/services/auth-service.js"/>
+                    <file name="javascripts/js/services/ParseServices.js"/>
+                    <file name="javascripts/js/patch/parse-angular.js"/>
+                </filelist>
+            </concat>
+        </sequential>
+    </macrodef>
+
+
+    <path id="compressor.task.classpath">
+        <pathelement location="${offline.module.root}/tools/htmlcompressor-1.5.3.jar"/>
+        <pathelement location="${offline.module.root}/tools/guava-15.0.jar"/>
+        <pathelement location="${offline.module.root}/tools/yuicompressor-2.4.7.jar"/>
+        <pathelement location="${offline.module.root}/tools/yui-compressor-ant-task-0.6.0.jar"/>
+    </path>
+
+    <taskdef name="yui-compressor" classname="net.noha.tools.ant.yuicompressor.tasks.YuiCompressorTask">
+        <classpath refid="compressor.task.classpath"/>
+    </taskdef>
+
+    <macrodef name="compress-files">
+        <attribute name="static.dir"/>
+        <sequential>
+            <delete dir="@{static.dir}/../tmp.compress.out" includeEmptyDirs="true" quiet="true"/>
+            <mkdir dir="@{static.dir}/../tmp.compress.out"/>
+            <yui-compressor charset="utf-8"
+                            fromdir="@{static.dir}"
+                            todir="@{static.dir}/../tmp.compress.out"
+                            jsSuffix=".js"
+                            cssSuffix=".css"
+                            munge="true"
+                            warn="false"
+                            optimize="true">
+                <include name="**/*.js"/>
+                <include name="**/*.css"/>
+            </yui-compressor>
+            <move todir="@{static.dir}" overwrite="true">
+                <fileset dir="@{static.dir}/../tmp.compress.out">
+                    <include name="**/*.js"/>
+                    <include name="**/*.css"/>
+                </fileset>
+            </move>
+            <delete dir="@{static.dir}/../tmp.compress.out" includeEmptyDirs="true" quiet="true"/>
+        </sequential>
+    </macrodef>
+
+    <macrodef name="rename-ios-project">
+        <attribute name="old.name"/>
+        <attribute name="old.pkg"/>
+        <attribute name="new.name"/>
+        <attribute name="new.pkg"/>
+        <sequential>
+            <if>
+                <equals arg1="@{new.name}" arg2="${app.name}"/>
+                <then>
+                    <sequential>
+                        <copy todir="${ios.proj.out}/@{old.name}/Resources/splash" overwrite="true">
+                            <fileset dir="${ios.proj.out}/@{old.name}/Resources/splash/aia">
+                                <include name="*.*"/>
+                            </fileset>
+                        </copy>
+                        <copy todir="${ios.proj.out}/@{old.name}/Resources/icons" overwrite="true">
+                            <fileset dir="${ios.proj.out}/@{old.name}/Resources/icons/aia">
+                                <include name="*.*"/>
+                            </fileset>
+                        </copy>
+                    </sequential>
+                </then>
+            </if>
+            <replace dir="${ios.proj.out}" value="@{old.name}" token="@{new.name}"/>
+            <replace dir="${ios.proj.out}" value="@{new.name}" token="@{old.name}"/>
+            <rename src="${ios.proj.out}/@{old.name}.xcodeproj"
+                    dest="${ios.proj.out}/@{new.name}.xcodeproj" replace="yes"/>
+            <rename src="${ios.proj.out}/@{old.name}/@{old.name}-Info.plist"
+                    dest="${ios.proj.out}/@{old.name}/@{new.name}-Info.plist" replace="yes"/>
+            <rename src="${ios.proj.out}/@{old.name}/@{old.name}-Prefix.pch"
+                    dest="${ios.proj.out}/@{old.name}/@{new.name}-Prefix.pch" replace="yes"/>
+            <rename src="${ios.proj.out}/@{old.name}"
+                    dest="${ios.proj.out}/@{new.name}" replace="yes"/>
+            <rename src="${ios.proj.out}/@{new.name}.xcodeproj/xcuserdata/denis.xcuserdatad/xcschemes/@{old.name}.xcscheme"
+                    dest="${ios.proj.out}/@{new.name}.xcodeproj/xcuserdata/denis.xcuserdatad/xcschemes/@{new.name}.xcscheme"
+                    replace="yes"/>
+            <exec executable="/usr/libexec/PlistBuddy">
+                <arg value="-c"/>
+                <arg value="Set :CFBundleIdentifier @{new.name}"/>
+                <arg value="${ios.proj.out}/@{new.name}/@{new.name}-Info.plist"/>
+            </exec>
+            <replace file="${android.out.dir}/config.xml" token="@{old.name}" value="@{new.name}"/>
+            <replace file="${android.out.dir}/config.xml" token="@{old.name}" value="@{new.name}"/>
+        </sequential>
+    </macrodef>
+
+    <macrodef name="set-ios-version">
+        <attribute name="app.name"/>
+        <sequential>
+            <echo>"Set CFBundleShortVersionString ${app.version.number.ios}.${build.number} for @{app.name}"</echo>
+            <exec executable="/usr/libexec/PlistBuddy">
+                <arg value="-c"/>
+                <arg value="Set :CFBundleShortVersionString ${app.version.number.ios}.${build.number}"/>
+                <arg value="${ios.proj.out}/build/device/@{app.name}.app/Info.plist"/>
+            </exec>
+        </sequential>
+    </macrodef>
+
+    <macrodef name="ipa-creator">
+        <attribute name="app.name"/>
+        <attribute name="artefacts"/>
+        <attribute name="sign.identity"/>
+        <attribute name="provisioning.profile"/>
+        <sequential>
+            <exec executable="bash">
+                <arg value="${offline.module.root}/createipa.sh"/>
+                <arg value="@{sign.identity}"/>
+                <arg value="@{provisioning.profile}"/>
+                <arg value="@{artefacts}"/>
+                <arg value="@{app.name}"/>
+                <arg value="${android.out.dir}"/>
+            </exec>
+        </sequential>
+    </macrodef>
+
+    <macrodef name="ipa-creator-release">
+        <attribute name="app.name"/>
+        <attribute name="artefacts"/>
+        <attribute name="type"/>
+        <sequential>
+            <if>
+                <equals arg1="@{type}" arg2="0"/>
+                <then>
+                    <ipa-creator artefacts="@{artefacts}"
+                                 app.name="@{app.name}"
+                                 provisioning.profile="${PROVISIONING_PROFILE}"
+                                 sign.identity="${SIGNING_IDENTITY}"/>
+                </then>
+            </if>
+        </sequential>
+    </macrodef>
+
+    <macrodef name="ipa-creator-debug">
+        <attribute name="app.name"/>
+        <attribute name="artefacts"/>
+        <attribute name="type"/>
+        <sequential>
+            <if>
+                <equals arg1="@{type}" arg2="0"/>
+                <then>
+                    <ipa-creator artefacts="@{artefacts}"
+                                 app.name="@{app.name}"
+                                 provisioning.profile="${PROVISIONING_PROFILE_QA}"
+                                 sign.identity="${SIGNING_IDENTITY_QA}"/>
+                </then>
+            </if>
+
+        </sequential>
+    </macrodef>
+
+</project>

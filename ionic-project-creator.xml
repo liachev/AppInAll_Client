@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Android_app_build" default="all" basedir=".">
+
+    <import file="./imported.xml"/>
+
+    <!-- <import file="./apps.xml"/>-->
+    <import file="./build-utils.xml"/>
+
+    <property name="www.dir" value="${android.out.dir}/www"/>
+    <property name="tmp.out.dir" value="${android.out.dir}/out_dir"/>
+
+
+    <target name="showVariables">
+        <echo message="idea.offline.module.root: ${offline.module.root}"/>
+        <echo message="module.out.dir: ${android.out.dir}"/>
+        <echo message="www.dir: ${www.dir}"/>
+        <echo message="android.app.title: ${android.app.title}"/>
+    </target>
+
+    <target name="deleteDir">
+        <delete quiet="true" includeEmptyDirs="true" dir="${android.out.dir}"/>
+    </target>
+
+    <target name="copyStructure">
+        <mkdir dir="${android.out.dir}"/>
+        <copydir src="${offline.module.root}/ionic/src/main/appinall"
+                 dest="${android.out.dir}"
+                />
+        <sequential>
+            <replace file="${android.out.dir}/platforms/android/AndroidManifest.xml"
+                     value="${app.major.version}.${build.number}">
+                <replacetoken>#mobileVersion#</replacetoken>
+            </replace>
+            <replace file="${android.out.dir}/platforms/android/AndroidManifest.xml" value="${build.vcs.number}">
+                <replacetoken>#mobileVersionCode#</replacetoken>
+            </replace>
+
+            <replace file="${android.out.dir}/config.xml" value="${android.app.title}">
+                <replacetoken>#app.title#</replacetoken>
+            </replace>
+            <replace file="${android.out.dir}/platforms/android/res/values/strings.xml" value="${android.app.title}">
+                <replacetoken>#app.title#</replacetoken>
+            </replace>
+            <replace file="${android.out.dir}/platforms/android/res/xml/config.xml" value="${android.app.title}">
+                <replacetoken>#app.title#</replacetoken>
+            </replace>
+            <replace file="${android.out.dir}/platforms/android/.project" value="${android.app.title}">
+                <replacetoken>#app.title#</replacetoken>
+            </replace>
+            <replace file="${android.out.dir}/platforms/android/AndroidManifest.xml" value="${app.version}">
+                <replacetoken>#app.path#</replacetoken>
+            </replace>
+            <replace file="${android.out.dir}/platforms/android/res/xml/config.xml" value="${app.version}">
+                <replacetoken>#app.path#</replacetoken>
+            </replace>
+            <replace file="${android.out.dir}/config.xml" value="${app.version}">
+                <replacetoken>#app.path#</replacetoken>
+            </replace>
+            <replace file="${android.out.dir}/config.xml" value="${app.version.number.ios}.${build.number}">
+                <replacetoken>#app.cordova.version#</replacetoken>
+            </replace>
+        </sequential>
+    </target>
+
+    <target name="replace-ios-specific-part">
+        <echo>" try to replace ONLY_ACTIVE_ARCH = YES"</echo>
+        <replace file="${ios.proj.out}/CordovaLib/CordovaLib.xcodeproj/project.pbxproj"
+                 token="ONLY_ACTIVE_ARCH = YES"
+                 value="ONLY_ACTIVE_ARCH = NO"/>
+    </target>
+
+    <target name="ios-set-version">
+        <set-ios-version app.name="${app.name}"/>
+    </target>
+
+
+    <target name="copyAlternativeIndex" if="alternative.index.file">
+        <echo message="copyAlternativeIndex"/>
+        <echo message="alternative.index.file=${alternative.index.file}"/>
+        <echo message="index.file.to.replace=${index.file.to.replace}"/>
+        <copy tofile="${index.file.to.replace}" file="${alternative.index.file}" overwrite="true"/>
+    </target>
+
+    <macrodef name="copy-platform-files">
+        <attribute name="out.platform"/>
+        <attribute name="platform"/>
+        <attribute name="out.dir"/>
+        <attribute name="tmp.out.dir"/>
+        <sequential>
+            <copy-to-out out.dir="@{tmp.out.dir}/javascripts" from.dir="application/platforms/@{platform}/javascripts"/>
+            <copy-to-out out.dir="@{tmp.out.dir}/stylesheets" from.dir="application/platforms/@{platform}/stylesheets"/>
+            <copy-to-out out.dir="${tmp.out.dir}/img" from.dir="code/img"/>
+
+            <build-css-files out.dir="${tmp.out.dir}"/>
+            <concat-js-files-app out.dir="${tmp.out.dir}"/>
+
+            <copy todir="@{out.dir}/merges/@{out.platform}" overwrite="true">
+                <fileset dir="@{tmp.out.dir}">
+                    <include name="js/*.js"/>
+                    <include name="js/lib/*.js"/>
+                    <include name="templates/*.html"/>
+                    <include name="translate/**"/>
+                    <include name="css/*.css"/>
+                    <include name="css/fonts/*.*"/>
+                    <include name="css/images/*.*"/>
+                    <include name="img/**"/>
+                </fileset>
+            </copy>
+        </sequential>
+    </macrodef>
+
+
+    <target name="copyFiles" depends="copyStructure">
+        <copy-base-files out.dir="${tmp.out.dir}"/>
+
+        <echo message="alternative.index.file=${alternative.index.file}"/>
+        <antcall target="copyAlternativeIndex">
+            <param name='index.file.to.replace' value="${tmp.out.dir}/index.html"/>
+        </antcall>
+
+        <replace-in-index file.path="${tmp.out.dir}/index.html"/>
+
+        <copy-to-out out.dir="${tmp.out.dir}/templates" from.dir="code/templates"/>
+        <copy-to-out out.dir="${tmp.out.dir}/translate" from.dir="code/translate"/>
+        <copy-to-out out.dir="${tmp.out.dir}/lib" from.dir="code/javascripts/lib"/>
+        <copy-to-out out.dir="${tmp.out.dir}/img" from.dir="code/img"/>
+
+        <echo message="www.dir: ${www.dir}"/>
+
+        <copy todir="${www.dir}" overwrite="true">
+            <fileset dir="${tmp.out.dir}">
+                <include name="css/*.*"/>
+                <include name="css/fonts/*.*"/>
+                <include name="css/images/*.*"/>
+                <include name="js/*.js"/>
+                <include name="js/lib/*.js"/>
+                <include name="templates/*.html"/>
+                <include name="translate/**"/>
+                <include name="lib/**"/>
+                <include name="img/**"/>
+                <include name="*.html"/>
+            </fileset>
+        </copy>
+
+        <copy-platform-files tmp.out.dir="${tmp.out.dir}" out.dir="${android.out.dir}" out.platform="android"
+                             platform="android"/>
+        <if>
+            <not>
+                <isset property="android.building"/>
+            </not>
+            <then>
+                <copy-platform-files tmp.out.dir="${tmp.out.dir}" out.dir="${android.out.dir}" out.platform="ios"
+                                     platform="ios"/>
+            </then>
+        </if>
+
+
+    </target>
+
+    <target name="compress" if="${do.compress}">
+        <compress-files static.dir="${www.dir}"/>
+    </target>
+
+    <target name="createProject" depends="deleteDir, showVariables, copyFiles, compress">
+        <echo message="Project Created"/>
+    </target>
+
+    <target name="copyProjectDev" depends="showVariables, copyFiles">
+        <echo message="Cordova3 Project Created for DEV"/>
+    </target>
+
+    <!--Cordova should be accessible in PATH-->
+    <target name="prepareAndroid">
+        <exec dir="${android.out.dir}" executable="ionic.cmd" osfamily="windows">
+            <arg value="prepare"/>
+            <arg value="android"/>
+        </exec>
+        <exec dir="${android.out.dir}" executable="ionic" osfamily="unix">
+            <arg value="prepare"/>
+            <arg value="android"/>
+        </exec>
+    </target>
+
+    <target name="buildAndroid">
+        <exec dir="${android.out.dir}" executable="ionic.cmd" osfamily="windows">
+            <arg value="build"/>
+            <arg value="android"/>
+        </exec>
+        <exec dir="${android.out.dir}" executable="ionic" osfamily="unix">
+            <arg value="build"/>
+            <arg value="android"/>
+        </exec>
+    </target>
+
+    <target name="instrument" depends="">
+        <echo message="Instrument Build start."/>
+        <ant dir="${android.out.dir}/platforms/android" antfile="build.xml" target="instrument"/>
+        <echo message="Instrument Build complete."/>
+    </target>
+
+    <target name="instrumentDev" depends="copyProjectDev">
+        <echo message="Instrument Build start."/>
+        <ant dir="${android.out.dir}" antfile="build.xml" target="instrument"/>
+        <echo message="Instrument Build complete."/>
+    </target>
+
+    <target name="release" depends="">
+        <echo message="Release Build start."/>
+        <ant dir="${android.out.dir}/platforms/android" antfile="build.xml" target="release"/>
+        <echo message="Release Build complete."/>
+    </target>
+
+    <target name="all" depends="createProject, instrument, release">
+        <echo message="Build complete."/>
+    </target>
+
+    <target name="create-ipa-release">
+        <ipa-creator-release app.name="${app.name}" artefacts="allinnapp_artefacts" type="0"/>
+    </target>
+
+
+    <target name="create-ipa-debug">
+        <ipa-creator-debug app.name="${app.name}" artefacts="allinnapp_artefacts_qa" type="0"/>
+    </target>
+
+    <target name="make-ios">
+        <rename-ios-project old.pkg="${app.pkg}" old.name="${old.off.name}"
+                            new.pkg="${app.pkg}" new.name="${app.name}"/>
+    </target>
+
+
+    <macrodef name="replace-in-index">
+        <attribute name="file.path"/>
+        <sequential>
+
+            <replace file="@{file.path}" value="${app.version.number.ios}.${build.number}">
+                <replacetoken>#appVersion#</replacetoken>
+            </replace>
+            <replace file="@{file.path}" value="${app.version}">
+                <replacetoken>#app.identifier#</replacetoken>
+            </replace>
+            <replace file="@{file.path}" value="${app.major.version}">
+                <replacetoken>#appMajorVersion#</replacetoken>
+            </replace>
+            <replace file="@{file.path}" value=" ">
+                <replacetoken>#manifest#</replacetoken>
+            </replace>
+            <replace file="@{file.path}" value="${android.app.title}">
+                <replacetoken>#app.title#</replacetoken>
+            </replace>
+
+
+        </sequential>
+    </macrodef>
+
+</project>

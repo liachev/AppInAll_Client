@@ -1,0 +1,25 @@
+<project name="dev-env-build" basedir="." default="buildAppResources">
+
+    <import file="./imported-dev.xml"/>
+
+    <target name="buildAppResources">
+        <echo message="project.root=${project.root}${line.separator}static.dir=${static.dir}"/>
+
+        <copy file="${project.root}/imported.tpl.xml" tofile="${project.root}/imported.xml" overwrite="true"/>
+
+        <ant antfile="${project.root}/cruise-build.xml" target="initArtifacts">
+
+        </ant>
+
+        <ant antfile="${project.root}/ionic-project-creator.xml" target="createProject">
+
+        </ant>
+        <ant antfile="${project.root}/ionic-project-creator.xml" target="prepareAndroid">
+
+        </ant>
+
+    </target>
+
+
+
+</project>

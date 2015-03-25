@@ -1,0 +1,101 @@
+<ion-view view-title="Sign Up">
+    <ion-content>
+        <!-- Connect with Facebook button -->
+        <div class="item">
+            <button ng-click="connectWithFacebook()">{{strings.Connect_with_Facebook.text}}</button>
+        </div>
+        <!-- Sign Up form -->
+        <form name="signupForm" ng-submit="signupForm.$valid && signUp(signupForm)" novalidate>
+            <div class="list">
+                <label class="item item-input"> <!-- TODO: undone?, supports latin only -->
+                    <input type="text" name="firstName" ng-model="signupData.firstName"
+                           placeholder="{{strings.firstName.placeholder}}" ng-pattern="/^\w*$/" required>
+                    <span style="color:red" ng-show="signupForm.firstName.$submitted || signupForm.firstName.$touched">
+                        <span ng-show="signupForm.firstName.$error.required">
+                            {{strings.firstName.errorMessages.required}}
+                        </span>
+                        <span ng-show="signupForm.firstName.$error.pattern">
+                            {{strings.firstName.errorMessages.pattern}}
+                        </span>
+                    </span>
+                </label>
+                <label class="item item-input"> <!-- TODO: undone?, supports latin only -->
+                    <input type="text" name="secondName" ng-model="signupData.secondName"
+                           placeholder="{{strings.secondName.placeholder}}" ng-pattern="/^\w*$/" required>
+                    <span style="color:red"
+                          ng-show="signupForm.secondName.$submitted || signupForm.secondName.$touched">
+                        <span ng-show="signupForm.secondName.$error.required">
+                            {{strings.secondName.errorMessages.required}}
+                        </span>
+                        <span ng-show="signupForm.secondName.$error.pattern">
+                            {{strings.secondName.errorMessages.pattern}}
+                        </span>
+                    </span>
+                </label>
+                <label class="item item-input">
+                    <input type="email" name="email" ng-model="signupData.email"
+                           placeholder="{{strings.email.placeholder}}" ng-unique="{key: 'users', property: 'email'}"
+                           ng-model-options="{ debounce: 350 }" required>
+                    <span style="color:red"
+                          ng-show="(signupForm.email.$dirty && signupForm.email.$invalid) || signupForm.email.$touched">
+                        <span ng-show="signupForm.email.$error.required">
+                            {{strings.email.errorMessages.required}}
+                        </span>
+                        <span ng-show="signupForm.email.$error.email">
+                            {{strings.email.errorMessages.invalid}}
+                        </span>
+                        <span ng-show="!isUnique && signupForm.email.$error.unique">
+                            {{strings.email.errorMessages.alreadyInUse}}
+                        </span>
+                    </span>
+                </label>
+                <label class="item item-input">
+                    <input type="password" name="password" ng-model="signupData.password"
+                           placeholder="{{strings.password.placeholder}}" required>
+                    <span style="color:red" ng-show="signupForm.password.$submitted || signupForm.password.$touched">
+                        <span ng-show="signupForm.password.$error.required">
+                            {{strings.password.errorMessages.required}}
+                        </span>
+                    </span>
+                </label>
+                <label class="item item-input">
+                    <input type="password" name="confirmPassword" ng-model="signupData.confirmPassword"
+                           placeholder="{{strings.confirmPassword.placeholder}}" ng-compare-to="signupData.password"
+                           required>
+                    <span style="color:red"
+                          ng-show="signupForm.confirmPassword.$submitted || signupForm.confirmPassword.$touched">
+                        <span ng-show="signupForm.confirmPassword.$error.required">
+                            {{strings.confirmPassword.errorMessages.required}}
+                        </span>
+                        <span ng-show="!signupForm.confirmPassword.$error.required && signupForm.confirmPassword.$error.compareTo">
+                            {{strings.confirmPassword.errorMessages.notIdentical}}
+                        </span>
+                    </span>
+                </label>
+                <label class="item item-checkbox">
+                    <span style="color:red" ng-show="signupForm.isAgree.$dirty && !signupData.isAgree">
+                        {{strings.isAgree.errorMessages.required}}
+                    </span>
+                    <ion-checkbox name="isAgree" ng-model="signupData.isAgree"></ion-checkbox>
+                </label>
+                <div class="item" ng-controller="AgreementsCtrl">
+                    {{strings.isAgree.text}}
+                    <a href ng-click="getAgreement('Terms of Use')">{{strings.isAgree.Terms_of_Use}}</a>
+                    {{strings.isAgree.and}}
+                    <a href ng-click="getAgreement('Privacy Policy')">{{strings.isAgree.Privacy_Policy}}</a>
+                </div>
+                <label class="item">
+                    <button class="button button-block button-positive" type="submit"
+                            ng-disabled="signupForm.$invalid || !signupData.isAgree">
+                        {{strings.Create_Account.text}}
+                    </button>
+                </label>
+            </div>
+        </form>
+        <!-- Sign In link -->
+        <div class="item">
+            <span>{{strings.Already_have_account.text}}</span>
+            <a href="" ng-click="login()">{{strings.Sign_In.text}}</a>
+        </div>
+    </ion-content>
+</ion-view>

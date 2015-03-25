@@ -1,0 +1,81 @@
+{
+  "firstName": {
+    "placeholder": "Your First Name",
+
+    "errorMessages": {
+      "required": "Required.",
+
+      "pattern": "Only digits and letters allowed."
+    }
+  },
+
+  "secondName": {
+    "placeholder": "Your Last Name",
+
+    "errorMessages": {
+      "required": "Required.",
+
+      "pattern": "Only digits and letters allowed."
+    }
+  },
+
+  "email": {
+    "placeholder": "Your Email",
+
+    "errorMessages": {
+      "required": "Required.",
+
+      "invalid": "Invalid email address.",
+
+      "alreadyInUse": "E-mail is already in use."
+    }
+  },
+
+  "password": {
+    "placeholder": "Choose Password",
+
+    "errorMessages": {
+      "required": "Required."
+    }
+  },
+
+  "confirmPassword": {
+    "placeholder": "Confirm Password",
+
+    "errorMessages": {
+      "required": "Required.",
+
+      "notIdentical": "Must match the previous entry."
+    }
+  },
+
+  "isAgree": {
+    "text": "I have read and agree with the",
+
+    "and": "and",
+
+    "Terms_of_Use": "Terms of Use",
+
+    "Privacy_Policy": "Privacy Policy",
+
+    "errorMessages": {
+      "required": "Must Agree"
+    }
+  },
+
+  "Connect_with_Facebook": {
+    "text": "Connect with Facebook"
+  },
+
+  "Create_Account": {
+    "text": "Create Account"
+  },
+
+  "Already_have_account": {
+    "text": "Already have an account?"
+  },
+
+  "Sign_In": {
+    "text": "Sign In"
+  }
+}

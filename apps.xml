@@ -1,0 +1,5 @@
+<project name="apps-imported" basedir=".">
+    <property name="old.off.name" value="AllInOne"/>
+    <property name="app.name" value="AllInApp"/>
+    <property name="app.pkg" value="com.allinapp"/>
+</project>

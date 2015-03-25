@@ -1,0 +1,13 @@
+<ion-slide-box active-slide="welcomePage_activeSlide" show-pager=true delegate-handle="welcome-viewer" ng-if="welcomePage_data">
+    <ion-slide ng-repeat="pageData in welcomePage_data">
+        <paper-shadow z="1" class="box white">
+            <h3>{{pageData.title}}</h3>
+            <img ng-src="{{pageData.src}}{{welcomePage_iconSize}}.png"/>
+            <p>{{pageData.description}}</p>
+        </paper-shadow>
+    </ion-slide>
+</ion-slide-box>
+
+<section id="welcome-button">
+    <paper-button raised>browse&nbsp;events</paper-button>
+</section>
