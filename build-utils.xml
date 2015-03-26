@@ -30,9 +30,9 @@
             <echo message="build css"/>
             <mkdir dir="@{out.dir}/css"/>
 
-            <concat destfile="@{out.dir}/css/styles.css">
+            <concat destfile="@{out.dir}/css/style.css">
                 <filelist dir="@{out.dir}">
-                    <file name="stylesheets/styles.css"/>
+                    <file name="stylesheets/style.css"/>
                 </filelist>
             </concat>
 
