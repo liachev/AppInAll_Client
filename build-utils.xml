@@ -60,6 +60,11 @@
                     <file name="javascripts/js/controllers.js"/>
                 </filelist>
             </concat>
+            <concat destfile="@{out.dir}/js/logging.js" ignoreempty="true">
+                <filelist dir="@{out.dir}">
+                    <file name="javascripts/js/logging.js"/>
+                </filelist>
+            </concat>
             <concat destfile="@{out.dir}/js/script.js" ignoreempty="true">
                 <filelist dir="@{out.dir}">
                     <file name="javascripts/js/controllers/signup.js"/>
