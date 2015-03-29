@@ -30,6 +30,8 @@ angular.module('starter', [
           StatusBar.styleDefault();
         }
       });
+      // Parse initialization for logging to parse.com
+      Parse.initialize("O7eCGvKWO5BihNXJQv8zU0Ewd9a5nLJs0EBZWFjr", "Aohwuhy4j63Rs9tL4kXuc4lD8zGqv6wgrI74yXnU");
     })
 
     .config(function($stateProvider, $urlRouterProvider) {

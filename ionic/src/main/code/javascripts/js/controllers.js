@@ -62,7 +62,7 @@ angular.module('starter.controllers', ['signup.controllers', 'agreements.control
           var icSizeList = [512, 144, 96, 48];
           $scope.welcomePage_iconSize = icSizeList[icSizeList.length-1];
 
-          $http.get('data/welcomePage.json').success(function(data) {
+          $http.get('translate/welcomePage.json').success(function(data) {
             for(var i = 0; i < data.length; i++)
               data[i].description = data[i].description.replace(/(\r\n|\r|\n)/g, '\n');
             console.log(data);
