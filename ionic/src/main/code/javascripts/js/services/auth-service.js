@@ -15,7 +15,7 @@ angular.module('signup.controllers')
                 case "users":
                     switch (data.property) {
                         case "email":
-                            var users = new (Parse.Collection.getClass("TestUser")); // TODO: must be changed later
+                            var users = new (Parse.Collection.getClass("_User")); // TODO: must be changed later
                             var user = users.loadUsersWithEmail(value).then(function (results) {
                                 $log.info("results = " + JSON.stringify(results));
                                 $rootScope.isUnique = (results.length == 0);

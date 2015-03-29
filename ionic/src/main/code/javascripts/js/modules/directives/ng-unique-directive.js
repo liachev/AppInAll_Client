@@ -13,7 +13,7 @@ angular.module('starter')
                     function (unique) {
                         //Ensure value that being checked hasn't changed
                         //since the Ajax call was made
-                        if ((currentValue == element.val())) {
+                        if ((currentValue === element.val())) {
                             $log.debug('unique = '+unique);
                             ngModel.$setValidity('unique', unique && (currentValue != ""));
                             scope.$broadcast('show-errors-check-validity');

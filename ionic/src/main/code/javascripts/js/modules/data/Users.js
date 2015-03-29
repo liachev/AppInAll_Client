@@ -10,9 +10,9 @@ angular.module('appinall.models.users', ['parse-angular.enhance'])
 	// the SDK will natively use this extended class, so you don't have to
 	// worry about objects instantiation if you fetch them from a Parse query for instance
 	var User = Parse.Object.extend({
-		className: "TestUser", // TODO: must be changed later
+		className: "_User", // TODO: must be changed later
 		// Extend the object with getter and setters
-		attrs: ["firstName", "lastName", "email", "password"]
+		attrs: ["username", "firstName", "lastName", "authData", "emailVerified", "email", "password"]
 	});
 
 
@@ -24,7 +24,7 @@ angular.module('appinall.models.users', ['parse-angular.enhance'])
 
 		// We give a className to be able to retrieve the collection
 		// from the getClass helper.
-		className: "TestUser", // TODO: must be changed later
+		className: "_User", // TODO: must be changed later
 
 		comparator: function(model) {
 			return model.getEmail(); // TODO: must be change later
@@ -44,15 +44,17 @@ angular.module('appinall.models.users', ['parse-angular.enhance'])
 			return result;
 		},
 
-		addUser: function(firstName, lastName, email, password) {
+		addUser: function(signupData) {
 	 		// save request_id to Parse
 	 		var _this = this;
 
 			var user = new User;
-			user.setFirstName(firstName);
-			user.setLastName(lastName);
-			user.setEmail(email);
-			user.setPassword(password);
+			user.setFirstName(signupData.firstName);
+			user.setLastName(signupData.lastName);
+			user.setEmail(signupData.email);
+			user.setPassword(signupData.password);
+			user.setUsername(signupData.firstName + " " + signupData.lastName);
+			user.setAuthData(signupData.authData);
 
 			// perform a save and return the promised object back into the Angular world
 			return user.save().then(function(object){

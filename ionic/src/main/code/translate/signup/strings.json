@@ -9,7 +9,7 @@
     }
   },
 
-  "secondName": {
+  "lastName": {
     "placeholder": "Your Last Name",
 
     "errorMessages": {
