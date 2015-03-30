@@ -101,7 +101,6 @@ angular.module('signup.controllers', [])
                 statusChangeCallback(response);
             }
             else {
-                alert(angular.toJson(response));
                 fbLogin();
             }
         }, function failed(response) {
@@ -109,4 +108,11 @@ angular.module('signup.controllers', [])
             fbLogin();
         });
     };
+
+$scope.agreedCheckBox = function(){
+    if (($scope.signupData.termsOfUseAgree && $scope.signupData.privacyPolicyAgree) !== true){
+        $scope.signupData.isAgree = false;
+        alert("You must agree with all of terms")
+    }
+}
 }]);

@@ -12,7 +12,7 @@ angular.module('appinall.models.users', ['parse-angular.enhance'])
 	var User = Parse.Object.extend({
 		className: "_User", // TODO: must be changed later
 		// Extend the object with getter and setters
-		attrs: ["username", "firstName", "lastName", "authData", "emailVerified", "email", "password"]
+		attrs: ["username", "firstName", "lastName", "authData", "emailVerified", "email", "password", "agreedDateTerms", "agreedDatePrivacy"]
 	});
 
 
@@ -55,6 +55,8 @@ angular.module('appinall.models.users', ['parse-angular.enhance'])
 			user.setPassword(signupData.password);
 			user.setUsername(signupData.firstName + " " + signupData.lastName);
 			user.setAuthData(signupData.authData);
+            user.setAgreedDateTerms(signupData.dateTerms);
+            user.setAgreedDatePrivacy(signupData.datePrivacy);
 
 			// perform a save and return the promised object back into the Angular world
 			return user.save().then(function(object){

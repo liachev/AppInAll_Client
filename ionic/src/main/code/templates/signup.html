@@ -76,7 +76,7 @@
                     <span style="color:red" ng-show="signupForm.isAgree.$dirty && !signupData.isAgree">
                         {{strings.isAgree.errorMessages.required}}
                     </span>
-                    <ion-checkbox name="isAgree" ng-model="signupData.isAgree"></ion-checkbox>
+                    <ion-checkbox name="isAgree" ng-model="signupData.isAgree" ng-change="agreedCheckBox()"></ion-checkbox>
                 </label>
                 <div class="item" ng-controller="AgreementsCtrl">
                     {{strings.isAgree.text}}
