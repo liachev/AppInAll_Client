@@ -22,8 +22,14 @@ function onPause() {
 
 function logSuccessRead(string)
 {
+    // JS string - 2 bytes per character
+    if(string.length/2 > 1024*1024*100) { // more than 100kb
+        string = "";
+        writeFile(g_dirEntry, g_logFile, ""); // log clearing
+    }
     if(string.length) {
         parseInfo(string);
+        writeFile(g_dirEntry, g_logFile, ""); // log clearing
     }
 }
 
