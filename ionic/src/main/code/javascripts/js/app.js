@@ -6,6 +6,7 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('starter', [
   'ionic',
+  'ngCordova',
 
   /* controllers */
   'starter.controllers',
@@ -15,8 +16,7 @@ angular.module('starter', [
   'appinall.models.agreements',
 
   /* services */
-  'ParseServices',
-  'FacebookServices'
+  'ParseServices'
 ])
 
 .run(function($ionicPlatform) {
