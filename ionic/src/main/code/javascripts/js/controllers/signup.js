@@ -13,10 +13,9 @@ angular.module('signup.controllers', [])
         var users = new (Parse.Collection.getClass("_User")); // TODO: must be changed later
 
         users.addUser($scope.signupData)
-            .then(function success(response) {
-                //alert(angular.toJson(response, true));
-                if (response) {
-                    if (response.email === $scope.signupData.email) {
+            .then(function success(user) {
+                if (user) {
+                    if (angular.equals(user.getEmail(), $scope.signupData.email)) {
                         $scope.reset(signupForm);
                         alert("Congratulation! You are successfully registered");
                     } else {
@@ -24,7 +23,7 @@ angular.module('signup.controllers', [])
                     }
                 } else {
                     alert("Smth wrong!");
-                    alert(angular.toJson(response, true));
+                    alert(angular.toJson(user, true));
                 }
             }, function failed(response) {
                 alert("Smth wrong!");
@@ -92,7 +91,6 @@ angular.module('signup.controllers', [])
         }
 
         function fbLogin() {
-            alert(angular.toJson(response));
             FB.login(["public_profile", "email"]).then(
                 function success(response) { statusChangeCallback(response) },
                 function failed(response) { alert(angular.toJson(response)) });
@@ -103,8 +101,12 @@ angular.module('signup.controllers', [])
                 statusChangeCallback(response);
             }
             else {
+                alert(angular.toJson(response));
                 fbLogin();
             }
-        }, function failed(response) { fbLogin() });
+        }, function failed(response) {
+            alert(angular.toJson(response));
+            fbLogin();
+        });
     };
 }]);
