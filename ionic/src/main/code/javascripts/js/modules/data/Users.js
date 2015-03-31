@@ -90,6 +90,7 @@ angular.module('appinall.models.users', ['parse-angular.enhance'])
 			user.set("authData", data.authData);
             user.set("agreedDateTerms", data.dateTerms);
             user.set("agreedDatePrivacy", data.datePrivacy);
+            // TODO: complete this if new columns added to `User`
 
             return user;
 	 	}

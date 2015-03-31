@@ -1,9 +1,14 @@
 angular.module('ParseServices', [])
 
-.factory('ParseSDK', function() {
+.constant("KEYS", {
+    "APPLICATION_ID": "O7eCGvKWO5BihNXJQv8zU0Ewd9a5nLJs0EBZWFjr",
+    "JAVASCRIPT_KEY": "Aohwuhy4j63Rs9tL4kXuc4lD8zGqv6wgrI74yXnU"
+})
 
-  // pro-tip: swap these keys out for PROD keys automatically on deploy using grunt-replace
-  Parse.initialize("O7eCGvKWO5BihNXJQv8zU0Ewd9a5nLJs0EBZWFjr", "Aohwuhy4j63Rs9tL4kXuc4lD8zGqv6wgrI74yXnU");
+.factory('ParseSDK', ['KEYS', function(KEYS) {
+
+    // pro-tip: swap these keys out for PROD keys automatically on deploy using grunt-replace
+    Parse.initialize(KEYS.APPLICATION_ID, KEYS.JAVASCRIPT_KEY);
 
 //  // FACEBOOK init
 //  window.fbPromise.then(function() {
@@ -22,4 +27,4 @@ angular.module('ParseServices', [])
 //  });
 
     return Parse;
-});
+}]);
