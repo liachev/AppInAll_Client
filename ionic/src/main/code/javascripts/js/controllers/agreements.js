@@ -19,12 +19,10 @@ angular.module('agreements.controllers', ['signup.controllers'])
     };
 
     $scope.agreedButtonClick = function(){
-        //$scope.signupData.termsOfUseAgree = $scope.signupData.termsOfUseAgree || ($scope.title == 'Terms of Use');
         if($scope.title == 'Terms of Use'){
             $scope.signupData.termsOfUseAgree = true;
             $scope.signupData.dateTerms = new Date();
         }
-        //$scope.signupData.privacyPolicyAgree = $scope.signupData.privacyPolicyAgree || ($scope.title == 'Privacy Policy');
         if($scope.title == 'Privacy Policy'){
             $scope.signupData.privacyPolicyAgree = true;
             $scope.signupData.datePrivacy = new Date();
