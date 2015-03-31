@@ -12,23 +12,23 @@ angular.module('signup.controllers', [])
     $scope.signUp = function (signupForm) {
         var users = new (Parse.Collection.getClass("_User")); // TODO: must be changed later
 
-        users.addUser($scope.signupData)
-            .then(function success(user) {
-                if (user) {
-                    if (angular.equals(user.getEmail(), $scope.signupData.email)) {
-                        $scope.reset(signupForm);
-                        alert("Congratulation! You are successfully registered");
-                    } else {
-                        alert("You already have an account!");
-                    }
+        var user = users.fetchUserData($scope.signupData);
+
+        user.signUp(null, {
+            success: function(user) {
+                if (angular.equals(user.getEmail(), $scope.signupData.email)) {
+                    $scope.reset(signupForm);
+                    alert("Congratulation! You are successfully registered");
+                    // Hooray! Let them use the app now.
                 } else {
-                    alert("Smth wrong!");
-                    alert(angular.toJson(user, true));
+                    alert("You already have an account!");
                 }
-            }, function failed(response) {
-                alert("Smth wrong!");
-                alert(angular.toJson(response, true));
-            });
+            },
+            error: function(user, error) {
+                // Show the error message somewhere and let the user try again.
+                alert(angular.toJson(error, true));
+            }
+        });
     };
 
     $scope.reset = function (signupForm) {
@@ -109,10 +109,10 @@ angular.module('signup.controllers', [])
         });
     };
 
-$scope.agreedCheckBox = function(){
-    if (($scope.signupData.termsOfUseAgree && $scope.signupData.privacyPolicyAgree) !== true){
-        $scope.signupData.isAgree = false;
-        alert("You must agree with all of terms")
-    }
-}
+    $scope.agreedCheckBox = function(){
+        if (($scope.signupData.termsOfUseAgree && $scope.signupData.privacyPolicyAgree) !== true){
+            $scope.signupData.isAgree = false;
+            alert("You must agree with all of terms")
+        }
+    };
 }]);

@@ -17,7 +17,7 @@ angular.module('signup.controllers')
                         case "email":
                             var users = new (Parse.Collection.getClass("_User")); // TODO: must be changed later
                             var user = users.loadUsersWithEmail(value).then(function (results) {
-                                $log.info("results = " + JSON.stringify(results));
+                                $log.info("results = " + angular.toJson(results, true));
                                 $rootScope.isUnique = (results.length == 0);
                                 $log.info("$rootScope.isUnique = " + $rootScope.isUnique);
 
@@ -25,12 +25,12 @@ angular.module('signup.controllers')
                             });
                             break;
                         default:
-                            $log.warn("[AuthService.checkUniqueValue] " + JSON.stringify(data));
+                            $log.warn("[AuthService.checkUniqueValue] " + angular.toJson(data, true));
                             break;
                     };
                     break;
                 default:
-                    $log.warn("[AuthService.checkUniqueValue] " + JSON.stringify(data));
+                    $log.warn("[AuthService.checkUniqueValue] " + angular.toJson(data, true));
                     break;
             };
 

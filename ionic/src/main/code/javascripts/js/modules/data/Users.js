@@ -1,7 +1,6 @@
 angular.module('appinall.models.users', ['parse-angular.enhance'])
 
 .run(function() {
-
 	// --------------------------
 	// User Object Definition
 	// --------------------------
@@ -12,9 +11,18 @@ angular.module('appinall.models.users', ['parse-angular.enhance'])
 	var User = Parse.Object.extend({
 		className: "_User", // TODO: must be changed later
 		// Extend the object with getter and setters
-		attrs: ["username", "firstName", "lastName", "authData", "emailVerified", "email", "password", "agreedDateTerms", "agreedDatePrivacy"]
+		attrs: [
+			"username",
+			"firstName",
+			"lastName",
+			"authData",
+			"emailVerified",
+			"email",
+			"password",
+			"agreedDateTerms",
+			"agreedDatePrivacy"
+		]
 	});
-
 
 	// --------------------------
 	// User Collection Definition
@@ -48,15 +56,7 @@ angular.module('appinall.models.users', ['parse-angular.enhance'])
 	 		// save request_id to Parse
 	 		var _this = this;
 
-			var user = new User;
-			user.setFirstName(signupData.firstName);
-			user.setLastName(signupData.lastName);
-			user.setEmail(signupData.email);
-			user.setPassword(signupData.password);
-			user.setUsername(signupData.firstName + " " + signupData.lastName);
-			user.setAuthData(signupData.authData);
-            user.setAgreedDateTerms(signupData.dateTerms);
-            user.setAgreedDatePrivacy(signupData.datePrivacy);
+			var user = fetchUserData(signupData);
 
 			// perform a save and return the promised object back into the Angular world
 			return user.save().then(function(object){
@@ -74,6 +74,24 @@ angular.module('appinall.models.users', ['parse-angular.enhance'])
 	 		return user.destroy().then(function(){
 	 			_this.remove(user);
 	 		});
+	 	},
+
+	 	fetchUserData: function(data) {
+	 		var username = ((data.firstName && data.lastName) != undefined)
+	 			? (data.firstName + " " + data.lastName)
+	 			: data.username;
+
+			var user = new User;
+			user.set("firstName", data.firstName);
+			user.set("lastName", data.lastName);
+			user.set("email", data.email);
+			user.set("password", data.password);
+			user.set("username", username);
+			user.set("authData", data.authData);
+            user.set("agreedDateTerms", data.dateTerms);
+            user.set("agreedDatePrivacy", data.datePrivacy);
+
+            return user;
 	 	}
 	});
 });

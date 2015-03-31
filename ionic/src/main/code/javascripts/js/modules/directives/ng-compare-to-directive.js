@@ -9,7 +9,7 @@ angular.module('starter')
         },
         link: function(scope, element, attributes, ngModel) {
             ngModel.$validators.compareTo = function(modelValue) {
-                return modelValue === scope.otherModelValue;
+                return angular.equals(modelValue, scope.otherModelValue);
             };
 
             scope.$watch("otherModelValue", function() {
