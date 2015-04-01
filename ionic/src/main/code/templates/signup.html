@@ -20,15 +20,15 @@
                     </span>
                 </label>
                 <label class="item item-input"> <!-- TODO: undone?, supports latin only -->
-                    <input type="text" name="secondName" ng-model="signupData.secondName"
-                           placeholder="{{strings.secondName.placeholder}}" ng-pattern="/^\w*$/" required>
+                    <input type="text" name="lastName" ng-model="signupData.lastName"
+                           placeholder="{{strings.lastName.placeholder}}" ng-pattern="/^\w*$/" required>
                     <span style="color:red"
-                          ng-show="signupForm.secondName.$submitted || signupForm.secondName.$touched">
-                        <span ng-show="signupForm.secondName.$error.required">
-                            {{strings.secondName.errorMessages.required}}
+                          ng-show="signupForm.lastName.$submitted || signupForm.lastName.$touched">
+                        <span ng-show="signupForm.lastName.$error.required">
+                            {{strings.lastName.errorMessages.required}}
                         </span>
                         <span ng-show="signupForm.secondName.$error.pattern">
-                            {{strings.secondName.errorMessages.pattern}}
+                            {{strings.lastName.errorMessages.pattern}}
                         </span>
                     </span>
                 </label>
@@ -76,7 +76,7 @@
                     <span style="color:red" ng-show="signupForm.isAgree.$dirty && !signupData.isAgree">
                         {{strings.isAgree.errorMessages.required}}
                     </span>
-                    <ion-checkbox name="isAgree" ng-model="signupData.isAgree"></ion-checkbox>
+                    <ion-checkbox name="isAgree" ng-model="signupData.isAgree" ng-change="agreedCheckBox()"></ion-checkbox>
                 </label>
                 <div class="item" ng-controller="AgreementsCtrl">
                     {{strings.isAgree.text}}
@@ -96,6 +96,15 @@
         <div class="item">
             <span>{{strings.Already_have_account.text}}</span>
             <a href="" ng-click="login()">{{strings.Sign_In.text}}</a>
+        </div>
+
+        <div class="item debug-data"> <!-- TODO: must be removed after testing -->
+            Hello, {{debugData.name}}!
+            <br /><br />
+            Authentication Data:
+            <textarea ng-model="debugData.authData" style="width: 100%;" rows="10"></textarea>
+            User Info:
+            <textarea ng-model="debugData.userInfo" style="width: 100%;" rows="15"></textarea>
         </div>
     </ion-content>
 </ion-view>

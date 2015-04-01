@@ -74,7 +74,7 @@
                     <file name="javascripts/js/modules/directives/ng-compare-to-directive.js"/>
                     <file name="javascripts/js/modules/directives/ng-unique-directive.js"/>
                     <file name="javascripts/js/services/auth-service.js"/>
-                    <file name="javascripts/js/services/ParseServices.js"/>
+                    <file name="javascripts/js/services/parse-service.js"/>
                     <file name="javascripts/js/patch/parse-angular.js"/>
                 </filelist>
             </concat>
@@ -114,7 +114,7 @@
                     <file name="javascripts/js/modules/directives/ng-compare-to-directive.js"/>
                     <file name="javascripts/js/modules/directives/ng-unique-directive.js"/>
                     <file name="javascripts/js/services/auth-service.js"/>
-                    <file name="javascripts/js/services/ParseServices.js"/>
+                    <file name="javascripts/js/services/parse-service.js"/>
                     <file name="javascripts/js/patch/parse-angular.js"/>
                 </filelist>
             </concat>

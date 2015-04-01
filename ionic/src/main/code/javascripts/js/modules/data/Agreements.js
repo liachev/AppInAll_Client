@@ -23,7 +23,7 @@ angular.module('appinall.models.agreements', ['parse-angular.enhance'])
             // use the enhanced load() function to fetch the collection
             var result = this.query.find({
                 success: function(results) {
-                    console.debug("[Agreement.loadAgreementsWithTitle] " + JSON.stringify(results));
+                    console.debug("[Agreement.loadAgreementsWithTitle] " + angular.toJson(results, true));
                 },
                 error: function(error) {
                     console.error("Error: " + error.code + " " + error.message);
