@@ -1,7 +1,7 @@
 <project name="imported" basedir="./">
 
     <!--Global variables-->
-    <property name="project.root" value="/Users/denis/Work/AllInApp/appinall_mobile"/>
+    <property name="project.root" value="."/>
     <property name="static.dir" value="static_out"/>
     <property name="app.major.version" value="1"/>
     <property name="build.number" value="1"/>

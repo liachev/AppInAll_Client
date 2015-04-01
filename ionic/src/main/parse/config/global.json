@@ -1,0 +1,14 @@
+{
+  "global": {
+    "parseVersion": "1.4.0"
+  },
+  "applications": {
+    "AppInAll": {
+      "applicationId": "O7eCGvKWO5BihNXJQv8zU0Ewd9a5nLJs0EBZWFjr",
+      "masterKey": "EZj2JsHceHt8P9DjIn4LiarimG6gRAXDPQhUCSg1"
+    },
+    "_default": {
+      "link": "AppInAll"
+    }
+  }
+}
