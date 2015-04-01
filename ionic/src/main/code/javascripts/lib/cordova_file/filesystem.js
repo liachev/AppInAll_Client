@@ -18,7 +18,7 @@ function onDeviceReady() {
     logging.info("Application started");
 }
 
-var writeFile = function(dirEntry, filename, text, bAppend) {
+function writeFile(dirEntry, filename, text, bAppend) {
     if(g_bDeviceIsReady) {
         bAppend = (typeof bAppend === 'undefined') ? false : bAppend;
         dirEntry.getFile(filename, {create: true, exclusive: false}, function (fileEntry) {
@@ -41,7 +41,7 @@ var writeFile = function(dirEntry, filename, text, bAppend) {
             }
         }, fail);
     }
-};
+}
 
 function readFile(dirEntry, filename, successCallback, errorCallback) {
     if(g_bDeviceIsReady)
