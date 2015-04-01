@@ -6,11 +6,11 @@ Parse.Cloud.define("hello", function(request, response) {
 });
 
 Parse.Cloud.define("LoggerInfo", function(request, response) {
-  console.log(request.params);
+  console.log(request.params.log);
   response.success(request.params);
 });
 
 Parse.Cloud.define("LoggerError", function(request, response) {
-  console.error(request.params);
+  console.error(request.params.log);
   response.success(request.params);
 });
