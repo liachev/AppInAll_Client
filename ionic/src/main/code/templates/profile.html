@@ -2,7 +2,7 @@
     <ion-nav-title>Add Profile</ion-nav-title>
 
     <ion-content>
-        <form name="addProfileForm" novalidate>
+        <form name="addProfileForm" ng-submit="addProfileForm.$valid && save()" novalidate>
             <div class="row">
                 <ion-item class="col-25 item-image">
                     <img src="" style="width: 70px; height: 70px">
@@ -87,10 +87,10 @@
                 </ion-checkbox>
             </ion-item>
 
-            <ion-item class="item item-label item-icon-right">
+            <ion-item class="item item-input item-icon-right">
                 <span class="input-label">Interested In</span>
                 <span class="input-text">list of interests will be here</span>
-                <i class="icon ion-edit" ng-click="interestedIn()">Edit</i>
+                <i class="icon ion-edit" ng-click="editInterests()">Edit</i>
             </ion-item>
         </form>
     </ion-content>
