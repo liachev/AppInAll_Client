@@ -64,12 +64,12 @@ angular.module('starter', [
     }
   })
 
-  .state('app.playlists', {
-    url: "/playlists",
+  .state('app.profiles', {
+    url: "/profiles",
     views: {
       'menuContent': {
-        templateUrl: "templates/playlists.html",
-        controller: 'PlaylistsCtrl'
+        templateUrl: "templates/profiles.html",
+        controller: 'ProfilesCtrl'
       }
     }
   })
@@ -94,17 +94,17 @@ angular.module('starter', [
     }
   })
 
-  .state('app.single', {
-    url: "/playlists/:playlistId",
+  .state('app.profile', {
+    url: "/profiles/:profileId",
     views: {
       'menuContent': {
-        templateUrl: "templates/playlist.html",
-        controller: 'PlaylistCtrl'
+        templateUrl: "templates/profile.html",
+        controller: 'ProfileCtrl'
       }
     }
   });
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/app/playlists');
+  $urlRouterProvider.otherwise('/app/signup');
 
   if (window.cordova && (window.cordova.platformId == "browser")) { // TODO: should be removed later or resolve this
     var appId = prompt("Enter FB Application ID", "");

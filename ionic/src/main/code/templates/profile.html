@@ -1,0 +1,108 @@
+<ion-view>
+    <ion-nav-title>Add Profile</ion-nav-title>
+
+    <ion-content>
+        <form name="addProfileForm" novalidate>
+            <div class="row">
+                <ion-item class="col-25 item-image">
+                    <img src="" style="width: 70px; height: 70px">
+
+                    <h3><a href ng-click="uploadPhoto()">Upload Photo</a></h3>
+                </ion-item>
+
+                <ion-item class="col">
+                    <label class="item item-input"> <!-- TODO: undone?, supports latin only -->
+                        <input type="text" name="firstName" ng-model="profileData.firstName"
+                               placeholder="{{strings.firstName.placeholder}}" ng-pattern="/^\w*$/" required>
+                        <span style="color:red"
+                              ng-show="addProfileForm.firstName.$submitted || addProfileForm.firstName.$touched">
+                            <span ng-show="addProfileForm.firstName.$error.required">
+                                {{strings.firstName.errorMessages.required}}
+                            </span>
+                            <span ng-show="addProfileForm.firstName.$error.pattern">
+                                {{strings.firstName.errorMessages.pattern}}
+                            </span>
+                        </span>
+                    </label>
+
+                    <label class="item item-input"> <!-- TODO: undone?, supports latin only -->
+                        <input type="text" name="lastName" ng-model="profileData.lastName"
+                               placeholder="{{strings.lastName.placeholder}}" ng-pattern="/^\w*$/" required>
+                        <span style="color:red"
+                              ng-show="addProfileForm.lastName.$submitted || addProfileForm.lastName.$touched">
+                            <span ng-show="addProfileForm.lastName.$error.required">
+                                {{strings.lastName.errorMessages.required}}
+                            </span>
+                            <span ng-show="addProfileForm.secondName.$error.pattern">
+                                {{strings.lastName.errorMessages.pattern}}
+                            </span>
+                        </span>
+                    </label>
+                </ion-item>
+            </div>
+
+            <label class="item item-input">
+                <span class="input-label">Location</span>
+                <input type="text" name="location" ng-model="profileData.location"
+                       placeholder="{{strings.location.placeholder}}" ng-pattern="/^\w*$/" required>
+                    <span style="color:red"
+                          ng-show="addProfileForm.location.$submitted || addProfileForm.location.$touched">
+                        <span ng-show="addProfileForm.location.$error.required">
+                            {{strings.lastName.errorMessages.required}}
+                        </span>
+                        <span ng-show="addProfileForm.location.$error.pattern">
+                            {{strings.lastName.errorMessages.pattern}}
+                        </span>
+                    </span>
+            </label>
+
+            <ion-item class="item item-input">
+                <span class="input-label">Gender</span>
+
+                <div class="button-bar">
+                    <a class="button" ng-class="{'button-positive': (profileData.gender === 'M')}"
+                       ng-click="profileData.gender = 'M'">Male</a>
+                    <a class="button" ng-class="{'button-positive': (profileData.gender === 'F')}"
+                       ng-click="profileData.gender = 'F'">Female</a>
+                    <a class="button" ng-class="{'button-positive': (profileData.gender === 'N')}"
+                       ng-click="profileData.gender = 'N'">Don't show</a>
+                </div>
+            </ion-item>
+
+            <label class="item item-input">
+                <span class="input-label">Birthday</span>
+                <input type="date" name="birthday" ng-model="profileData.birthday" placeholder="yyyy-MM-dd">
+                <span style="color:red"
+                      ng-show="addProfileForm.birthday.$submitted || addProfileForm.birthday.$touched">
+                    <span ng-show="addProfileForm.birthday.$error.date">
+                       Not a valid date!
+                    </span>
+                </span>
+            </label>
+
+            <ion-item class="item item-input">
+                <span class="input-label">Kid</span>
+                <ion-checkbox name="kid" ng-model="profileData.kid">
+                    Kid's restrictions will be applied
+                </ion-checkbox>
+            </ion-item>
+
+            <ion-item class="item item-label item-icon-right">
+                <span class="input-label">Interested In</span>
+                <span class="input-text">list of interests will be here</span>
+                <i class="icon ion-edit" ng-click="interestedIn()">Edit</i>
+            </ion-item>
+        </form>
+    </ion-content>
+
+    <ion-footer-bar align-title="center" class="bar-positive">
+        <div class="buttons">
+            <button class="button" ng-click="cancel()">Cancel</button>
+        </div>
+        <h1 class="title">&nbsp;</h1>
+
+        <div class="buttons">
+            <button class="button" ng-click="addProfileForm.$submit()">Save</button>
+        </div>
+    </ion-footer-bar>
+</ion-view>

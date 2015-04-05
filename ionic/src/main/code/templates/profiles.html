@@ -1,0 +1,60 @@
+<ion-view>
+    <ion-nav-title>Profile</ion-nav-title>
+
+    <ion-nav-buttons side="right">
+        <button class="button" ng-click="data.showReorder = !data.showReorder">
+            Reorder
+        </button>
+    </ion-nav-buttons>
+
+    <ion-content>
+        <ion-list show-reorder="data.showReorder">
+            <ion-item ng-repeat="profile in profiles" ng-click="selectItem($index)"
+                      class="item-thumbnail-left item-remove-animate">
+                <div class="item-image">
+                    <img ng-src="{{profile.img}}" alt="{{profile.name}}" style="width:70px; height:70px">
+
+                    <h3>
+                        {{isSelected($index) === true ? 'Selected' : 'Select'}}
+                    </h3>
+                </div>
+
+                <div class="item-text-wrap">
+                    <h2>
+                        {{profile.firstName + ' ' + profile.lastName +
+                        ' (' + (isSelected($index) === true ? '' : 'not ') + 'selected)'}}
+                    </h2>
+
+                    <p>{{profile.isOnline === true ? '' : 'not '}}online</p>
+
+                    <p>
+                        {{profile.gender && (profile.gender + ', ')}}
+                        {{profile.birthday && (calcYears(profile) + ' years old, ')}}
+                        {{profile.location}}
+                    </p>
+
+                    <p>
+                        Interest in {{getInterests(profile)}}
+                    </p>
+                </div>
+                <ion-option-button class="ion-edit" ng-click="editItem(profile)">
+                    Edit
+                </ion-option-button>
+                <ion-option-button class="ion-trash-b" ng-click="onItemDelete(profile)">
+                    Delete
+                </ion-option-button>
+                <ion-reorder-button class="ion-navicon" on-reorder="moveItem(profile, $fromIndex, $toIndex)">
+                </ion-reorder-button>
+            </ion-item>
+        </ion-list>
+    </ion-content>
+
+    <ion-footer-bar align-title="center" class="bar-positive">
+        <div class="buttons"></div>
+        <h1 class="title">&nbsp;</h1>
+
+        <div class="buttons">
+            <button class="button" ng-click="editItem()">Add Profile</button>
+        </div>
+    </ion-footer-bar>
+</ion-view>
