@@ -12,7 +12,7 @@
             <ion-item ng-repeat="profile in profiles" ng-click="selectItem($index)"
                       class="item-thumbnail-left item-remove-animate">
                 <div class="item-image">
-                    <img ng-src="{{profile.img}}" alt="{{profile.name}}" style="width:70px; height:70px">
+                    <img class="avatar" ng-src="{{profile.avatar}}" alt="{{profile.name}}">
 
                     <h3>
                         {{isSelected($index) === true ? 'Selected' : 'Select'}}
@@ -28,7 +28,7 @@
                     <p>{{profile.isOnline === true ? '' : 'not '}}online</p>
 
                     <p>
-                        {{profile.gender && (profile.gender + ', ')}}
+                        {{profile.gender === 'N' ? '' : ((profile.gender === 'F' ? 'Female' : 'Male') + ', ')}}
                         {{profile.birthday && (calcYears(profile) + ' years old, ')}}
                         {{profile.location}}
                     </p>

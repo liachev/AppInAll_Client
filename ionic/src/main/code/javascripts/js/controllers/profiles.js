@@ -1,39 +1,19 @@
 angular.module('profiles.controllers', ['profile.controllers'])
 
-.controller('ProfilesCtrl', function($scope, $location) {
+.controller('ProfilesCtrl', ['$scope', '$location', '$http', function($scope, $location, $http) {
   $scope.data = {
     selected: 0 // TODO: instantiate selected profile
   };
 
-  $scope.profiles = [
-    {
-      firstName: 'Susan',
-      lastName: 'Miller',
-      gender: 'Female',
-      birthday: new Date(1987, 1, 1),
-      location: 'Raynham, MA',
-      isOnline: true,
-      interestedIn: ['Bicycle', 'Hiking']
-    },
-    {
-      firstName: 'John',
-      lastName: 'Miller',
-      gender: 'Male',
-      birthday: new Date(2011, 1, 1),
-      location: 'Raynham, MA',
-      isOnline: false,
-      interestedIn: ['Swimming']
-    },
-    {
-      firstName: 'Someone',
-      lastName: 'Else',
-      gender: '',
-      birthday: null,
-      location: 'Raynham, MA',
-      isOnline: false,
-      interestedIn: []
-    }
-  ];
+  $http.get('translate/profiles.json').success(function(result) { // TODO: delete this later
+      $scope.profiles = [];
+      angular.forEach(result, function(value, key) {
+        $scope.profiles[key] = value;
+        $scope.profiles[key].birthday && ($scope.profiles[key].birthday = new Date(value.birthday));
+      });
+  }).error(function(object, code) {
+      console.warn(object);
+  });
 
   $scope.selectItem = function ($index) {
     $scope.profiles[$scope.data.selected].isSelected = false;
@@ -46,7 +26,7 @@ angular.module('profiles.controllers', ['profile.controllers'])
   };
 
   $scope.editItem = function(item) {
-    $location.path("/app/profiles/" + (item && item.name || "new")) // if-then-else
+    $location.path("/app/profiles/" + (item && item.id || "new")) // if-then-else
   };
 
   $scope.moveItem = function(item, fromIndex, toIndex) {
@@ -82,9 +62,9 @@ angular.module('profiles.controllers', ['profile.controllers'])
 
   $scope.getInterests = function (item) {
     var result = "";
-    angular.forEach(item.interestIn, function(value, key) {
+    angular.forEach(item.interestedIn, function(value, key) {
       result += (key > 0 ? ", " : "") + value
     });
     return result;
   }
-});
+}]);

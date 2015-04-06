@@ -1,11 +1,11 @@
 <ion-view>
-    <ion-nav-title>Add Profile</ion-nav-title>
+    <ion-nav-title>{{title}}</ion-nav-title>
 
-    <ion-content>
-        <form name="addProfileForm" ng-submit="addProfileForm.$valid && save()" novalidate>
+    <form name="addProfileForm" ng-submit="addProfileForm.$valid && save()" novalidate>
+        <ion-content>
             <div class="row">
                 <ion-item class="col-25 item-image">
-                    <img src="" style="width: 70px; height: 70px">
+                    <img class="avatar" ng-src="{{profileData.avatar}}">
 
                     <h3><a href ng-click="uploadPhoto()">Upload Photo</a></h3>
                 </ion-item>
@@ -44,14 +44,11 @@
             <label class="item item-input">
                 <span class="input-label">Location</span>
                 <input type="text" name="location" ng-model="profileData.location"
-                       placeholder="{{strings.location.placeholder}}" ng-pattern="/^\w*$/" required>
+                       placeholder="{{strings.location.placeholder}}" required>
                     <span style="color:red"
                           ng-show="addProfileForm.location.$submitted || addProfileForm.location.$touched">
                         <span ng-show="addProfileForm.location.$error.required">
                             {{strings.lastName.errorMessages.required}}
-                        </span>
-                        <span ng-show="addProfileForm.location.$error.pattern">
-                            {{strings.lastName.errorMessages.pattern}}
                         </span>
                     </span>
             </label>
@@ -89,20 +86,20 @@
 
             <ion-item class="item item-input item-icon-right">
                 <span class="input-label">Interested In</span>
-                <span class="input-text">list of interests will be here</span>
+                <span class="input-text">{{profileData.interestedIn || "list of interests will be here"}}</span>
                 <i class="icon ion-edit" ng-click="editInterests()">Edit</i>
             </ion-item>
-        </form>
-    </ion-content>
+        </ion-content>
 
-    <ion-footer-bar align-title="center" class="bar-positive">
-        <div class="buttons">
-            <button class="button" ng-click="cancel()">Cancel</button>
-        </div>
-        <h1 class="title">&nbsp;</h1>
+        <ion-footer-bar align-title="center" class="bar-positive">
+            <div class="buttons">
+                <button type="button" class="button" ng-click="cancel()">Cancel</button>
+            </div>
+            <h1 class="title">&nbsp;</h1>
 
-        <div class="buttons">
-            <button class="button" ng-click="addProfileForm.$submit()">Save</button>
-        </div>
-    </ion-footer-bar>
+            <div class="buttons">
+                <button type="submit" class="button">Save</button>
+            </div>
+        </ion-footer-bar>
+    </form>
 </ion-view>

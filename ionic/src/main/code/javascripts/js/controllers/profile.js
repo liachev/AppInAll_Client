@@ -5,7 +5,22 @@ angular.module('profile.controllers', [])
     gender: 'N'
   };
 
-  $http.get('translate/signup/strings.json').success(function(result) {
+  $http.get('translate/profiles.json').success(function(result) { // TODO: delete this later
+    $scope.title = "Add Profile";
+    for (i in result) {
+      console.info(angular.toJson(result[i], true));
+      if (angular.equals(result[i].id, $stateParams.profileId)) {
+        $scope.profileData = result[i];
+        $scope.title = "Edit Profile '" + $scope.profileData.firstName + " " + $scope.profileData.lastName + "'";
+        $scope.profileData.birthday && ($scope.profileData.birthday = new Date(result[i].birthday));
+        break;
+      }
+    }
+  }).error(function(object, code) {
+      console.warn(object);
+  });
+
+  $http.get('translate/profiles/strings.json').success(function(result) {
       $scope.strings = result;
   }).error(function(object, code) {
       console.warn(object);
@@ -20,11 +35,12 @@ angular.module('profile.controllers', [])
   };
 
   $scope.cancel = function () {
-    $scope.profileData = defaultData;
     $window.history.back();
+    $scope.profileData = defaultData;
   };
 
   $scope.save = function () {
-    alert('Not implemented yet') // TODO: complete saving
+    alert('Not implemented yet\n\n' + angular.toJson($scope.profileData, true)) // TODO: complete saving
+    $window.history.back();
   };
 }]);

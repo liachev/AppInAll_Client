@@ -1,0 +1,43 @@
+[
+  {
+    "id": "1",
+    "avatar": "img/ionic.png",
+    "firstName": "Susan",
+    "lastName": "Miller",
+    "gender": "F",
+    "birthday": "1987-01-01T00:00:00.000Z",
+    "location": "Raynham, MA",
+    "isOnline": true,
+    "kid": false,
+    "interestedIn": [
+      "Bicycle",
+      "Hiking"
+    ]
+  },
+  {
+    "id": "2",
+    "avatar": "img/ionic.png",
+    "firstName": "John",
+    "lastName": "Miller",
+    "gender": "M",
+    "birthday": "2011-01-01T00:00:00.000Z",
+    "location": "Raynham, MA",
+    "isOnline": false,
+    "kid": true,
+    "interestedIn": [
+      "Swimming"
+    ]
+  },
+  {
+    "id": "3",
+    "avatar": "img/ionic.png",
+    "firstName": "Someone",
+    "lastName": "Else",
+    "gender": "N",
+    "birthday": null,
+    "location": "Raynham, MA",
+    "isOnline": false,
+    "kid": false,
+    "interestedIn": null
+  }
+]
