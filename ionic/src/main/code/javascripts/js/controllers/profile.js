@@ -5,23 +5,24 @@ angular.module('profile.controllers', [])
     gender: 'N'
   };
 
-  $http.get('translate/profiles.json').success(function(result) { // TODO: delete this later
-    $scope.title = "Add Profile";
-    for (i in result) {
-      console.info(angular.toJson(result[i], true));
-      if (angular.equals(result[i].id, $stateParams.profileId)) {
-        $scope.profileData = result[i];
-        $scope.title = "Edit Profile '" + $scope.profileData.firstName + " " + $scope.profileData.lastName + "'";
-        $scope.profileData.birthday && ($scope.profileData.birthday = new Date(result[i].birthday));
-        break;
-      }
-    }
+  $http.get('translate/profiles/strings.json').success(function(result) {
+      $scope.strings = result;
   }).error(function(object, code) {
       console.warn(object);
   });
 
-  $http.get('translate/profiles/strings.json').success(function(result) {
-      $scope.strings = result;
+  $http.get('translate/profiles.json').success(function(result) { // TODO: delete this later
+    $scope.title = $scope.strings.title.add_profile;
+    for (i in result) {
+      console.info(angular.toJson(result[i], true));
+      if (angular.equals(result[i].id, $stateParams.profileId)) {
+        $scope.profileData = result[i];
+        $scope.title =
+          $scope.strings.title.edit_profile + " '" + $scope.profileData.firstName + " " + $scope.profileData.lastName + "'";
+        $scope.profileData.birthday && ($scope.profileData.birthday = new Date(result[i].birthday));
+        break;
+      }
+    }
   }).error(function(object, code) {
       console.warn(object);
   });

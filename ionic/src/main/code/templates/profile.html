@@ -7,7 +7,7 @@
                 <ion-item class="col-25 item-image">
                     <img class="avatar" ng-src="{{profileData.avatar}}">
 
-                    <h3><a href ng-click="uploadPhoto()">Upload Photo</a></h3>
+                    <h3><a href ng-click="uploadPhoto()">{{strings.upload_photo.label}}</a></h3>
                 </ion-item>
 
                 <ion-item class="col">
@@ -42,63 +42,65 @@
             </div>
 
             <label class="item item-input">
-                <span class="input-label">Location</span>
+                <span class="input-label">{{strings.location.label}}</span>
                 <input type="text" name="location" ng-model="profileData.location"
                        placeholder="{{strings.location.placeholder}}" required>
                     <span style="color:red"
                           ng-show="addProfileForm.location.$submitted || addProfileForm.location.$touched">
                         <span ng-show="addProfileForm.location.$error.required">
-                            {{strings.lastName.errorMessages.required}}
+                            {{strings.location.errorMessages.required}}
+                        </span>
+                        <span ng-show="addProfileForm.location.$error.invalid">
+                            {{strings.location.errorMessages.invalid}}
                         </span>
                     </span>
             </label>
 
             <ion-item class="item item-input">
-                <span class="input-label">Gender</span>
+                <span class="input-label">{{strings.gender.label}}</span>
 
                 <div class="button-bar">
                     <a class="button" ng-class="{'button-positive': (profileData.gender === 'M')}"
-                       ng-click="profileData.gender = 'M'">Male</a>
+                       ng-click="profileData.gender = 'M'">{{strings.gender.male}}</a>
                     <a class="button" ng-class="{'button-positive': (profileData.gender === 'F')}"
-                       ng-click="profileData.gender = 'F'">Female</a>
+                       ng-click="profileData.gender = 'F'">{{strings.gender.female}}</a>
                     <a class="button" ng-class="{'button-positive': (profileData.gender === 'N')}"
-                       ng-click="profileData.gender = 'N'">Don't show</a>
+                       ng-click="profileData.gender = 'N'">{{strings.gender.do_not_show}}</a>
                 </div>
             </ion-item>
 
             <label class="item item-input">
-                <span class="input-label">Birthday</span>
-                <input type="date" name="birthday" ng-model="profileData.birthday" placeholder="yyyy-MM-dd">
+                <span class="input-label">{{strings.birthday.label}}</span>
+                <input type="date" name="birthday" ng-model="profileData.birthday"
+                       placeholder="{{strings.birthday.placeholder}}">
                 <span style="color:red"
                       ng-show="addProfileForm.birthday.$submitted || addProfileForm.birthday.$touched">
                     <span ng-show="addProfileForm.birthday.$error.date">
-                       Not a valid date!
+                       {{strings.birthday.errorMessages.date}}
                     </span>
                 </span>
             </label>
 
             <ion-item class="item item-input">
-                <span class="input-label">Kid</span>
-                <ion-checkbox name="kid" ng-model="profileData.kid">
-                    Kid's restrictions will be applied
-                </ion-checkbox>
+                <span class="input-label">{{strings.kid.label}}</span>
+                <ion-checkbox name="kid" ng-model="profileData.kid">{{strings.kid.text}}</ion-checkbox>
             </ion-item>
 
             <ion-item class="item item-input item-icon-right">
-                <span class="input-label">Interested In</span>
+                <span class="input-label">{{strings.interestedIn.label}}</span>
                 <span class="input-text">{{profileData.interestedIn || "list of interests will be here"}}</span>
-                <i class="icon ion-edit" ng-click="editInterests()">Edit</i>
+                <i class="icon ion-edit" ng-click="editInterests()">{{strings.interestedIn.edit}}</i>
             </ion-item>
         </ion-content>
 
         <ion-footer-bar align-title="center" class="bar-positive">
             <div class="buttons">
-                <button type="button" class="button" ng-click="cancel()">Cancel</button>
+                <button type="button" class="button" ng-click="cancel()">{{strings.buttons.cancel}}</button>
             </div>
             <h1 class="title">&nbsp;</h1>
 
             <div class="buttons">
-                <button type="submit" class="button">Save</button>
+                <button type="submit" class="button">{{strings.buttons.save}}</button>
             </div>
         </ion-footer-bar>
     </form>

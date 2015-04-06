@@ -1,81 +1,58 @@
 {
   "firstName": {
     "placeholder": "Your First Name",
-
     "errorMessages": {
       "required": "Required.",
-
       "pattern": "Only digits and letters allowed."
     }
   },
-
   "lastName": {
     "placeholder": "Your Last Name",
-
     "errorMessages": {
       "required": "Required.",
-
       "pattern": "Only digits and letters allowed."
     }
   },
-
-  "email": {
-    "placeholder": "Your Email",
-
+  "location": {
+    "label": "Location",
+    "placeholder": "City, Zip Code",
     "errorMessages": {
       "required": "Required.",
-
-      "invalid": "Invalid email address.",
-
-      "alreadyInUse": "E-mail is already in use."
+      "invalid": "Invalid location."
     }
   },
-
-  "password": {
-    "placeholder": "Choose Password",
-
+  "gender": {
+    "label": "Gender",
+    "male": "Male",
+    "female": "Female",
+    "do_not_show": "Don't show",
+    "errorMessages": {}
+  },
+  "birthday": {
+    "label": "Birthday",
+    "placeholder": "yyyy-MM-dd",
     "errorMessages": {
-      "required": "Required."
+      "date": "Not a valid date."
     }
   },
-
-  "confirmPassword": {
-    "placeholder": "Confirm Password",
-
-    "errorMessages": {
-      "required": "Required.",
-
-      "notIdentical": "Must match the previous entry."
-    }
+  "kid": {
+    "label": "Kid",
+    "text": "Kid's restrictions will be applied",
+    "errorMessages": {}
   },
-
-  "isAgree": {
-    "text": "I have read and agree with the",
-
-    "and": "and",
-
-    "Terms_of_Use": "Terms of Use",
-
-    "Privacy_Policy": "Privacy Policy",
-
-    "errorMessages": {
-      "required": "Must Agree"
-    }
+  "interestedIn": {
+    "label": "Interested In",
+    "edit": "Edit"
   },
-
-  "Connect_with_Facebook": {
-    "text": "Connect with Facebook"
+  "upload_photo": {
+    "label": "Upload Photo"
   },
-
-  "Create_Account": {
-    "text": "Create Account"
+  "title": {
+    "add_profile": "Add Profile",
+    "edit_profile": "Edit Profile"
   },
-
-  "Already_have_account": {
-    "text": "Already have an account?"
-  },
-
-  "Sign_In": {
-    "text": "Sign In"
+  "buttons": {
+    "save": "Save",
+    "cancel": "Cancel"
   }
 }
