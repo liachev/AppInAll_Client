@@ -40,6 +40,7 @@ angular.module('starter', [
   var startDate = new Date();
   var endDate = new Date();
   endDate.setHours(startDate.getHours() + 1);
+  console.log("Creating event " + "Appinall event" + "Test location" + "Test event note");
   logging.log("Creating event");
   calendarService.createEvent("Appinall event", "Test location", "Test event note", calendarOnSuccess, calendarOnError);
   // angular localStorageService 'isSupported' test

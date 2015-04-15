@@ -7,7 +7,7 @@ function calendarOnError(msg) {
     logging.error('Calendar error: ' + JSON.stringify(msg));
 }
 
-angular.module('cordova_calendar')
+angular.module('cordova_calendar', [])
 
     .factory('calendarService', function($window) {
         return {
