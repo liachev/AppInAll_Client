@@ -14,6 +14,7 @@ angular.module('starter', [
   /* models */
   'appinall.models.users',
   'appinall.models.agreements',
+  'appinall.models.category',
 
   /* services */
   'ParseServices'

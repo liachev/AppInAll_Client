@@ -1,0 +1,10 @@
+<ion-view view-title="Events">
+    <ion-content>
+        <ion-list>
+            <ion-item ng-repeat="event in events">
+                {{event.name}}
+            </ion-item>
+        </ion-list>
+        <ion-infinite-scroll on-infinite="loadMore()" distance="10%"></ion-infinite-scroll>
+    </ion-content>
+</ion-view>
