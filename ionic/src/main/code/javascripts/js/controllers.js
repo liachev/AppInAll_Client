@@ -2,6 +2,7 @@ angular.module('starter.controllers', [
   'signup.controllers',
   'agreements.controllers',
   'profiles.controllers'
+  // TODO: add new controllers here
 ])
 
 .controller('AppCtrl', function($scope, $ionicModal, $timeout) {

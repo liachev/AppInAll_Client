@@ -72,6 +72,8 @@
                     <file name="javascripts/js/controllers/profile.js"/>
                     <file name="javascripts/js/controllers/profiles.js"/>
                     <file name="javascripts/js/modules/data/Agreements.js"/>
+                    <file name="javascripts/js/modules/data/models.js"/>
+                    <file name="javascripts/js/modules/data/Profiles.js"/>
                     <file name="javascripts/js/modules/data/Users.js"/>
                     <file name="javascripts/js/modules/directives/ng-compare-to-directive.js"/>
                     <file name="javascripts/js/modules/directives/ng-unique-directive.js"/>
@@ -114,6 +116,8 @@
                     <file name="javascripts/js/controllers/profile.js"/>
                     <file name="javascripts/js/controllers/profiles.js"/>
                     <file name="javascripts/js/modules/data/Agreements.js"/>
+                    <file name="javascripts/js/modules/data/models.js"/>
+                    <file name="javascripts/js/modules/data/Profiles.js"/>
                     <file name="javascripts/js/modules/data/Users.js"/>
                     <file name="javascripts/js/modules/directives/ng-compare-to-directive.js"/>
                     <file name="javascripts/js/modules/directives/ng-unique-directive.js"/>

@@ -8,12 +8,11 @@ angular.module('starter', [
   'ionic',
   'ngCordova',
 
-  /* controllers */
+  /* controllers */ // TODO: add new controllers to 'ionic/src/main/code/javascripts/js/controllers.js'
   'starter.controllers',
 
-  /* models */
-  'appinall.models.users',
-  'appinall.models.agreements',
+  /* models */ // TODO: add new models to 'ionic/src/main/code/javascripts/js/modules/data/models.js'
+  'appinall.models',
 
   /* services */
   'ParseServices'

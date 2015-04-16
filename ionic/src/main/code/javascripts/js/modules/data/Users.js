@@ -56,7 +56,7 @@ angular.module('appinall.models.users', ['parse-angular.enhance'])
 	 		// save request_id to Parse
 	 		var _this = this;
 
-			var user = fetchUserData(signupData);
+			var user = _this.fetchUserData(signupData);
 
 			// perform a save and return the promised object back into the Angular world
 			return user.save().then(function(object){
