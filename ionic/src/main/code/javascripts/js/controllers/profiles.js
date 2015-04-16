@@ -1,28 +1,52 @@
 angular.module('profiles.controllers', ['profile.controllers'])
 
-.controller('ProfilesCtrl', ['$scope', '$location', '$http', function($scope, $location, $http) {
-  $scope.data = {
-    selected: 0 // TODO: instantiate selected profile
-  };
-
-  $http.get('translate/profiles.json').success(function(result) { // TODO: delete this later
-      $scope.profiles = [];
-      angular.forEach(result, function(value, key) {
-        $scope.profiles[key] = value;
-        $scope.profiles[key].birthday && ($scope.profiles[key].birthday = new Date(value.birthday));
-      });
-  }).error(function(object, code) {
-      console.warn(object);
-  });
+.controller('ProfilesCtrl', ['$scope', '$location', '$http', 'ParseSDK', function($scope, $location, $http, Parse) {
+  $scope.data = { };
 
   $scope.selectItem = function ($index) {
-    $scope.profiles[$scope.data.selected].isSelected = false;
-    $scope.profiles[$index].isSelected = true;
-    $scope.data.selected = $index;
+    $scope.profiles.forEach(function (value, key) {
+      value.isSelected = angular.equals(key, $index)
+    });
+    $scope.selectedProfile = $scope.profiles[$index].id;
+    var currentUser = Parse.User.current();
+    if (currentUser) {
+      var query = new Parse.Query(Parse.User);
+      query.get(currentUser.id, {
+        success: function(user) {
+          // The object was retrieved successfully.
+          var queryToProfile = new Parse.Query(Parse.Object.getClass("Profile"));
+          queryToProfile.get($scope.selectedProfile, {
+            success: function(profile) {
+              // The object was retrieved successfully.
+              user.save({
+                  selectedProfile: profile
+                }, {
+                  success: function(user) {
+                    // The object was saved successfully.
+                    console.info(angular.toJson(user));
+                  },
+                  error: function(user, error) {
+                    // The save failed.
+                    // error is a Parse.Error with an error code and message.
+                  }
+              });
+            },
+            error: function (object, error) {
+              // The object was not retrieved successfully.
+              // error is a Parse.Error with an error code and message.
+            }
+          });
+        },
+        error: function(object, error) {
+          // The object was not retrieved successfully.
+          // error is a Parse.Error with an error code and message.
+        }
+      });
+    }
   };
 
   $scope.isSelected = function ($index) {
-    return angular.equals($index, $scope.data.selected)
+    return angular.equals($scope.profiles[$index].id, $scope.selectedProfile)
   };
 
   $scope.editItem = function(item) {
@@ -36,6 +60,7 @@ angular.module('profiles.controllers', ['profile.controllers'])
 
   $scope.onItemDelete = function(item) {
     $scope.profiles.splice($scope.profiles.indexOf(item), 1)
+    // TODO: remove profile from server
   };
 
   $scope.calcYears = function (item) {

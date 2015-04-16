@@ -68,7 +68,42 @@ angular.module('starter', [
     views: {
       'menuContent': {
         templateUrl: "templates/profiles.html",
-        controller: 'ProfilesCtrl'
+        controller: 'ProfilesCtrl',
+        resolve: {
+          delay: ['$q', '$rootScope', 'ParseSDK', function($q, $scope, Parse) {
+            var delay = $q.defer();
+            var currentUser = Parse.User.current();
+            if (currentUser) {
+               // do stuff with the user
+              $scope.profiles = [];
+              var profiles = new (Parse.Collection.getClass("Profile"));
+              profiles.getProfilesByUser(currentUser).then(function (result) {
+                console.info(angular.toJson(result));
+                for (i in result) {
+                  $scope.profiles[i] = {
+                    id: result[i].id,
+                    firstName: result[i].get("firstName"),
+                    lastName: result[i].get("lastName"),
+                    avatar: result[i].get("avatar"),
+                    location: result[i].get("location"),
+                    gender: result[i].get("gender"),
+                    birthday: result[i].get("birthday"),
+                    kid: result[i].get("kid"),
+                    interestedIn: result[i].get("interestedIn"),
+                    isSelected: result[i].get("isSelected"),
+                    name: result[i].get("firstName") + " " + result[i].get("lastName")
+                  };
+                  $scope.selectedProfile = ($scope.profiles[i].isSelected ? $scope.profiles[i].id : $scope.selectedProfile);
+                };
+                delay.resolve();
+              });
+            } else {
+              $scope.login(); // show the signup or login page
+              delay.resolve();
+            }
+            return delay.promise;
+          }]
+        }
       }
     }
   })
