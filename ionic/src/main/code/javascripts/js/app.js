@@ -37,12 +37,6 @@ angular.module('starter', [
   // FixMe: duplicated with ionic/src/main/code/javascripts/js/services/parse-service.js:6
   Parse.initialize("O7eCGvKWO5BihNXJQv8zU0Ewd9a5nLJs0EBZWFjr", "Aohwuhy4j63Rs9tL4kXuc4lD8zGqv6wgrI74yXnU");
 
-  var startDate = new Date();
-  var endDate = new Date();
-  endDate.setHours(startDate.getHours() + 1);
-  console.log("Creating event " + "Appinall event" + "Test location" + "Test event note");
-  logging.log("Creating event");
-  calendarService.createEvent("Appinall event", "Test location", "Test event note", calendarOnSuccess, calendarOnError);
   // angular localStorageService 'isSupported' test
   if(localStorageService.isSupported)
   {

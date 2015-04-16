@@ -1,4 +1,4 @@
-
+// usage: ionic/src/main/appinall/plugins/nl.x-services.plugins.calendar/demo/index.html
 function calendarOnSuccess(msg) {
     logging.info('Calendar success: ' + JSON.stringify(msg));
 }
