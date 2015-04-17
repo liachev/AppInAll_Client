@@ -35,7 +35,7 @@ angular.module('appinall.models.profiles', ['parse-angular.enhance'])
 		className: "Profile", // TODO: must be changed later
 
 		comparator: function(model) {
-			return (model.getLastName() + model.getFirstName()); // TODO: must be change later
+			return (model.getLastName() + " " + model.getFirstName()); // TODO: must be change later
 		},
 
 		createProfile: function() {
@@ -84,7 +84,7 @@ angular.module('appinall.models.profiles', ['parse-angular.enhance'])
 					return profile;
 				},
 				error: function (object, error) {
-					// TODO: an error occurs, log it; or data doesn't created yet
+					// TODO: an error occurs, log it; or profile doesn't created yet
 				}
 			}).then(function (profile) {
 				return profile;
@@ -101,6 +101,7 @@ angular.module('appinall.models.profiles', ['parse-angular.enhance'])
 				profile.set("kid", data.kid);
 				profile.set("interestedIn", data.interestedIn);
 				// TODO: complete this if new columns added to `Profile`
+
 				return profile;
 			});
 	 	}

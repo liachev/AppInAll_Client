@@ -93,9 +93,27 @@ angular.module('starter', [
                     isSelected: result[i].get("isSelected"),
                     name: result[i].get("firstName") + " " + result[i].get("lastName")
                   };
-                  $scope.selectedProfile = ($scope.profiles[i].isSelected ? $scope.profiles[i].id : $scope.selectedProfile);
                 };
-                delay.resolve();
+                var query = new Parse.Query(Parse.User);
+                query.get(currentUser.id, {
+                  success: function(user) {
+                    // The object was retrieved successfully.
+                    var selectedProfile = user.get("selectedProfile");
+                    selectedProfile.fetch({
+                      success: function(profile) {
+                        $scope.selectedProfile = profile.id;
+                      }
+                    });
+                  },
+                  error: function(object, error) {
+                    // The object was not retrieved successfully.
+                    // error is a Parse.Error with an error code and message.
+                  }
+                }).then(function (user) {
+                    delay.resolve();
+                }, function (error) {
+                    delay.resolve();
+                });
               });
             } else {
               $scope.login(); // show the signup or login page
