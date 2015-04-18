@@ -78,6 +78,7 @@ var logging = {
             str += arguments[i];
         }
         logArray.push("DEBUG" + getStrDate() + ":" + str);
+        console.debug("DEBUG" + getStrDate() + ":" + str);
     },
     error : function () {
         var str = "";
@@ -88,6 +89,7 @@ var logging = {
             str += arguments[i];
         }
         logArray.push("ERROR" + getStrDate() + ":"  + str);
+        console.error("ERROR" + getStrDate() + ":" + str);
     },
     info : function () {
         var str = "";
@@ -98,6 +100,7 @@ var logging = {
             str += arguments[i];
         }
         logArray.push("INFO" + getStrDate() + ":"  + str);
+        console.info("INFO" + getStrDate() + ":" + str);
     },
     log : function () {
         var str = "";
@@ -108,5 +111,6 @@ var logging = {
             str += arguments[i];
         }
         logArray.push("LOG" + getStrDate() + ":"  + str);
+        console.log("LOG" + getStrDate() + ":" + str);
     }
 };
