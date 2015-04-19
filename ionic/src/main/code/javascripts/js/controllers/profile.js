@@ -8,9 +8,6 @@ angular.module('profile.controllers', [])
             var fn = $parse(attrs.onReadFile);
 
 			element.on('change', function(onChangeEvent) {
-//                scope.$apply(function() {
-//                    fn(scope, { $file: (onChangeEvent.srcElement || onChangeEvent.target).files[0] });
-//                });
 				var reader = new FileReader();
 
 				reader.onload = function(onLoadEvent) {
@@ -87,8 +84,10 @@ angular.module('profile.controllers', [])
           !$scope.profileData && ($scope.profileData = defaultData);
           parseFile.save().then(function() {
             // The file has been saved to Parse.
-            $scope.profileData.avatar = parseFile;
-            $scope.profileData.avatarSrc = parseFile.url() || "img/ionic.png";
+            $scope.$apply(function () {
+                $scope.profileData.avatar = parseFile;
+                $scope.profileData.avatarSrc = parseFile.url() || "img/ionic.png";
+            });
           },
           function(error) {
             // The file either could not be read, or could not be saved to Parse.
