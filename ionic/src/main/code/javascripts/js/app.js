@@ -70,7 +70,7 @@ angular.module('starter', [
         templateUrl: "templates/profiles.html",
         controller: 'ProfilesCtrl',
         resolve: {
-          delay: ['$q', '$rootScope', 'ParseSDK', function($q, $scope, Parse) {
+          delay: ['$q', '$rootScope', '$state', 'ParseSDK', function($q, $scope, $state, Parse) {
             var delay = $q.defer();
             var currentUser = Parse.User.current();
             if (currentUser) {
@@ -85,12 +85,12 @@ angular.module('starter', [
                     firstName: result[i].get("firstName"),
                     lastName: result[i].get("lastName"),
                     avatar: result[i].get("avatar"),
+                    avatarSrc: (result[i].get("avatar") && result[i].get("avatar").url()) || "img/ionic.png",
                     location: result[i].get("location"),
                     gender: result[i].get("gender"),
                     birthday: result[i].get("birthday"),
                     kid: result[i].get("kid"),
                     interestedIn: result[i].get("interestedIn"),
-                    isSelected: result[i].get("isSelected"),
                     name: result[i].get("firstName") + " " + result[i].get("lastName")
                   };
                 };
@@ -99,7 +99,7 @@ angular.module('starter', [
                   success: function(user) {
                     // The object was retrieved successfully.
                     var selectedProfile = user.get("selectedProfile");
-                    selectedProfile.fetch({
+                    selectedProfile && selectedProfile.fetch({
                       success: function(profile) {
                         $scope.selectedProfile = profile.id;
                       }
@@ -108,6 +108,7 @@ angular.module('starter', [
                   error: function(object, error) {
                     // The object was not retrieved successfully.
                     // error is a Parse.Error with an error code and message.
+                    alert('current user getting error: ' + angular.toJson(error, true));
                   }
                 }).then(function (user) {
                     delay.resolve();
@@ -116,7 +117,7 @@ angular.module('starter', [
                 });
               });
             } else {
-              $scope.login(); // show the signup or login page
+              $state.go('app.signup'); // show the signup or login page
               delay.resolve();
             }
             return delay.promise;
@@ -131,7 +132,20 @@ angular.module('starter', [
     views: {
       'menuContent': {
         templateUrl: "templates/signup.html",
-        controller: 'SignUpCtrl'
+        controller: 'SignUpCtrl',
+        resolve: {
+          delay: ['$q', '$http', '$rootScope', function ($q, $http, $scope) {
+            var delay = $q.defer();
+            $http.get('translate/signup/strings.json').success(function(result) {
+                $scope.strings = result;
+            }).error(function(object, code) {
+                console.warn(object);
+            }).then(function () {
+              delay.resolve();
+            });
+            return delay.promise;
+          }]
+        }
       }
     }
   })
@@ -151,7 +165,20 @@ angular.module('starter', [
     views: {
       'menuContent': {
         templateUrl: "templates/profile.html",
-        controller: 'ProfileCtrl'
+        controller: 'ProfileCtrl',
+        resolve: {
+          delay: ['$q', '$http', '$rootScope', function ($q, $http, $scope) {
+            var delay = $q.defer();
+            $http.get('translate/profiles/strings.json').success(function(result) {
+                $scope.strings = result;
+            }).error(function(object, code) {
+                console.warn(object);
+            }).then(function () {
+              delay.resolve();
+            });
+            return delay.promise;
+          }]
+        }
       }
     }
   });

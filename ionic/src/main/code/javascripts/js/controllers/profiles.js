@@ -4,9 +4,7 @@ angular.module('profiles.controllers', ['profile.controllers'])
   $scope.data = { };
 
   $scope.selectItem = function ($index) {
-    $scope.profiles.forEach(function (value, key) {
-      value.isSelected = angular.equals(key, $index)
-    });
+    if (angular.equals($scope.selectedProfile, $scope.profiles[$index].id)) return;
     $scope.selectedProfile = $scope.profiles[$index].id;
     var currentUser = Parse.User.current();
     if (currentUser) {
@@ -65,7 +63,7 @@ angular.module('profiles.controllers', ['profile.controllers'])
 
   $scope.calcYears = function (item) {
     if (!item.birthday) { return }
-
+    console.info(angular.toJson(item, true));
     var todayDate = new Date();
     var todayYear = todayDate.getFullYear();
     var todayMonth = todayDate.getMonth();

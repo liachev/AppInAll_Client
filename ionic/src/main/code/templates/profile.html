@@ -5,9 +5,11 @@
         <ion-content>
             <div class="row">
                 <div class="col-25 item-image">
-                    <img class="avatar" ng-src="{{profileData.avatar}}">
+                    <img class="avatar" ng-src="{{profileData.avatarSrc}}">
 
-                    <h5><a href ng-click="uploadPhoto()">{{strings.upload_photo.label}}</a></h5>
+                    <h5>
+                        <input type="file" on-read-file="uploadPhoto($fileContent)" accept="image/*" />
+                    </h5>
                 </div>
 
                 <div class="col">
@@ -95,7 +97,8 @@
 
             <ion-item class="item">
                 <ul>
-                    <li ng-repeat="(key, errors) in addProfileForm.$error track by $index"> <strong>{{ key }}</strong> errors
+                    <li ng-repeat="(key, errors) in addProfileForm.$error track by $index"><strong>{{ key }}</strong>
+                        errors
                         <ul>
                             <li ng-repeat="e in errors">{{ e.$name }} has an error: <strong>{{ key }}</strong>.</li>
                         </ul>

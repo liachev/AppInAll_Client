@@ -1,5 +1,5 @@
 <ion-view>
-    <ion-nav-title>Profile</ion-nav-title>
+    <ion-nav-title>Profiles</ion-nav-title>
 
     <ion-nav-buttons side="right">
         <button class="button" ng-click="data.showReorder = !data.showReorder">
@@ -12,7 +12,7 @@
             <ion-item ng-repeat="profile in profiles" ng-click="selectItem($index)"
                       class="item-thumbnail-left item-remove-animate">
                 <div class="item-image">
-                    <img class="avatar" ng-src="{{profile.avatar}}" alt="{{profile.name}}">
+                    <img class="avatar" ng-src="{{profile.avatarSrc}}">
 
                     <h3>
                         {{isSelected($index) === true ? 'Selected' : 'Select'}}

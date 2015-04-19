@@ -1,18 +1,36 @@
 angular.module('profile.controllers', [])
 
-.controller('ProfileCtrl', ['$state', '$scope', '$http', '$stateParams', 'ParseSDK',
-  function($state, $scope, $http, $stateParams, Parse) {
-    $http.get('translate/profiles/strings.json').success(function(result) {
-        $scope.strings = result;
-    }).error(function(object, code) {
-        console.warn(object);
-    });
+.directive('onReadFile', function ($parse) {
+	return {
+		restrict: 'A',
+		scope: false,
+		link: function(scope, element, attrs) {
+            var fn = $parse(attrs.onReadFile);
 
+			element.on('change', function(onChangeEvent) {
+//                scope.$apply(function() {
+//                    fn(scope, { $file: (onChangeEvent.srcElement || onChangeEvent.target).files[0] });
+//                });
+				var reader = new FileReader();
+
+				reader.onload = function(onLoadEvent) {
+					scope.$apply(function() {
+						fn(scope, { $fileContent: onLoadEvent.target.result });
+					});
+				};
+
+				reader.readAsDataURL((onChangeEvent.srcElement || onChangeEvent.target).files[0]);
+			});
+		}
+	};
+})
+
+.controller('ProfileCtrl', ['$state', '$scope', '$stateParams', 'ParseSDK', function($state, $scope, $stateParams, Parse) {
     var currentUser = Parse.User.current();
     if (currentUser) {
        // do stuff with the user
     } else {
-       $scope.login(); // show the signup or login page
+      $state.go('app.signup'); // show the signup or login page
     }
 
     $scope.profileData = defaultData = {
@@ -27,12 +45,12 @@ angular.module('profile.controllers', [])
     query.get($stateParams.profileId, {
       success: function (profile) {
         // The object was retrieved successfully.
-        $scope.title = $scope.strings.title.add_profile;
         $scope.profileData = {
             id: profile.id,
             firstName: profile.get("firstName"),
             lastName: profile.get("lastName"),
             avatar: profile.get("avatar"),
+            avatarSrc: (profile.get("avatar") && profile.get("avatar").url()) || "img/ionic.png",
             location: profile.get("location"),
             gender: profile.get("gender"),
             birthday: profile.get("birthday"),
@@ -45,17 +63,38 @@ angular.module('profile.controllers', [])
           $scope.strings.title.edit_profile + " '" + $scope.profileData.firstName + " " + $scope.profileData.lastName + "'";
       },
       error: function(object, error) {
+        // The object was not retrieved successfully.
+        // error is a Parse.Error with an error code and message.
         $scope.title = $scope.strings.title.add_profile;
-        $scope.profileData = { };
-          // The object was not retrieved successfully.
-          // error is a Parse.Error with an error code and message.
+        $scope.profileData = defaultData;
+        $scope.debugInfo = 'profile getting error: ' + angular.toJson(error, true);
       }
     });
 
     $scope.profileData.birthday && ($scope.profileData.birthday = new Date(result[i].birthday));
 
-    $scope.uploadPhoto = function () {
-      alert('Not implemented yet') // TODO: complete uploading
+    $scope.uploadPhoto = function ($fileContent) {
+        var currentUser = Parse.User.current();
+        if (currentUser) {
+          $scope.debugInfo = $fileContent;
+          var name = "avatar-" + $stateParams.profileId + ".png";
+          var fileDataArray = $fileContent.split(';base64,');
+          var fileData = {
+            base64: fileDataArray[1],
+            data: fileDataArray[0].split('data:')[1]
+          };
+          var parseFile = new Parse.File(name, { base64: fileData.base64 });
+          !$scope.profileData && ($scope.profileData = defaultData);
+          parseFile.save().then(function() {
+            // The file has been saved to Parse.
+            $scope.profileData.avatar = parseFile;
+            $scope.profileData.avatarSrc = parseFile.url() || "img/ionic.png";
+          },
+          function(error) {
+            // The file either could not be read, or could not be saved to Parse.
+            $scope.debugInfo = 'file saving error: ' + angular.toJson(error, true);
+          });
+        }
     };
 
     $scope.editInterests = function () {
@@ -88,15 +127,19 @@ angular.module('profile.controllers', [])
                     error: function(profile, error) {
                       // The save failed.
                       // error is a Parse.Error with an error code and message.
+                      $scope.debugInfo = 'profile saving error: ' + angular.toJson(error, true);
                     }
                 });
               },
               error: function(object, error) {
                 // The object was not retrieved successfully.
                 // error is a Parse.Error with an error code and message.
+                $scope.debugInfo = 'user getting error: ' + angular.toJson(error, true);
               }
             });
           }
+      }, function (error) {
+        $scope.debugInfo = 'profile getting error: ' + angular.toJson(error, true);
       });
     };
-  }]);
+}]);
