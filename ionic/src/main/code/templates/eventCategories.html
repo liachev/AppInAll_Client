@@ -1,7 +1,7 @@
 <ion-view view-title="Categories">
     <ion-content>
         <ion-list>
-            <ion-item ng-repeat="category in categories" href="#/app/events/{{category.meetUpId()}}">
+            <ion-item ng-repeat="category in categories" href="#/app/events/{{category | json }}">
                 {{category.shortName()}}
             </ion-item>
         </ion-list>

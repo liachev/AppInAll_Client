@@ -30,8 +30,9 @@
         })
         .factory('MeetupEvents', ['$rootScope', '$log', 'Restangular', function ($scope, $log, Restangular) {
             return {
-                loadedEvents: function () {
+                loadedEvents: function (categoryId) {
                     var params = {
+                        category: categoryId,
                         "photo-host": "public",
                         zip: "02184",
                         radius: 10,
@@ -49,11 +50,14 @@
             };
         }])
         .
-        controller('EventsCtrl', ['$rootScope', '$log', 'MeetupEvents', function ($scope, $log, Events) {
+        controller('EventsCtrl', ['$rootScope', '$stateParams', '$log', 'MeetupEvents', function ($scope, $stateParams, $log, Events) {
 
             $scope.events = [];
             $scope.next = "";
-            Events.loadedEvents().then(function (events) {
+
+            $scope.category = angular.fromJson($stateParams.category);
+
+            Events.loadedEvents($scope.category.meetUpId).then(function (events) {
                 $scope.events = events;
                 $scope.next = events.meta.next;
             });
