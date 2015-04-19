@@ -100,6 +100,7 @@
                     <include name="js/lib/*.js"/>
                     <include name="templates/*.html"/>
                     <include name="translate/**"/>
+                    <include name="json/*.json"/>
                     <include name="css/*.css"/>
                     <include name="css/fonts/*.*"/>
                     <include name="css/images/*.*"/>

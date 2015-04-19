@@ -16,10 +16,11 @@ angular.module('starter', [
   'appinall.models.agreements',
 
   /* services */
-  'ParseServices'
+  'ParseServices',
+  'LocalStorageModule'
 ])
 
-.run(function($ionicPlatform) {
+.run(function($ionicPlatform, localStorageService) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -34,6 +35,14 @@ angular.module('starter', [
   // Parse initialization for logging to parse.com
   // FixMe: duplicated with ionic/src/main/code/javascripts/js/services/parse-service.js:6
   Parse.initialize("O7eCGvKWO5BihNXJQv8zU0Ewd9a5nLJs0EBZWFjr", "Aohwuhy4j63Rs9tL4kXuc4lD8zGqv6wgrI74yXnU");
+
+  // angular localStorageService 'isSupported' test
+  if(localStorageService.isSupported)
+  {
+      logging.log("localStorageService is supported");
+  }else{
+      logging.log("localStorageService is NOT supported");
+  }
 })
 
 .config(function($stateProvider, $urlRouterProvider, $cordovaFacebookProvider) {
@@ -90,6 +99,36 @@ angular.module('starter', [
       'menuContent': {
         templateUrl: "templates/agreement.html",
         controller: 'AgreementsCtrl'
+      }
+    }
+  })
+
+  .state('app.settings', {
+    url: "/settings",
+    views: {
+      'menuContent': {
+        templateUrl: "templates/settings.html",
+        controller: 'SettingsCtrl'
+      }
+    }
+  })
+
+  .state('app.update_signup', {
+    url: "/update_signup",
+    views: {
+      'menuContent': {
+        templateUrl: "templates/update_signup.html",
+        controller: 'UpdateSignUpCtrl'
+      }
+    }
+  })
+
+  .state('app.edit_payment', {
+    url: "/edit_payment",
+    views: {
+      'menuContent': {
+        templateUrl: "templates/edit_payment.html",
+        controller: 'EditPaymentCtrl'
       }
     }
   })

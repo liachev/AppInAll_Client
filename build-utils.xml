@@ -68,6 +68,9 @@
             <concat destfile="@{out.dir}/js/script.js" ignoreempty="true">
                 <filelist dir="@{out.dir}">
                     <file name="javascripts/js/controllers/signup.js"/>
+                    <file name="javascripts/js/controllers/settings.js"/>
+                    <file name="javascripts/js/controllers/update_signup.js"/>
+                    <file name="javascripts/js/controllers/edit_payment.js"/>
                     <file name="javascripts/js/controllers/agreements.js"/>
                     <file name="javascripts/js/modules/data/Agreements.js"/>
                     <file name="javascripts/js/modules/data/Users.js"/>
@@ -108,6 +111,9 @@
             <concat destfile="@{out.dir}/js/script.js" ignoreempty="true">
                 <filelist dir="@{out.dir}">
                     <file name="javascripts/js/controllers/signup.js"/>
+                    <file name="javascripts/js/controllers/settings.js"/>
+                    <file name="javascripts/js/controllers/update_signup.js"/>
+                    <file name="javascripts/js/controllers/edit_payment.js"/>
                     <file name="javascripts/js/controllers/agreements.js"/>
                     <file name="javascripts/js/modules/data/Agreements.js"/>
                     <file name="javascripts/js/modules/data/Users.js"/>

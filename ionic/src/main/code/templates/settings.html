@@ -1,0 +1,113 @@
+<ion-view view-title="Settings">
+    <ion-content>
+        <div class="list">
+            <label class="item item-input" ng-if="true">
+                {{strings.Connect_with_Facebook.text}}
+            </label>
+            <label class="item item-input">
+                <input type="email" name="useremail" ng-model="settingsData.userEmail" readonly>
+            </label>
+            <label class="item item-input" ng-if="true">
+                <span class="input-label">{{strings.Password.text}}</span>
+                <input type="password" name="userpsw" ng-model="settingsData.userPsw" readonly>
+            </label>
+
+            <div class="item">
+                <a ng-href="#/app/update_signup">{{strings.Update.text}}</a>
+            </div>
+            <div class="item" ng-controller="AgreementsCtrl">
+                <a href ng-click="getAgreement('Terms of Use')">{{strings.Agree.Terms_of_Use}}</a>
+                <a href ng-click="getAgreement('Privacy Policy')">{{strings.Agree.Privacy_Policy}}</a>
+            </div>
+        </div>
+        <div class="list">
+            <label class="item item-input item-select">
+                <div class="input-label">
+                    {{strings.Regional.Time_Zone}}
+                </div>
+                <select ng-model="settingsData.timezone">
+                    <option ng-selected="{{timezone.abbr === settingsData.timezone}}"
+                            ng-repeat="timezone in timezones"
+                            value="{{timezone.abbr}}">
+                        {{timezone.text}}
+                    </option>
+                </select>
+            </label>
+            <label class="item item-input item-select">
+                <div class="input-label">
+                    {{strings.Regional.Date_Format}}
+                </div>
+                <select ng-model="settingsData.formatData">
+                    <option ng-selected="{{format.code === settingsData.data}}"
+                            ng-repeat="format in formats"
+                            value="{{format.code}}">
+                        {{format.name}}
+                    </option>
+                </select>
+            </label>
+            <label class="item item-input item-select">
+                <div class="input-label">
+                    {{strings.Regional.Language}}
+                </div>
+                <select ng-model="settingsData.language">
+                    <option ng-selected="{{language.code === settingsData.language}}"
+                            ng-repeat="language in languages"
+                            value="{{language.code}}">
+                        {{language.name}}
+                    </option>
+                </select>
+            </label>
+            <label class="item item-input item-select">
+                <div class="input-label">
+                    {{strings.Regional.Distance}}
+                </div>
+                <select>
+                    <option value="distance1" selected>{{strings.Regional.Miles}}</option>
+                    <option value="distance2">{{strings.Regional.Km}}</option>
+                </select>
+            </label>
+            <label class="item item-input item-select">
+                <div class="input-label">
+                    {{strings.Regional.Time_Format}}
+                </div>
+                <select>
+                    <option value="format1">{{strings.Regional.AM_PM}}</option>
+                    <option value="format2" selected>{{strings.Regional.Military}}</option>
+                </select>
+            </label>
+            <label class="item item-input item-select">
+                <div class="input-label">
+                    {{strings.Regional.Currency}}
+                </div>
+                <select>
+                    <option selected>{{strings.Regional.Currency_Title}}</option>
+                    <option ng-repeat="currency in currencys"
+                            value="{{currency.code}}">
+                        {{currency.name}}
+                    </option>
+                </select>
+            </label>
+            <label class="item">
+                <button>
+                    {{strings.Save.text}}
+                </button>
+            </label>
+        </div>
+        <div class="item">
+            <div class="row input-label">
+                {{strings.Payment.text}}
+            </div>
+            <div class="row">
+                <div class="col">
+                    <input type="text" ng-model="card.type" name="cardtype" readonly>
+                </div>
+                <div class="col">
+                    <input type="text" ng-model="card.number" name="cardnumber" readonly>
+                </div>
+                <div class="col-10 col-center">
+                    <a ng-href="#/app/edit_payment">{{strings.Payment.edit}}</a>
+                </div>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

@@ -1,0 +1,126 @@
+<ion-view view-title="Settings">
+    <form name="editPaymentForm" ng-submit="editPaymentForm.$valid && save(editPaymentForm)">
+        <ion-content>
+            <div class="list">
+                <label class="item item-input">
+                    <input type="text" name="cardName" ng-model="editPaymentData.cardName"
+                           placeholder="{{strings.cardName.placeholder}}" ng-pattern="/^(\w*\s*)+$/" required>
+                    <span style="color:red"
+                          ng-show="editPaymentForm.cardName.$submitted || editPaymentForm.cardName.$touched">
+                        <span ng-show="editPaymentForm.cardName.$error.required">
+                            {{strings.cardName.errorMessages.required}}
+                        </span>
+                        <span ng-show="editPaymentForm.cardName.$error.pattern">
+                            {{strings.cardName.errorMessages.pattern}}
+                        </span>
+                    </span>
+                </label>
+                <label class="item item-input">
+                    <input type="text" ng-model="card.number" cc-number name="cardNumber"
+                           placeholder="{{strings.cardNumber.placeholder}}" required>
+                    <span style="color:red"
+                          ng-show="editPaymentForm.cardNumber.$submitted || editPaymentForm.cardNumber.$touched">
+                        <span ng-show="editPaymentForm.cardNumber.$error.required">
+                            {{strings.cardNumber.errorMessages.required}}
+                        </span>
+                        <span ng-show="editPaymentForm.cardNumber.$error.pattern">
+                            {{strings.cardNumber.errorMessages.pattern}}
+                        </span>
+                    </span>
+                </label>
+                <label class="item item-input item-select">
+                    <div class="input-label">
+                        {{strings.exMonth.text}}
+                    </div>
+                    <select>
+                        <option selected disabled>MM</option>
+                        <option value="01">01</option>
+                        <option value="02">02</option>
+                        <option value="03">03</option>
+                        <option value="04">04</option>
+                        <option value="05">05</option>
+                        <option value="06">06</option>
+                        <option value="07">07</option>
+                        <option value="08">08</option>
+                        <option value="09">09</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+                    </select>
+                </label>
+                <label class="item item-input item-select">
+                    <div class="input-label">
+                        {{strings.exYear.text}}
+                    </div>
+                    <select>
+                        <option selected disabled>YYYY</option>
+                        <option value="15">2015</option>
+                        <option value="16">2016</option>
+                        <option value="17">2017</option>
+                        <option value="18">2018</option>
+                        <option value="19">2019</option>
+                        <option value="20">2020</option>
+                        <option value="21">2021</option>
+                        <option value="22">2022</option>
+                        <option value="23">2023</option>
+                        <option value="24">2024</option>
+                        <option value="25">2025</option>
+                    </select>
+                </label>
+                <label class="item item-input">
+                    <input type="text" name="cardCode" ng-model="card.cvc" cc-cvc
+                           cc-type="editPaymentForm.cardNumber.$ccType"
+                           placeholder="{{strings.cardCode.placeholder}}" required>
+                    <span style="color:red"
+                          ng-show="editPaymentForm.cardCode.$submitted || editPaymentForm.cardCode.$touched">
+                        <span ng-show="editPaymentForm.cardCode.$error.required">
+                            {{strings.cardCode.errorMessages.required}}
+                        </span>
+                        <span ng-show="editPaymentForm.cardCode.$error.pattern">
+                            {{strings.cardCode.errorMessages.pattern}}
+                        </span>
+                        <span ng-show="editPaymentForm.cardCode.$error.minlength">
+                            {{strings.cardCode.errorMessages.minlength}}
+                        </span>
+                    </span>
+                </label>
+                <label class="item item-input">
+                    <input type="text" name="zip" ng-model="editPaymentData.zip"
+                           placeholder="{{strings.zip.placeholder}}" required>
+                    <span style="color:red" ng-show="editPaymentForm.zip.$submitted || editPaymentForm.zip.$touched">
+                        <span ng-show="editPaymentForm.zip.$error.required">
+                            {{strings.zip.errorMessages.required}}
+                        </span>
+                    </span>
+                </label>
+                <label class="item item-input">
+                    <input type="text" name="informationPay" placeholder="{{strings.informationPay.text}}" readonly>
+                </label>
+                <label class="item item-input">
+                    <input type="text" name="confirm" placeholder="{{strings.confirm.text}}" readonly>
+                </label>
+            </div>
+            <div>
+                Valid: {{editPaymentForm.cardNumber.$valid | yesNo}}
+                Type: {{editPaymentForm.cardNumber.$ccType || 'Unknown'}}
+                CVC: {{editPaymentForm.cardCode.$valid | yesNo}}
+                data: {{card | json}}
+            </div>
+        </ion-content>
+        <ion-footer-bar align-title="center" class="bar-positive">
+            <div class="buttons" ng-click="cancelButtonClick()">
+                <button class="button button-positive">
+                    {{strings.Buttons.Cancel}}
+                </button>
+            </div>
+            <h1 class="title">&nbsp;</h1>
+
+            <div class="buttons">
+                <button class="button button-positive" type="submit"
+                        ng-disabled="editPaymentForm.$invalid">
+                    {{strings.Buttons.Save}}
+                </button>
+            </div>
+        </ion-footer-bar>
+    </form>
+</ion-view>

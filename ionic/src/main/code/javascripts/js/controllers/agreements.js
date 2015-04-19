@@ -1,8 +1,9 @@
 angular.module('agreements.controllers', ['signup.controllers'])
 
-.controller('AgreementsCtrl', ['$rootScope', '$state', '$log', function ($scope, $state, $log) {
+.controller('AgreementsCtrl', ['$rootScope', '$state', '$log', '$window', function ($scope, $state, $log, $window) {
     $scope.title = "";
     $scope.text = "";
+    $scope.signupData = $scope.signupData || {};
 
     $scope.getAgreement = function (name) {
         var agreements = new (Parse.Collection.getClass("Agreement"));
@@ -27,7 +28,8 @@ angular.module('agreements.controllers', ['signup.controllers'])
             $scope.signupData.privacyPolicyAgree = true;
             $scope.signupData.datePrivacy = new Date();
         }
-        $state.go('app.signup');
+
+        $window.history.back();
         $scope.signupData.isAgree = ($scope.signupData.termsOfUseAgree && $scope.signupData.privacyPolicyAgree);
     };
 }]);
