@@ -17,10 +17,11 @@ angular.module('starter', [
 
   /* services */
   'ParseServices',
-  'LocalStorageModule'
+  'LocalStorageModule',
+  'cordova_calendar'
 ])
 
-.run(function($ionicPlatform, localStorageService) {
+.run(function($ionicPlatform, localStorageService, calendarService) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
