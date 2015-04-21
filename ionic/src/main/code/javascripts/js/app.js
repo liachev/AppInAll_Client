@@ -14,7 +14,7 @@ angular.module('starter', [
   /* models */ // TODO: add new models to 'ionic/src/main/code/javascripts/js/modules/data/models.js'
   'appinall.models',
 
-  /* services */ // TODO: add new models to 'ionic/src/main/code/javascripts/js/modules/data/models.js'
+  /* services */ // TODO: add new services to 'ionic/src/main/code/javascripts/js/services/services.js'
   'appinall.services'
 ])
 

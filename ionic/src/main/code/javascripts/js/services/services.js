@@ -3,7 +3,7 @@ angular.module('appinall.services', [
     'auth.services',
     'utils.services',
     'parse.services'
-    // TODO: add new models here
+    // TODO: add new services here
 ])
 
 .factory('Services', [function () {
