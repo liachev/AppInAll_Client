@@ -5,10 +5,13 @@
         <ion-content>
             <div class="row">
                 <div class="col-25 item-image">
-                    <img class="avatar" ng-src="{{profileData.avatarSrc}}">
+                    <img class="avatar" ng-src="{{profileData.avatarSrc}}" alt="{{fileProgress}}">
 
                     <h5>
-                        <input type="file" on-read-file="uploadPhoto($fileContent)" accept="image/*" />
+                        <a href onclick="addProfileForm.file.click()">{{strings.upload_photo.label}}</a>
+
+                        <input id="file" type="file" style="display: none;" ng-on-read-file="uploadPhoto($fileContent)"
+                               accept="image/*"/>
                     </h5>
                 </div>
 

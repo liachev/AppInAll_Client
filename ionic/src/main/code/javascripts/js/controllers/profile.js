@@ -1,28 +1,7 @@
 angular.module('profile.controllers', [])
 
-.directive('onReadFile', function ($parse) {
-	return {
-		restrict: 'A',
-		scope: false,
-		link: function(scope, element, attrs) {
-            var fn = $parse(attrs.onReadFile);
-
-			element.on('change', function(onChangeEvent) {
-				var reader = new FileReader();
-
-				reader.onload = function(onLoadEvent) {
-					scope.$apply(function() {
-						fn(scope, { $fileContent: onLoadEvent.target.result });
-					});
-				};
-
-				reader.readAsDataURL((onChangeEvent.srcElement || onChangeEvent.target).files[0]);
-			});
-		}
-	};
-})
-
-.controller('ProfileCtrl', ['$state', '$scope', '$stateParams', 'ParseSDK', function($state, $scope, $stateParams, Parse) {
+.controller('ProfileCtrl', ['$state', '$scope', '$stateParams', '$filter', 'ParseSDK',
+  function($state, $scope, $stateParams, $filter, Parse) {
     var currentUser = Parse.User.current();
     if (currentUser) {
        // do stuff with the user
@@ -70,7 +49,14 @@ angular.module('profile.controllers', [])
 
     $scope.profileData.birthday && ($scope.profileData.birthday = new Date(result[i].birthday));
 
+    $scope.fileProgress = "No Photo";
+
+    $scope.$on("fileProgress", function(e, progress) {
+        $scope.fileProgress = $filter('number')(progress.loaded / progress.total * 100, 1) + " %";
+    });
+
     $scope.uploadPhoto = function ($fileContent) {
+        $scope.profileData.avatarSrc = $fileContent || "img/ionic.png";
         var currentUser = Parse.User.current();
         if (currentUser) {
           $scope.debugInfo = $fileContent;
@@ -86,7 +72,7 @@ angular.module('profile.controllers', [])
             // The file has been saved to Parse.
             $scope.$apply(function () {
                 $scope.profileData.avatar = parseFile;
-                $scope.profileData.avatarSrc = parseFile.url() || "img/ionic.png";
+                $scope.profileData.avatarSrc = parseFile.url() || $scope.profileData.avatarSrc;
             });
           },
           function(error) {
@@ -141,4 +127,4 @@ angular.module('profile.controllers', [])
         $scope.debugInfo = 'profile getting error: ' + angular.toJson(error, true);
       });
     };
-}]);
+  }]);

@@ -14,8 +14,8 @@ angular.module('starter', [
   /* models */ // TODO: add new models to 'ionic/src/main/code/javascripts/js/modules/data/models.js'
   'appinall.models',
 
-  /* services */
-  'ParseServices'
+  /* services */ // TODO: add new models to 'ionic/src/main/code/javascripts/js/modules/data/models.js'
+  'appinall.services'
 ])
 
 .run(function($ionicPlatform) {
@@ -109,11 +109,12 @@ angular.module('starter', [
                     // The object was not retrieved successfully.
                     // error is a Parse.Error with an error code and message.
                     alert('current user getting error: ' + angular.toJson(error, true));
+                    delay.reject(error);
                   }
                 }).then(function (user) {
                     delay.resolve();
                 }, function (error) {
-                    delay.resolve();
+                    delay.reject(error);
                 });
               });
             } else {
@@ -135,15 +136,7 @@ angular.module('starter', [
         controller: 'SignUpCtrl',
         resolve: {
           delay: ['$q', '$http', '$rootScope', function ($q, $http, $scope) {
-            var delay = $q.defer();
-            $http.get('translate/signup/strings.json').success(function(result) {
-                $scope.strings = result;
-            }).error(function(object, code) {
-                console.warn(object);
-            }).then(function () {
-              delay.resolve();
-            });
-            return delay.promise;
+            return translateLoad($q, $http, $scope, 'signup');
           }]
         }
       }
@@ -168,15 +161,7 @@ angular.module('starter', [
         controller: 'ProfileCtrl',
         resolve: {
           delay: ['$q', '$http', '$rootScope', function ($q, $http, $scope) {
-            var delay = $q.defer();
-            $http.get('translate/profiles/strings.json').success(function(result) {
-                $scope.strings = result;
-            }).error(function(object, code) {
-                console.warn(object);
-            }).then(function () {
-              delay.resolve();
-            });
-            return delay.promise;
+            return translateLoad($q, $http, $scope, 'profiles');
           }]
         }
       }
@@ -184,6 +169,18 @@ angular.module('starter', [
   });
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/app/signup');
+
+  var translateLoad = function (q, http, scope, dir) {
+    var delay = q.defer();
+    http.get('translate/' + dir + '/strings.json').success(function(result) {
+      scope.strings = result;
+      delay.resolve();
+    }).error(function(object, code) {
+      console.warn(object);
+      delay.reject();
+    });
+    return delay.promise;
+  };
 
   if (window.cordova && (window.cordova.platformId == "browser")) { // TODO: should be removed later or resolve this
     var appId = prompt("Enter FB Application ID", "");

@@ -1,4 +1,4 @@
-angular.module('ParseServices', [])
+angular.module('parse.services', [])
 
 .constant("KEYS", {
     "APPLICATION_ID": "O7eCGvKWO5BihNXJQv8zU0Ewd9a5nLJs0EBZWFjr",

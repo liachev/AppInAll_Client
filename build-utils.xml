@@ -76,9 +76,12 @@
                     <file name="javascripts/js/modules/data/Profiles.js"/>
                     <file name="javascripts/js/modules/data/Users.js"/>
                     <file name="javascripts/js/modules/directives/ng-compare-to-directive.js"/>
+                    <file name="javascripts/js/modules/directives/ng-on-read-file-directive.js"/>
                     <file name="javascripts/js/modules/directives/ng-unique-directive.js"/>
                     <file name="javascripts/js/services/auth-service.js"/>
+                    <file name="javascripts/js/services/fileReader-service.js"/>
                     <file name="javascripts/js/services/parse-service.js"/>
+                    <file name="javascripts/js/services/services.js"/>
                     <file name="javascripts/js/patch/parse-angular.js"/>
                 </filelist>
             </concat>
@@ -120,9 +123,12 @@
                     <file name="javascripts/js/modules/data/Profiles.js"/>
                     <file name="javascripts/js/modules/data/Users.js"/>
                     <file name="javascripts/js/modules/directives/ng-compare-to-directive.js"/>
+                    <file name="javascripts/js/modules/directives/ng-on-read-file-directive.js"/>
                     <file name="javascripts/js/modules/directives/ng-unique-directive.js"/>
                     <file name="javascripts/js/services/auth-service.js"/>
+                    <file name="javascripts/js/services/fileReader-service.js"/>
                     <file name="javascripts/js/services/parse-service.js"/>
+                    <file name="javascripts/js/services/services.js"/>
                     <file name="javascripts/js/patch/parse-angular.js"/>
                 </filelist>
             </concat>
