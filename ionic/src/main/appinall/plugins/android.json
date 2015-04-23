@@ -43,6 +43,10 @@
                         {
                             "xml": "<feature name=\"File\"><param name=\"android-package\" value=\"org.apache.cordova.file.FileUtils\" /><param name=\"onload\" value=\"true\" /></feature>",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Calendar\"><param name=\"android-package\" value=\"nl.xservices.plugins.Calendar\" /></feature>",
+                            "count": 1
                         }
                     ]
                 }
@@ -78,6 +82,16 @@
                             "xml": "<uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\" />",
                             "count": 1
                         }
+                    ],
+                    "/manifest": [
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.READ_CALENDAR\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.WRITE_CALENDAR\" />",
+                            "count": 1
+                        }
                     ]
                 }
             }
@@ -99,6 +113,9 @@
             "PACKAGE_NAME": "com.ionicframework.appinall967145"
         },
         "org.apache.cordova.file": {
+            "PACKAGE_NAME": "com.ionicframework.appinall967145"
+        },
+        "nl.x-services.plugins.calendar": {
             "PACKAGE_NAME": "com.ionicframework.appinall967145"
         }
     },

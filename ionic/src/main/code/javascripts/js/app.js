@@ -16,26 +16,36 @@ angular.module('starter', [
     'appinall.models.agreements',
     'appinall.models.category',
 
-    /* services */
-    'ParseServices'
+  /* services */
+  'ParseServices',
+  'LocalStorageModule',
+  'cordova_calendar'
 ])
 
-    .run(function ($ionicPlatform) {
-        $ionicPlatform.ready(function () {
-            // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
-            // for form inputs)
-            if (window.cordova && window.cordova.plugins.Keyboard) {
-                cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-            }
-            if (window.StatusBar) {
-                // org.apache.cordova.statusbar required
-                StatusBar.styleDefault();
-            }
-        });
-        // Parse initialization for logging to parse.com
-        // FixMe: duplicated with ionic/src/main/code/javascripts/js/services/parse-service.js:6
-        Parse.initialize("O7eCGvKWO5BihNXJQv8zU0Ewd9a5nLJs0EBZWFjr", "Aohwuhy4j63Rs9tL4kXuc4lD8zGqv6wgrI74yXnU");
-    })
+.run(function($ionicPlatform, localStorageService, calendarService) {
+  $ionicPlatform.ready(function() {
+    // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
+    // for form inputs)
+    if (window.cordova && window.cordova.plugins.Keyboard) {
+      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+    }
+    if (window.StatusBar) {
+      // org.apache.cordova.statusbar required
+      StatusBar.styleDefault();
+    }
+  });
+  // Parse initialization for logging to parse.com
+  // FixMe: duplicated with ionic/src/main/code/javascripts/js/services/parse-service.js:6
+  Parse.initialize("O7eCGvKWO5BihNXJQv8zU0Ewd9a5nLJs0EBZWFjr", "Aohwuhy4j63Rs9tL4kXuc4lD8zGqv6wgrI74yXnU");
+
+  // angular localStorageService 'isSupported' test
+  if(localStorageService.isSupported)
+  {
+      logging.log("localStorageService is supported");
+  }else{
+      logging.log("localStorageService is NOT supported");
+  }
+})
 
     .config(function ($stateProvider, $urlRouterProvider, $cordovaFacebookProvider) {
         $stateProvider
