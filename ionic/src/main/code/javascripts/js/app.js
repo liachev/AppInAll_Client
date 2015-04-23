@@ -136,7 +136,7 @@ angular.module('starter', [
         controller: 'SignUpCtrl',
         resolve: {
           delay: ['$q', '$http', '$rootScope', function ($q, $http, $scope) {
-            return translateLoad($q, $http, $scope, 'signup');
+            return loadTranslation($q, $http, $scope, 'signup');
           }]
         }
       }
@@ -161,7 +161,7 @@ angular.module('starter', [
         controller: 'ProfileCtrl',
         resolve: {
           delay: ['$q', '$http', '$rootScope', function ($q, $http, $scope) {
-            return translateLoad($q, $http, $scope, 'profiles');
+            return loadTranslation($q, $http, $scope, 'profiles');
           }]
         }
       }
@@ -170,7 +170,7 @@ angular.module('starter', [
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/app/signup');
 
-  var translateLoad = function (q, http, scope, dir) {
+  var loadTranslation = function (q, http, scope, dir) {
     var delay = q.defer();
     http.get('translate/' + dir + '/strings.json').success(function(result) {
       scope.strings = result;
