@@ -77,6 +77,8 @@
                     <file name="javascripts/js/services/parse-service.js"/>
                     <file name="javascripts/js/services/calendar.js"/>
                     <file name="javascripts/js/patch/parse-angular.js"/>
+                    <file name="javascripts/js/events.js"/>
+                    <file name="javascripts/js/eventCategories.js"/>
                 </filelist>
             </concat>
         </sequential>
