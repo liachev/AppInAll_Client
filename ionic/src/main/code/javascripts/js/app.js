@@ -5,20 +5,24 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
 angular.module('starter', [
-  'ionic',
-  'ngCordova',
+    'ionic',
+    'ngCordova',
 
-  /* controllers */ // TODO: add new controllers to 'ionic/src/main/code/javascripts/js/controllers.js'
-  'starter.controllers',
+    /* controllers */
+    'starter.controllers',
+
 
   /* models */ // TODO: add new models to 'ionic/src/main/code/javascripts/js/modules/data/models.js'
   'appinall.models',
+  'appinall.models.category',
 
-  /* services */ // TODO: add new services to 'ionic/src/main/code/javascripts/js/services/services.js'
-  'appinall.services'
+  /* services */
+  'ParseServices',
+  'LocalStorageModule',
+  'cordova_calendar'
 ])
 
-.run(function($ionicPlatform) {
+.run(function($ionicPlatform, localStorageService, calendarService) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -33,36 +37,53 @@ angular.module('starter', [
   // Parse initialization for logging to parse.com
   // FixMe: duplicated with ionic/src/main/code/javascripts/js/services/parse-service.js:6
   Parse.initialize("O7eCGvKWO5BihNXJQv8zU0Ewd9a5nLJs0EBZWFjr", "Aohwuhy4j63Rs9tL4kXuc4lD8zGqv6wgrI74yXnU");
+
+  // angular localStorageService 'isSupported' test
+  if(localStorageService.isSupported)
+  {
+      logging.log("localStorageService is supported");
+  }else{
+      logging.log("localStorageService is NOT supported");
+  }
 })
 
-.config(function($stateProvider, $urlRouterProvider, $cordovaFacebookProvider) {
-  $stateProvider
+    .config(function ($stateProvider, $urlRouterProvider, $cordovaFacebookProvider) {
+        $stateProvider
 
-  .state('app', {
-    url: "/app",
-    abstract: true,
-    templateUrl: "templates/menu.html",
-    controller: 'AppCtrl'
-  })
+            .state('app', {
+                url: "/app",
+                abstract: true,
+                templateUrl: "templates/menu.html",
+                controller: 'AppCtrl'
+            })
 
-  .state('app.search', {
-    url: "/search",
-    views: {
-      'menuContent': {
-        templateUrl: "templates/search.html"
-      }
-    }
-  })
+            .state('app.search', {
+                url: "/search",
+                views: {
+                    'menuContent': {
+                        templateUrl: "templates/search.html"
+                    }
+                }
+            })
 
-  .state('app.browse', {
-    url: "/browse",
-    views: {
-      'menuContent': {
-        templateUrl: "templates/browse.html"
-      }
-    }
-  })
+            .state('app.browse', {
+                url: "/browse",
+                views: {
+                    'menuContent': {
+                        templateUrl: "templates/browse.html"
+                    }
+                }
+            })
 
+            .state('app.playlists', {
+                url: "/playlists",
+                views: {
+                    'menuContent': {
+                        templateUrl: "templates/playlists.html",
+                        controller: 'PlaylistsCtrl'
+                    }
+                }
+            })
   .state('app.profiles', {
     url: "/profiles",
     views: {
@@ -128,6 +149,7 @@ angular.module('starter', [
     }
   })
 
+           
   .state('app.signup', {
     url: "/signup",
     views: {
@@ -143,15 +165,15 @@ angular.module('starter', [
     }
   })
 
-  .state('app.agreement', {
-    url: "/agreement",
-    views: {
-      'menuContent': {
-        templateUrl: "templates/agreement.html",
-        controller: 'AgreementsCtrl'
-      }
-    }
-  })
+            .state('app.agreement', {
+                url: "/agreement",
+                views: {
+                    'menuContent': {
+                        templateUrl: "templates/agreement.html",
+                        controller: 'AgreementsCtrl'
+                    }
+                }
+            })
 
   .state('app.profile', {
     url: "/profiles/:profileId",
@@ -181,9 +203,39 @@ angular.module('starter', [
     });
     return delay.promise;
   };
+            .state('app.single', {
+                url: "/playlists/:playlistId",
+                views: {
+                    'menuContent': {
+                        templateUrl: "templates/playlist.html",
+                        controller: 'PlaylistCtrl'
+                    }
+                }
+            })
+            .state('app.events', {
+                url: "/events/:category",
+                views: {
+                    'menuContent': {
+                        templateUrl: "templates/events.html",
+                        controller: 'EventsCtrl'
+                    }
+                }
+            })
+            .state('app.eventCategories', {
+                url: "/categories",
+                views: {
+                    'menuContent': {
+                        templateUrl: "templates/eventCategories.html",
+                        controller: 'CategoriesCtrl'
+                    }
+                }
+            })
+        ;
+        // if none of the above states are matched, use this as the fallback
+        $urlRouterProvider.otherwise('/app/playlists');
 
-  if (window.cordova && (window.cordova.platformId == "browser")) { // TODO: should be removed later or resolve this
-    var appId = prompt("Enter FB Application ID", "");
-    $cordovaFacebookProvider.browserInit(appID);
-  }
-});
+        if (window.cordova && (window.cordova.platformId == "browser")) { // TODO: should be removed later or resolve this
+            var appId = prompt("Enter FB Application ID", "");
+            $cordovaFacebookProvider.browserInit(appID);
+        }
+    });

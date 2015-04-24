@@ -1,9 +1,9 @@
-angular.module('starter.controllers', [
-  'signup.controllers',
-  'agreements.controllers',
-  'profiles.controllers'
-  // TODO: add new controllers here
-])
+angular.module('starter.controllers', 
+    ['signup.controllers',
+      'agreements.controllers',
+      'events.controllers',
+      'eventCategories.controllers',
+    'profiles.controllers'])
 
 .controller('AppCtrl', function($scope, $ionicModal, $timeout) {
   // Form data for the login modal
