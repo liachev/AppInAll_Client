@@ -231,6 +231,22 @@ angular.module('starter', [
             return delay.promise;
         };
 
+        ;;
+        // if none of the above states are matched, use this as the fallback
+        $urlRouterProvider.otherwise('/app/signup');
+
+        var loadTranslation = function (q, http, scope, dir) {
+            var delay = q.defer();
+            http.get('translate/' + dir + '/strings.json').success(function (result) {
+                scope.strings = result;
+                delay.resolve();
+            }).error(function (object, code) {
+                console.warn(object);
+                delay.reject();
+            });
+            return delay.promise;
+        };
+
         // if none of the above states are matched, use this as the fallback
         $urlRouterProvider.otherwise('/app/playlists');
 
