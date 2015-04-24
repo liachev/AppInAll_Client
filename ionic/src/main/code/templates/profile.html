@@ -1,0 +1,125 @@
+<ion-view>
+    <ion-nav-title>{{title}}</ion-nav-title>
+
+    <form name="addProfileForm" ng-submit="addProfileForm.$valid && save()" novalidate>
+        <ion-content>
+            <div class="row">
+                <div class="col-25 item-image">
+                    <img class="avatar" ng-src="{{profileData.avatarSrc}}" alt="{{fileProgress}}">
+
+                    <h5>
+                        <a href onclick="addProfileForm.file.click()">{{strings.upload_photo.label}}</a>
+
+                        <input id="file" type="file" style="display: none;" ng-on-read-file="uploadPhoto($fileContent)"
+                               accept="image/*"/>
+                    </h5>
+                </div>
+
+                <div class="col">
+                    <label class="item item-input"> <!-- TODO: undone?, supports latin only -->
+                        <input type="text" name="firstName" ng-model="profileData.firstName"
+                               placeholder="{{strings.firstName.placeholder}}" ng-pattern="/^\w*$/" required>
+                        <span style="color:red"
+                              ng-show="addProfileForm.firstName.$submitted || addProfileForm.firstName.$touched">
+                            <span ng-show="addProfileForm.firstName.$error.required">
+                                {{strings.firstName.errorMessages.required}}
+                            </span>
+                            <span ng-show="addProfileForm.firstName.$error.pattern">
+                                {{strings.firstName.errorMessages.pattern}}
+                            </span>
+                        </span>
+                    </label>
+
+                    <label class="item item-input"> <!-- TODO: undone?, supports latin only -->
+                        <input type="text" name="lastName" ng-model="profileData.lastName"
+                               placeholder="{{strings.lastName.placeholder}}" ng-pattern="/^\w*$/" required>
+                        <span style="color:red"
+                              ng-show="addProfileForm.lastName.$submitted || addProfileForm.lastName.$touched">
+                            <span ng-show="addProfileForm.lastName.$error.required">
+                                {{strings.lastName.errorMessages.required}}
+                            </span>
+                            <span ng-show="addProfileForm.secondName.$error.pattern">
+                                {{strings.lastName.errorMessages.pattern}}
+                            </span>
+                        </span>
+                    </label>
+                </div>
+            </div>
+
+            <label class="item item-input">
+                <span class="input-label">{{strings.location.label}}</span>
+                <input type="text" name="location" ng-model="profileData.location"
+                       placeholder="{{strings.location.placeholder}}" required>
+                    <span style="color:red"
+                          ng-show="addProfileForm.location.$submitted || addProfileForm.location.$touched">
+                        <span ng-show="addProfileForm.location.$error.required">
+                            {{strings.location.errorMessages.required}}
+                        </span>
+                        <span ng-show="addProfileForm.location.$error.invalid">
+                            {{strings.location.errorMessages.invalid}}
+                        </span>
+                    </span>
+            </label>
+
+            <ion-item class="item item-input">
+                <span class="input-label">{{strings.gender.label}}</span>
+
+                <div class="button-bar">
+                    <a class="button" ng-class="{'button-positive': (profileData.gender === 'M')}"
+                       ng-click="profileData.gender = 'M'">{{strings.gender.male}}</a>
+                    <a class="button" ng-class="{'button-positive': (profileData.gender === 'F')}"
+                       ng-click="profileData.gender = 'F'">{{strings.gender.female}}</a>
+                    <a class="button" ng-class="{'button-positive': (profileData.gender === 'N')}"
+                       ng-click="profileData.gender = 'N'">{{strings.gender.do_not_show}}</a>
+                </div>
+            </ion-item>
+
+            <label class="item item-input">
+                <span class="input-label">{{strings.birthday.label}}</span>
+                <input type="date" name="birthday" ng-model="profileData.birthday"
+                       placeholder="{{strings.birthday.placeholder}}" min="1900-01-01"
+                       max="{{tomorrow}}">
+                <span style="color:red"
+                      ng-show="addProfileForm.birthday.$submitted || addProfileForm.birthday.$touched">
+                    <span ng-show="addProfileForm.birthday.$error.date">
+                       {{strings.birthday.errorMessages.date}}
+                    </span>
+                </span>
+            </label>
+
+            <ion-item class="item item-input">
+                <span class="input-label">{{strings.kid.label}}</span>
+                <ion-checkbox name="kid" ng-model="profileData.kid">{{strings.kid.text}}</ion-checkbox>
+            </ion-item>
+
+            <ion-item class="item item-input item-icon-right">
+                <span class="input-label">{{strings.interestedIn.label}}</span>
+                <span class="input-text">{{profileData.interestedIn || "list of interests will be here"}}</span>
+                <i class="icon ion-edit" ng-click="editInterests()">{{strings.interestedIn.edit}}</i>
+            </ion-item>
+
+            <ion-item class="item">
+                <ul>
+                    <li ng-repeat="(key, errors) in addProfileForm.$error track by $index"><strong>{{ key }}</strong>
+                        errors
+                        <ul>
+                            <li ng-repeat="e in errors">{{ e.$name }} has an error: <strong>{{ key }}</strong>.</li>
+                        </ul>
+                    </li>
+                </ul>
+            </ion-item>
+        </ion-content>
+
+        <ion-footer-bar align-title="center" class="bar-positive">
+            <div class="buttons">
+                <button type="button" class="button" ng-click="cancel()">{{strings.buttons.cancel}}</button>
+            </div>
+            <h1 class="title">&nbsp;</h1>
+
+            <div class="buttons">
+                <button type="submit" ng-disabled="addProfileForm.$invalid" class="button">{{strings.buttons.save}}
+                </button>
+            </div>
+        </ion-footer-bar>
+    </form>
+</ion-view>

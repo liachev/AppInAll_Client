@@ -5,11 +5,11 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
 angular.module('starter', [
-  'ionic',
-  'ngCordova',
+    'ionic',
+    'ngCordova',
 
-  /* controllers */
-  'starter.controllers',
+    /* controllers */
+    'starter.controllers',
 
 
     /* models */ // TODO: add new models to 'ionic/src/main/code/javascripts/js/modules/data/models.js'
@@ -45,31 +45,6 @@ angular.module('starter', [
             logging.log("localStorageService is NOT supported");
         }
     })
-
-.run(function($ionicPlatform, localStorageService, calendarService) {
-  $ionicPlatform.ready(function() {
-    // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
-    // for form inputs)
-    if (window.cordova && window.cordova.plugins.Keyboard) {
-      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-    }
-    if (window.StatusBar) {
-      // org.apache.cordova.statusbar required
-      StatusBar.styleDefault();
-    }
-  });
-  // Parse initialization for logging to parse.com
-  // FixMe: duplicated with ionic/src/main/code/javascripts/js/services/parse-service.js:6
-  Parse.initialize("O7eCGvKWO5BihNXJQv8zU0Ewd9a5nLJs0EBZWFjr", "Aohwuhy4j63Rs9tL4kXuc4lD8zGqv6wgrI74yXnU");
-
-  // angular localStorageService 'isSupported' test
-  if(localStorageService.isSupported)
-  {
-      logging.log("localStorageService is supported");
-  }else{
-      logging.log("localStorageService is NOT supported");
-  }
-})
 
     .config(function ($stateProvider, $urlRouterProvider, $cordovaFacebookProvider) {
         $stateProvider
@@ -174,15 +149,6 @@ angular.module('starter', [
                 }
             })
 
-  .state('app.signup', {
-    url: "/signup",
-    views: {
-      'menuContent': {
-        templateUrl: "templates/signup.html",
-        controller: 'SignUpCtrl'
-      }
-    }
-  })
 
             .state('app.signup', {
                 url: "/signup",
@@ -222,8 +188,7 @@ angular.module('starter', [
                         }
                     }
                 }
-            })
-            .state('app.single', {
+            }).state('app.single', {
                 url: "/playlists/:playlistId",
                 views: {
                     'menuContent': {
@@ -250,6 +215,22 @@ angular.module('starter', [
                     }
                 }
             })
+        ;
+        // if none of the above states are matched, use this as the fallback
+        $urlRouterProvider.otherwise('/app/signup');
+
+        var loadTranslation = function (q, http, scope, dir) {
+            var delay = q.defer();
+            http.get('translate/' + dir + '/strings.json').success(function (result) {
+                scope.strings = result;
+                delay.resolve();
+            }).error(function (object, code) {
+                console.warn(object);
+                delay.reject();
+            });
+            return delay.promise;
+        };
+
         ;;
         // if none of the above states are matched, use this as the fallback
         $urlRouterProvider.otherwise('/app/signup');

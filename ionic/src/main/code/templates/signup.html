@@ -76,8 +76,10 @@
                     <span style="color:red" ng-show="signupForm.isAgree.$dirty && !signupData.isAgree">
                         {{strings.isAgree.errorMessages.required}}
                     </span>
-                    <ion-checkbox name="isAgree" ng-model="signupData.isAgree" ng-change="agreedCheckBox()"></ion-checkbox>
+                    <ion-checkbox name="isAgree" ng-model="signupData.isAgree"
+                                  ng-change="agreedCheckBox()"></ion-checkbox>
                 </label>
+
                 <div class="item" ng-controller="AgreementsCtrl">
                     {{strings.isAgree.text}}
                     <a href ng-click="getAgreement('Terms of Use')">{{strings.isAgree.Terms_of_Use}}</a>
@@ -100,7 +102,7 @@
 
         <div class="item debug-data"> <!-- TODO: must be removed after testing -->
             Hello, {{debugData.name}}!
-            <br /><br />
+            <br/><br/>
             Authentication Data:
             <textarea ng-model="debugData.authData" style="width: 100%;" rows="10"></textarea>
             User Info:

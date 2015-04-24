@@ -56,7 +56,7 @@ angular.module('appinall.models.users', ['parse-angular.enhance'])
 	 		// save request_id to Parse
 	 		var _this = this;
 
-			var user = fetchUserData(signupData);
+			var user = _this.fetchUserData(signupData);
 
 			// perform a save and return the promised object back into the Angular world
 			return user.save().then(function(object){
@@ -77,11 +77,9 @@ angular.module('appinall.models.users', ['parse-angular.enhance'])
 	 	},
 
 	 	fetchUserData: function(data) {
-	 		var username = ((data.firstName && data.lastName) != undefined)
-	 			? (data.firstName + " " + data.lastName)
-	 			: data.username;
+	 		var username = (data.firstName && data.lastName) ? (data.firstName + " " + data.lastName) : data.username;
 
-			var user = new User;
+			var user = this.get(data.id) || new User;
 			user.set("firstName", data.firstName);
 			user.set("lastName", data.lastName);
 			user.set("email", data.email);
@@ -91,7 +89,6 @@ angular.module('appinall.models.users', ['parse-angular.enhance'])
             user.set("agreedDateTerms", data.dateTerms);
             user.set("agreedDatePrivacy", data.datePrivacy);
             // TODO: complete this if new columns added to `User`
-
             return user;
 	 	}
 	});
