@@ -69,14 +69,24 @@
                 <filelist dir="@{out.dir}">
                     <file name="javascripts/js/controllers/signup.js"/>
                     <file name="javascripts/js/controllers/agreements.js"/>
+                    <file name="javascripts/js/controllers/profile.js"/>
+                    <file name="javascripts/js/controllers/profiles.js"/>
                     <file name="javascripts/js/modules/data/Agreements.js"/>
-                    <file name="javascripts/js/modules/data/Messages.js"/>
+                    <file name="javascripts/js/modules/data/models.js"/>
+                    <file name="javascripts/js/modules/data/Profiles.js"/>
                     <file name="javascripts/js/modules/data/Users.js"/>
                     <file name="javascripts/js/modules/directives/ng-compare-to-directive.js"/>
+                    <file name="javascripts/js/modules/directives/ng-on-read-file-directive.js"/>
                     <file name="javascripts/js/modules/directives/ng-unique-directive.js"/>
                     <file name="javascripts/js/services/auth-service.js"/>
+                    <file name="javascripts/js/services/fileReader-service.js"/>
                     <file name="javascripts/js/services/parse-service.js"/>
+                    <file name="javascripts/js/services/calendar.js"/>
+                    <file name="javascripts/js/services/services.js"/>
+                    <file name="javascripts/js/services/calendar.js"/>
                     <file name="javascripts/js/patch/parse-angular.js"/>
+                    <file name="javascripts/js/events.js"/>
+                    <file name="javascripts/js/eventCategories.js"/>
                 </filelist>
             </concat>
         </sequential>
@@ -110,12 +120,20 @@
                 <filelist dir="@{out.dir}">
                     <file name="javascripts/js/controllers/signup.js"/>
                     <file name="javascripts/js/controllers/agreements.js"/>
+                    <file name="javascripts/js/controllers/profile.js"/>
+                    <file name="javascripts/js/controllers/profiles.js"/>
                     <file name="javascripts/js/modules/data/Agreements.js"/>
+                    <file name="javascripts/js/modules/data/models.js"/>
+                    <file name="javascripts/js/modules/data/Profiles.js"/>
                     <file name="javascripts/js/modules/data/Users.js"/>
                     <file name="javascripts/js/modules/directives/ng-compare-to-directive.js"/>
+                    <file name="javascripts/js/modules/directives/ng-on-read-file-directive.js"/>
                     <file name="javascripts/js/modules/directives/ng-unique-directive.js"/>
                     <file name="javascripts/js/services/auth-service.js"/>
+                    <file name="javascripts/js/services/fileReader-service.js"/>
                     <file name="javascripts/js/services/parse-service.js"/>
+                    <file name="javascripts/js/services/calendar.js"/>
+                    <file name="javascripts/js/services/services.js"/>
                     <file name="javascripts/js/patch/parse-angular.js"/>
                 </filelist>
             </concat>
