@@ -205,7 +205,7 @@ angular.module('starter', [
       delay.resolve();
     }).error(function(object, code) {
       console.warn(object);
-      delay.reject();
+      delay.reject(object);
     });
     return delay.promise;
   };
