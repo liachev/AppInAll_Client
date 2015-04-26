@@ -1,4 +1,4 @@
-angular.module('signup.controllers')
+angular.module('auth.services', [])
 
 .factory('AuthService', ['$rootScope', '$log', 'ParseSDK', function($rootScope, $log, Parse) {
     $rootScope.isUnique = false;
