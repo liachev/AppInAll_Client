@@ -143,7 +143,13 @@ angular.module('starter', [
         controller: 'SignUpCtrl',
         resolve: {
           delay: ['$q', '$http', '$rootScope', function ($q, $http, $scope) {
-            return loadTranslation($q, $http, $scope, 'signup');
+            var delay = q.defer();
+            loadTranslation($http, $scope, 'signup').then(function (response) {
+              delay.resolve();
+            }, function (error) {
+              delay.reject(error);
+            });
+            return delay.promise;
           }]
         }
       }
@@ -168,7 +174,13 @@ angular.module('starter', [
         controller: 'ProfileCtrl',
         resolve: {
           delay: ['$q', '$http', '$rootScope', function ($q, $http, $scope) {
-            return loadTranslation($q, $http, $scope, 'profiles');
+            var delay = q.defer();
+            loadTranslation($http, $scope, 'profiles').then(function (response) {
+              delay.resolve();
+            }, function (error) {
+              delay.reject(error);
+            });
+            return delay.promise;
           }]
         }
       }
@@ -198,16 +210,12 @@ angular.module('starter', [
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/app/signup');
 
-  var loadTranslation = function (q, http, scope, dir) {
-    var delay = q.defer();
-    http.get('translate/' + dir + '/strings.json').success(function(result) {
+  var loadTranslation = function (http, scope, dir) {
+    return http.get('translate/' + dir + '/strings.json').success(function(result) {
       scope.strings = result;
-      delay.resolve();
     }).error(function(object, code) {
       console.warn(object);
-      delay.reject();
     });
-    return delay.promise;
   };
 
   if (window.cordova && (window.cordova.platformId == "browser")) { // TODO: should be removed later or resolve this
