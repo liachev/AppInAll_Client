@@ -1,10 +1,10 @@
 <!-- Nested node template -->
 <script type="text/ng-template" id="nodes_renderer.html">
-    <div ui-tree-handle class="tree-node tree-node-content item item-icon-left">
-        <i class="button button-icon icon" data-nodrag ng-click="toggle(this)"
+    <ion-item ui-tree-handle class="tree-node tree-node-content item-icon-left" ng-click="toggle(this)">
+        <i class="button button-icon icon" data-nodrag
            ng-class="{hidden: canExpand(node), 'ion-arrow-right-b': collapsed, 'ion-arrow-down-b': !collapsed}"></i>
         {{node.title}}
-    </div>
+    </ion-item>
     <ol ui-tree-nodes="options" ng-model="node.nodes" ng-class="{'hidden': collapsed}">
         <li ng-repeat="node in node.nodes" ui-tree-node ng-include="'nodes_renderer.html'">
         </li>
@@ -14,10 +14,10 @@
 <ion-view>
     <ion-nav-title>Example</ion-nav-title>
     <ion-content>
-        <div ui-tree="options" class="list" data-drag-enabled="false">
+        <ion-list ui-tree="options" data-drag-enabled="false">
             <ol ui-tree-nodes="" ng-model="data" id="tree-root">
                 <li ng-repeat="node in data" ui-tree-node ng-include="'nodes_renderer.html'"></li>
             </ol>
-        </div>
+        </ion-list>
     </ion-content>
 </ion-view>

@@ -199,7 +199,25 @@ angular.module('starter', [
     views: {
       'menuContent': {
         templateUrl: "templates/ui-tree.html",
-        controller: 'UITreeCtrl'
+        controller: 'UITreeCtrl',
+        resolve: {
+          data: ['$q', '$http', 'DataSource', function ($q, $http, source) {
+            var deferred = $q.defer();
+            $http.get('json/data-source-sample.json').success(function (response) {
+                source.fromArray(response).then(function (data) {
+                    console.debug(data);
+                    deferred.resolve(data);
+                }, function (error) {
+                    console.warn(error);
+                    deferred.reject(error);
+                });
+            }).error(function (object, code) {
+                console.warn(object);
+                deferred.reject(object);
+            });
+            return deferred.promise;
+          }]
+        }
       }
     }
   });
