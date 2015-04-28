@@ -71,6 +71,7 @@
                     <file name="javascripts/js/controllers/agreements.js"/>
                     <file name="javascripts/js/controllers/profile.js"/>
                     <file name="javascripts/js/controllers/profiles.js"/>
+                    <file name="javascripts/js/controllers/ui-tree.js"/>
                     <file name="javascripts/js/modules/data/Agreements.js"/>
                     <file name="javascripts/js/modules/data/models.js"/>
                     <file name="javascripts/js/modules/data/Profiles.js"/>
@@ -122,6 +123,7 @@
                     <file name="javascripts/js/controllers/agreements.js"/>
                     <file name="javascripts/js/controllers/profile.js"/>
                     <file name="javascripts/js/controllers/profiles.js"/>
+                    <file name="javascripts/js/controllers/ui-tree.js"/>
                     <file name="javascripts/js/modules/data/Agreements.js"/>
                     <file name="javascripts/js/modules/data/models.js"/>
                     <file name="javascripts/js/modules/data/Profiles.js"/>

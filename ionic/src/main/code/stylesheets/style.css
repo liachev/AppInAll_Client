@@ -22,6 +22,10 @@ h3 {
     line-height: 1.2;
 }
 
+.hidden {
+    display: none !important;
+}
+
 /* Slider */
 
 #welcome-button {

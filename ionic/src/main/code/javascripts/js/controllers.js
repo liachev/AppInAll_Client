@@ -3,6 +3,7 @@ angular.module('starter.controllers',
       'agreements.controllers',
       'events.controllers',
       'eventCategories.controllers',
+      'ui-tree.controllers',
     'profiles.controllers'])
 
 .controller('AppCtrl', function($scope, $ionicModal, $timeout) {

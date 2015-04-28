@@ -85,7 +85,6 @@ angular.module('starter', [
               $scope.profiles = [];
               var profiles = new (Parse.Collection.getClass("Profile"));
               profiles.getProfilesByUser(currentUser).then(function (result) {
-                console.info(angular.toJson(result));
                 for (i in result) {
                   $scope.profiles[i] = {
                     id: result[i].id,
@@ -193,6 +192,16 @@ angular.module('starter', [
               controller: 'CategoriesCtrl'
           }
       }
+  })
+
+  .state('app.tree-view', {
+    url: "/tree-view",
+    views: {
+      'menuContent': {
+        templateUrl: "templates/ui-tree.html",
+        controller: 'UITreeCtrl'
+      }
+    }
   });
 
   // if none of the above states are matched, use this as the fallback
