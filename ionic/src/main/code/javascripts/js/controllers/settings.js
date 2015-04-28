@@ -1,18 +1,36 @@
-angular.module('settings.controllers', ['updateSignup.controllers', 'editPayment.controllers'])
+angular.module('settings.controllers', [])
 
-.controller('SettingsCtrl', ['$scope', '$http', '$cordovaGlobalization', 'ParseSDK', function ($scope, $http, globalization, Parse) {
-    $scope.settingsData = {};
+.controller('SettingsCtrl', ['$rootScope', '$http', '$cordovaGlobalization', '$state', 'ParseSDK', 'localStorageService',
+  function ($scope, $http, globalization, $state, Parse, localStorageService) {
+    var defaultData = $scope.settingsData = {
+        distance: "miles",
+        timeformat: "military"
+    };
+
+    $scope.today = function () {
+        return new Date();
+    };
 
     var currentUser = Parse.User.current();
     if (currentUser) {
         $scope.settingsData.userEmail = currentUser.get("email");
-    };
-
-    $http.get('translate/settings/strings.json').success(function(result) {
-        $scope.strings = result;
-    }).error(function(object, code) {
-        console.warn(object);
-    });
+        $scope.settingsData.userPsw = "password"; // fake password
+        currentUser.fetch().then(function (user) {
+            console.info(angular.toJson(user, true));
+            if (angular.isUndefined($scope.settingsData)) {
+                $scope.settingsData = defaultData;
+            }
+            $scope.settingsData.userEmail = user.get("email");
+            var authData = user.get("authData");
+            $scope.settingsData.isConnectedToFB = authData && authData.facebook;
+        }, function (object, error) {
+            console.info(angular.toJson(error, true));
+            alert('An error occurs: ' + angular.toJson(error, true));
+            // TODO: an error occurs - log it
+        });
+    } else {
+        $state.go('app.signup');
+    }
 
     $scope.languages = [];
     $http.get('json/language.json').success(function (results) {
@@ -21,32 +39,66 @@ angular.module('settings.controllers', ['updateSignup.controllers', 'editPayment
                 code: results[i].code,
                 name: results[i].name
             }
-        }
+        };
+    if (window.cordova) {
+        globalization.getPreferredLanguage().then(
+            function (language) {
+                $scope.settingsData.language = 'en-US';
+                for (i in $scope.languages) {
+                    if (language.value === $scope.languages[i].code) {
+                        $scope.settingsData.language = $scope.languages[i].code;
+                        break;
+                    }
+                }
+            },
+            function () {
+                alert('Error getting language\n');
+            }
+        );
+    }
     }).error(function (data) {
         alert(data || 'error');
-    })
+    });
+
+    $scope.isCurrentTZ = function (tz) {
+        return (currentTZ.indexOf(tz) > -1);
+    };
+
+    var todayStr = ($scope.today() || new Date()).toString();
+    var index = todayStr.indexOf('(') + 1;
+    var utcTZ = todayStr.substr(index, todayStr.length - index - 1);
+    var regex = new RegExp("GMT[+|-][0-9]{4}");
+    var gmtTZ = regex.exec(todayStr);
+    var currentTZ = [utcTZ, gmtTZ && gmtTZ[0]];
 
     $scope.timezones = [];
     $http.get('json/timezones.json').success(function (results) {
         for (var i = 0; i < results.length; i++) {
             $scope.timezones[i] = {
                 abbr: results[i].abbr,
-                text: results[i].text
+                name: results[i].name,
+                offset: results[i].offset
+            };
+            if ($scope.isCurrentTZ(results[i].abbr)) {
+                $scope.settingsData.timezone = results[i].abbr;
+            } else {
             }
         }
     }).error(function (data) {
         alert(data || 'error');
     });
 
-    $scope.currencys = [];
+    $scope.currencies = [];
     $http.get('json/currency.json').success(function (results) {
         for (var i = 0; i < results.length; i++) {
-            $scope.currencys[i] = {
+            $scope.currencies[i] = {
                 symbol: results[i].symbol,
                 name: results[i].name,
-                code: results[i].code
+                code: results[i].code,
+                symbol_native: results[i].symbol_native
             }
         }
+    $scope.settingsData.currency = $scope.currencies[0].name;
     }).error(function (data) {
         alert(data || 'error');
     });
@@ -59,46 +111,17 @@ angular.module('settings.controllers', ['updateSignup.controllers', 'editPayment
                 name: results[i].name
             }
         }
+    $scope.settingsData.date = $scope.formats[0].code;
     }).error(function (data) {
         alert(data || 'error');
     });
 
-    if (window.cordova) {
-
-        globalization.getPreferredLanguage().then(
-            function (language) {
-                $scope.settingsData.language = 'en-US';
-                alert(angular.toJson($scope.languages));
-                for (i in $scope.languages) {
-                    alert(angular.toJson($scope.languages[i]));
-                    if (language.value === $scope.languages[i].code) {
-                        $scope.settingsData.language = $scope.languages[i].code;
-                        break;
-                    }
-                }
-            },
-            function () {
-                alert('Error getting language\n');
-            }
-        );
-
-        globalization.getDatePattern().then(
-            function (date) {
-                $scope.settingsData.date = date.pattern;
-                },
-            function () {
-                alert('Error getting format\n');
-            }
-        );
-
-        globalization.getDatePattern().then(
-            function (date) {
-                $scope.settingsData.timezone = date.timezone;
-            },
-            function () {
-                alert('Error getting pattern\n');
-            }
-        );
-    }
-
+    $scope.saveButtonClick = function(){
+        if(localStorageService.isSupported) {
+            localStorageService.set("settings", $scope.settingsData);
+        }
+        else if(localStorageService.cookie.isSupported) {
+            localStorageService.cookie.set("settings", $scope.settingsData);
+        }
+    };
 }]);

@@ -1,57 +1,81 @@
 angular.module('updateSignup.controllers', [])
 
-.controller('UpdateSignUpCtrl', ['$rootScope', '$http', 'ParseSDK', '$window', function($scope, $http, Parse, $window) {
-    $scope.updateSignupData = {
-        confirmPsw: ""
-    };
+    .controller('UpdateSignUpCtrl', ['$rootScope', '$http', 'ParseSDK', '$window', function ($scope, $http, Parse, $window) {
+        var defaultData = $scope.updateSignupData = {};
 
-    $http.get('translate/settings/strings.json').success(function (result) {
-        console.info(angular.toJson(result, true));
-        $scope.settingStrings = result;
-    }).error(function (object, code) {
-        console.warn(angular.toJson(object, true));
-    });
+        $scope.isValid = function () {
+            return !isNullOrWhiteSpace($scope.updateSignupData.userEmail)
+                || !isNullOrWhiteSpace($scope.updateSignupData.userPsw);
+        };
 
-    var currentUser = Parse.User.current();
-    if (currentUser) {
-        $scope.updateSignupData.userEmail = currentUser.get("email");
-    } else {
-        // TODO: go to login
-    };
-
-    $scope.getUser = function (userEmail) {
-        var users = new (Parse.Collection.getClass("_User"));
-        var user = users.loadUsersWithEmail(userEmail).then(function (results) {
-            if (results.length == 1) {
-                $scope.password = results[0].get("password");
-            } else {
-                $log.warn('[updateSignup.controllers] trying to get password "' + userEmail + '"');
-            }
-        });
-    };
-
-    $scope.updateSignup = function (updateSignupForm) {
         var currentUser = Parse.User.current();
         if (currentUser) {
-            currentUser.set("email", $scope.updateSignupData.userEmail);
-            currentUser.set("password", $scope.updateSignupData.userPsw);
+            //$scope.updateSignupData.userEmail = currentUser.get("email");
         } else {
             // TODO: go to login
         }
-        currentUser.save(null, {
-            success: function (user) {
-                $scope.reset(updateSignupForm); // user was saved
+
+        $scope.updateSignup = function (updateSignupForm) {
+            var currentUser = Parse.User.current();
+            if (currentUser) {
+                var updateEmail = function (user) {
+                    if (!isNullOrWhiteSpace($scope.updateSignupData.userEmail)) {
+                        return user.save({
+                            email: $scope.updateSignupData.userEmail
+                        }, {
+                            success: function (user) {
+                                $scope.settingsData.userEmail = user.get("email");
+                                return user;
+                            },
+                            error: function (error) {
+                                // Show the error message somewhere
+                                console.warn("Error: " + error.code + " " + error.message);
+                                Parse.Promise.error(error);
+                            }
+                        })
+                    } else {
+                        return Parse.Promise.as(user);
+                    }
+                };
+                var updatePassword = function (user) {
+                    if (!isNullOrWhiteSpace($scope.updateSignupData.userPsw)) {
+                        return user.save({
+                            password: $scope.updateSignupData.userPsw
+                        }, {
+                            success: function (user) {
+                                return user;
+                            },
+                            error: function (error) {
+                                // Show the error message somewhere
+                                console.warn("Error: " + error.code + " " + error.message);
+                                Parse.Promise.error(error);
+                            }
+                        });
+                    } else {
+                        return Parse.Promise.as(user);
+                    }
+                };
+
+                updateEmail(currentUser).then(function (user) {
+                    updatePassword(user).then(function (user) {
+                        $scope.reset(updateSignupForm); // user was saved
+                    })
+                });
+                $window.history.back()
+            } else {
+                // TODO: go to login
             }
-        });
-        $window.history.back()
-    };
+        };
 
-    $scope.reset = function (updateSignupForm) {
-        if (updateSignupForm) {
-            updateSignupForm.$setPristine();
-            updateSignupForm.$setUntouched();
-        }
-        $scope.updateSignupData = {};
-    };
+        var isNullOrWhiteSpace = function (str) {
+            return angular.isUndefined(str) || str == null || ((typeof str === "string") && str.trim() == "");
+        };
 
-}]);
+        $scope.reset = function (updateSignupForm) {
+            if (updateSignupForm) {
+                updateSignupForm.$setPristine();
+                updateSignupForm.$setUntouched();
+            }
+            $scope.updateSignupData = defaultData;
+        };
+    }]);

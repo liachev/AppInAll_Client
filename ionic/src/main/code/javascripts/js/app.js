@@ -37,7 +37,7 @@ angular.module('starter', [
   Parse.initialize("O7eCGvKWO5BihNXJQv8zU0Ewd9a5nLJs0EBZWFjr", "Aohwuhy4j63Rs9tL4kXuc4lD8zGqv6wgrI74yXnU");
 
   // angular localStorageService 'isSupported' test
-  if(localStorageService.isSupported)
+  if(localStorageService.isSupported) // FixMe: localStorageService doesn't work
   {
       logging.log("localStorageService is supported");
   }else{
@@ -88,7 +88,19 @@ angular.module('starter', [
     views: {
       'menuContent': {
         templateUrl: "templates/signup.html",
-        controller: 'SignUpCtrl'
+        controller: 'SignUpCtrl',
+        resolve: {
+          delay: ['$q', '$http', '$rootScope', function ($q, $http, $scope) {
+            var delay = $q.defer();
+            $http.get('translate/signup/strings.json').success(function(result) {
+              $scope.strings = result;
+              delay.resolve();
+            }).error(function(object, code) {
+              delay.reject();
+            });
+            return delay.promise;
+          }]
+        }
       }
     }
   })
@@ -108,7 +120,20 @@ angular.module('starter', [
     views: {
       'menuContent': {
         templateUrl: "templates/settings.html",
-        controller: 'SettingsCtrl'
+        controller: 'SettingsCtrl',
+        requireLogin: true,
+        resolve: {
+          delay: ['$q', '$http', '$rootScope', '$state', function ($q, $http, $scope, $state) {
+            var delay = $q.defer();
+            $http.get('translate/settings/strings.json').success(function (result) {
+              $scope.strings = result;
+              delay.resolve();
+            }).error(function(object, code) {
+              delay.reject();
+            });
+            return delay.promise;
+          }]
+        }
       }
     }
   })
@@ -118,7 +143,19 @@ angular.module('starter', [
     views: {
       'menuContent': {
         templateUrl: "templates/update_signup.html",
-        controller: 'UpdateSignUpCtrl'
+        controller: 'UpdateSignUpCtrl',
+        resolve: {
+          delay: ['$q', '$http', '$rootScope', function ($q, $http, $scope) {
+            var delay = $q.defer();
+            $http.get('translate/settings/strings.json').success(function(result) {
+              $scope.strings = result;
+              delay.resolve();
+            }).error(function(object, code) {
+              delay.reject();
+            });
+            return delay.promise;
+          }]
+        }
       }
     }
   })
@@ -128,7 +165,19 @@ angular.module('starter', [
     views: {
       'menuContent': {
         templateUrl: "templates/edit_payment.html",
-        controller: 'EditPaymentCtrl'
+        controller: 'EditPaymentCtrl',
+        resolve: {
+          delay: ['$q', '$http', '$rootScope', function ($q, $http, $scope) {
+            var delay = $q.defer();
+            $http.get('translate/settings/strings.json').success(function(result) {
+              $scope.strings = result;
+              delay.resolve();
+            }).error(function(object, code) {
+              delay.reject();
+            });
+            return delay.promise;
+          }]
+        }
       }
     }
   })

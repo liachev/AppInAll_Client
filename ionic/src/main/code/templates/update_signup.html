@@ -2,55 +2,66 @@
     <ion-content>
         <!-- Connect with Facebook button -->
         <div class="item" ng-controller="SignUpCtrl">
-            <button ng-click="connectWithFacebook()">{{settingStrings.Connect_with_Facebook.text}}</button>
+            <button ng-click="connectWithFacebook()">{{strings.Connect_with_Facebook.text}}</button>
         </div>
         <form name="updateSignupForm" ng-submit="updateSignupForm.$valid && updateSignup(updateSignupForm)">
             <div class="list">
                 <label class="item item-input">
                     <input type="email" name="email" ng-model="updateSignupData.userEmail"
-                           placeholder="{{settingStrings.email.placeholder}}" ng-unique="{key: 'users', property: 'email'}"
+                           placeholder="{{strings.email.placeholder}}" ng-unique="{key: 'users', property: 'email'}"
                            ng-model-options="{ debounce: 350 }">
                     <span style="color:red"
                           ng-show="(updateSignupForm.email.$dirty && updateSignupForm.email.$invalid) || updateSignupForm.email.$touched">
                         <span ng-show="updateSignupForm.email.$error.required">
-                            {{settingStrings.email.errorMessages.required}}
+                            {{strings.email.errorMessages.required}}
                         </span>
                         <span ng-show="updateSignupForm.email.$error.email">
-                            {{settingStrings.email.errorMessages.invalid}}
+                            {{strings.email.errorMessages.invalid}}
                         </span>
                         <span ng-show="!isUnique && updateSignupForm.email.$error.unique">
-                            {{settingStrings.email.errorMessages.alreadyInUse}}
+                            {{strings.email.errorMessages.alreadyInUse}}
                         </span>
                     </span>
                 </label>
                 <label class="item item-input">
-                    <input type="password" name="password" ng-model="password"
-                           placeholder="{{settingStrings.password.placeholder}}">
+                    <input type="password" name="password" ng-model="updateSignupData.userPsw"
+                           placeholder="{{strings.password.placeholder}}">
                     <span style="color:red" ng-show="updateSignupForm.password.$submitted || updateSignupForm.password.$touched">
                         <span ng-show="updateSignupForm.password.$error.required">
-                            {{settingStrings.password.errorMessages.required}}
+                            {{strings.password.errorMessages.required}}
                         </span>
                     </span>
                 </label>
                 <label class="item item-input">
                     <input type="password" name="confirmPassword" ng-model="updateSignupData.confirmPsw"
-                           placeholder="{{settingStrings.confirmPassword.placeholder}}" ng-compare-to="updateSignupData.userPsw">
+                           placeholder="{{strings.confirmPassword.placeholder}}" ng-compare-to="updateSignupData.userPsw">
                     <span style="color:red"
                           ng-show="updateSignupForm.confirmPassword.$submitted || updateSignupForm.confirmPassword.$touched">
                         <span ng-show="updateSignupForm.confirmPassword.$error.required">
-                            {{settingStrings.confirmPassword.errorMessages.required}}
+                            {{strings.confirmPassword.errorMessages.required}}
                         </span>
                         <span ng-show="!updateSignupForm.confirmPassword.$error.required && updateSignupForm.confirmPassword.$error.compareTo">
-                            {{settingStrings.confirmPassword.errorMessages.notIdentical}}
+                            {{strings.confirmPassword.errorMessages.notIdentical}}
                         </span>
                     </span>
                 </label>
                 <label class="item">
                     <button class="button button-block button-positive" type="submit"
-                            ng-disabled="updateSignupForm.$invalid || !signupData.isAgree">
-                        {{settingStrings.Update.text}}
+                            ng-disabled="updateSignupForm.$invalid || !isValid()">
+                        {{strings.Update.text}}
                     </button>
                 </label>
+
+                <ion-item class="item">
+                    <ul>
+                        <li ng-repeat="(key, errors) in updateSignupForm.$error track by $index"><strong>{{ key }}</strong>
+                            errors
+                            <ul>
+                                <li ng-repeat="e in errors">{{ e.$name }} has an error: <strong>{{ key }}</strong>.</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </ion-item>
             </div>
         </form>
     </ion-content>

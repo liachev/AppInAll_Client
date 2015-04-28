@@ -10,18 +10,18 @@ angular.module('editPayment.controllers', ['credit-cards'])
     $scope.editPaymentData = {};
     $scope.card = {};
 
-    $http.get('translate/settings/strings.json').success(function(result) {
-        $scope.strings = result;
-    }).error(function(object, code) {
-        console.warn(object);
-    });
+    //$http.get('translate/settings/strings.json').success(function(result) {
+    //    $scope.strings = result;
+    //}).error(function(object, code) {
+    //    console.warn(object);
+    //});
 
     $scope.reset = function (editPaymentForm) {
         if (editPaymentForm) {
             editPaymentForm.$setPristine();
             editPaymentForm.$setUntouched();
         }
-        $scope.editPaymentData = {};
+        $scope.editPaymentData = $scope.card = {};
     };
 
     $scope.cancelButtonClick = function(){

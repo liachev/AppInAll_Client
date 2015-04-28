@@ -1,4 +1,4 @@
-angular.module('agreements.controllers', ['signup.controllers'])
+angular.module('agreements.controllers', [])
 
 .controller('AgreementsCtrl', ['$rootScope', '$state', '$log', '$window', function ($scope, $state, $log, $window) {
     $scope.title = "";

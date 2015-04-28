@@ -16,6 +16,12 @@
     "text": "Update"
   },
 
+  "ResetPassword": {
+    "text": "Reset Password",
+
+    "description": "We will send you an email to your address, with a special password reset link"
+  },
+
   "Agree": {
     "Terms_of_Use": "Terms of Use",
 

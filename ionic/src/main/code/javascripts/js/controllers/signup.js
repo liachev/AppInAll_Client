@@ -3,12 +3,6 @@ angular.module('signup.controllers', [])
 .controller('SignUpCtrl', ['$rootScope', '$http', '$cordovaFacebook', 'ParseSDK', function($scope, $http, FB, Parse) {
     $scope.signupData = $scope.debugData = {}; // TODO: delete debugData after Connect with Facebook tested
 
-    $http.get('translate/signup/strings.json').success(function(result) {
-        $scope.strings = result;
-    }).error(function(object, code) {
-        console.warn(object);
-    });
-
     $scope.signUp = function (signupForm) {
         var users = new (Parse.Collection.getClass("_User")); // TODO: must be changed later
 

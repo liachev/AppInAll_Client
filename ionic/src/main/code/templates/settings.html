@@ -1,13 +1,13 @@
 <ion-view view-title="Settings">
     <ion-content>
         <div class="list">
-            <label class="item item-input" ng-if="true">
+            <label class="item item-input" ng-if="settingsData.isConnectedToFB">
                 {{strings.Connect_with_Facebook.text}}
             </label>
             <label class="item item-input">
                 <input type="email" name="useremail" ng-model="settingsData.userEmail" readonly>
             </label>
-            <label class="item item-input" ng-if="true">
+            <label class="item item-input" ng-if="!settingsData.isConnectedToFB">
                 <span class="input-label">{{strings.Password.text}}</span>
                 <input type="password" name="userpsw" ng-model="settingsData.userPsw" readonly>
             </label>
@@ -26,10 +26,10 @@
                     {{strings.Regional.Time_Zone}}
                 </div>
                 <select ng-model="settingsData.timezone">
-                    <option ng-selected="{{timezone.abbr === settingsData.timezone}}"
+                    <option ng-selected="{{isCurrentTZ(timezone.abbr)}}"
                             ng-repeat="timezone in timezones"
                             value="{{timezone.abbr}}">
-                        {{timezone.text}}
+                        {{timezone.name}} ({{timezone.offset}})
                     </option>
                 </select>
             </label>
@@ -37,7 +37,7 @@
                 <div class="input-label">
                     {{strings.Regional.Date_Format}}
                 </div>
-                <select ng-model="settingsData.formatData">
+                <select ng-model="settingsData.date">
                     <option ng-selected="{{format.code === settingsData.data}}"
                             ng-repeat="format in formats"
                             value="{{format.code}}">
@@ -61,34 +61,34 @@
                 <div class="input-label">
                     {{strings.Regional.Distance}}
                 </div>
-                <select>
-                    <option value="distance1" selected>{{strings.Regional.Miles}}</option>
-                    <option value="distance2">{{strings.Regional.Km}}</option>
+                <select ng-model="settingsData.distance">
+                    <option value="miles">{{strings.Regional.Miles}}</option>
+                    <option value="km">{{strings.Regional.Km}}</option>
                 </select>
             </label>
             <label class="item item-input item-select">
                 <div class="input-label">
                     {{strings.Regional.Time_Format}}
                 </div>
-                <select>
-                    <option value="format1">{{strings.Regional.AM_PM}}</option>
-                    <option value="format2" selected>{{strings.Regional.Military}}</option>
+                <select ng-model="settingsData.timeformat">
+                    <option value="am_pm">{{strings.Regional.AM_PM}}</option>
+                    <option value="military">{{strings.Regional.Military}}</option>
                 </select>
             </label>
             <label class="item item-input item-select">
                 <div class="input-label">
                     {{strings.Regional.Currency}}
                 </div>
-                <select>
-                    <option selected>{{strings.Regional.Currency_Title}}</option>
-                    <option ng-repeat="currency in currencys"
+                <select ng-model="settingsData.currency">
+                    <option ng-selected="{{currency.name === settingsData.currency}}"
+                            ng-repeat="currency in currencies"
                             value="{{currency.code}}">
-                        {{currency.name}}
+                        {{currency.name}} ({{currency.symbol_native}})
                     </option>
                 </select>
             </label>
             <label class="item">
-                <button>
+                <button ng-click="saveButtonClick()">
                     {{strings.Save.text}}
                 </button>
             </label>
@@ -109,5 +109,8 @@
                 </div>
             </div>
         </div>
+        <pre class="item">
+            {{ angular.toJson(settingsData, true) }}
+        </pre>
     </ion-content>
 </ion-view>

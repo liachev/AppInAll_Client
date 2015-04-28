@@ -1,14 +1,14 @@
 [
   {
-    "code": "M/d/y h:mm a",
+    "code": "M/d/y",
     "name": "Month/Day/Year"
   },
   {
-    "code": "dd/MM/yyyy h:mm a",
+    "code": "dd/MM/yyyy",
     "name": "Day/Month/Year"
   },
   {
-    "code": "yyyy/MM/dd h:mm a",
+    "code": "yyyy/MM/dd",
     "name": "Year/Day/Month"
   }
 ]
