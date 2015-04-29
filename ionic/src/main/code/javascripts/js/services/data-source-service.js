@@ -1,3 +1,10 @@
+/// How to use:
+/// (1) see ionic/src/main/code/javascripts/js/controllers/ui-tree.js controller example
+/// (2) see ionic/src/main/code/templates/ui-tree.html template
+/// (3) see ionic/src/main/code/javascripts/js/app.js:
+///         state app.tree-view-array for DataSource from array
+///         state app.tree-view-table for DataSource from parse.com table
+
 angular.module('utils.services')
 
 .factory('DataSource', ['$q', 'ParseSDK', function ($q, Parse) {
@@ -117,24 +124,6 @@ angular.module('utils.services')
             return deferred.promise;
         }
         var table = Parse.Object.getClass(tableName);
-//        getChilds(table, null).then(function (childrens) {
-//            console.info('roots: ' + angular.toJson(childrens, true));
-//            angular.forEach(childrens, function (child, key) {
-//                var pushed = that.data.push({
-//                    id: child.id,
-//                    title: child.get(that.options.titleColumnName),
-//                    nodes: []
-//                });
-//                angular.forEach(that.options.columns, function (column, key) {
-//                    if (getAllColumns().indexOf(column) < 0) {
-//                        that.data[pushed - 1][column] = child.get(column);
-//                    }
-//                });
-//            });
-//            deferred.resolve(that.data || []);
-//        }, function (error) {
-//            deferred.reject(error);
-//        });
         that.data = [];
         makeTree(table, that.data, null, []).then(function (tree) {
             deferred.resolve(that.data || []);
