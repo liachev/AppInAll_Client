@@ -138,8 +138,6 @@ angular.module('utils.services')
     }
 
     function makeTree(table, nodes, node, requests) {
-        console.info('node: ' + angular.toJson(node, true));
-        console.info('nodes: ' + angular.toJson(nodes, true));
         var deferred = $q.defer();
         getChilds(table, node).then(function (array) {
             for (var i = 0; i < array.length; i++) {
@@ -157,7 +155,9 @@ angular.module('utils.services')
                 }
                 var pushed = nodes.push(newNode);
                 makeTree(table, nodes[pushed - 1].nodes, item, requests).then(function (result) {
-                    node.nodes = result;
+                    if (!angular.isUndefined(node) && node !== null) {
+                        node.nodes = result;
+                    }
                     defer.resolve(result);
                 }, function (error) {
                     deferred.reject(error);
