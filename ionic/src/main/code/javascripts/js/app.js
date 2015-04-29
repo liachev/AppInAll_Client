@@ -194,8 +194,8 @@ angular.module('starter', [
       }
   })
 
-  .state('app.tree-view', {
-    url: "/tree-view",
+  .state('app.tree-view-array', {
+    url: "/tree-view-array-example",
     views: {
       'menuContent': {
         templateUrl: "templates/ui-tree.html",
@@ -205,6 +205,37 @@ angular.module('starter', [
             var deferred = $q.defer();
             $http.get('json/data-source-sample.json').success(function (response) {
                 source.fromArray(response).then(function (data) {
+                    console.debug(data);
+                    deferred.resolve(data);
+                }, function (error) {
+                    console.warn(error);
+                    deferred.reject(error);
+                });
+            }).error(function (object, code) {
+                console.warn(object);
+                deferred.reject(object);
+            });
+            return deferred.promise;
+          }]
+        }
+      }
+    }
+  })
+
+  .state('app.tree-view-table', {
+    url: "/tree-view-table-example",
+    views: {
+      'menuContent': {
+        templateUrl: "templates/ui-tree.html",
+        controller: 'UITreeCtrl',
+        resolve: {
+          data: ['$q', '$http', 'DataSource', function ($q, $http, source) {
+            var deferred = $q.defer();
+            $http.get('json/data-source-sample.json').success(function (response) {
+                source.setTitleColumnName("name");
+                source.setParentColumnName("parentId");
+                source.addColumn("shortName");
+                source.fromDbTable("Category").then(function (data) {
                     console.debug(data);
                     deferred.resolve(data);
                 }, function (error) {
