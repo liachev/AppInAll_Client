@@ -42,12 +42,7 @@
                          excludes="style.css"/>
             </copy>
 
-            <echo message="build font"/>
-            <mkdir dir="@{out.dir}/font"/>
 
-            <copy todir="@{out.dir}/font" overwrite="true">
-                <fileset dir="${offline.module.root}/ionic/src/main/code/stylesheets/font"/>
-            </copy>
 
         </sequential>
     </macrodef>
