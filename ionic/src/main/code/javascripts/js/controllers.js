@@ -3,7 +3,8 @@ angular.module('starter.controllers',
       'agreements.controllers',
       'events.controllers',
       'eventCategories.controllers',
-    'profiles.controllers'])
+      'profiles.controllers',
+      'messages.controllers'])
 
 .controller('AppCtrl', function($scope, $ionicModal, $timeout) {
   // Form data for the login modal
