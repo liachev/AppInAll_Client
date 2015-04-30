@@ -12,7 +12,7 @@ angular.module('utils.services')
 
     var that = this;
     var defaultOptions = that.options = {
-        maxDepth: 10,
+        maxDepth: 0, // 0 - means unlimited nesting
         titleColumnName: "title",
         parentColumnName: "parentId",
         columns: []
@@ -125,7 +125,7 @@ angular.module('utils.services')
         }
         var table = Parse.Object.getClass(tableName);
         that.data = [];
-        makeTree(table, that.data, null, []).then(function (tree) {
+        makeTree(table, that.data, null, 0, []).then(function (tree) {
             deferred.resolve(that.data || []);
         });
         return deferred.promise;
@@ -137,16 +137,21 @@ angular.module('utils.services')
         return columns;
     }
 
-    function makeTree(table, nodes, node, requests) {
+    function makeTree(table, nodes, node, depth, requests) {
         var deferred = $q.defer();
         getChilds(table, node).then(function (array) {
             for (var i = 0; i < array.length; i++) {
+                if (!(depth < that.options.maxDepth || that.options.maxDepth === 0)) {
+                    // continue if maximum depth limit is exceeded
+                    continue;
+                }
                 var defer = $q.defer();
                 requests.push(defer);
                 var item = array[i];
                 var newNode = {
                     id: item.id,
                     title: item.get(that.options.titleColumnName),
+                    depth: depth + 1,
                     nodes: []
                 };
                 for (var j = 0; j < that.options.columns.length; j++) {
@@ -154,7 +159,7 @@ angular.module('utils.services')
                     newNode[column] = item.get(column);
                 }
                 var pushed = nodes.push(newNode);
-                makeTree(table, nodes[pushed - 1].nodes, item, requests).then(function (result) {
+                makeTree(table, nodes[pushed - 1].nodes, item, newNode.depth, requests).then(function (result) {
                     if (!angular.isUndefined(node) && node !== null) {
                         node.nodes = result;
                     }
