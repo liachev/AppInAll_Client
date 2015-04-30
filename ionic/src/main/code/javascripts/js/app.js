@@ -216,6 +216,9 @@ angular.module('starter', [
                 deferred.reject(object);
             });
             return deferred.promise;
+          }],
+          tableName: [function () {
+           return "";
           }]
         }
       }
@@ -229,24 +232,22 @@ angular.module('starter', [
         templateUrl: "templates/ui-tree.html",
         controller: 'UITreeCtrl',
         resolve: {
-          data: ['$q', '$http', 'DataSource', function ($q, $http, source) {
+          data: ['$q', 'DataSource', 'tableName', function ($q, source, tableName) {
             var deferred = $q.defer();
-            $http.get('json/data-source-sample.json').success(function (response) {
-                source.setTitleColumnName("name");
-                source.setParentColumnName("parentId");
-                source.addColumn("shortName");
-                source.fromDbTable("Category").then(function (data) {
-                    console.debug(data);
-                    deferred.resolve(data);
-                }, function (error) {
-                    console.warn(error);
-                    deferred.reject(error);
-                });
-            }).error(function (object, code) {
-                console.warn(object);
-                deferred.reject(object);
+            source.setTitleColumnName("name");
+            source.setParentColumnName("parentId");
+            source.setMaxDepth(1);
+            source.fromDbTable(tableName, null).then(function (data) {
+                console.debug(data);
+                deferred.resolve(data);
+            }, function (error) {
+                console.warn(error);
+                deferred.reject(error);
             });
             return deferred.promise;
+          }],
+          tableName: [function () {
+            return "Category";
           }]
         }
       }
