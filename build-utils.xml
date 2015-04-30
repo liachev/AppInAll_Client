@@ -36,6 +36,14 @@
                 </filelist>
             </concat>
 
+            <copy todir="@{out.dir}/css" overwrite="true">
+                <fileset dir="${offline.module.root}/ionic/src/main/code/stylesheets"
+                         includes="**/*.css"
+                         excludes="style.css"/>
+            </copy>
+
+
+
         </sequential>
     </macrodef>
 
@@ -69,9 +77,11 @@
                 <filelist dir="@{out.dir}">
                     <file name="javascripts/js/controllers/signup.js"/>
                     <file name="javascripts/js/controllers/agreements.js"/>
+                    <file name="javascripts/js/controllers/messages.js"/>
                     <file name="javascripts/js/controllers/profile.js"/>
                     <file name="javascripts/js/controllers/profiles.js"/>
                     <file name="javascripts/js/modules/data/Agreements.js"/>
+                    <file name="javascripts/js/modules/data/Messages.js"/>
                     <file name="javascripts/js/modules/data/models.js"/>
                     <file name="javascripts/js/modules/data/Profiles.js"/>
                     <file name="javascripts/js/modules/data/Users.js"/>
@@ -120,9 +130,11 @@
                 <filelist dir="@{out.dir}">
                     <file name="javascripts/js/controllers/signup.js"/>
                     <file name="javascripts/js/controllers/agreements.js"/>
+                    <file name="javascripts/js/controllers/messages.js"/>
                     <file name="javascripts/js/controllers/profile.js"/>
                     <file name="javascripts/js/controllers/profiles.js"/>
                     <file name="javascripts/js/modules/data/Agreements.js"/>
+                    <file name="javascripts/js/modules/data/Messages.js"/>
                     <file name="javascripts/js/modules/data/models.js"/>
                     <file name="javascripts/js/modules/data/Profiles.js"/>
                     <file name="javascripts/js/modules/data/Users.js"/>

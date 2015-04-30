@@ -150,6 +150,26 @@ angular.module('starter', [
     }
   })
 
+  .state('app.messages', {
+    url: "/messages",
+    views: {
+      'menuContent': {
+        templateUrl: "templates/messages.html",
+        controller: 'MessagesCtrl'
+      }
+    }
+  })
+
+  .state('app.chat', {
+    url: "/chat",
+    views: {
+      'menuContent': {
+        templateUrl: "templates/chat.html",
+        controller: 'MessagesCtrl'
+      }
+    }
+  })
+
   .state('app.agreement', {
     url: "/agreement",
     views: {
