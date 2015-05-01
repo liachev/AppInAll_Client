@@ -175,8 +175,19 @@ angular.module('starter', [
     }
   })
 
+  .state('app.eventByDate', {
+    url: "/eventdate",
+    views: {
+      'menuContent': {
+        templateUrl: "templates/eventsByDate.html",
+        controller: 'EventsCtrl'
+      }
+    }
+  })
+
+
   .state('app.events', {
-      url: "/events/:category",
+      url: "/events",//"/events/:category"
       views: {
           'menuContent': {
               templateUrl: "templates/events.html",
