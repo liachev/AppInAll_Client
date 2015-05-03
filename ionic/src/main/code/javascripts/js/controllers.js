@@ -4,6 +4,7 @@ angular.module('starter.controllers',
       'events.controllers',
       'eventCategories.controllers',
       'profiles.controllers',
+      'messages.controllers',
       'settings.controllers',
       'editPayment.controllers',
       'updateSignup.controllers'
