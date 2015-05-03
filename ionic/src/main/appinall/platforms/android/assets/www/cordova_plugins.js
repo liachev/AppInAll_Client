@@ -168,6 +168,17 @@ module.exports = [
         "runs": true
     },
     {
+        "file": "plugins/nl.x-services.plugins.calendar/www/Calendar.js",
+        "id": "nl.x-services.plugins.calendar.Calendar",
+        "clobbers": [
+            "Calendar"
+        ]
+    },
+    {
+        "file": "plugins/nl.x-services.plugins.calendar/test/tests.js",
+        "id": "nl.x-services.plugins.calendar.tests"
+    },
+    {
         "file": "plugins/org.apache.cordova.globalization/www/GlobalizationError.js",
         "id": "org.apache.cordova.globalization.GlobalizationError",
         "clobbers": [
@@ -187,9 +198,10 @@ module.exports.metadata =
 {
     "com.ionic.keyboard": "1.0.4",
     "org.apache.cordova.console": "0.2.13",
+    "com.phonegap.plugins.facebookconnect": "0.11.0"
     "org.apache.cordova.device": "0.3.0",
-    "com.phonegap.plugins.facebookconnect": "0.11.0",
     "org.apache.cordova.file": "1.3.3",
+    "nl.x-services.plugins.calendar": "4.3.1",
     "org.apache.cordova.globalization": "0.3.4"
 }
 // BOTTOM OF METADATA

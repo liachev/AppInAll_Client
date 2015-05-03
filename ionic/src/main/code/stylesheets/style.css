@@ -104,3 +104,10 @@ h3 {
     border-color: #78FA89;
 }
 /* /Angular: invalid fields */
+
+/* Profiles: avatar */
+.item-image .avatar {
+    width: 70px !important; /* yea, I know. TODO: resolve this issue */
+    height: 70px !important;/* yea, I know. TODO: resolve this issue */
+}
+/* /Profiles: avatar */

@@ -1,0 +1,85 @@
+{
+  "firstName": {
+    "placeholder": "Your First Name",
+
+    "errorMessages": {
+      "required": "Required.",
+
+      "pattern": "Only digits and letters allowed."
+    }
+  },
+
+  "lastName": {
+    "placeholder": "Your Last Name",
+
+    "errorMessages": {
+      "required": "Required.",
+
+      "pattern": "Only digits and letters allowed."
+    }
+  },
+
+  "location": {
+    "label": "Location",
+
+    "placeholder": "City, Zip Code",
+
+    "errorMessages": {
+      "required": "Required.",
+
+      "invalid": "Invalid location."
+    }
+  },
+
+  "gender": {
+    "label": "Gender",
+
+    "male": "Male",
+
+    "female": "Female",
+
+    "do_not_show": "Don't show",
+
+    "errorMessages": {}
+  },
+
+  "birthday": {
+    "label": "Birthday",
+
+    "placeholder": "yyyy-MM-dd",
+
+    "errorMessages": {
+      "date": "Not a valid date."
+    }
+  },
+
+  "kid": {
+    "label": "Kid",
+
+    "text": "Kid's restrictions will be applied",
+
+    "errorMessages": {}
+  },
+
+  "interestedIn": {
+    "label": "Interested In",
+
+    "edit": "Edit"
+  },
+
+  "upload_photo": {
+    "label": "Upload Photo"
+  },
+
+  "title": {
+    "add_profile": "Add Profile",
+
+    "edit_profile": "Edit Profile"
+  },
+
+  "buttons": {
+    "save": "Save",
+
+    "cancel": "Cancel"
+  }
+}
