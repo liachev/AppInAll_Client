@@ -195,6 +195,22 @@ angular.module('starter', [
     }
   })
 
+  .state('app.createEvent', {
+    url: "/createEvent",
+    views: {
+      'menuContent': {
+        templateUrl: "templates/createEvent.html",
+        controller: 'CreateEventCtrl',
+        requireLogin: true,
+        resolve: {
+          delay: ['$q', '$http', '$rootScope', function ($q, $http, $scope) {
+            return loadTranslation($q, $http, $scope, 'createEvent');
+          }]
+        }
+      }
+    }
+  })
+
   .state('app.events', {
       url: "/events/:category",
       views: {

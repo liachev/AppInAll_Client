@@ -1,0 +1,11 @@
+<!-- imported.xml -->
+<project name="offline-imported" basedir=".">
+    <dirname property="offline.module.root" file="${ant.file.offline-imported}"/>
+    <property name="artifacts.dir" value="${offline.module.root}/artifacts_allinapp"/>
+    <property name="android.app.title" value="AllInApp"/>
+    <property name="app.version" value="com.allinapp" />
+    <property name="do.compress" value="false" />
+
+    <property name="android.out.dir" value="${offline.module.root}/out_android"/>
+    <property name="ios.out.dir" value="${offline.module.root}/out_ios"/>
+</project>

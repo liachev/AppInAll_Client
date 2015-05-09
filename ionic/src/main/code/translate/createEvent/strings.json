@@ -1,0 +1,76 @@
+{
+  "eventName": {
+    "placeholder": "Type a short distinct event name",
+
+    "errorMessages": {
+      "required": "Required.",
+
+      "pattern": "Only digits and letters allowed."
+    }
+  },
+
+  "description": {
+    "label": "Description",
+
+    "placeholder": "Tell people what's special about this event",
+
+    "errorMessages": {
+      "required": "Required."
+    }
+  },
+
+  "activity": {
+    "placeholder": "Please enter an activity name..."
+  },
+
+  "time": {
+    "start": "Start Time",
+    "end": "End Time"
+  },
+
+  "upload_photo": {
+    "label": "Upload Photo"
+  },
+
+  "buttons": {
+    "done": "Done"
+  },
+
+  "list": {
+    "location": {
+      "label": "Location",
+
+      "currentLoc": "Current Location:",
+
+      "address": "Address",
+
+      "online": "Online Event"
+    },
+
+    "privacy": "Privacy",
+
+    "gender": "Gender",
+
+    "age_group": "Age Group"
+  },
+
+  "restrictions": {
+    "label": "Restrictions",
+    "link": "More"
+  },
+
+  "notifications": {
+    "label": "Notifications",
+    "link": "Setup"
+  },
+
+  "fee": {
+    "label": "Fee",
+    "link": "Edit"
+  },
+
+  "radio": {
+    "buttonPublish": "Publish",
+    "buttonDraft": "Keep as a draft"
+  }
+}
