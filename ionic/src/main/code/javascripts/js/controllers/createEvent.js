@@ -46,4 +46,31 @@ angular.module('createEvent.controllers', ['ionic'])
             alert(data || 'error');
         });
 
+        $scope.change = function () {
+            switch ($scope.createEventData.location) {
+                case 'current':
+                    alert('not implemented yet')
+                    break
+                case 'address':
+                    $scope.addressEditOpen()
+                    break
+                case 'online':
+                    $scope.createEventData.location = 'online'
+                    break
+                default:
+                    alert('not determined')
+            }
+        }
+        // Modal Windows
+        $ionicModal.fromTemplateUrl('addressEdit.html', {
+            scope: $scope
+        }).then(function(modal) {
+            $scope.modal = modal;
+        });
+        $scope.addressEditOpen = function() {
+            $scope.modal.show();
+        };
+        $scope.addressEditClose = function() {
+            $scope.modal.hide();
+        };
     }]);
