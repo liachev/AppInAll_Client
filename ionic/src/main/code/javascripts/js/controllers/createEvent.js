@@ -1,7 +1,7 @@
 angular.module('createEvent.controllers', ['ionic'])
 
-.controller('CreateEventCtrl', ['$rootScope', '$http', '$state', 'ParseSDK', '$ionicModal',
-    function ($scope, $http, $state, Parse, $ionicModal) {
+.controller('CreateEventCtrl', ['$rootScope', '$http', '$state', 'ParseSDK', '$ionicModal', '$ionicPopup', '$timeout',
+    function ($scope, $http, $state, Parse, $ionicModal, $ionicPopup, $timeout) {
         $scope.createEventData = {
             location: "current",
             radio: "publish"
@@ -49,7 +49,7 @@ angular.module('createEvent.controllers', ['ionic'])
         $scope.change = function () {
             switch ($scope.createEventData.location) {
                 case 'current':
-                    alert('not implemented yet')
+                    $scope.showAlert()
                     break
                 case 'address':
                     $scope.addressEditOpen()
@@ -61,6 +61,7 @@ angular.module('createEvent.controllers', ['ionic'])
                     alert('not determined')
             }
         }
+
         // Modal Windows
         $ionicModal.fromTemplateUrl('addressEdit.html', {
             scope: $scope
@@ -72,5 +73,16 @@ angular.module('createEvent.controllers', ['ionic'])
         };
         $scope.addressEditClose = function() {
             $scope.modal.hide();
+        };
+
+        // Popup Windows
+        $scope.showAlert = function() {
+            var alertPopup = $ionicPopup.alert({
+                title: 'Warning',
+                template: 'Not implemented yet'
+            });
+            $timeout(function() {
+                alertPopup.close();
+            }, 1000);
         };
     }]);

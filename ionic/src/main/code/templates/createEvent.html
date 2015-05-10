@@ -1,6 +1,6 @@
 <ion-view view-title="Create Event">
     <ion-nav-buttons side="right">
-        <button class="button">
+        <button class="button" ng-click="showAlert()">
             {{strings.buttons.done}}
         </button>
     </ion-nav-buttons>
@@ -54,8 +54,8 @@
             </div>
 
             <label class="item item-input">
-                <input type="text" name="activityName" ng-model="createEventData.activityName"
-                       placeholder="{{strings.activity.placeholder}}" ng-pattern="/^\w*$/">
+                <input type="text" name="activityName" ng-model="createEventData.activityName" ng-click="showAlert()" readonly
+                       placeholder="{{strings.activity.placeholder}}">
             </label>
 
             <div class="row">
@@ -69,7 +69,7 @@
                 </div>
                 <div class="col-10 col-center">
                     <div class="buttons">
-                        <button class="button button-icon ion-calendar">
+                        <button class="button button-icon ion-calendar" >
                         </button>
                     </div>
                 </div>
@@ -84,7 +84,7 @@
             </div>
             <div class="col-10 col-center">
                 <div class="buttons">
-                    <button class="button button-icon ion-refresh">
+                    <button class="button button-icon ion-refresh"ng-click="showAlert()">
                     </button>
                 </div>
             </div>
@@ -145,7 +145,7 @@
                     <input type="text" name="restrictionsStatus" readonly>
                 </div>
                 <div class="col-10 col-center">
-                    <a ng-href="#/app/restrictions_more">{{strings.restrictions.link}}</a>
+                    <a ng-href="#/app/createEvent" ng-click="showAlert()">{{strings.restrictions.link}}</a>
                 </div>
             </div>
 
@@ -157,7 +157,7 @@
                     <input type="text" name="notificationsStatus" readonly>
                 </div>
                 <div class="col-10 col-center">
-                    <a ng-href="#/app/notifications_setup">{{strings.notifications.link}}</a>
+                    <a ng-href="#/app/createEvent" ng-click="showAlert()">{{strings.notifications.link}}</a>
                 </div>
             </div>
 
@@ -169,7 +169,7 @@
                     <input type="text" name="feeStatus" readonly>
                 </div>
                 <div class="col-10 col-center">
-                    <a ng-href="#/app/fee_edit">{{strings.fee.link}}</a>
+                    <a ng-href="#/app/createEvent" ng-click="showAlert()">{{strings.fee.link}}</a>
                 </div>
             </div>
 
