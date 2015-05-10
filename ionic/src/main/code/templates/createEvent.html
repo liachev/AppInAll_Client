@@ -58,31 +58,37 @@
                        placeholder="{{strings.activity.placeholder}}" ng-pattern="/^\w*$/">
             </label>
 
-            <!--<div class="row">-->
-                <!--<div class="col">-->
-                    <!--{{strings.time.start}}-->
-                <!--</div>-->
-                <!--<div class="col">-->
-                    <!--<label class="item item-input">-->
-                        <!--<input id="start" type="datetime-local" readonly>-->
-                    <!--</label>-->
-                <!--</div>-->
-                <!--<div class="col-10 col-center">-->
-                    <!--<input type="button" value="Time" onclick="createEventForm.start.focus()">-->
-                <!--</div>-->
-            <!--</div>-->
+            <div class="row">
+                <div class="col">
+                    {{strings.time.start}}
+                </div>
+                <div class="col">
+                    <label class="item item-input">
+                        <input id="start" type="datetime-local">
+                    </label>
+                </div>
+                <div class="col-10 col-center">
+                    <div class="buttons">
+                        <button class="button button-icon ion-calendar">
+                        </button>
+                    </div>
+                </div>
+            </div>
 
-            <!--<div class="row">-->
-            <!--<div class="col">-->
-                <!--{{strings.time.end}}-->
-            <!--</div>-->
-            <!--<div class="col">-->
-                <!--<input type="text" name="restrictionsStatus" readonly>-->
-            <!--</div>-->
-            <!--&lt;!&ndash;<div class="col-10 col-center">&ndash;&gt;-->
-                <!--&lt;!&ndash;<a ng-href="#/app/restrictions_more">{{strings.restrictions.link}}</a>&ndash;&gt;-->
-            <!--&lt;!&ndash;</div>&ndash;&gt;-->
-        <!--</div>-->
+            <div class="row">
+            <div class="col">
+                {{strings.time.end}}
+            </div>
+            <div class="col">
+                <input type="text" name="restrictionsStatus" readonly>
+            </div>
+            <div class="col-10 col-center">
+                <div class="buttons">
+                    <button class="button button-icon ion-refresh">
+                    </button>
+                </div>
+            </div>
+        </div>
 
             <div class="item item-input item-select">
                 <div class="input-label">
