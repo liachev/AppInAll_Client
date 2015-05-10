@@ -19,7 +19,7 @@ angular.module('ui-tree.controllers', ['ui.tree'])
                 });
             })(node, dataSource); // if node doesn't have child nodes upload them ...
         } else {
-        scope.toggle(); // ... else toggle node
+            scope.toggle(); // ... else toggle node
         }
       }
     };

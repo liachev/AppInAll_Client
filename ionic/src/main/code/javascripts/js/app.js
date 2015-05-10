@@ -252,6 +252,35 @@ angular.module('starter', [
         }
       }
     }
+  })
+
+  .state('app.list-view-table', {
+    url: "/list-view-table-example",
+    views: {
+      'menuContent': {
+        templateUrl: "templates/ui-tree.html",
+        controller: 'UITreeCtrl',
+        resolve: {
+          data: ['$q', 'DataSource', 'tableName', function ($q, source, tableName) {
+            var deferred = $q.defer();
+            source.setTitleColumnName("name");
+            source.setParentColumnName(null);
+            source.setMaxDepth(1);
+            source.fromDbTable(tableName, null).then(function (data) {
+                console.debug(data);
+                deferred.resolve(data);
+            }, function (error) {
+                console.warn(error);
+                deferred.reject(error);
+            });
+            return deferred.promise;
+          }],
+          tableName: [function () {
+            return "Category";
+          }]
+        }
+      }
+    }
   });
 
   // if none of the above states are matched, use this as the fallback

@@ -15,12 +15,12 @@ angular.module('utils.services')
     var defaultOptions = that.options = {
         maxDepth: 0, // 0 - means unlimited nesting
         titleColumnName: "title",
-        parentColumnName: "parentId",
+        parentColumnName: "parentId", // null - means a list view
     };
 
     var setParentColumnName = function (columnName) {
         var deferred = $q.defer();
-        if (typeof columnName !== "string") {
+        if (columnName !== null && typeof columnName !== "string") {
             deferred.reject("Argument is not a string");
             return deferred.promise;
         }
@@ -141,6 +141,9 @@ angular.module('utils.services')
 
     function getChilds (table, node) {
         var query = new Parse.Query(table);
+        if (that.options.parentColumnName === null && node !== null) {
+            return Parse.Promise.as([]);
+        }
         query.equalTo(that.options.parentColumnName, node);
         return query.find({
             success: function (results) {
