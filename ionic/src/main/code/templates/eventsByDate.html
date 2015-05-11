@@ -1,0 +1,14 @@
+<ion-view view-title="Events by Date">
+    <ion-content>
+        <ion-list ng-repeat="(key, value) in events | map: mapping | groupBy: 'date'">
+            <div class="item item-divider">
+            {{key}}
+        </div>
+            <ion-item ng-repeat="event in value | orderBy:'time'" class="item-thumbnail-left">
+                <h4 class="item-image">{{event.time}}</h4>
+                <h4>{{event.venue.name}}</h4>
+                <h2>{{event.name}}</h2>
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-view>

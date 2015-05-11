@@ -180,6 +180,52 @@ angular.module('starter', [
     }
   })
 
+  .state('app.settings', {
+    url: "/settings",
+    views: {
+      'menuContent': {
+        templateUrl: "templates/settings.html",
+        controller: 'SettingsCtrl',
+        requireLogin: true,
+        resolve: {
+          delay: ['$q', '$http', '$rootScope', function ($q, $http, $scope) {
+            return loadTranslation($q, $http, $scope, 'settings');
+          }]
+        }
+      }
+    }
+  })
+
+  .state('app.update_signup', {
+    url: "/update_signup",
+    views: {
+      'menuContent': {
+        templateUrl: "templates/update_signup.html",
+        controller: 'UpdateSignUpCtrl',
+        resolve: {
+          delay: ['$q', '$http', '$rootScope', function ($q, $http, $scope) {
+            return loadTranslation($q, $http, $scope, 'settings');
+          }]
+        }
+      }
+    }
+  })
+
+  .state('app.edit_payment', {
+    url: "/edit_payment",
+    views: {
+      'menuContent': {
+        templateUrl: "templates/edit_payment.html",
+        controller: 'EditPaymentCtrl',
+        resolve: {
+          delay: ['$q', '$http', '$rootScope', function ($q, $http, $scope) {
+            return loadTranslation($q, $http, $scope, 'settings');
+          }]
+        }
+      }
+    }
+  })
+
   .state('app.profile', {
     url: "/profiles/:profileId",
     views: {
@@ -195,8 +241,19 @@ angular.module('starter', [
     }
   })
 
+  .state('app.eventByDate', {
+    url: "/eventdate",
+    views: {
+      'menuContent': {
+        templateUrl: "templates/eventsByDate.html",
+        controller: 'EventsCtrl'
+      }
+    }
+  })
+
+
   .state('app.events', {
-      url: "/events/:category",
+      url: "/events",//"/events/:category"
       views: {
           'menuContent': {
               templateUrl: "templates/events.html",

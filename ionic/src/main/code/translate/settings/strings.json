@@ -1,0 +1,151 @@
+{
+  "Password": {
+    "text": "Password:"
+  },
+
+  "Save": {
+    "text": "Save"
+  },
+
+  "Payment": {
+    "text": "Payment info:",
+    "edit": "edit"
+  },
+
+  "Update": {
+    "text": "Update"
+  },
+
+  "ResetPassword": {
+    "text": "Reset Password",
+
+    "description": "We will send you an email to your address, with a special password reset link"
+  },
+
+  "Agree": {
+    "Terms_of_Use": "Terms of Use",
+
+    "Privacy_Policy": "Privacy Policy"
+  },
+
+  "Regional": {
+    "Time_Zone": "Time Zone",
+
+    "Date_Format": "Date Format",
+
+    "Language": "Language",
+
+    "Distance": "Distance",
+
+    "Miles": "Miles",
+
+    "Km": "Km",
+
+    "AM_PM": "AM/PM",
+
+    "Military": "Military",
+
+    "Time_Format": "Time Format",
+
+    "Currency": "Currency",
+
+    "Currency_Title": "Please choose a currency"
+  },
+
+  "Connect_with_Facebook": {
+    "text": "Connect with Facebook"
+  },
+
+  "email": {
+    "placeholder": "Your Email",
+
+    "errorMessages": {
+      "required": "Required.",
+
+      "invalid": "Invalid email address.",
+
+      "alreadyInUse": "E-mail is already in use."
+    }
+  },
+
+  "password": {
+    "placeholder": "Choose Password",
+
+    "errorMessages": {
+      "required": "Required."
+    }
+  },
+
+  "confirmPassword": {
+    "placeholder": "Confirm Password",
+
+    "errorMessages": {
+      "required": "Required.",
+
+      "notIdentical": "Must match the previous entry."
+    }
+  },
+
+  "cardName": {
+    "placeholder": "Name on card",
+
+    "errorMessages": {
+      "required": "Required.",
+
+      "pattern": "Only digits and letters allowed."
+    }
+  },
+
+  "cardNumber": {
+    "placeholder": "Card number",
+
+    "errorMessages": {
+      "required": "Required.",
+
+      "pattern": "Only digits allowed."
+    }
+  },
+
+  "exMonth": {
+    "text": "Expiry month"
+  },
+
+  "exYear": {
+    "text": "Expiry year"
+  },
+
+  "cardCode": {
+    "placeholder": "Card code",
+
+    "errorMessages": {
+      "required": "Required.",
+
+      "pattern": "Only digits allowed.",
+
+      "minlength": "Too short."
+    }
+  },
+
+  "zip": {
+    "placeholder": "Billing ZIP",
+
+
+    "errorMessages": {
+      "required": "Required."
+    }
+  },
+
+  "informationPay": {
+    "text": "The information you enter above will only be shared with WePay -- AppInAll's payment processor"
+  },
+
+  "confirm": {
+    "text": "Confirmation will be sent to "
+  },
+
+  "Buttons": {
+    "Cancel": "Cancel",
+
+    "Save": "Save"
+  }
+}

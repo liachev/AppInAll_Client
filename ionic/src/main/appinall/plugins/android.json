@@ -47,6 +47,10 @@
                         {
                             "xml": "<feature name=\"Calendar\"><param name=\"android-package\" value=\"nl.xservices.plugins.Calendar\" /></feature>",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Globalization\"><param name=\"android-package\" value=\"org.apache.cordova.globalization.Globalization\" /></feature>",
+                            "count": 1
                         }
                     ]
                 }
@@ -116,6 +120,9 @@
             "PACKAGE_NAME": "com.ionicframework.appinall967145"
         },
         "nl.x-services.plugins.calendar": {
+            "PACKAGE_NAME": "com.ionicframework.appinall967145"
+        },
+        "org.apache.cordova.globalization": {
             "PACKAGE_NAME": "com.ionicframework.appinall967145"
         }
     },
