@@ -32,6 +32,7 @@ angular.module('messages.controllers', [])
                 $scope.chatCheck_promise = undefined;
             var log_key; // chat log     - array of messages
             var mem_key; // chat members - array of styles for display left or right message in chat
+            var needScroll = false;
 
             $scope.MSG_STYLE_USERSELF = "chat_message_userself blue-grey lighten-3";
             $scope.COL_STYLE_USERSELF = "col s10 offset-s2";
@@ -84,8 +85,15 @@ angular.module('messages.controllers', [])
             };
             //$scope
             $scope.ionicContent_getOffsetHeight = function() {
+                needScroll_check();
                 var ionicContent_offsetHeight = document.getElementById('chat-footer').offsetHeight;
                 return {'bottom' : ionicContent_offsetHeight + 'px'};
+            };
+            var needScroll_check = function() {
+                if(needScroll) {
+                    $ionicScrollDelegate.scrollBottom();
+                    needScroll = false;
+                }
             };
             angular.element(document).ready(function () {
                 if($state.is('app.chat')) {
@@ -117,6 +125,7 @@ angular.module('messages.controllers', [])
                         localStorageService.set(mem_key, $scope.chatData.messages_member);
                         localStorageService.set(log_key, $scope.chatData.messages_log);
                         // $scope.checkChat(); // refresh chat log #maybe it is not topical now
+                        needScroll = true;
                     },
                     function(error) {
                         logging.error("sendMessage: Error:" + error.code);
@@ -138,6 +147,7 @@ angular.module('messages.controllers', [])
 
                 if(!$scope.localstorage_attachments) $scope.localstorage_attachments = [];
                 $scope.localstorage_attachments = $scope.localstorage_attachments.concat($files);
+                needScroll = true;
 
                 var shift_i = $scope.chatData.attachments.length;
 
@@ -172,6 +182,7 @@ angular.module('messages.controllers', [])
             $scope.cancel_attach = function(idx) {
                 $scope.chatData.attachments.splice(idx, 1);
                 $scope.localstorage_attachments.splice(idx, 1);
+                needScroll = true;
             };
             $scope.checkChat = function() {
                 if(!$state.is('app.chat') && $scope.chatCheck_promise) { // state is not a chat
@@ -255,6 +266,7 @@ angular.module('messages.controllers', [])
                                 localStorageService.set(log_key, $scope.chatData.messages_log);
 
                                 $scope.isChatChecking = false;
+                                needScroll = true;
                             });
                             // /*attachments url to base64*
                         }

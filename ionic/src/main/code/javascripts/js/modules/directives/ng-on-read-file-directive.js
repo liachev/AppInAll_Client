@@ -10,26 +10,26 @@ angular.module('starter')
 			element.on('change', function(onChangeEvent) {
 				var files = (onChangeEvent.srcElement || onChangeEvent.target).files;
 				var parsed_files = [];
-				var parsed_indexes = [];
+                var files_read = 0;
 
-				for(var i = 0; i < files.length; i++) {
-					var file = {};
-					file.name = files[i].name;
-					file.type = files[i].type;
-					parsed_indexes.push(i);
-					parsed_files.push(file); // <- First In (FIFO)
+                for(var i = 0; i < files.length; i++) {
+                    var file = {};
+                    file.name = files[i].name;
+                    file.type = files[i].type;
+                    parsed_files.push(file);
 
-					// TODO: bug with async function call. Files with other names.
-					reader.readAsDataUrl(files[i], scope).then(function(content) {
-						var async_i = parsed_indexes.shift(); // <- First Out (FIFO)
-						if(async_i === undefined) {
-							fn(scope, { $files: parsed_files });
-							return;
-						}
+                    reader.readAsDataUrl(files[i], scope, i).then(function(data) {
+                        var content = data.content;
+                        var async_i = data.additional_arg;
+                        if(async_i === undefined) {
+                            fn(scope, { $files: parsed_files });
+                            return;
+                        }
+                        files_read++;
 
-						parsed_files[async_i].base64 = content.split(';base64,')[1];
-						if(!parsed_indexes.length) fn(scope, { $files: parsed_files });
-					});
+                        parsed_files[async_i].base64 = content.split(';base64,')[1];
+                        if(files_read == files.length) fn(scope, { $files: parsed_files });
+                    });
 				}
 			});
 		}
