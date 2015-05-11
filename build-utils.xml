@@ -36,6 +36,14 @@
                 </filelist>
             </concat>
 
+            <copy todir="@{out.dir}/css" overwrite="true">
+                <fileset dir="${offline.module.root}/ionic/src/main/code/stylesheets"
+                         includes="**/*.css"
+                         excludes="style.css"/>
+            </copy>
+
+
+
         </sequential>
     </macrodef>
 
@@ -68,11 +76,17 @@
             <concat destfile="@{out.dir}/js/script.js" ignoreempty="true">
                 <filelist dir="@{out.dir}">
                     <file name="javascripts/js/controllers/signup.js"/>
+                    <file name="javascripts/js/controllers/settings.js"/>
+                    <file name="javascripts/js/controllers/update_signup.js"/>
+                    <file name="javascripts/js/controllers/edit_payment.js"/>
                     <file name="javascripts/js/controllers/agreements.js"/>
+                    <file name="javascripts/js/controllers/messages.js"/>
                     <file name="javascripts/js/controllers/profile.js"/>
                     <file name="javascripts/js/controllers/profiles.js"/>
+                    <file name="javascripts/js/controllers/home.js"/>
                     <file name="javascripts/js/controllers/ui-tree.js"/>
                     <file name="javascripts/js/modules/data/Agreements.js"/>
+                    <file name="javascripts/js/modules/data/Messages.js"/>
                     <file name="javascripts/js/modules/data/models.js"/>
                     <file name="javascripts/js/modules/data/Profiles.js"/>
                     <file name="javascripts/js/modules/data/Users.js"/>
@@ -121,11 +135,17 @@
             <concat destfile="@{out.dir}/js/script.js" ignoreempty="true">
                 <filelist dir="@{out.dir}">
                     <file name="javascripts/js/controllers/signup.js"/>
+                    <file name="javascripts/js/controllers/settings.js"/>
+                    <file name="javascripts/js/controllers/update_signup.js"/>
+                    <file name="javascripts/js/controllers/edit_payment.js"/>
                     <file name="javascripts/js/controllers/agreements.js"/>
+                    <file name="javascripts/js/controllers/messages.js"/>
                     <file name="javascripts/js/controllers/profile.js"/>
                     <file name="javascripts/js/controllers/profiles.js"/>
                     <file name="javascripts/js/controllers/ui-tree.js"/>
+                    <file name="javascripts/js/controllers/home.js"/>
                     <file name="javascripts/js/modules/data/Agreements.js"/>
+                    <file name="javascripts/js/modules/data/Messages.js"/>
                     <file name="javascripts/js/modules/data/models.js"/>
                     <file name="javascripts/js/modules/data/Profiles.js"/>
                     <file name="javascripts/js/modules/data/Users.js"/>

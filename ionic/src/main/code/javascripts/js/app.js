@@ -7,6 +7,7 @@
 angular.module('starter', [
   'ionic',
   'ngCordova',
+  'tabSlideBox',
 
   /* controllers */ // TODO: add new controllers to 'ionic/src/main/code/javascripts/js/controllers.js'
   'starter.controllers',
@@ -50,6 +51,16 @@ angular.module('starter', [
     abstract: true,
     templateUrl: "templates/menu.html",
     controller: 'AppCtrl'
+  })
+
+  .state('app.home', {
+    url: "/home",
+    views: {
+      'menuContent': {
+        templateUrl: "templates/home.html",
+        controller: 'HomeCtrl'
+      }
+    }
   })
 
   .state('app.search', {
@@ -149,12 +160,78 @@ angular.module('starter', [
     }
   })
 
+  .state('app.messages', {
+    url: "/messages",
+    views: {
+      'menuContent': {
+        templateUrl: "templates/messages.html",
+        controller: 'MessagesCtrl'
+      }
+    }
+  })
+
+  .state('app.chat', {
+    url: "/chat",
+    views: {
+      'menuContent': {
+        templateUrl: "templates/chat.html",
+        controller: 'MessagesCtrl'
+      }
+    }
+  })
+
   .state('app.agreement', {
     url: "/agreement",
     views: {
       'menuContent': {
         templateUrl: "templates/agreement.html",
         controller: 'AgreementsCtrl'
+      }
+    }
+  })
+
+  .state('app.settings', {
+    url: "/settings",
+    views: {
+      'menuContent': {
+        templateUrl: "templates/settings.html",
+        controller: 'SettingsCtrl',
+        requireLogin: true,
+        resolve: {
+          delay: ['$q', '$http', '$rootScope', function ($q, $http, $scope) {
+            return loadTranslation($q, $http, $scope, 'settings');
+          }]
+        }
+      }
+    }
+  })
+
+  .state('app.update_signup', {
+    url: "/update_signup",
+    views: {
+      'menuContent': {
+        templateUrl: "templates/update_signup.html",
+        controller: 'UpdateSignUpCtrl',
+        resolve: {
+          delay: ['$q', '$http', '$rootScope', function ($q, $http, $scope) {
+            return loadTranslation($q, $http, $scope, 'settings');
+          }]
+        }
+      }
+    }
+  })
+
+  .state('app.edit_payment', {
+    url: "/edit_payment",
+    views: {
+      'menuContent': {
+        templateUrl: "templates/edit_payment.html",
+        controller: 'EditPaymentCtrl',
+        resolve: {
+          delay: ['$q', '$http', '$rootScope', function ($q, $http, $scope) {
+            return loadTranslation($q, $http, $scope, 'settings');
+          }]
+        }
       }
     }
   })
@@ -174,8 +251,19 @@ angular.module('starter', [
     }
   })
 
+  .state('app.eventByDate', {
+    url: "/eventdate",
+    views: {
+      'menuContent': {
+        templateUrl: "templates/eventsByDate.html",
+        controller: 'EventsCtrl'
+      }
+    }
+  })
+
+
   .state('app.events', {
-      url: "/events/:category",
+      url: "/events",//"/events/:category"
       views: {
           'menuContent': {
               templateUrl: "templates/events.html",
@@ -284,7 +372,7 @@ angular.module('starter', [
   });
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/app/signup');
+  $urlRouterProvider.otherwise('/app/home');
 
   var loadTranslation = function (q, http, scope, dir) {
     var delay = q.defer();
