@@ -105,6 +105,7 @@
                     <include name="css/fonts/*.*"/>
                     <include name="css/images/*.*"/>
                     <include name="img/**"/>
+                    <include name="font/**"/>
                 </fileset>
             </copy>
         </sequential>
@@ -123,6 +124,7 @@
 
         <copy-to-out out.dir="${tmp.out.dir}/templates" from.dir="code/templates"/>
         <copy-to-out out.dir="${tmp.out.dir}/translate" from.dir="code/translate"/>
+        <copy-to-out out.dir="${tmp.out.dir}/font" from.dir="code/stylesheets/font"/>
         <copy-to-out out.dir="${tmp.out.dir}/lib" from.dir="code/javascripts/lib"/>
         <copy-to-out out.dir="${tmp.out.dir}/img" from.dir="code/img"/>
 
@@ -139,6 +141,7 @@
                 <include name="translate/**"/>
                 <include name="lib/**"/>
                 <include name="img/**"/>
+                <include name="font/**"/>
                 <include name="*.html"/>
             </fileset>
         </copy>
