@@ -10,5 +10,6 @@
                 <h2>{{event.name}}</h2>
             </ion-item>
         </ion-list>
+        <ion-infinite-scroll on-infinite="loadMore()" distance="10%"></ion-infinite-scroll>
     </ion-content>
 </ion-view>

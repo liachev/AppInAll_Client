@@ -37,7 +37,7 @@
                         zip: "02184",
                         radius: 10,
                         page: 20,
-                        "only": "id, name, time, venue"
+                        "only": "id,name,time,venue"
                     };
 
                     return Restangular.all("open_events").getList(params);
