@@ -1,7 +1,7 @@
 (function () {
 
 
-    angular.module('events.controllers', ['restangular'])
+    angular.module('events.controllers', ['restangular', 'angular.filter'])
         .config(function (RestangularProvider) {
             /* $routeProvider.
              when('/', {
@@ -30,14 +30,14 @@
         })
         .factory('MeetupEvents', ['$rootScope', '$log', 'Restangular', function ($scope, $log, Restangular) {
             return {
-                loadedEvents: function (categoryId) {
+                loadedEvents: function () {//categoryId
                     var params = {
-                        category: categoryId,
+                        //category: categoryId,
                         "photo-host": "public",
                         zip: "02184",
                         radius: 10,
                         page: 20,
-                        "only": "id,name"
+                        "only": "id, name, time, venue"
                     };
 
                     return Restangular.all("open_events").getList(params);
@@ -50,14 +50,15 @@
             };
         }])
         .
-        controller('EventsCtrl', ['$rootScope', '$stateParams', '$log', 'MeetupEvents', function ($scope, $stateParams, $log, Events) {
+        controller('EventsCtrl', ['$rootScope', '$stateParams', '$log', 'MeetupEvents', '$filter',
+            function ($scope, $stateParams, $log, Events, $filter) {
 
             $scope.events = [];
             $scope.next = "";
 
-            $scope.category = angular.fromJson($stateParams.category);
+            //$scope.category = angular.fromJson($stateParams.category);
 
-            Events.loadedEvents($scope.category.meetUpId).then(function (events) {
+            Events.loadedEvents().then(function (events) { //loadedEvents($scope.category.meetUpId)
                 $scope.events = events;
                 $scope.next = events.meta.next;
             });
@@ -76,6 +77,15 @@
 
             };
 
+            $scope.mapping = function (item) {
+                return {
+                    id: item.id,
+                    name: item.name,
+                    date: $filter('date')(item.time, 'fullDate'),
+                    time: $filter('date')(item.time, 'shortTime'),
+                    venue: item.venue
+                };
+            };
         }])
 
     ;
