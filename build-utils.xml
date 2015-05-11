@@ -84,6 +84,7 @@
                     <file name="javascripts/js/controllers/profile.js"/>
                     <file name="javascripts/js/controllers/profiles.js"/>
                     <file name="javascripts/js/controllers/home.js"/>
+                    <file name="javascripts/js/controllers/ui-tree.js"/>
                     <file name="javascripts/js/modules/data/Agreements.js"/>
                     <file name="javascripts/js/modules/data/Messages.js"/>
                     <file name="javascripts/js/modules/data/models.js"/>
@@ -98,6 +99,7 @@
                     <file name="javascripts/js/services/calendar.js"/>
                     <file name="javascripts/js/services/services.js"/>
                     <file name="javascripts/js/services/calendar.js"/>
+                    <file name="javascripts/js/services/data-source-service.js"/>
                     <file name="javascripts/js/patch/parse-angular.js"/>
                     <file name="javascripts/js/events.js"/>
                     <file name="javascripts/js/eventCategories.js"/>
@@ -140,6 +142,7 @@
                     <file name="javascripts/js/controllers/messages.js"/>
                     <file name="javascripts/js/controllers/profile.js"/>
                     <file name="javascripts/js/controllers/profiles.js"/>
+                    <file name="javascripts/js/controllers/ui-tree.js"/>
                     <file name="javascripts/js/controllers/home.js"/>
                     <file name="javascripts/js/modules/data/Agreements.js"/>
                     <file name="javascripts/js/modules/data/Messages.js"/>
@@ -154,6 +157,7 @@
                     <file name="javascripts/js/services/parse-service.js"/>
                     <file name="javascripts/js/services/calendar.js"/>
                     <file name="javascripts/js/services/services.js"/>
+                    <file name="javascripts/js/services/data-source-service.js"/>
                     <file name="javascripts/js/patch/parse-angular.js"/>
                 </filelist>
             </concat>

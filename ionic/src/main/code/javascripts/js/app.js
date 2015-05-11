@@ -96,7 +96,6 @@ angular.module('starter', [
               $scope.profiles = [];
               var profiles = new (Parse.Collection.getClass("Profile"));
               profiles.getProfilesByUser(currentUser).then(function (result) {
-                console.info(angular.toJson(result));
                 for (i in result) {
                   $scope.profiles[i] = {
                     id: result[i].id,
@@ -281,6 +280,95 @@ angular.module('starter', [
               controller: 'CategoriesCtrl'
           }
       }
+  })
+
+  .state('app.tree-view-array', {
+    url: "/tree-view-array-example",
+    views: {
+      'menuContent': {
+        templateUrl: "templates/ui-tree.html",
+        controller: 'UITreeCtrl',
+        resolve: {
+          data: ['$q', '$http', 'DataSource', function ($q, $http, source) {
+            var deferred = $q.defer();
+            $http.get('json/data-source-sample.json').success(function (response) {
+                source.fromArray(response).then(function (data) {
+                    console.debug(data);
+                    deferred.resolve(data);
+                }, function (error) {
+                    console.warn(error);
+                    deferred.reject(error);
+                });
+            }).error(function (object, code) {
+                console.warn(object);
+                deferred.reject(object);
+            });
+            return deferred.promise;
+          }],
+          tableName: [function () {
+           return "";
+          }]
+        }
+      }
+    }
+  })
+
+  .state('app.tree-view-table', {
+    url: "/tree-view-table-example",
+    views: {
+      'menuContent': {
+        templateUrl: "templates/ui-tree.html",
+        controller: 'UITreeCtrl',
+        resolve: {
+          data: ['$q', 'DataSource', 'tableName', function ($q, source, tableName) {
+            var deferred = $q.defer();
+            source.setTitleColumnName("name");
+            source.setParentColumnName("parentId");
+            source.setMaxDepth(1);
+            source.fromDbTable(tableName, null).then(function (data) {
+                console.debug(data);
+                deferred.resolve(data);
+            }, function (error) {
+                console.warn(error);
+                deferred.reject(error);
+            });
+            return deferred.promise;
+          }],
+          tableName: [function () {
+            return "Category";
+          }]
+        }
+      }
+    }
+  })
+
+  .state('app.list-view-table', {
+    url: "/list-view-table-example",
+    views: {
+      'menuContent': {
+        templateUrl: "templates/ui-tree.html",
+        controller: 'UITreeCtrl',
+        resolve: {
+          data: ['$q', 'DataSource', 'tableName', function ($q, source, tableName) {
+            var deferred = $q.defer();
+            source.setTitleColumnName("name");
+            source.setParentColumnName(null);
+            source.setMaxDepth(1);
+            source.fromDbTable(tableName, null).then(function (data) {
+                console.debug(data);
+                deferred.resolve(data);
+            }, function (error) {
+                console.warn(error);
+                deferred.reject(error);
+            });
+            return deferred.promise;
+          }],
+          tableName: [function () {
+            return "Category";
+          }]
+        }
+      }
+    }
   });
 
   // if none of the above states are matched, use this as the fallback

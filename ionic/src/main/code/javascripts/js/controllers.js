@@ -8,46 +8,46 @@ angular.module('starter.controllers',
       'home.controllers',
       'settings.controllers',
       'editPayment.controllers',
-      'updateSignup.controllers'
+      'updateSignup.controllers',
+      'ui-tree.controllers'
     ])
-      
 
-    .controller('AppCtrl', function($scope, $ionicModal, $timeout) {
-      // Form data for the login modal
-      $scope.loginData = {};
+.controller('AppCtrl', function($scope, $ionicModal, $timeout) {
+  // Form data for the login modal
+  $scope.loginData = {};
 
-      // Create the login modal that we will use later
-      $ionicModal.fromTemplateUrl('templates/login.html', {
-        scope: $scope
-      }).then(function(modal) {
-        $scope.modal = modal;
-      });
+  // Create the login modal that we will use later
+  $ionicModal.fromTemplateUrl('templates/login.html', {
+    scope: $scope
+  }).then(function(modal) {
+    $scope.modal = modal;
+  });
 
-      // Triggered in the login modal to close it
-      $scope.closeLogin = function() {
-        $scope.modal.hide();
-      };
+  // Triggered in the login modal to close it
+  $scope.closeLogin = function() {
+    $scope.modal.hide();
+  };
 
-      // Open the login modal
-      $scope.login = function() {
-        $scope.modal.show();
-      };
+  // Open the login modal
+  $scope.login = function() {
+    $scope.modal.show();
+  };
 
-      // Perform the login action when the user submits the login form
-      $scope.doLogin = function() {
-        console.log('Doing login', $scope.loginData);
+  // Perform the login action when the user submits the login form
+  $scope.doLogin = function() {
+    console.log('Doing login', $scope.loginData);
 
-        // Simulate a login delay. Remove this and replace with your login
-        // code if using a login system
-        $timeout(function() {
-          $scope.closeLogin();
-        }, 1000);
-      };
-    })
+    // Simulate a login delay. Remove this and replace with your login
+    // code if using a login system
+    $timeout(function() {
+      $scope.closeLogin(); // TODO: complete login
+    }, 1000);
+  };
+})
 
-    .controller('welcomePageCtrl', function($scope) {
-      $scope.bWelcomePage = Boolean(true); // #debugAA welcome
-    })
+.controller('welcomePageCtrl', function($scope) { // FixMe: move this to ionic/src/main/code/javascripts/js/controllers
+  $scope.bWelcomePage = Boolean(true); // #debugAA welcome
+})
 
 
     .directive('welcomePage', function () {
