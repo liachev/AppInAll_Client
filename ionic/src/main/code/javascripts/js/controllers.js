@@ -8,8 +8,8 @@ angular.module('starter.controllers',
       'home.controllers',
       'settings.controllers',
       'editPayment.controllers',
-      'updateSignup.controllers'
-      'ui-tree.controllers',
+      'updateSignup.controllers',
+      'ui-tree.controllers'
     ])
 
 .controller('AppCtrl', function($scope, $ionicModal, $timeout) {
