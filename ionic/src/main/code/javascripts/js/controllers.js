@@ -5,6 +5,7 @@ angular.module('starter.controllers',
       'eventCategories.controllers',
       'profiles.controllers',
       'messages.controllers',
+      'home.controllers',
       'settings.controllers',
       'editPayment.controllers',
       'updateSignup.controllers'
@@ -42,20 +43,6 @@ angular.module('starter.controllers',
           $scope.closeLogin();
         }, 1000);
       };
-    })
-
-    .controller('PlaylistsCtrl', function($scope) {
-      $scope.playlists = [
-        { title: 'Reggae', id: 1 },
-        { title: 'Chill', id: 2 },
-        { title: 'Dubstep', id: 3 },
-        { title: 'Indie', id: 4 },
-        { title: 'Rap', id: 5 },
-        { title: 'Cowbell', id: 6 }
-      ];
-    })
-
-    .controller('PlaylistCtrl', function($scope, $stateParams) {
     })
 
     .controller('welcomePageCtrl', function($scope) {

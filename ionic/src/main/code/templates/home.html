@@ -1,0 +1,50 @@
+<!-- variant 1 (not scrollable) -->
+<!--<ion-tabs class="tabs-striped tabs-background-positive tabs-color-light tabs-top tabs-icon-top">-->
+    <!--<ion-tab ng-repeat="category in categories" title="{{category.name}}" href="#/app/home/{{category.id}}"-->
+             <!--icon-on="{{category.icon}}" icon-off="{{category.icon_outline}}">-->
+        <!--<ion-nav-view name="tabContent">-->
+        <!--</ion-nav-view>-->
+    <!--</ion-tab>-->
+<!--</ion-tabs>-->
+
+<!-- variant 2 (separate ion-nav-view for each tab; order is important)-->
+<ion-view view-title="Home">
+    <ion-content scroll="false">
+        <tab-slide-box tab="0">
+            <div class="tsb-icons">
+                <div class="tsb-ic-wrp">
+                    <ion-scroll direction="x" class="tsb-hscroll">
+                        <a href="javascript:;" ng-repeat="category in categories" on-finish-render="test()">
+                            {{category.name}}
+                        </a>
+                    </ion-scroll>
+                </div>
+            </div>
+            <ion-slide-box show-pager="false" on-slide-changed="slideHasChanged($index)">
+                <ion-slide ng-repeat="category in categories">
+                    <ion-nav-view name="tabContent">
+                        <ion-view view-title="{{category.name}}">
+                            <ion-content>
+                                <h3>{{category.name}} content</h3>
+                            </ion-content>
+                        </ion-view>
+                    </ion-nav-view>
+                </ion-slide>
+            </ion-slide-box>
+        </tab-slide-box>
+    </ion-content>
+</ion-view>
+
+<!-- variant 3 (not complete) -->
+<!--<ion-header-bar-->
+        <!--class="tabs-striped tabs-background-positive tabs-color-light tabs-top tabs-icon-top tabs-bottom tabs-standard">-->
+    <!--<ion-scroll class="title tabs tab-nav" direction="x" scrollbar-x="false">-->
+        <!--<a ng-repeat="category in categories" class="button button-clear inline-button tab-item"-->
+           <!--ng-class="{true: 'active', false: ''}[selectedTab === category.id]"-->
+           <!--ng-click="selectedTab = category.id">-->
+            <!--<i class="icon {{category.icon}}" ng-if="getIconOn() && isTabActive()"></i>-->
+            <!--<i class="icon {{category.icon_outline}}" ng-if="getIconOff() && !isTabActive()"></i>-->
+            <!--<span class="tab-title">{{category.name}}</span>-->
+        <!--</a>-->
+    <!--</ion-scroll>-->
+<!--</ion-header-bar>-->

@@ -1,4 +1,3 @@
-
 html,body { /* Material */
     height: 100%;
     margin: 0;
@@ -165,3 +164,7 @@ h3 {
     height: 70px !important;/* yea, I know. TODO: resolve this issue */
 }
 /* /Profiles: avatar */
+
+.tabbed-slidebox .tsb-icons:after{
+    display:none !important;
+}
