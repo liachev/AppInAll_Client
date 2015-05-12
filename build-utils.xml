@@ -83,6 +83,7 @@
                     <file name="javascripts/js/controllers/messages.js"/>
                     <file name="javascripts/js/controllers/profile.js"/>
                     <file name="javascripts/js/controllers/profiles.js"/>
+                    <file name="javascripts/js/controllers/eventMapBox.js"/>
                     <file name="javascripts/js/controllers/home.js"/>
                     <file name="javascripts/js/controllers/ui-tree.js"/>
                     <file name="javascripts/js/controllers/createEvent.js"/>

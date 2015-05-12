@@ -1,0 +1,21 @@
+<ion-view view-title="Events">
+    <ion-content>
+        <mapbox map-id="denispolish.3604b1b2"
+                lat="47.643569"
+                lng="-122.329453"
+                on-reposition="mapMovedCallback"
+                on-zoom="mapZoomedCallback"
+                zoom="12" scale-to-fit>
+
+            <marker ng-repeat="event in events "
+                    lat="{{event.venue.lat}}"
+                    lng="{{event.venue.lon}}"
+                    color="teal"
+                    icon="grocery">
+                <h1>{{event.name}}</h1>
+
+                <!--<p>{{market.times}}</p>-->
+            </marker>
+        </mapbox>
+    </ion-content>
+</ion-view>
