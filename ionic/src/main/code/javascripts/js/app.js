@@ -307,7 +307,15 @@ angular.module('starter', [
           }
       }
   })
-
+      .state('app.eventsOnMap', {
+          url: "/eventsonmap",
+          views: {
+              'menuContent': {
+                  templateUrl: "templates/eventsOnMap.html",
+                  controller: 'eventsOnMapCtrl'
+              }
+          }
+      })
   .state('app.tree-view-array', {
     url: "/tree-view-array-example",
     views: {
