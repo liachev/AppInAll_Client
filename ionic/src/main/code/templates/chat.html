@@ -48,28 +48,26 @@
             </div>
 
             <div class="input-field col s8 m9 l10">
-                <textarea id="message_textarea" placeholder="Message"
+                <textarea id="message_textarea" placeholder="{{strings.messageForm.placeholder}}"
                           ng-model="chatData.message" class="materialize-textarea"></textarea>
             </div>
             <div id="send-button-wrapper" class="col s4 m3 l2 valign-wrapper">
                 <a class="waves-effect waves-light btn cyan valign" ng-click="sendMessage()">
                     <i class="mdi-content-send mdi_nonmargin right"></i>
-                    Send <!-- TODO: translate -->
+                    {{strings.messageForm.send}}
                 </a>
 
                 <a class="waves-effect waves-light btn cyan valign attach_btn dropdown-button"
                    onclick="messageForm.attach.click()">
                     <i class="small mdi-editor-attach-file mdi_nonmargin left"></i>
-                    Attach <!-- TODO: translate -->
+                    {{strings.messageForm.attach}}
                 </a>
             </div>
 
-            <!-- TODO: attach -->
             <input id="attach" type="file" multiple
                    style="display: none;"
                    ng-model="attachments"
                    ng-on-read-file="addAttach($files)"/>
-            <!-- -->
 
         </form>
 
@@ -89,8 +87,9 @@
                     <div class="{{chatData.messages_member[$index]}} z-depth-1 paper">
                         <span class="black-text">{{messageData.message}}</span>
                         <div ng-repeat="attach in messageData.attachments" ng-if="messageData.attachments">
-                            <img ng-src="data:{{attach.type}};base64,{{attach.base64}}">
+                            <img class="chat_img" ng-src="data:{{attach.type}};base64,{{attach.base64}}">
                         </div>
+                        <p class="msg_time">{{getMessageTime($index)}}</p>
                     </div>
 
                 </div>
