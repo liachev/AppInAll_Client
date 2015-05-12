@@ -43,7 +43,6 @@
             </copy>
 
 
-
         </sequential>
     </macrodef>
 
@@ -83,6 +82,7 @@
                     <file name="javascripts/js/controllers/messages.js"/>
                     <file name="javascripts/js/controllers/profile.js"/>
                     <file name="javascripts/js/controllers/profiles.js"/>
+                    <file name="javascripts/js/controllers/eventMapBox.js"/>
                     <file name="javascripts/js/modules/data/Agreements.js"/>
                     <file name="javascripts/js/modules/data/Messages.js"/>
                     <file name="javascripts/js/modules/data/models.js"/>
