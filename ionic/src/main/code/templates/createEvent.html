@@ -1,0 +1,228 @@
+<ion-view view-title="Create Event">
+    <ion-nav-buttons side="right">
+        <button class="button" ng-click="showAlert()">
+            {{strings.buttons.done}}
+        </button>
+    </ion-nav-buttons>
+    <form name="createEventForm" ng-submit="createEventForm.$valid && done()" novalidate>
+        <ion-content>
+            <div class="row">
+                <div class="col">
+                    <label class="item item-input">
+                        <input type="text" name="eventName" ng-model="createEventData.eventName"
+                               placeholder="{{strings.eventName.placeholder}}" ng-pattern="/^\w*$/" required>
+                        <span style="color:red"
+                              ng-show="createEventForm.eventName.$submitted || createEventForm.eventName.$touched">
+                            <span ng-show="createEventForm.eventName.$error.required">
+                                {{strings.eventName.errorMessages.required}}
+                            </span>
+                            <span ng-show="createEventForm.eventName.$error.pattern">
+                                {{strings.eventName.errorMessages.pattern}}
+                            </span>
+                        </span>
+                    </label>
+                </div>
+
+                <div class="col-25 item-image">
+                    <img class="avatar" ng-src="{{createEventData.avatarSrc}}" alt="{{fileProgress}}">
+
+                    <h5>
+                        <a href onclick="createEventForm.file.click()">{{strings.upload_photo.label}}</a>
+
+                        <input id="file" type="file" style="display: none;" ng-on-read-file="uploadPhoto($fileContent)"
+                               accept="image/*"/>
+                    </h5>
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="row input-label-left">
+                    {{strings.description.label}}
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <textarea name="description" ng-model="createEventData.description"
+                                  placeholder="{{strings.description.placeholder}}" required></textarea>
+                            <span style="color:red"
+                                  ng-show="createEventForm.description.$submitted || createEventForm.description.$touched">
+                                <span ng-show="createEventForm.description.$error.required">
+                                    {{strings.description.errorMessages.required}}
+                                </span>
+                    </span>
+                    </div>
+                </div>
+            </div>
+
+            <label class="item item-input">
+                <input type="text" name="activityName" ng-model="createEventData.activityName" ng-click="showAlert()" readonly
+                       placeholder="{{strings.activity.placeholder}}">
+            </label>
+
+            <div class="row">
+                <div class="col">
+                    {{strings.time.start}}
+                </div>
+                <div class="col">
+                    <label class="item item-input">
+                        <input id="start" type="datetime-local">
+                    </label>
+                </div>
+                <div class="col-10 col-center">
+                    <div class="buttons">
+                        <button class="button button-icon ion-calendar" >
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+            <div class="col">
+                {{strings.time.end}}
+            </div>
+            <div class="col">
+                <input type="text" name="restrictionsStatus" readonly>
+            </div>
+            <div class="col-10 col-center">
+                <div class="buttons">
+                    <button class="button button-icon ion-refresh"ng-click="showAlert()">
+                    </button>
+                </div>
+            </div>
+        </div>
+
+            <div class="item item-input item-select">
+                <div class="input-label">
+                    {{strings.list.location.label}}
+                </div>
+                <select ng-model="createEventData.location" ng-change="change()">
+                    <option value="current">{{strings.list.location.currentLoc}}</option>
+                    <option value="address">{{strings.list.location.address}}</option>
+                    <option value="online">{{strings.list.location.online}}</option>
+                </select>
+            </div>
+
+            <div class="item item-input item-select">
+                <div class="input-label">
+                    {{strings.list.privacy}}
+                </div>
+                <select ng-model="createEventData.privacy">
+                    <option ng-repeat="privacy in privacyArr"
+                            value="{{privacy.value}}">
+                        {{privacy.name}}
+                    </option>
+                </select>
+            </div>
+
+            <div class="item item-input item-select">
+                <div class="input-label">
+                    {{strings.list.gender}}
+                </div>
+                <select ng-model="createEventData.gender">
+                    <option ng-repeat="gender in genderArr"
+                            value="{{gender.value}}">
+                        {{gender.name}}
+                    </option>
+                </select>
+            </div>
+
+            <div class="item item-input item-select">
+                <div class="input-label">
+                    {{strings.list.age_group}}
+                </div>
+                <select ng-model="createEventData.age">
+                    <option ng-repeat="age in ages"
+                            value="{{age.value}}">
+                        {{age.name}}
+                    </option>
+                </select>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    {{strings.restrictions.label}}
+                </div>
+                <div class="col">
+                    <input type="text" name="restrictionsStatus" readonly>
+                </div>
+                <div class="col-10 col-center">
+                    <a ng-href="#/app/createEvent" ng-click="showAlert()">{{strings.restrictions.link}}</a>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    {{strings.notifications.label}}
+                </div>
+                <div class="col">
+                    <input type="text" name="notificationsStatus" readonly>
+                </div>
+                <div class="col-10 col-center">
+                    <a ng-href="#/app/createEvent" ng-click="showAlert()">{{strings.notifications.link}}</a>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    {{strings.fee.label}}
+                </div>
+                <div class="col">
+                    <input type="text" name="feeStatus" readonly>
+                </div>
+                <div class="col-10 col-center">
+                    <a ng-href="#/app/createEvent" ng-click="showAlert()">{{strings.fee.link}}</a>
+                </div>
+            </div>
+
+            <ion-radio ng-model="createEventData.radio" ng-value="'publish'">{{strings.radio.buttonPublish}}</ion-radio>
+            <ion-radio ng-model="createEventData.radio" ng-value="'draft'">{{strings.radio.buttonDraft}}</ion-radio>
+
+
+            <!--Modal Windows-->
+            <script id="addressEdit.html" type="text/ng-template">
+                <ion-modal-view>
+                    <ion-header-bar class="bar bar-header bar-positive">
+                        <h1 class="title">Address</h1>
+                    </ion-header-bar>
+                    <ion-content class="padding">
+                        <div class="list">
+                            <label class="item item-input">
+                                <input ng-model="createEventData.venueName" type="text" placeholder="{{strings.addressModal.name}}">
+                            </label>
+
+                            <label class="item item-input">
+                                <input ng-model="createEventData.address1" type="text" placeholder="{{strings.addressModal.address_1}}">
+                            </label>
+
+                            <label class="item item-input">
+                                <input ng-model="createEventData.address2" type="text" placeholder="{{strings.addressModal.address_2}}">
+                            </label>
+
+                            <label class="item item-input">
+                                <input ng-model="createEventData.city" type="text" placeholder="{{strings.addressModal.city}}">
+                            </label>
+
+                            <div class="row">
+                                <div class="col">
+                                    <label class="item item-input">
+                                        <input ng-model="createEventData.state" type="text" placeholder="{{strings.addressModal.state}}">
+                                    </label>
+                                </div>
+                                <div class="col">
+                                    <label class="item item-input">
+                                        <input ng-model="createEventData.zip" type="text" placeholder="{{strings.addressModal.zip}}">
+                                    </label>
+                                </div>
+                            </div>
+
+                            <button class="button button-full button-positive" ng-click="addressEditClose()">
+                                {{strings.addressModal.buttons.cancel}}</button>
+                            <button class="button button-full button-positive" ng-click="createContact(newUser)">
+                                {{strings.addressModal.buttons.apply}}</button>
+                        </div>
+                    </ion-content>
+                </ion-modal-view>
+            </script>
+
+        </ion-content>
+    </form>
+</ion-view>

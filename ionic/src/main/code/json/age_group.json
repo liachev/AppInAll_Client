@@ -1,0 +1,22 @@
+[
+  {
+    "value": "all",
+    "name": "All"
+  },
+  {
+    "value": "kids",
+    "name": "Kids"
+  },
+  {
+    "value": "teens",
+    "name": "Teens"
+  },
+  {
+    "value": "adults",
+    "name": "Adults"
+  },
+  {
+    "value": "seniors",
+    "name": "Seniors"
+  }
+]
