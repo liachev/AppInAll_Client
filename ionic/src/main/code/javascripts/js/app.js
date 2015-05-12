@@ -279,7 +279,7 @@ angular.module('starter', [
   })
 
   .state('app.events', {
-      url: "/events",//"/events/:category"
+      url: "/events/:category",
       views: {
           'menuContent': {
               templateUrl: "templates/events.html",

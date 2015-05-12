@@ -30,9 +30,21 @@
         })
         .factory('MeetupEvents', ['$rootScope', '$log', 'Restangular', function ($scope, $log, Restangular) {
             return {
-                loadedEvents: function () {//categoryId
+                loadedEvents: function (categoryId) {
                     var params = {
-                        //category: categoryId,
+                        category: categoryId,
+                        "photo-host": "public",
+                        zip: "02184",
+                        radius: 10,
+                        page: 20,
+                        "only": "id,name,time,venue"
+                    };
+
+                    return Restangular.all("open_events").getList(params);
+
+                },
+                loadedAllEvents: function () {
+                    var params = {
                         "photo-host": "public",
                         zip: "02184",
                         radius: 10,
@@ -54,14 +66,23 @@
             function ($scope, $stateParams, $log, Events, $filter) {
 
             $scope.events = [];
+            $scope.allEvents = [];
             $scope.next = "";
 
-            //$scope.category = angular.fromJson($stateParams.category);
+            $scope.category = angular.fromJson($stateParams.category);
 
-            Events.loadedEvents().then(function (events) { //loadedEvents($scope.category.meetUpId)
-                $scope.events = events;
-                $scope.next = events.meta.next;
-            });
+            if (!angular.isUndefined($scope.category) && $scope.category !== null) {
+                Events.loadedEvents($scope.category.meetUpId).then(function (events) {
+                    $scope.events = events;
+                    $scope.next = events.meta.next;
+                });
+            } else {
+                Events.loadedAllEvents().then(function (events) {
+                    $scope.allEvents = events;
+                    $scope.next = events.meta.next;
+                });
+            }
+
 
             $scope.loadMore = function () {
 
@@ -70,7 +91,11 @@
                     return;
                 }
                 Events.loadMore($scope.next).then(function (events) {
-                    $scope.events = $scope.events.concat(events);
+                    if (!angular.isUndefined($scope.category) && $scope.category !== null) {
+                        $scope.events = $scope.events.concat(events);
+                    } else {
+                        $scope.allEvents = $scope.allEvents.concat(events);
+                    }
                     $scope.next = events.meta.next;
                     $scope.$broadcast('scroll.infiniteScrollComplete');
                 });
@@ -81,7 +106,7 @@
                 return {
                     id: item.id,
                     name: item.name,
-                    date: $filter('date')(item.time, 'fullDate'),
+                    date: new Date($filter('date')(item.time, 'fullDate')).getTime(),
                     time: $filter('date')(item.time, 'shortTime'),
                     venue: item.venue
                 };
@@ -89,7 +114,6 @@
         }])
 
     ;
-
 
 })
 ();
