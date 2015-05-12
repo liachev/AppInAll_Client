@@ -1,0 +1,15 @@
+<ion-view view-title="Events by Date">
+    <ion-content>
+        <ion-list ng-repeat="(key, value) in allEvents | map: mapping | groupBy: 'date' | orderBy:'date'">
+            <div class="item item-divider">
+                {{key | date:'fullDate'}}
+            </div>
+            <ion-item ng-repeat="allEvent in value | orderBy:'time'" class="item-thumbnail-left">
+                <h4 class="item-image">{{allEvent.time}}</h4>
+                <h4>{{allEvent.venue.name}}</h4>
+                <h2>{{allEvent.name}}</h2>
+            </ion-item>
+        </ion-list>
+        <ion-infinite-scroll on-infinite="loadMore()" distance="10%"></ion-infinite-scroll>
+    </ion-content>
+</ion-view>

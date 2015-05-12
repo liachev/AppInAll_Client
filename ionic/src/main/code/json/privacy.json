@@ -1,0 +1,14 @@
+[
+  {
+    "value": "vis_ena",
+    "name": "Visible & Enabled"
+  },
+  {
+    "value": "vis_on",
+    "name": "Visible Only"
+  },
+  {
+    "value": "not_vis",
+    "name": "Not Visible"
+  }
+]
