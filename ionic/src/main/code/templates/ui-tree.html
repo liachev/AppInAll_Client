@@ -1,0 +1,20 @@
+<!-- Nested node template -->
+<script type="text/ng-template" id="nodes_renderer.html">
+    <ion-item ui-tree-handle class="tree-node tree-node-content item-icon-left" ng-click="node_click(this, node)"
+            ng-include="nodeRendererUri">
+    </ion-item>
+    <ol ui-tree-nodes="options" ng-model="node.nodes" ng-class="{'hidden': collapsed}">
+        <li ng-repeat="node in node.nodes" ui-tree-node ng-include="'nodes_renderer.html'">
+        </li>
+    </ol>
+</script>
+<ion-view>
+    <ion-nav-title>{{title}}</ion-nav-title>
+    <ion-content>
+        <ion-list ui-tree="options" data-drag-enabled="false">
+            <ol ui-tree-nodes="" ng-model="data" id="tree-root">
+                <li ng-repeat="node in data" ui-tree-node ng-include="'nodes_renderer.html'"></li>
+            </ol>
+        </ion-list>
+    </ion-content>
+</ion-view>

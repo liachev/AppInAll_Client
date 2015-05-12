@@ -7,6 +7,7 @@
 angular.module('starter', [
   'ionic',
   'ngCordova',
+  'tabSlideBox',
 
   /* controllers */ // TODO: add new controllers to 'ionic/src/main/code/javascripts/js/controllers.js'
   'starter.controllers',
@@ -52,6 +53,16 @@ angular.module('starter', [
     controller: 'AppCtrl'
   })
 
+  .state('app.home', {
+    url: "/home",
+    views: {
+      'menuContent': {
+        templateUrl: "templates/home.html",
+        controller: 'HomeCtrl'
+      }
+    }
+  })
+
   .state('app.search', {
     url: "/search",
     views: {
@@ -85,7 +96,6 @@ angular.module('starter', [
               $scope.profiles = [];
               var profiles = new (Parse.Collection.getClass("Profile"));
               profiles.getProfilesByUser(currentUser).then(function (result) {
-                console.info(angular.toJson(result));
                 for (i in result) {
                   $scope.profiles[i] = {
                     id: result[i].id,
@@ -180,6 +190,52 @@ angular.module('starter', [
     }
   })
 
+  .state('app.settings', {
+    url: "/settings",
+    views: {
+      'menuContent': {
+        templateUrl: "templates/settings.html",
+        controller: 'SettingsCtrl',
+        requireLogin: true,
+        resolve: {
+          delay: ['$q', '$http', '$rootScope', function ($q, $http, $scope) {
+            return loadTranslation($q, $http, $scope, 'settings');
+          }]
+        }
+      }
+    }
+  })
+
+  .state('app.update_signup', {
+    url: "/update_signup",
+    views: {
+      'menuContent': {
+        templateUrl: "templates/update_signup.html",
+        controller: 'UpdateSignUpCtrl',
+        resolve: {
+          delay: ['$q', '$http', '$rootScope', function ($q, $http, $scope) {
+            return loadTranslation($q, $http, $scope, 'settings');
+          }]
+        }
+      }
+    }
+  })
+
+  .state('app.edit_payment', {
+    url: "/edit_payment",
+    views: {
+      'menuContent': {
+        templateUrl: "templates/edit_payment.html",
+        controller: 'EditPaymentCtrl',
+        resolve: {
+          delay: ['$q', '$http', '$rootScope', function ($q, $http, $scope) {
+            return loadTranslation($q, $http, $scope, 'settings');
+          }]
+        }
+      }
+    }
+  })
+
   .state('app.profile', {
     url: "/profiles/:profileId",
     views: {
@@ -194,6 +250,17 @@ angular.module('starter', [
       }
     }
   })
+
+  .state('app.eventByDate', {
+    url: "/eventdate",
+    views: {
+      'menuContent': {
+        templateUrl: "templates/eventsByDate.html",
+        controller: 'EventsCtrl'
+      }
+    }
+  })
+
 
   .state('app.createEvent', {
     url: "/createEvent",
@@ -212,7 +279,7 @@ angular.module('starter', [
   })
 
   .state('app.events', {
-      url: "/events/:category",
+      url: "/events",//"/events/:category"
       views: {
           'menuContent': {
               templateUrl: "templates/events.html",
@@ -229,10 +296,99 @@ angular.module('starter', [
               controller: 'CategoriesCtrl'
           }
       }
+  })
+
+  .state('app.tree-view-array', {
+    url: "/tree-view-array-example",
+    views: {
+      'menuContent': {
+        templateUrl: "templates/ui-tree.html",
+        controller: 'UITreeCtrl',
+        resolve: {
+          data: ['$q', '$http', 'DataSource', function ($q, $http, source) {
+            var deferred = $q.defer();
+            $http.get('json/data-source-sample.json').success(function (response) {
+                source.fromArray(response).then(function (data) {
+                    console.debug(data);
+                    deferred.resolve(data);
+                }, function (error) {
+                    console.warn(error);
+                    deferred.reject(error);
+                });
+            }).error(function (object, code) {
+                console.warn(object);
+                deferred.reject(object);
+            });
+            return deferred.promise;
+          }],
+          tableName: [function () {
+           return "";
+          }]
+        }
+      }
+    }
+  })
+
+  .state('app.tree-view-table', {
+    url: "/tree-view-table-example",
+    views: {
+      'menuContent': {
+        templateUrl: "templates/ui-tree.html",
+        controller: 'UITreeCtrl',
+        resolve: {
+          data: ['$q', 'DataSource', 'tableName', function ($q, source, tableName) {
+            var deferred = $q.defer();
+            source.setTitleColumnName("name");
+            source.setParentColumnName("parentId");
+            source.setMaxDepth(1);
+            source.fromDbTable(tableName, null).then(function (data) {
+                console.debug(data);
+                deferred.resolve(data);
+            }, function (error) {
+                console.warn(error);
+                deferred.reject(error);
+            });
+            return deferred.promise;
+          }],
+          tableName: [function () {
+            return "Category";
+          }]
+        }
+      }
+    }
+  })
+
+  .state('app.list-view-table', {
+    url: "/list-view-table-example",
+    views: {
+      'menuContent': {
+        templateUrl: "templates/ui-tree.html",
+        controller: 'UITreeCtrl',
+        resolve: {
+          data: ['$q', 'DataSource', 'tableName', function ($q, source, tableName) {
+            var deferred = $q.defer();
+            source.setTitleColumnName("name");
+            source.setParentColumnName(null);
+            source.setMaxDepth(1);
+            source.fromDbTable(tableName, null).then(function (data) {
+                console.debug(data);
+                deferred.resolve(data);
+            }, function (error) {
+                console.warn(error);
+                deferred.reject(error);
+            });
+            return deferred.promise;
+          }],
+          tableName: [function () {
+            return "Category";
+          }]
+        }
+      }
+    }
   });
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/app/signup');
+  $urlRouterProvider.otherwise('/app/home');
 
   var loadTranslation = function (q, http, scope, dir) {
     var delay = q.defer();

@@ -5,6 +5,11 @@ angular.module('starter.controllers',
       'eventCategories.controllers',
       'profiles.controllers',
       'messages.controllers',
+      'home.controllers',
+      'settings.controllers',
+      'editPayment.controllers',
+      'updateSignup.controllers',
+      'ui-tree.controllers',
       'createEvent.controllers'])
 
 .controller('AppCtrl', function($scope, $ionicModal, $timeout) {
@@ -44,35 +49,37 @@ angular.module('starter.controllers',
   $scope.bWelcomePage = Boolean(true); // #debugAA welcome
 })
 
-.directive('welcomePage', function () { // FixMe: move this to ionic/src/main/code/javascripts/js/modules/directives
-  return {
-    restrict: 'E',
-    templateUrl: 'templates/welcome.html',
-    controller: function($scope,$window, $http){
-      $scope.welcomePage_activeSlide = 0;
 
-      var icSizeList = [512, 144, 96, 48];
-      $scope.welcomePage_iconSize = icSizeList[icSizeList.length-1];
+    .directive('welcomePage', function () {
+      return {
+        restrict: 'E',
+        templateUrl: 'templates/welcome.html',
+        controller: function($scope,$window, $http){
+          $scope.welcomePage_activeSlide = 0;
 
-      $http.get('translate/welcomePage.json').success(function(data) {
-        for(var i = 0; i < data.length; i++)
-          data[i].description = data[i].description.replace(/(\r\n|\r|\n)/g, '\n');
-        console.log(data);
-        $scope.welcomePage_data = data;
-      });
+          var icSizeList = [512, 144, 96, 48];
+          $scope.welcomePage_iconSize = icSizeList[icSizeList.length-1];
 
-      $scope.$watch(function(){
-        return $window.innerWidth;
-      }, function(value) {
-        console.log(value); // #debugAA welcome
-        for (var i = 0; i < icSizeList.length; i++) {
-          if ($window.innerWidth >= icSizeList[i] + 64) {
-            $scope.welcomePage_iconSize = icSizeList[i];
-            break;
-          }
-        }
-      });
-    },
-    controllerAs: "welcomeCtrl"
-  };
-});
+          $http.get('translate/welcomePage.json').success(function(data) {
+            for(var i = 0; i < data.length; i++)
+              data[i].description = data[i].description.replace(/(\r\n|\r|\n)/g, '\n');
+            console.log(data);
+            $scope.welcomePage_data = data;
+          });
+
+          $scope.$watch(function(){
+            return $window.innerWidth;
+          }, function(value) {
+            console.log(value); // #debugAA welcome
+            for (var i = 0; i < icSizeList.length; i++) {
+              if ($window.innerWidth >= icSizeList[i] + 64) {
+                $scope.welcomePage_iconSize = icSizeList[i];
+                break;
+              }
+            }
+          });
+        },
+        controllerAs: "welcomeCtrl"
+      };
+    });
+

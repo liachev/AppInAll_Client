@@ -137,6 +137,7 @@
                 <include name="css/images/*.*"/>
                 <include name="js/*.js"/>
                 <include name="js/lib/*.js"/>
+                <include name="json/*.json"/>
                 <include name="templates/*.html"/>
                 <include name="translate/**"/>
                 <include name="lib/**"/>
