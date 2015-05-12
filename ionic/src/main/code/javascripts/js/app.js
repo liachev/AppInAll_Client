@@ -262,7 +262,7 @@ angular.module('starter', [
                     }
                 }
             })
-            .state('app.events', {
+            .state('app.eventsOnMap', {
                 url: "/eventsonmap",
                 views: {
                     'menuContent': {
