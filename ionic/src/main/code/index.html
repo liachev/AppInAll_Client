@@ -9,12 +9,21 @@
     <link href="lib/ionic/css/ionic.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
 
+    <!-- tabbed slides box -->
+    <link href="lib/tabbedSlideBox/css/tabSlideBox.css" rel="stylesheet">
+
     <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
     <link href="css/ionic.app.css" rel="stylesheet">
     -->
 
+    <!-- angular-ui-tree css -->
+    <link href="lib/angular-ui-tree/dist/angular-ui-tree.min.css" rel="stylesheet">
+
     <!-- ionic/angularjs js -->
     <script src="lib/ionic/js/ionic.bundle.js"></script>
+
+    <!-- tabbed slides box -->
+    <script src="lib/tabbedSlideBox/js/tabSlideBox.js"></script>
 
     <!-- parse js -->
     <script src="lib/parse/js/parse-1.3.5.js"></script>
@@ -27,6 +36,9 @@
     <script src="lib/local_storage/filesystem.js"></script>
     <script src="lib/local_storage/angular-local-storage.js"></script>
     <script src="lib/calendar/Calendar.js"></script>
+
+    <!-- angular-ui-tree js -->
+    <script src="lib/angular-ui-tree/dist/angular-ui-tree.min.js"></script>
 
     <!-- Materialize lib -->
     <script src="lib/materialize/jquery-2.1.1.min.js"></script>
@@ -68,6 +80,14 @@
     <script src="js/controllers.js"></script>
     <script src="js/logging.js"></script>
     <script src="js/script.js"></script>
+
+    <!-- Fix for <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>-->
+    <style>
+        select
+        {
+            display: inline-block;
+        }
+    </style>
 
 </head>
 

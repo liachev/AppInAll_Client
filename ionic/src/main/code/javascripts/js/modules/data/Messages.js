@@ -1,25 +1,11 @@
 
 /*
- Usage note:
- var messages = new (Parse.Collection.getClass("Messages"));
- messages.sendMessage(
- toProfile,     // parse
- fromProfile,  // objects
- 'Title',
- 'Text message',
- [{attachName:file, attachData:"..."}], // TODO
- function(result) {
- logging.log("Messages.sendMessage: " + JSON.stringify(result));
- },
- function(result, error) {
- logging.error("[Messages.getMessageList] Error: " + error.code + " " + error.message);
- });
-
+ See usage in: MessagesCtrl
  */
 
-angular.module('appinall.models.messages', ['parse-angular.enhance'])
+angular.module('appinall.models.messages', ['parse-angular.enhance', 'LocalStorageModule', 'parse.services'])
 
-    .run(function(){
+    .run(function(localStorageService, KEYS){
         var Message = Parse.Object.extend({
             className: "Messages",
             attrs: ['toProfile', 'fromProfile', 'title', 'message', 'attachments']
@@ -36,28 +22,26 @@ angular.module('appinall.models.messages', ['parse-angular.enhance'])
             getChatWith: function(profile, successCallback, errorCallback) {
                 var toCurQuery = new Parse.Query(Message);
                 var fromCurQuery = new Parse.Query(Message);
+
                 var selectedProfile;
+                var currentUser = localStorageService.get("Parse/" + KEYS.APPLICATION_ID + "/currentUser");
+                if(currentUser && currentUser.selectedProfile)
+                    selectedProfile = currentUser.selectedProfile;
+                else {
+                    logging.error("[Messages.getChatWith()] Profile hasn't been selected yet");
+                    return;
+                }
 
-                Parse.User.current().fetch().then(function (user) {
-                    selectedProfile = user.get("selectedProfile");
+                toCurQuery.equalTo("toProfile", selectedProfile);
+                toCurQuery.equalTo("fromProfile", profile);
+                fromCurQuery.equalTo("toProfile", profile);
+                fromCurQuery.equalTo("fromProfile", selectedProfile);
 
-                    if(!selectedProfile)
-                    {
-                        logging.error("[MessagesCtrl.goChat()] Profile hasn't been selected yet");
-                        return;
-                    }
+                var mainQuery = Parse.Query.or(toCurQuery, fromCurQuery);
 
-                    toCurQuery.equalTo("toProfile", selectedProfile);
-                    toCurQuery.equalTo("fromProfile", profile);
-                    fromCurQuery.equalTo("toProfile", profile);
-                    fromCurQuery.equalTo("fromProfile", selectedProfile);
-
-                    var mainQuery = Parse.Query.or(toCurQuery, fromCurQuery);
-
-                    mainQuery.find({
-                        success: successCallback,
-                        error: errorCallback
-                    });
+                mainQuery.find({
+                    success: successCallback,
+                    error: errorCallback
                 });
             },
 
@@ -75,54 +59,55 @@ angular.module('appinall.models.messages', ['parse-angular.enhance'])
                 });
             },
 
+            // returns array of profiles
+            getChatList: function(successCallback, errorCallback) {
+                var chatList = [];
+                var queryTo = new Parse.Query(Message);
+                var queryFrom = new Parse.Query(Message);
+
+                var selectedProfile;
+                var currentUser = localStorageService.get("Parse/" + KEYS.APPLICATION_ID + "/currentUser");
+                if(currentUser && currentUser.selectedProfile)
+                    selectedProfile = currentUser.selectedProfile;
+                else {
+                    logging.error("[Messages.getChatList()] Profile hasn't been selected yet");
+                    return;
+                }
+                // ======   =====   =====   =====   ===== //
+                // search chats with selectedProfile
+                queryTo.equalTo("fromProfile", selectedProfile);
+                queryFrom.equalTo("toProfile", selectedProfile);
+
+                var mainQuery = Parse.Query.or(queryTo, queryFrom);
+
+                mainQuery.find().then(function(result) {
+                    var profileTo, profileFrom;
+                    for (var i = 0; i < result.length; i++)
+                    {
+                        profileTo = result[i].get("toProfile");
+                        profileFrom = result[i].get("fromProfile");
+
+                        if(profileTo.id != selectedProfile.objectId) {
+                            if(chatList.indexOf(profileTo) === -1) chatList.push(profileTo);
+                        }
+                        else if(profileFrom.id != selectedProfile.objectId) {
+                            if(chatList.indexOf(profileFrom) === -1) chatList.push(profileFrom);
+                        }else{
+                            errorCallback("Strange query result");
+                            return;
+                        }
+                    }
+                    successCallback(chatList);
+
+                }, errorCallback);
+            },
+
             retrievingMessageObject: function(messageId, successCallback, errorCallback) {
                 var query = new Parse.Query(Message);
                 query.get(messageId, {
                     success: successCallback,
                     error: errorCallback
                 });
-            },
-
-            // returns array of profiles
-            getChatList: function(successCallback, errorCallback) {
-                var chatList = [];
-                var query;
-                var currentUser = Parse.User.current();
-                if(!currentUser) {
-                    logging.error("Messages.getChatList: current User is undefined");
-                    return;
-                }
-
-                var selectedProfile = currentUser.get("selectedProfile");
-                // ======   =====   =====   =====   ===== //
-                // search chats from selectedProfile
-                query = new Parse.Query(Message);
-                query.equalTo("fromProfile", selectedProfile);
-
-                query.find().then(function(result) {
-                    var profile;
-                    for (var i = 0; i < result.length; i++)
-                    {
-                        profile = result[i].get("toProfile");
-                        if(chatList.indexOf(profile) === -1) chatList.push(profile);
-                    }
-                    // ======   =====   =====   =====   ===== //
-                    // search chats to selectedProfile
-                    query = new Parse.Query(Message);
-                    query.equalTo("toProfile", selectedProfile);
-
-                    query.find().then(function(result) {
-                        var profile;
-                        for (var i = 0; i < result.length; i++)
-                        {
-                            profile = result[i].get("fromProfile");
-                            if(chatList.indexOf(profile) === -1) chatList.push(profile);
-                        }
-
-                        successCallback(chatList);
-                        // ======   =====   =====   =====   ===== //
-                    }, errorCallback);
-                }, errorCallback);
             },
 
             deleteMessage: function(message, successCallback, errorCallback) {

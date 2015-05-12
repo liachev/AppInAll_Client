@@ -35,7 +35,7 @@
     // myApp.config(function (localStorageServiceProvider) {
     //    localStorageServiceProvider.prefix = 'yourAppName';
     // });
-    this.prefix = 'ls';
+    this.prefix = '';
 
     // You could change web storage type localstorage or sessionStorage
     this.storageType = 'localStorage';
