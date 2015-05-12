@@ -1,5 +1,5 @@
 <div class="bar bar-footer paper">
-    <div id="chat-footer" class="row footer-item z-depth-2 paper">
+    <div id="chat-footer" class="mat_row  footer-item z-depth-2 paper">
         <form name="messageForm">
 
             <div style="padding: 0;" class="col s12" ng-show="localstorage_attachments && localstorage_attachments.length > 0">
@@ -82,7 +82,7 @@
                  ng-style="ionicContent_getOffsetHeight()">
         <div ng-repeat="messageData in chatData.messages_log track by $index" ng-if="chatData.messages_log">
 
-            <div class="row msg_row">
+            <div class="mat_row  msg_mat_row ">
                 <div ng-class="{ '{{COL_STYLE_USERSELF}}': chatData.messages_member[$index] == MSG_STYLE_USERSELF,
                                  '{{COL_STYLE_INTERLOCUTOR}}': chatData.messages_member[$index] == MSG_STYLE_INTERLOCUTOR}">
 
