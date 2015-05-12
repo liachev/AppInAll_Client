@@ -1,20 +1,75 @@
 <div class="bar bar-footer paper">
     <div id="chat-footer" class="row footer-item z-depth-2 paper">
         <form name="messageForm">
+
+            <div style="padding: 0;" class="col s12" ng-show="localstorage_attachments && localstorage_attachments.length > 0">
+                <div class="attachments_wrapper">
+
+                    <!-- attachments -->
+                    <ion-scroll direction="x" scrollbar-x="false">
+                        <div class="horizontal_list_wrapper">
+
+                            <div class="attach_wrapper"
+                                 ng-repeat="attach in localstorage_attachments track by $index">
+                                <div class="attach_container z-depth-1">
+                                    <a ng-click="cancel_attach($index)" class="cancel_attach_btn waves-effect waves-red">
+                                        <i class="mdi-navigation-cancel"></i>
+                                    </a>
+                                    <div class="absolute_centerer_block">
+                                        <span class="centerer"></span>
+                                        <img class="attach" ng-src="data:{{attach.type}};base64,{{attach.base64}}">
+                                    </div>
+
+                                    <div class="dark_cover"></div>
+                                </div>
+
+                                <div ng-hide="chatData.attachments[$index].name == attach.name"
+                                     class="preloader-wrapper small active attach_preloader">
+                                    <div class="spinner-layer attach_spinner">
+                                        <div class="circle-clipper left">
+                                            <div class="circle"></div>
+                                        </div>
+                                        <div class="gap-patch">
+                                            <div class="circle"></div>
+                                        </div>
+                                        <div class="circle-clipper right">
+                                            <div class="circle"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </ion-scroll>
+
+                </div>
+                <div class="divider"></div>
+            </div>
+
             <div class="input-field col s8 m9 l10">
                 <textarea id="message_textarea" placeholder="Message"
                           ng-model="chatData.message" class="materialize-textarea"></textarea>
             </div>
             <div id="send-button-wrapper" class="col s4 m3 l2 valign-wrapper">
-                <a class="waves-effect waves-light btn cyan valign" ng-click="sendMessage()">Send</a>
+                <a class="waves-effect waves-light btn cyan valign" ng-click="sendMessage()">
+                    <i class="mdi-content-send mdi_nonmargin right"></i>
+                    Send <!-- TODO: translate -->
+                </a>
+
+                <a class="waves-effect waves-light btn cyan valign attach_btn dropdown-button"
+                   onclick="messageForm.attach.click()">
+                    <i class="small mdi-editor-attach-file mdi_nonmargin left"></i>
+                    Attach <!-- TODO: translate -->
+                </a>
             </div>
 
-            <!-- TODO: attach
-            <a onclick="messageForm.attach.click()" class="btn-floating btn-large waves-effect waves-light cyan">
-                <i class="small mdi-editor-attach-file"></i>
-            </a>
-            <input id="attach" type="file" style="display: none;" ng-on-read-file="addAttach($fileContent)"/>
-            -->
+            <!-- TODO: attach -->
+            <input id="attach" type="file" multiple
+                   style="display: none;"
+                   ng-model="attachments"
+                   ng-on-read-file="addAttach($files)"/>
+            <!-- -->
 
         </form>
 
@@ -23,12 +78,24 @@
 
 <ion-view>
     <ion-nav-title>{{title}}</ion-nav-title> <!-- TODO: angular variable - chat title -->
-    <ion-content class="material-background">
+    <ion-content class="material-background scroll-content ionic-scroll has-header"
+                 ng-style="ionicContent_getOffsetHeight()">
+        <div ng-repeat="messageData in chatData.messages_log track by $index" ng-if="chatData.messages_log">
 
-        <div ng-repeat="messageData in chatData.messages_log track by $index">
-            <div class="{{chatData.messages_member[$index]}} z-depth-1 paper">
-                <span class="black-text">{{messageData.get('message')}}</span>
+            <div class="row msg_row">
+                <div ng-class="{ '{{COL_STYLE_USERSELF}}': chatData.messages_member[$index] == MSG_STYLE_USERSELF,
+                                 '{{COL_STYLE_INTERLOCUTOR}}': chatData.messages_member[$index] == MSG_STYLE_INTERLOCUTOR}">
+
+                    <div class="{{chatData.messages_member[$index]}} z-depth-1 paper">
+                        <span class="black-text">{{messageData.message}}</span>
+                        <div ng-repeat="attach in messageData.attachments" ng-if="messageData.attachments">
+                            <img ng-src="data:{{attach.type}};base64,{{attach.base64}}">
+                        </div>
+                    </div>
+
+                </div>
             </div>
+
         </div>
 
     </ion-content>

@@ -141,6 +141,102 @@ h3 {
     margin: 8px 16px;
     padding: 12px;
 }
+
+.mdi_nonmargin {
+    margin: 0 !important;
+}
+
+.attach_btn {
+    margin-top: 16px;
+}
+
+.attachments_wrapper {
+    margin-top: 16px;
+    margin-bottom: 16px;
+}
+.attach_wrapper {  /* attach full block */
+    position: relative;
+    float: left;
+    width: auto;
+    height: auto;
+    display: block;
+    margin-right: 8px;
+    margin-left: 8px;
+}
+
+.attach_container { /* container attach,cover */
+    height: 118px;
+    width: 118px;
+    position: relative;
+    border-radius: 3px;
+    overflow: hidden;
+}
+.attach {       /* img */
+    max-width: 118px;
+    max-height: 118px;
+    height: auto;
+    width: auto;
+    vertical-align: middle;
+    margin: auto auto;
+}
+.absolute_centerer_block {
+    position:absolute;
+    width:105%;         /* fix for attach with 118px width */
+    margin-left: -2.5%; /* centering after fix ^ */
+    height:100%;
+    text-align: center;
+}
+.centerer /*handles the vertical centering*/
+{
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+}
+.dark_cover {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.25);
+}
+
+.attach_preloader { /* spinner wrapper */
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+.attach_spinner { /* spinner color */
+    border-color: #ffffff;
+}
+.cancel_attach_btn {
+    position: absolute;
+    right: 8px;
+    top: 8px;
+    color: white;
+    border-radius: 50%;
+    text-align: center;
+    width: 21px;
+}
+.active .attach_spinner { /* spinner animation */
+    /* durations: 4 * ARCTIME */
+    opacity: 1;
+    -webkit-animation: fill-unfill-rotate 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both;
+    animation: fill-unfill-rotate 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both; }
+
+.horizontal_list_container {
+    position: relative;
+    display: block;
+    overflow: hidden;
+}
+.horizontal_list_wrapper {
+    position: relative;
+    display: block;
+    width: max-content;
+    width: -webkit-max-content;
+}
+.msg_row {
+    padding: 0;
+    margin-bottom: 0;
+}
 /* Chat */
 
 /* Material */

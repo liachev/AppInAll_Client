@@ -171,7 +171,7 @@ angular.module('starter', [
   })
 
   .state('app.chat', {
-    url: "/chat",
+    url: "/chat/:profileId",
     views: {
       'menuContent': {
         templateUrl: "templates/chat.html",

@@ -55,18 +55,14 @@ angular.module('profile.controllers', [])
         $scope.fileProgress = $filter('number')(progress.loaded / progress.total * 100, 1) + " %";
     });
 
-    $scope.uploadPhoto = function ($fileContent) {
-        $scope.profileData.avatarSrc = $fileContent || "img/ionic.png";
+    $scope.uploadPhoto = function ($files) {
+        var photo = $files.length && ("data:" + $files[0].type + ";base64," + $files[0].base64);
+        $scope.profileData.avatarSrc = photo || "img/ionic.png";
         var currentUser = Parse.User.current();
         if (currentUser) {
-          $scope.debugInfo = $fileContent;
+          $scope.debugInfo = photo;
           var name = "avatar-" + $stateParams.profileId + ".png";
-          var fileDataArray = $fileContent.split(';base64,');
-          var fileData = {
-            base64: fileDataArray[1],
-            data: fileDataArray[0].split('data:')[1]
-          };
-          var parseFile = new Parse.File(name, { base64: fileData.base64 });
+          var parseFile = new Parse.File(name, { base64: $files[0].base64 });
           !$scope.profileData && ($scope.profileData = defaultData);
           parseFile.save().then(function() {
             // The file has been saved to Parse.
