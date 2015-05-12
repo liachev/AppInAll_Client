@@ -165,7 +165,12 @@ angular.module('starter', [
     views: {
       'menuContent': {
         templateUrl: "templates/messages.html",
-        controller: 'MessagesCtrl'
+        controller: 'MessagesCtrl',
+        resolve: {
+          delay: ['$q', '$http', '$rootScope', function ($q, $http, $scope) {
+            return loadTranslation($q, $http, $scope, 'messages');
+          }]
+        }
       }
     }
   })
@@ -175,7 +180,12 @@ angular.module('starter', [
     views: {
       'menuContent': {
         templateUrl: "templates/chat.html",
-        controller: 'MessagesCtrl'
+        controller: 'MessagesCtrl',
+        resolve: {
+          delay: ['$q', '$http', '$rootScope', function ($q, $http, $scope) {
+            return loadTranslation($q, $http, $scope, 'messages');
+          }]
+        }
       }
     }
   })

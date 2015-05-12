@@ -83,6 +83,11 @@ angular.module('messages.controllers', [])
                 img.src = url;
                 return defer.promise();
             };
+            function pad(num, size) {
+                var s = num+"";
+                while (s.length < size) s = "0" + s;
+                return s;
+            }
             //$scope
             $scope.ionicContent_getOffsetHeight = function() {
                 needScroll_check();
@@ -100,6 +105,16 @@ angular.module('messages.controllers', [])
                     $ionicScrollDelegate.scrollBottom();
                 }
             });
+            $scope.getMessageTime = function(idx) {
+                if($scope.chatData.messages_log && $scope.chatData.messages_log[idx]) {
+                    var date = new Date($scope.chatData.messages_log[idx].createdAt);
+                    var str_date = '';
+
+                    str_date += pad(date.getHours(), 2) + ':';
+                    str_date += pad(date.getMinutes(), 2);
+                    return str_date;
+                }
+            };
             /* /tool functions */
             $scope.goChat = function (profileId) {
                 $location.path("/app/chat/" + profileId);
@@ -119,6 +134,10 @@ angular.module('messages.controllers', [])
                         var msg = JSON.parse(JSON.stringify(message));
                         msg.attachments = $scope.localstorage_attachments;
                         delete $scope.localstorage_attachments;
+
+                        if(!$scope.chatData.messages_log) $scope.chatData.messages_log = [];
+                        if(!$scope.chatData.messages_member) $scope.chatData.messages_member = [];
+
                         $scope.chatData.messages_log.push(msg);
                         $scope.chatData.messages_member.push($scope.MSG_STYLE_USERSELF);
 
