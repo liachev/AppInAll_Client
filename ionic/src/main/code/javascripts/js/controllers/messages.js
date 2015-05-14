@@ -34,10 +34,10 @@ angular.module('messages.controllers', [])
             var mem_key; // chat members - array of styles for display left or right message in chat
             var needScroll = false;
 
-            $scope.MSG_STYLE_USERSELF = "chat_message_userself blue-grey lighten-3";
-            $scope.COL_STYLE_USERSELF = "col s10 offset-s2";
+            $scope.MSG_STYLE_USERSELF = "chat_message_userself";
             $scope.MSG_STYLE_INTERLOCUTOR = "chat_message_interlocutor";
-            $scope.COL_STYLE_INTERLOCUTOR = "col s10";
+            $scope.ATTR_FLEX = "80";
+            $scope.ATTR_OFFSET = "20";
 
             /*=== === Functions declaration === ===*/
             /* tool functions */
@@ -115,6 +115,16 @@ angular.module('messages.controllers', [])
                     return str_date;
                 }
             };
+            $scope.getUserStyle = function(user, style_u, style_i) {
+                if(user.indexOf('USERSELF') > -1) {
+                    return style_u;
+                }
+                else if(user.indexOf('INTERLOCUTOR') > -1) {
+                    return style_i;
+                }else{
+                    return '';
+                }
+            };
             /* /tool functions */
             $scope.goChat = function (profileId) {
                 $location.path("/app/chat/" + profileId);
@@ -139,7 +149,7 @@ angular.module('messages.controllers', [])
                         if(!$scope.chatData.messages_member) $scope.chatData.messages_member = [];
 
                         $scope.chatData.messages_log.push(msg);
-                        $scope.chatData.messages_member.push($scope.MSG_STYLE_USERSELF);
+                        $scope.chatData.messages_member.push('MSG_STYLE_USERSELF');
 
                         localStorageService.set(mem_key, $scope.chatData.messages_member);
                         localStorageService.set(log_key, $scope.chatData.messages_log);
@@ -220,9 +230,9 @@ angular.module('messages.controllers', [])
                         for(i = 0; i < messages.length; i++)
                         {
                             if(messages[i].get("fromProfile").id === $scope.chatData.currentProfile.objectId)
-                                messages_member.push($scope.MSG_STYLE_USERSELF);
+                                messages_member.push('MSG_STYLE_USERSELF');
                             else
-                                messages_member.push($scope.MSG_STYLE_INTERLOCUTOR);
+                                messages_member.push('MSG_STYLE_INTERLOCUTOR');
                         }
 
                         if( arraysEqual(messages_member, localStorageService.get(mem_key)      ) &&

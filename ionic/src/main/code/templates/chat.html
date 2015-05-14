@@ -1,8 +1,8 @@
 <div class="bar bar-footer paper">
-    <div id="chat-footer" class="mat_row  footer-item z-depth-2 paper">
-        <form name="messageForm">
-
-            <div style="padding: 0;" class="col s12" ng-show="localstorage_attachments && localstorage_attachments.length > 0">
+    <div id="chat-footer" layout="row" layout-wrap class="footer-item md-whiteframe-z2 paper">
+        <form name="messageForm" class="msg_form">
+            <div style="padding: 0;" layout="row" layout-wrap
+                 ng-show="localstorage_attachments && localstorage_attachments.length > 0">
                 <div class="attachments_wrapper">
 
                     <!-- attachments -->
@@ -12,9 +12,14 @@
                             <div class="attach_wrapper"
                                  ng-repeat="attach in localstorage_attachments track by $index">
                                 <div class="attach_container z-depth-1">
-                                    <a ng-click="cancel_attach($index)" class="cancel_attach_btn waves-effect waves-red">
-                                        <i class="mdi-navigation-cancel"></i>
-                                    </a>
+                                    <div class="cancel_btn_wrapper">
+                                        <md-button aria-label="0" ng-click="cancel_attach($index)"
+                                                   class="md-icon-button cancel_attach_btn">
+                                            <ng-md-icon icon="cancel"
+                                                        size="20">
+                                            </ng-md-icon>
+                                        </md-button>
+                                    </div>
                                     <div class="absolute_centerer_block">
                                         <span class="centerer"></span>
                                         <img class="attach" ng-src="data:{{attach.type}};base64,{{attach.base64}}">
@@ -24,18 +29,9 @@
                                 </div>
 
                                 <div ng-hide="chatData.attachments[$index].name == attach.name"
-                                     class="preloader-wrapper small active attach_preloader">
-                                    <div class="spinner-layer attach_spinner">
-                                        <div class="circle-clipper left">
-                                            <div class="circle"></div>
-                                        </div>
-                                        <div class="gap-patch">
-                                            <div class="circle"></div>
-                                        </div>
-                                        <div class="circle-clipper right">
-                                            <div class="circle"></div>
-                                        </div>
-                                    </div>
+                                     class="attach_preloader">
+                                    <md-progress-circular class="paper" md-mode="indeterminate">
+                                    </md-progress-circular>
                                 </div>
                             </div>
 
@@ -44,24 +40,32 @@
                     </ion-scroll>
 
                 </div>
-                <div class="divider"></div>
             </div>
+            <md-divider></md-divider>
 
-            <div class="input-field col s8 m9 l10">
-                <textarea id="message_textarea" placeholder="{{strings.messageForm.placeholder}}"
-                          ng-model="chatData.message" class="materialize-textarea"></textarea>
-            </div>
-            <div id="send-button-wrapper" class="col s4 m3 l2 valign-wrapper">
-                <a class="waves-effect waves-light btn cyan valign" ng-click="sendMessage()">
-                    <i class="mdi-content-send mdi_nonmargin right"></i>
-                    {{strings.messageForm.send}}
-                </a>
+            <div class="textinput_form">
+                <div id="textarea_container">
+                    <md-content>
+                        <md-input-container md-no-float>
+                            <textarea id="message_textarea" class="form_textarea md-body-2"
+                                      placeholder="{{strings.messageForm.placeholder}}"
+                                      ng-model="chatData.message"></textarea>
+                        </md-input-container>
+                    </md-content>
+                </div>
 
-                <a class="waves-effect waves-light btn cyan valign attach_btn dropdown-button"
-                   onclick="messageForm.attach.click()">
-                    <i class="small mdi-editor-attach-file mdi_nonmargin left"></i>
-                    {{strings.messageForm.attach}}
-                </a>
+                <div id="send-button-wrapper">
+                    <md-button class="form_btn md-icon-button"
+                               aria-label="send" ng-click="sendMessage()">
+                        <ng-md-icon icon="send" style="fill: #000" size="24"></ng-md-icon>
+                    </md-button>
+
+                    <md-button class="form_btn md-icon-button"
+                               aria-label="attach" onclick="messageForm.attach.click()">
+                        <ng-md-icon icon="attach_file" style="fill: #000" size="24"></ng-md-icon>
+                    </md-button>
+                </div>
+
             </div>
 
             <input id="attach" type="file" multiple
@@ -80,17 +84,24 @@
                  ng-style="ionicContent_getOffsetHeight()">
         <div ng-repeat="messageData in chatData.messages_log track by $index" ng-if="chatData.messages_log">
 
-            <div class="mat_row  msg_mat_row ">
-                <div ng-class="{ '{{COL_STYLE_USERSELF}}': chatData.messages_member[$index] == MSG_STYLE_USERSELF,
-                                 '{{COL_STYLE_INTERLOCUTOR}}': chatData.messages_member[$index] == MSG_STYLE_INTERLOCUTOR}">
+            <div layout="row" layout-wrap class="msg_row">
 
-                    <div class="{{chatData.messages_member[$index]}} z-depth-1 paper">
+                <div flex="{{ATTR_FLEX}}" style="position: relative;"
+                     offset="{{getUserStyle(chatData.messages_member[$index], ATTR_OFFSET, '')}}">
+
+                    <md-card class="paper {{getUserStyle(chatData.messages_member[$index],
+                                            MSG_STYLE_USERSELF,
+                                            MSG_STYLE_INTERLOCUTOR)}}">
                         <span class="black-text">{{messageData.message}}</span>
                         <div ng-repeat="attach in messageData.attachments" ng-if="messageData.attachments">
-                            <img class="chat_img" ng-src="data:{{attach.type}};base64,{{attach.base64}}">
+                            <img class="msg_img" ng-src="data:{{attach.type}};base64,{{attach.base64}}">
                         </div>
-                        <p class="msg_time">{{getMessageTime($index)}}</p>
-                    </div>
+
+                        <div class="msg_time_wrapper
+                              {{getUserStyle(chatData.messages_member[$index], 'msg_wrapper_u', 'msg_wrapper_i')}}">
+                            <h2 class="msg_time">{{getMessageTime($index)}}</h2>
+                        </div>
+                    </md-card>
 
                 </div>
             </div>

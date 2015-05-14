@@ -7,6 +7,8 @@
 angular.module('starter', [
   'ionic',
   'ngCordova',
+  'ngMaterial',
+  'ngMdIcons',
   'tabSlideBox',
 
   /* controllers */ // TODO: add new controllers to 'ionic/src/main/code/javascripts/js/controllers.js'
