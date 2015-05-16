@@ -89,6 +89,8 @@ h3 {
 /* Messages */
 .messages-list-item-button {
     width: 100%;
+    border-radius: 0 !important;
+    margin: 0 !important;
 }
 .messages-list-item-section {
     padding: 12px;
@@ -119,23 +121,36 @@ h3 {
     margin: 0;
     padding: 0;
 }
+.textinput_form {
+    position: relative;
+    white-space: nowrap;
+}
 #send-button-wrapper {
+    display:inline-block;
+    position: relative;
+    float: right;
+    line-height: 0;
     padding: 0.75rem;
+}
+#textarea_container {
+    display:inline-block;
+    position: relative;
+    width: calc(100% - 150px);
+    height: 100%;
 }
 .footer-item {
     position: absolute;
     bottom: 0;
 }
-/*.row {*/
-    /*display: table !important;*/
-/*}*/
 .chat_message_interlocutor {
+    position: relative;
     float: left;
     clear: both;
     margin: 8px 16px;
     padding: 12px;
 }
 .chat_message_userself {
+    position: relative;
     float: right;
     clear: both;
     margin: 8px 16px;
@@ -153,6 +168,7 @@ h3 {
 .attachments_wrapper {
     margin-top: 16px;
     margin-bottom: 16px;
+    width: 100%;
 }
 .attach_wrapper {  /* attach full block */
     position: relative;
@@ -203,18 +219,35 @@ h3 {
     position: absolute;
     left: 0;
     top: 0;
+    bottom: 0;
+    right: 0;
+    width: -webkit-max-content;
+    height: -webkit-max-content;
+    margin: auto auto;
 }
 .attach_spinner { /* spinner color */
     border-color: #ffffff;
 }
-.cancel_attach_btn {
-    position: absolute;
+.cancel_btn_wrapper {
+    position: absolute !important;
     right: 8px;
     top: 8px;
-    color: white;
-    border-radius: 50%;
-    text-align: center;
-    width: 21px;
+    margin: 0 !important;
+    color: white !important;
+    text-align: center !important;
+    width: -webkit-max-content !important;
+    height: -webkit-max-content !important;
+}
+.cancel_attach_btn {
+    z-index: 1;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: auto !important;
+    height: auto !important;
+    border-radius: 50% !important;
+    line-height: 0 !important;
+    min-height: 0 !important;
+    min-width: 0 !important;
 }
 .active .attach_spinner { /* spinner animation */
     /* durations: 4 * ARCTIME */
@@ -233,20 +266,44 @@ h3 {
     width: max-content;
     width: -webkit-max-content;
 }
+.form_btn {
+    line-height: 0 !important;
+}
+.form_textarea {
+    overflow-y: hidden;
+    padding: 1.6rem 0;
+    resize: none;
+    min-height: 3rem;
+}
+.msg_form {
+    width: 100%;
+}
 .msg_row {
     padding: 0;
     margin-bottom: 0;
 }
-.chat_img {
-    width: 100%;
+.msg_img {
+    max-width: 100%;
+    width: auto;
     height: auto;
 }
+.msg_time_wrapper {
+    position: absolute;
+    bottom: 0;
+    width: -webkit-max-content;
+}
+.msg_wrapper_u {
+    left: -50px;
+}
+.msg_wrapper_i {
+    right: -50px;
+}
 .msg_time {
-    color: rgba(74, 103, 118, 1);
-    margin: 0 0 0 16px;
+    color: rgb(63, 63, 63);
     padding: 0;
-    float: right;
     font-size: inherit;
+    text-align: end;
+    margin-bottom: 12px;
 }
 /* Chat */
 
@@ -257,6 +314,32 @@ h3 {
 .paper {
     background-color: #FFF;
 }
+
+@font-face {
+  font-family: "Roboto";
+  src: url("../font/roboto/Roboto-Thin.woff2") format("woff2"), url("../font/roboto/Roboto-Thin.woff") format("woff"), url("../font/roboto/Roboto-Thin.ttf") format("truetype");
+  font-weight: 200; }
+
+@font-face {
+  font-family: "Roboto";
+  src: url("../font/roboto/Roboto-Light.woff2") format("woff2"), url("../font/roboto/Roboto-Light.woff") format("woff"), url("../font/roboto/Roboto-Light.ttf") format("truetype");
+  font-weight: 300; }
+
+@font-face {
+  font-family: "Roboto";
+  src: url("../font/roboto/Roboto-Regular.woff2") format("woff2"), url("../font/roboto/Roboto-Regular.woff") format("woff"), url("../font/roboto/Roboto-Regular.ttf") format("truetype");
+  font-weight: 400; }
+
+@font-face {
+  font-family: "Roboto";
+  src: url("../font/roboto/Roboto-Medium.woff2") format("woff2"), url("../font/roboto/Roboto-Medium.woff") format("woff"), url("../font/roboto/Roboto-Medium.ttf") format("truetype");
+  font-weight: 500; }
+
+@font-face {
+  font-family: "Roboto";
+  src: url("../font/roboto/Roboto-Bold.woff2") format("woff2"), url("../font/roboto/Roboto-Bold.woff") format("woff"), url("../font/roboto/Roboto-Bold.ttf") format("truetype");
+  font-weight: 700; }
+
 /* /Material */
 
 /* Angular: invalid fields */
