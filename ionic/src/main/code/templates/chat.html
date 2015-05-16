@@ -20,9 +20,14 @@
                                             </ng-md-icon>
                                         </md-button>
                                     </div>
-                                    <div class="absolute_centerer_block">
+                                    <div ng-if="isImageAttach(attach)" class="absolute_centerer_block"> <!-- Image -->
                                         <span class="centerer"></span>
-                                        <img class="attach" ng-src="data:{{attach.type}};base64,{{attach.base64}}">
+                                        <img class="msg_img" ng-src="data:{{attach.type}};base64,{{attach.base64}}">
+                                    </div>
+                                    <div ng-if="!isImageAttach(attach)" class="absolute_centerer_block"> <!-- Document -->
+                                        <span class="centerer"></span>
+                                        <ng-md-icon icon="insert_drive_file" style="fill: #000" size="24"></ng-md-icon>
+                                        <span>{{attach.name}}</span>
                                     </div>
 
                                     <div class="dark_cover"></div>
@@ -46,7 +51,7 @@
             <div class="textinput_form">
                 <div id="textarea_container">
                     <md-content>
-                        <md-input-container md-no-float>
+                        <md-input-container md-no-float style="padding: 16px;">
                             <textarea id="message_textarea" class="form_textarea md-body-2"
                                       placeholder="{{strings.messageForm.placeholder}}"
                                       ng-model="chatData.message"></textarea>
@@ -93,8 +98,17 @@
                                             MSG_STYLE_USERSELF,
                                             MSG_STYLE_INTERLOCUTOR)}}">
                         <span class="black-text">{{messageData.message}}</span>
-                        <div ng-repeat="attach in messageData.attachments" ng-if="messageData.attachments">
-                            <img class="msg_img" ng-src="data:{{attach.type}};base64,{{attach.base64}}">
+                        <div ng-repeat="attach in messageData.attachments" ng-if="messageData.attachments"
+                             class="msg_attach">
+                            <md-button ng-click="openAttach(attach)" >
+                                <div ng-if="isImageAttach(attach)"> <!-- Image -->
+                                    <img class="msg_img" ng-src="data:{{attach.type}};base64,{{attach.base64}}">
+                                </div>
+                                <div ng-if="!isImageAttach(attach)"> <!-- Document -->
+                                    <ng-md-icon icon="insert_drive_file" style="fill: #000" size="24"></ng-md-icon>
+                                    <span>{{attach.name}}</span>
+                                </div>
+                            </md-button>
                         </div>
 
                         <div class="msg_time_wrapper
