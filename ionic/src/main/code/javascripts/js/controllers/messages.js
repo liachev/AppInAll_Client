@@ -394,10 +394,14 @@ angular.module('messages.controllers', [])
             }
             if($state.is('app.chat')) {
                 $scope.ionicContent_offsetHeight = document.getElementById('chat-footer').offsetHeight;
-                if(!$scope.chatData.currentProfile)
+                if(!$scope.chatData.currentProfile) {
                     $state.go('app.profiles'); // don't go chat if profile is not selected
-                if(!$stateParams.profileId)
+                    return;
+                }
+                if(!$stateParams.profileId) {
                     $state.go('app.messages'); // don't go chat if profileId is undefined
+                    return;
+                }
 
                 $scope.chatData.chatWithProfile = {
                     "__type" : "Pointer",
