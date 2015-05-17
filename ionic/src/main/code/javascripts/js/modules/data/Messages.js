@@ -3,7 +3,10 @@
  See usage in: MessagesCtrl
  */
 
-angular.module('appinall.models.messages', ['parse-angular.enhance', 'LocalStorageModule', 'parse.services'])
+angular.module('appinall.models.messages', ['parse-angular.enhance',
+    'LocalStorageModule',
+    'parse.services',
+    'appinall.models.profiles'])
 
     .run(function(localStorageService, KEYS){
         var Message = Parse.Object.extend({
@@ -81,21 +84,53 @@ angular.module('appinall.models.messages', ['parse-angular.enhance', 'LocalStora
                 var mainQuery = Parse.Query.or(queryTo, queryFrom);
 
                 mainQuery.find().then(function(result) {
-                    var profileTo, profileFrom;
-                    for (var i = 0; i < result.length; i++)
+                    function isInArray(itemId, parseObjs) {
+                        for(var i = 0; i < parseObjs.length; i++) {
+                            if(parseObjs[i].objectId == itemId)
+                                return i;
+                        }
+                        return -1;
+                    }
+                    function getParseObj(obj) {
+                        var id = (typeof obj.id != 'undefined')? obj.id: obj.objectId;
+                        return {
+                            __type: "Pointer",
+                            className: "Profile",
+                            objectId: id
+                        }
+                    }
+                    var profileTo, profileFrom, i;
+                    for (i = 0; i < result.length; i++)
                     {
                         profileTo = result[i].get("toProfile");
                         profileFrom = result[i].get("fromProfile");
 
-                        if(profileTo.id != selectedProfile.objectId) {
-                            if(chatList.indexOf(profileTo) === -1) chatList.push(profileTo);
+                        if(profileTo && profileTo.id != selectedProfile.objectId) {
+                            if(isInArray(profileTo.id, chatList) == -1) chatList.push(getParseObj(profileTo));
                         }
-                        else if(profileFrom.id != selectedProfile.objectId) {
-                            if(chatList.indexOf(profileFrom) === -1) chatList.push(profileFrom);
-                        }else{
+                        else if(profileFrom && profileFrom.id != selectedProfile.objectId) {
+                            if(isInArray(profileFrom.id, chatList) == -1) chatList.push(getParseObj(profileFrom));
+                        }
+                        else if(profileFrom && profileFrom.id == selectedProfile.objectId ||
+                            profileTo && profileTo.id   == selectedProfile.objectId) {
+                            if(isInArray(selectedProfile.objectId, chatList) == -1) chatList.push(selectedProfile);
+                        }
+                        else{
                             errorCallback("Strange query result");
                             return;
                         }
+                    }
+                    for(i = 0; i < chatList.length; i++) {
+                        // TODO: done the function
+                        var query = new Parse.Query(Profile);
+                        query.get(chatList[i], {
+                            success: function (profile) {
+                                return profile;
+                            },
+                            error: function (object, error) {
+                                logging.error("Chat with unexisting profile");
+                            }
+                        })
                     }
                     successCallback(chatList);
 
