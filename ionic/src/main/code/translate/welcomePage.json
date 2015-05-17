@@ -1,4 +1,4 @@
-[
+{"slider":[
   {
     "title": "Appinall",
     "src": "img/logo/ic_appinall_",
@@ -24,4 +24,7 @@
     "src": "img/icons/ic_fun_",
     "description": "Connect to friends, family and be in it for the support and motivation you need"
   }
-]
+],
+  "browse":"browse events",
+  "signup":"sign up"
+}

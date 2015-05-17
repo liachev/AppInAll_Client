@@ -26,15 +26,6 @@ h3 {
 }
 
 /* Slider */
-#welcome-button {
-    position: absolute;
-    bottom: 32px;
-    left: 50%;
-}
-#welcome-button .paper-button {
-    left: -50%;
-    background-color: #fff;
-}
 .slider {
     height: 100%;
     overflow: auto;
@@ -79,10 +70,17 @@ h3 {
     padding: 0;
 }
 .welcome-text {
-    margin-right: 1em;
-    margin-left: 1em;
-    margin-bottom: 1em;
-    height: auto;
+    margin: 0;
+    padding: 0;
+}
+.btn_wrapper_outer {
+    position: absolute;
+    width: 100%;
+    bottom: 32px;
+}
+.btn_wrapper_inner {
+    width: -webkit-max-content;
+    margin: 0 auto;
 }
 /* /Slider */
 

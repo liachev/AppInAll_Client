@@ -1,13 +1,16 @@
-<ion-slide-box active-slide="welcomePage_activeSlide" show-pager=true delegate-handle="welcome-viewer" ng-if="welcomePage_data">
-    <ion-slide ng-repeat="pageData in welcomePage_data">
-        <paper-shadow z="1" class="box white">
+<ion-slide-box active-slide="welcomePage_activeSlide" show-pager=true delegate-handle="welcome-viewer" ng-if="welcomePage_data.slider">
+    <ion-slide ng-repeat="pageData in welcomePage_data.slider">
+        <div z="1" class="box white md-whiteframe-z1">
             <h3>{{pageData.title}}</h3>
             <img ng-src="{{pageData.src}}{{welcomePage_iconSize}}.png"/>
-            <p>{{pageData.description}}</p>
-        </paper-shadow>
+            <p ng-repeat="desc in pageData.description track by $index" class="welcome-text">{{desc}}</p>
+        </div>
     </ion-slide>
 </ion-slide-box>
 
-<section id="welcome-button">
-    <paper-button raised>browse&nbsp;events</paper-button>
-</section>
+<div class="btn_wrapper_outer">
+    <div class="btn_wrapper_inner">
+        <md-button ng-click="browse()" class="md-raised">{{welcomePage_data.browse}}</md-button>
+        <md-button ng-click="signup()" class="md-raised">{{welcomePage_data.signup}}</md-button>
+    </div>
+</div>

@@ -87,6 +87,7 @@
                     <file name="javascripts/js/controllers/home.js"/>
                     <file name="javascripts/js/controllers/ui-tree.js"/>
                     <file name="javascripts/js/controllers/createEvent.js"/>
+                    <file name="javascripts/js/controllers/welcome_page.js"/>
                     <file name="javascripts/js/modules/data/Agreements.js"/>
                     <file name="javascripts/js/modules/data/Messages.js"/>
                     <file name="javascripts/js/modules/data/models.js"/>
