@@ -28,6 +28,15 @@ angular.module('messages.controllers', [])
                 var currentProfile = localStorageService.get("Parse/" + KEYS.APPLICATION_ID + "/currentUser");
                 if(currentProfile && currentProfile.selectedProfile)
                     $scope.chatData.currentProfile = currentProfile.selectedProfile;
+                else if($scope.selectedProfile) {
+                    $scope.chatData.currentProfile = {
+                        "__type":"Pointer",
+                        "className":"Profile",
+                        "objectId":$scope.selectedProfile
+                    };
+                    currentProfile.selectedProfile = $scope.chatData.currentProfile;
+                    localStorageService.set("Parse/" + KEYS.APPLICATION_ID + "/currentUser", currentProfile);
+                }
                 else
                     $state.go('app.profiles');
             }
