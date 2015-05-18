@@ -10,6 +10,7 @@ angular.module('messages.controllers', [])
         'localStorageService',
         '$ionicScrollDelegate',
         '$window',
+        '$q',
         function ($scope,
                   $state,
                   $stateParams,
@@ -18,7 +19,8 @@ angular.module('messages.controllers', [])
                   $interval,
                   localStorageService,
                   $ionicScrollDelegate,
-                  $window) {
+                  $window,
+                  $q) {
             if(!$scope.chatData)
                 $scope.chatData = {attachments:[]}; // current message to interlocutor
 
@@ -69,7 +71,7 @@ angular.module('messages.controllers', [])
                 }
             }
             function urlToBase64(url, resending_arg, outputFormat){
-                var defer = jQuery.Deferred();
+                var defer = $q.defer();
                 var canvas = document.createElement('CANVAS');
                 var ctx = canvas.getContext('2d');
                 var img = new Image;
@@ -82,10 +84,10 @@ angular.module('messages.controllers', [])
                     // Clean up
                     canvas = null;
 
-                    defer.resolve(dataURL, resending_arg);
+                    defer.resolve({"response":dataURL, "resending_arg":resending_arg});
                 };
                 img.src = url;
-                return defer.promise();
+                return defer.promise;
             }
             function pad(num, size) {
                 var s = num+"";
@@ -180,8 +182,14 @@ angular.module('messages.controllers', [])
             };
             /* /tool functions */
             $scope.openAttach = function(attach) {
-                var link = 'data:' + attach.type + ';base64,' + attach.base64;
-                $window.open(link);
+                if(typeof attach.file != 'undefined') {
+                    $window.open(attach.file.url, '_system');
+                    return;
+                }
+                var base64 = attach.base64? attach.base64 : '';
+                var type = attach.type;
+                var link = 'data:' + type + ';base64,' + base64;
+                $window.open(link, '_blank');
             };
             $scope.goChat = function (profileId) {
                 $location.path("/app/chat/" + profileId);
@@ -275,74 +283,70 @@ angular.module('messages.controllers', [])
                 var parseMessage = new (Parse.Collection.getClass("Messages"));
                 parseMessage.getChatWith($scope.chatData.chatWithProfile,
                     function(messages) {
-                        var messages_member = [], i, j;
-                        for(i = 0; i < messages.length; i++)
-                        {
-                            if(messages[i].get("fromProfile").id === $scope.chatData.currentProfile.objectId)
-                                messages_member.push('MSG_STYLE_USERSELF');
-                            else
-                                messages_member.push('MSG_STYLE_INTERLOCUTOR');
-                        }
+                        var i, j;
 
-                        if( arraysEqual(messages_member, localStorageService.get(mem_key)      ) &&
-                            arraysEqual(messages,        localStorageService.get(log_key), true) )
-                        {
+                        /* find difference between nMsg_log and oMsg_log */
+                        var nMsg_log = JSON.parse(JSON.stringify(messages));
+                        var oMsg_log = localStorageService.get(log_key) || [];
+
+                        var refreshed = refreshMessages(nMsg_log, oMsg_log);
+                        var new_msg = refreshed.msg_log;
+                        var isNew = refreshed.isNew;
+
+                        if(!isNew) {
                             $scope.isChatChecking = false;
                             return;
-                        }else{
-                            /* find difference between nMsg_log and oMsg_log */
-                            var nMsg_log = JSON.parse(JSON.stringify(messages));
-                            var oMsg_log = localStorageService.get(log_key) || [];
+                        }
 
-                            var refreshed = refreshMessages(nMsg_log, oMsg_log);
-                            var new_msg = refreshed.msg_log;
-                            var isNew = refreshed.isNew;
+                        /* convert url to base64 */
+                        var promises = [];
+                        for(i = 0; i < new_msg.length; i++)
+                        {
+                            var attach = new_msg[i].attachments;
+                            if(attach && attach.length && attach[0].hasOwnProperty('file'))
+                                for(j = 0; j < attach.length; j++) {
+                                    if(attach[j].type.indexOf("image") > -1) { // only image file
+                                        var promise = urlToBase64(attach[j].file.url, {"j": j, "i": i});
+                                        promise.then(function(responseObj) {
+                                            var response = responseObj.response;
+                                            var resending_arg = responseObj.resending_arg;
+                                            var base64 = response.split("base64,")[1];
 
-                            if(!isNew) {
-                                $scope.isChatChecking = false;
-                                return;
-                            }
+                                            var async_i = resending_arg.i;
+                                            var async_j = resending_arg.j;
+                                            new_msg[async_i].attachments[async_j].base64 = base64;
+                                            delete new_msg[async_i].attachments[async_j].file;
+                                        });
+                                        promises.push(promise);
+                                    }
+                                }
+                        }
 
-                            /* convert url to base64 */
-                            var promises = [];
+                        Promise.all(promises).then(function() {
+                            // sort by date
+                            new_msg.sort(function(a, b) {
+                                return new Date(a.createdAt) - new Date(b.createdAt);
+                            });
+
+                            var messages_member = [];
                             for(i = 0; i < new_msg.length; i++)
                             {
-                                var attach = new_msg[i].attachments;
-                                if(attach && attach.length && attach[0].hasOwnProperty('file'))
-                                    for(j = 0; j < attach.length; j++) {
-                                        if(attach[j].type.indexOf("image") > -1) { // only image file
-                                            var promise = urlToBase64(attach[j].file.url, {"j": j, "i": i});
-                                            promise.then(function(response, resending_arg) {
-                                                var base64 = response.split("base64,")[1];
-
-                                                var async_i = resending_arg.i;
-                                                var async_j = resending_arg.j;
-                                                new_msg[async_i].attachments[async_j].base64 = base64;
-                                                delete new_msg[async_i].attachments[async_j].file;
-                                            });
-                                            promises.push(promise);
-                                        }
-                                    }
+                                if(new_msg[i].fromProfile.objectId == $scope.chatData.currentProfile.objectId)
+                                    messages_member.push('MSG_STYLE_USERSELF');
+                                else
+                                    messages_member.push('MSG_STYLE_INTERLOCUTOR');
                             }
 
-                            Promise.all(promises).then(function() {
-                                $scope.chatData.messages_member = messages_member;
+                            $scope.chatData.messages_member = messages_member;
+                            $scope.chatData.messages_log = new_msg;
 
-                                // sort by date
-                                new_msg.sort(function(a, b) {
-                                    return new Date(a.createdAt) - new Date(b.createdAt);
-                                });
+                            localStorageService.set(mem_key, $scope.chatData.messages_member);
+                            localStorageService.set(log_key, $scope.chatData.messages_log);
 
-                                $scope.chatData.messages_log = new_msg;
-
-                                localStorageService.set(mem_key, $scope.chatData.messages_member);
-                                localStorageService.set(log_key, $scope.chatData.messages_log);
-
-                                $scope.isChatChecking = false;
-                                needScroll = true;
-                            });
-                            // /*attachments url to base64*
-                        }
+                            $scope.isChatChecking = false;
+                            needScroll = true;
+                        });
+                        // /*attachments url to base64*
                     },
                     function(error) {
                         logging.error("sendMessage: Error:" + JSON.stringify(error));

@@ -100,7 +100,7 @@
                         <span class="black-text">{{messageData.message}}</span>
                         <div ng-repeat="attach in messageData.attachments" ng-if="messageData.attachments"
                              class="msg_attach">
-                            <md-button ng-click="openAttach(attach)" >
+                            <md-button ng-click="openAttach(attach)" aria-label="attach">
                                 <div ng-if="isImageAttach(attach)"> <!-- Image -->
                                     <img class="msg_img" ng-src="data:{{attach.type}};base64,{{attach.base64}}">
                                 </div>
