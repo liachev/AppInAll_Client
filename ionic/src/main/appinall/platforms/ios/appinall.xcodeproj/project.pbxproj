@@ -49,6 +49,7 @@
 		1E2C2DB99E2343878EECD7C9 /* Calendar.m in Sources */ = {isa = PBXBuildFile; fileRef = 33FC644EEDB94F72AFAB3A85 /* Calendar.m */; };
 		396FD2001230450396D48F05 /* EventKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 509A5E68BAE7411190F01E87 /* EventKit.framework */; };
 		41292D58D8B7469D9FD9AA93 /* EventKitUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D834163EF24848D894846E82 /* EventKitUI.framework */; };
+		E6F73ADFF3E24D3D89C90C9B /* CDVInAppBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = ED325D016470497EB849BF5A /* CDVInAppBrowser.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -132,6 +133,8 @@
 		E5CC11BD75E042708DD28BB9 /* Calendar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "Calendar.h"; path = "nl.x-services.plugins.calendar/Calendar.h"; sourceTree = "<group>"; fileEncoding = 4; };
 		509A5E68BAE7411190F01E87 /* EventKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "EventKit.framework"; path = "System/Library/Frameworks/EventKit.framework"; sourceTree = SDKROOT; fileEncoding = 4; };
 		D834163EF24848D894846E82 /* EventKitUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "EventKitUI.framework"; path = "System/Library/Frameworks/EventKitUI.framework"; sourceTree = SDKROOT; fileEncoding = 4; };
+		ED325D016470497EB849BF5A /* CDVInAppBrowser.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "CDVInAppBrowser.m"; path = "cordova-plugin-inappbrowser/CDVInAppBrowser.m"; sourceTree = "<group>"; fileEncoding = 4; };
+		055C02CE686A4FECB23966E4 /* CDVInAppBrowser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "CDVInAppBrowser.h"; path = "cordova-plugin-inappbrowser/CDVInAppBrowser.h"; sourceTree = "<group>"; fileEncoding = 4; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -250,6 +253,8 @@
 				28F4D30590244DDB8C47BCC0 /* CDVAssetLibraryFilesystem.h */,
 				33FC644EEDB94F72AFAB3A85 /* Calendar.m */,
 				E5CC11BD75E042708DD28BB9 /* Calendar.h */,
+				ED325D016470497EB849BF5A /* CDVInAppBrowser.m */,
+				055C02CE686A4FECB23966E4 /* CDVInAppBrowser.h */,
 			);
 			name = Plugins;
 			path = "appinall/Plugins";
@@ -442,6 +447,7 @@
 				83725858305B4B75AA7DC470 /* CDVLocalFilesystem.m in Sources */,
 				45AAAA9D778C4A6C84BD636A /* CDVAssetLibraryFilesystem.m in Sources */,
 				1E2C2DB99E2343878EECD7C9 /* Calendar.m in Sources */,
+				E6F73ADFF3E24D3D89C90C9B /* CDVInAppBrowser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

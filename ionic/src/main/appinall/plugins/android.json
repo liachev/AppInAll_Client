@@ -51,6 +51,10 @@
                         {
                             "xml": "<feature name=\"Globalization\"><param name=\"android-package\" value=\"org.apache.cordova.globalization.Globalization\" /></feature>",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"InAppBrowser\"><param name=\"android-package\" value=\"org.apache.cordova.inappbrowser.InAppBrowser\" /></feature>",
+                            "count": 1
                         }
                     ]
                 }
@@ -123,6 +127,9 @@
             "PACKAGE_NAME": "com.ionicframework.appinall967145"
         },
         "org.apache.cordova.globalization": {
+            "PACKAGE_NAME": "com.ionicframework.appinall967145"
+        },
+        "cordova-plugin-inappbrowser": {
             "PACKAGE_NAME": "com.ionicframework.appinall967145"
         }
     },
