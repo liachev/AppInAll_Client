@@ -24,7 +24,7 @@ angular.module('updateSignup.controllers', [])
                             email: $scope.updateSignupData.userEmail
                         }, {
                             success: function (user) {
-                                $scope.settingsData.userEmail = user.get("email");
+                                $scope.userData.userEmail = user.get("email");
                                 return user;
                             },
                             error: function (error) {

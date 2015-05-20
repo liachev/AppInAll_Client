@@ -4,7 +4,8 @@ angular.module('appinall.services', [
     'utils.services',
     'parse.services',
     'LocalStorageModule',
-    'cordova_calendar'
+    'cordova_calendar',
+    'usersettings.services'
     // TODO: add new services here
 ])
 

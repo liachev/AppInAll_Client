@@ -102,6 +102,7 @@
                     <file name="javascripts/js/services/services.js"/>
                     <file name="javascripts/js/services/calendar.js"/>
                     <file name="javascripts/js/services/data-source-service.js"/>
+                    <file name="javascripts/js/services/user-settings.js"/>
                     <file name="javascripts/js/patch/parse-angular.js"/>
                     <file name="javascripts/js/events.js"/>
                     <file name="javascripts/js/eventCategories.js"/>
@@ -161,6 +162,7 @@
                     <file name="javascripts/js/services/calendar.js"/>
                     <file name="javascripts/js/services/services.js"/>
                     <file name="javascripts/js/services/data-source-service.js"/>
+                    <file name="javascripts/js/services/user-settings.js"/>
                     <file name="javascripts/js/patch/parse-angular.js"/>
                 </filelist>
             </concat>
