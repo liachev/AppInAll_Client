@@ -26,7 +26,7 @@
                     {{strings.Regional.Time_Zone}}
                 </div>
                 <select ng-model="settingsData.timezone">
-                    <option ng-selected="{{timezone.isCurrent}}"
+                    <option ng-selected="{{settingsData.timezone === timezone.abbr}}"
                             ng-repeat="timezone in settingsData.timezones"
                             value="{{timezone.abbr}}">
                         {{timezone.name}} ({{timezone.offset}})
@@ -80,7 +80,7 @@
                     {{strings.Regional.Currency}}
                 </div>
                 <select ng-model="settingsData.currency">
-                    <option ng-selected="{{currency.name === settingsData.currency}}"
+                    <option ng-selected="{{currency.code === settingsData.currency}}"
                             ng-repeat="currency in settingsData.currencies"
                             value="{{currency.code}}">
                         {{currency.name}} ({{currency.symbol_native}})

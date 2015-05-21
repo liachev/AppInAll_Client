@@ -213,7 +213,10 @@ angular.module('starter', [
         controller: 'SettingsCtrl',
         requireLogin: true,
         resolve: {
-          delay: ['$q', '$http', '$rootScope', function ($q, $http, $scope) {
+          delay: ['$q', '$http', '$rootScope', 'UserSettings', function ($q, $http, $scope, settings) {
+            settings.getSettings().then(function (data) {
+              $scope.settingsData = data;
+            });
             return loadTranslation($q, $http, $scope, 'settings');
           }]
         }

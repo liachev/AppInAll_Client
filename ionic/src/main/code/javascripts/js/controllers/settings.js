@@ -2,11 +2,6 @@ angular.module('settings.controllers', [])
 
 .controller('SettingsCtrl', ['$rootScope', '$state', 'ParseSDK', 'UserSettings',
     function ($scope, $state, Parse, settings) {
-        var defaultData = $scope.settingsData = {};
-        settings.getSettings().then(function (data) {
-            defaultData = $scope.settingsData = data;
-        });
-
         var currentUser = Parse.User.current();
         if (currentUser) {
             $scope.userData = {
