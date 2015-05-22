@@ -1,6 +1,7 @@
 angular.module('signup.controllers', [])
 
-.controller('SignUpCtrl', ['$rootScope', '$http', '$cordovaFacebook', 'ParseSDK', function($scope, $http, FB, Parse) {
+.controller('SignUpCtrl', ['$rootScope', '$http', '$window', '$cordovaFacebook', 'ParseSDK',
+ function($scope, $http, $window, FB, Parse) {
     $scope.signupData = $scope.debugData = {}; // TODO: delete debugData after Connect with Facebook tested
 
     $scope.signUp = function (signupForm) {
@@ -14,6 +15,7 @@ angular.module('signup.controllers', [])
                     $scope.reset(signupForm);
                     alert("Congratulation! You are successfully registered");
                     // Hooray! Let them use the app now.
+                    $window.history.back();
                 } else {
                     alert("You already have an account!");
                 }
@@ -109,4 +111,4 @@ angular.module('signup.controllers', [])
             alert("You must agree with all of terms")
         }
     };
-}]);
+ }]);

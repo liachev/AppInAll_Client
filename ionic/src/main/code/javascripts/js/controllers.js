@@ -15,7 +15,7 @@ angular.module('starter.controllers',
       'welcomePage.controllers'
     ])
 
-.controller('AppCtrl', function($scope, $ionicModal, $timeout) {
+.controller('AppCtrl', function($scope, $state, $ionicModal, $timeout, $ionicSideMenuDelegate, $ionicActionSheet, ParseSDK) {
   // Form data for the login modal
   $scope.loginData = {};
 
@@ -46,4 +46,39 @@ angular.module('starter.controllers',
       $scope.closeLogin(); // TODO: complete login
     }, 1000);
   };
+
+  // Triggered on a button click, or some other target
+  $scope.showActionSheet = function() {
+    // Show the action sheet
+    var hideSheet = $ionicActionSheet.show({
+      buttons: [
+        { text: '<b>Please Sign Up First</b>' }
+      ],
+      cancelText: 'Cancel',
+      cancel: function() {
+           // add cancel code..
+           hideSheet();
+         },
+      buttonClicked: function(index) {
+        $state.go('app.signup');
+        return true;
+      }
+    });
+
+    // For example's sake, hide the sheet after one minute
+    $timeout(function() {
+      hideSheet();
+    }, 60000);
+  };
+
+  $scope.menuToggle = function (side) {
+    var currentUser = ParseSDK.User.current();
+    if (!$ionicSideMenuDelegate.isOpen() && currentUser === null) {
+      $scope.showActionSheet();
+    } else if (side === 'left') {
+      $ionicSideMenuDelegate.toggleLeft();
+    } else if (side === 'right'){
+      $ionicSideMenuDelegate.toggleRight();
+    }
+  }
 });
