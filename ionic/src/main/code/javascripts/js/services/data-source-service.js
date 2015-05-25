@@ -163,6 +163,6 @@ angular.module('utils.services')
         setTitleColumnName: setTitleColumnName,
         setMaxDepth: setMaxDepth,
         setParentColumnName: setParentColumnName,
-        resetOptions: resetOptions,
+        resetOptions: resetOptions
     };
 }]);

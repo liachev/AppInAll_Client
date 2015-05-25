@@ -1,6 +1,6 @@
 angular.module('home.controllers', [])
 
-.controller('HomeCtrl', ['$scope', function ($scope) {
+.controller('HomeCtrl', ['$scope', '$ionicSideMenuDelegate', function ($scope) {
     $scope.categories = [{
             id: 'weather',
             name: 'Weather',
