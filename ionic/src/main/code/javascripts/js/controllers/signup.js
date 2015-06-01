@@ -15,6 +15,56 @@ angular.module('signup.controllers', [])
                     $scope.reset(signupForm);
                     alert("Congratulation! You are successfully registered");
                     // Hooray! Let them use the app now.
+                    var defaultProfile = {
+                        firstName: user.getFirstName(),
+                        lastName: user.getLastName(),
+                        avatar: null,
+                        location: null,
+                        gender: 'N',
+                        birthday: null,
+                        kid: false,
+                        interestedIn: []
+                    };
+                    var profiles = new (Parse.Collection.getClass("Profile"));
+                    profiles.addProfile(defaultProfile).then(function (profile) {
+                      Parse.User.current().fetch({
+                        success: function (user) {
+                            // The object was retrieved successfully.
+                            profile.save({
+                                user: user
+                              }, {
+                                success: function (profile) {
+                                  // The object was saved successfully.
+                                  user.save({
+                                      selectedProfile: profile
+                                    }, {
+                                      success: function(user) {
+                                        // The object was saved successfully.
+                                        console.info(angular.toJson(user));
+                                      },
+                                      error: function(user, error) {
+                                        // The save failed.
+                                        // error is a Parse.Error with an error code and message.
+                                      }
+                                  });
+                                },
+                                error: function (profile, error) {
+                                  // The save failed.
+                                  // error is a Parse.Error with an error code and message.
+                                  $scope.debugInfo = 'profile saving error: ' + angular.toJson(error, true);
+                                }
+                            });
+                        },
+                        error: function (object, error) {
+                          // The object was not retrieved successfully.
+                          // error is a Parse.Error with an error code and message.
+                          $scope.debugInfo = 'user getting error: ' + angular.toJson(error, true);
+                        }
+                      });
+                    }, function (error) {
+                      $scope.debugInfo = 'profile getting error: ' + angular.toJson(error, true);
+                    });
+                    // TODO: create default user profile here
                     $window.history.back();
                 } else {
                     alert("You already have an account!");
