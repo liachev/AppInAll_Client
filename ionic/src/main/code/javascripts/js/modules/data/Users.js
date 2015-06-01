@@ -77,14 +77,14 @@ angular.module('appinall.models.users', ['parse-angular.enhance'])
 	 	},
 
 	 	fetchUserData: function(data) {
-	 		var username = (data.firstName && data.lastName) ? (data.firstName + " " + data.lastName) : data.username;
+//	 		var username = (data.firstName && data.lastName) ? (data.firstName + " " + data.lastName) : data.username;
 
 			var user = this.get(data.id) || new User;
 			user.set("firstName", data.firstName);
 			user.set("lastName", data.lastName);
 			user.set("email", data.email);
 			user.set("password", data.password);
-			user.set("username", username);
+			user.set("username", data.email); // TODO: email used as a login (username)
 			user.set("authData", data.authData);
             user.set("agreedDateTerms", data.dateTerms);
             user.set("agreedDatePrivacy", data.datePrivacy);
