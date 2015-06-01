@@ -21,7 +21,7 @@ angular.module('starter', [
   'appinall.services'
 ])
 
-.run(function ($ionicPlatform, localStorageService, calendarService) {
+.run(function ($ionicPlatform, localStorageService, calendarService, UserSettings) {
     $ionicPlatform.ready(function () {
         // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
         // for form inputs)
@@ -42,6 +42,11 @@ angular.module('starter', [
         logging.log("localStorageService is supported");
     } else {
         logging.log("localStorageService is NOT supported");
+    }
+
+    var firstStart = true; // TODO: detect first app start
+    if (firstStart || localStorageService.get("settings") === null) {
+      UserSettings.saveSettings(null); // get default settings
     }
 })
 
@@ -210,7 +215,10 @@ angular.module('starter', [
         controller: 'SettingsCtrl',
         requireLogin: true,
         resolve: {
-          delay: ['$q', '$http', '$rootScope', function ($q, $http, $scope) {
+          delay: ['$q', '$http', '$rootScope', 'UserSettings', function ($q, $http, $scope, settings) {
+            settings.getSettings().then(function (data) {
+              $scope.settingsData = data;
+            });
             return loadTranslation($q, $http, $scope, 'settings');
           }]
         }

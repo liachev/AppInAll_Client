@@ -1,15 +1,15 @@
 <ion-view view-title="Settings">
     <ion-content>
         <div class="list">
-            <label class="item item-input" ng-if="settingsData.isConnectedToFB">
+            <label class="item item-input" ng-if="userData.isConnectedToFB">
                 {{strings.Connect_with_Facebook.text}}
             </label>
             <label class="item item-input">
-                <input type="email" name="useremail" ng-model="settingsData.userEmail" readonly>
+                <input type="email" name="useremail" ng-model="userData.userEmail" readonly>
             </label>
-            <label class="item item-input" ng-if="!settingsData.isConnectedToFB">
+            <label class="item item-input" ng-if="!userData.isConnectedToFB">
                 <span class="input-label">{{strings.Password.text}}</span>
-                <input type="password" name="userpsw" ng-model="settingsData.userPsw" readonly>
+                <input type="password" name="userpsw" ng-model="userData.userPsw" readonly>
             </label>
 
             <div class="item">
@@ -26,8 +26,8 @@
                     {{strings.Regional.Time_Zone}}
                 </div>
                 <select ng-model="settingsData.timezone">
-                    <option ng-selected="{{isCurrentTZ(timezone.abbr)}}"
-                            ng-repeat="timezone in timezones"
+                    <option ng-selected="{{settingsData.timezone === timezone.abbr}}"
+                            ng-repeat="timezone in settingsData.timezones"
                             value="{{timezone.abbr}}">
                         {{timezone.name}} ({{timezone.offset}})
                     </option>
@@ -38,8 +38,8 @@
                     {{strings.Regional.Date_Format}}
                 </div>
                 <select ng-model="settingsData.date">
-                    <option ng-selected="{{format.code === settingsData.data}}"
-                            ng-repeat="format in formats"
+                    <option ng-selected="{{format.code === settingsData.date}}"
+                            ng-repeat="format in settingsData.formats"
                             value="{{format.code}}">
                         {{format.name}}
                     </option>
@@ -51,7 +51,7 @@
                 </div>
                 <select ng-model="settingsData.language">
                     <option ng-selected="{{language.code === settingsData.language}}"
-                            ng-repeat="language in languages"
+                            ng-repeat="language in settingsData.languages"
                             value="{{language.code}}">
                         {{language.name}}
                     </option>
@@ -80,8 +80,8 @@
                     {{strings.Regional.Currency}}
                 </div>
                 <select ng-model="settingsData.currency">
-                    <option ng-selected="{{currency.name === settingsData.currency}}"
-                            ng-repeat="currency in currencies"
+                    <option ng-selected="{{currency.code === settingsData.currency}}"
+                            ng-repeat="currency in settingsData.currencies"
                             value="{{currency.code}}">
                         {{currency.name}} ({{currency.symbol_native}})
                     </option>
