@@ -1,6 +1,6 @@
 angular.module('home.controllers', [])
 
-.controller('HomeCtrl', ['$scope', '$ionicSideMenuDelegate', function ($scope) {
+.controller('HomeCtrl', ['$scope', '$state', function ($scope, $state) {
     $scope.categories = [{
             id: 'weather',
             name: 'Weather',
@@ -31,4 +31,8 @@ angular.module('home.controllers', [])
             name: 'Sell / Buy'
         }
     ];
+
+    $scope.onSearch = function () {
+        $state.go('app.search');
+    }
 }]);

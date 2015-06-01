@@ -317,15 +317,17 @@ angular.module('starter', [
           }
       }
   })
-      .state('app.eventsOnMap', {
-          url: "/eventsonmap",
-          views: {
-              'menuContent': {
-                  templateUrl: "templates/eventsOnMap.html",
-                  controller: 'eventsOnMapCtrl'
-              }
+
+  .state('app.eventsOnMap', {
+      url: "/eventsonmap",
+      views: {
+          'menuContent': {
+              templateUrl: "templates/eventsOnMap.html",
+              controller: 'eventsOnMapCtrl'
           }
-      })
+      }
+  })
+
   .state('app.tree-view-array', {
     url: "/tree-view-array-example",
     views: {
@@ -411,6 +413,15 @@ angular.module('starter', [
             return "Category";
           }]
         }
+      }
+    }
+  })
+
+  .state('app.non-exists', {
+    url: "/non-exists",
+    views: {
+      'menuContent': {
+        template: "<ion-view view-title=''><ion-content><h3>Not Implemented Yet.</h3></ion-content></ion-view>"
       }
     }
   });

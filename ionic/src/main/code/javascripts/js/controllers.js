@@ -72,13 +72,17 @@ angular.module('starter.controllers',
   };
 
   $scope.menuToggle = function (side) {
-    var currentUser = ParseSDK.User.current();
-    if (!$ionicSideMenuDelegate.isOpen() && currentUser === null) {
+    if (!($ionicSideMenuDelegate.isOpen() || $scope.shouldLeftSideMenuBeEnabled())) {
       $scope.showActionSheet();
     } else if (side === 'left') {
       $ionicSideMenuDelegate.toggleLeft();
     } else if (side === 'right'){
       $ionicSideMenuDelegate.toggleRight();
     }
-  }
+  };
+
+  $scope.shouldLeftSideMenuBeEnabled = function () {
+    var currentUser = ParseSDK.User.current();
+    return currentUser !== null;
+  };
 });
