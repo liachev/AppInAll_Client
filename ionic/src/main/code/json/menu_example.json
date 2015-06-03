@@ -1,0 +1,203 @@
+{
+  "ItemsCount": 3,
+  "MenuItems": [
+    {
+      "ItemName": "Weather",
+      "CategoryCount": 1,
+      "Categories": [
+        {
+          "Name": "Weather",
+          "Id": 0,
+          "ShortName": "Weather"
+        }
+      ]
+    },
+    {
+      "ItemName": "Events",
+      "CategoryCount": 33,
+      "Categories": [
+        {
+          "Name": "Arts & Culture",
+          "Id": 1,
+          "ShortName": "Arts"
+        },
+        {
+          "Name": "Career & Business",
+          "Id": 2,
+          "ShortName": "Business"
+        },
+        {
+          "Name": "Cars & Motorcycles",
+          "Id": 3,
+          "ShortName": "Auto"
+        },
+        {
+          "Name": "Community & Environment",
+          "Id": 4,
+          "ShortName": "Community"
+        },
+        {
+          "Name": "Dancing",
+          "Id": 5,
+          "ShortName": "Dancing"
+        },
+        {
+          "Name": "Education & Learning",
+          "Id": 6,
+          "ShortName": "Education"
+        },
+        {
+          "Name": "Fashion & Beauty",
+          "Id": 8,
+          "ShortName": "Fashion"
+        },
+        {
+          "Name": "Fitness",
+          "Id": 9,
+          "ShortName": "Fitness"
+        },
+        {
+          "Name": "Food & Drink",
+          "Id": 10,
+          "ShortName": "Food & Drink"
+        },
+        {
+          "Name": "Games",
+          "Id": 11,
+          "ShortName": "Games"
+        },
+        {
+          "Name": "Movements & Politics",
+          "Id": 13,
+          "ShortName": "Movements"
+        },
+        {
+          "Name": "Health & Wellbeing",
+          "Id": 14,
+          "ShortName": "Well-being"
+        },
+        {
+          "Name": "Hobbies & Crafts",
+          "Id": 15,
+          "ShortName": "Crafts"
+        },
+        {
+          "Name": "Language & Ethnic Identity",
+          "Id": 16,
+          "ShortName": "Languages"
+        },
+        {
+          "Name": "LGBT",
+          "Id": 12,
+          "ShortName": "LGBT"
+        },
+        {
+          "Name": "Lifestyle",
+          "Id": 17,
+          "ShortName": "Lifestyle"
+        },
+        {
+          "Name": "Literature & Writing",
+          "Id": 18,
+          "ShortName": "Literature"
+        },
+        {
+          "Name": "Movies & Film",
+          "Id": 20,
+          "ShortName": "Films"
+        },
+        {
+          "Name": "Music",
+          "Id": 21,
+          "ShortName": "Music"
+        },
+        {
+          "Name": "New Age & Spirituality",
+          "Id": 22,
+          "ShortName": "Spirituality"
+        },
+        {
+          "Name": "Outdoors & Adventure",
+          "Id": 23,
+          "ShortName": "Outdoors"
+        },
+        {
+          "Name": "Paranormal",
+          "Id": 24,
+          "ShortName": "Paranormal"
+        },
+        {
+          "Name": "Parents & Family",
+          "Id": 25,
+          "ShortName": "Moms & Dads"
+        },
+        {
+          "Name": "Pets & Animals",
+          "Id": 26,
+          "ShortName": "Pets"
+        },
+        {
+          "Name": "Photography",
+          "Id": 27,
+          "ShortName": "Photography"
+        },
+        {
+          "Name": "Religion & Beliefs",
+          "Id": 28,
+          "ShortName": "Beliefs"
+        },
+        {
+          "Name": "Sci-Fi & Fantasy",
+          "Id": 29,
+          "ShortName": "Sci fi"
+        },
+        {
+          "Name": "Singles",
+          "Id": 30,
+          "ShortName": "Singles"
+        },
+        {
+          "Name": "Socializing",
+          "Id": 31,
+          "ShortName": "Social"
+        },
+        {
+          "Name": "Sports & Recreation",
+          "Id": 32,
+          "ShortName": "Sports"
+        },
+        {
+          "Name": "Support",
+          "Id": 33,
+          "ShortName": "Support"
+        },
+        {
+          "Name": "Tech",
+          "Id": 34,
+          "ShortName": "Tech"
+        },
+        {
+          "Name": "Women",
+          "Id": 35,
+          "ShortName": "Women"
+        }
+      ]
+    },
+    {
+      "ItemName": "Groups",
+      "CategoryCount": 2,
+      "Categories": [
+        {
+          "Name": "Tech",
+          "Id": 34,
+          "ShortName": "Tech"
+        },
+        {
+          "Name": "Support",
+          "Id": 33,
+          "ShortName": "Support"
+        }
+      ]
+    }
+  ]
+}
