@@ -67,6 +67,19 @@ angular.module('starter', [
         templateUrl: "templates/home.html",
         controller: 'HomeCtrl'
       }
+    },
+    resolve: {
+        menu: ['$q', '$http', function ($q, $http) {
+            var defer = $q.defer();
+            $http.get('json/menu_example.json').success(function(result) {
+                console.debug(angular.fromJson(result, true));
+                defer.resolve(angular.fromJson(result));
+            }).error(function(object, code) {
+                console.warn(object);
+                defer.reject(object);
+            });
+            return defer.promise;
+        }]
     }
   })
 
@@ -280,7 +293,6 @@ angular.module('starter', [
       }
     }
   })
-
 
   .state('app.createEvent', {
     url: "/createEvent",

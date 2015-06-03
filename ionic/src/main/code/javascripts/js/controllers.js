@@ -85,4 +85,13 @@ angular.module('starter.controllers',
     var currentUser = ParseSDK.User.current();
     return currentUser !== null;
   };
+
+  $scope.menuData = {
+    username: 'username',
+    profilesCount: 0,
+    unreadMessages: 0,
+    friendsCount: 0,
+    newsCount: 0,
+    forumCount: 0
+  };
 });
