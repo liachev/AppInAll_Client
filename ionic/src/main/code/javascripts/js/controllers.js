@@ -43,7 +43,11 @@ angular.module('starter.controllers',
     ParseSDK.User.logIn($scope.loginData.email, $scope.loginData.password, {
         success: function(user) {
             $scope.closeLogin();
-            $state.go('app.home');
+            if ($state.is('app.home')) {
+                $state.go($state.current, {}, {reload: true}); //second parameter is for $stateParams
+            } else {
+                $state.go('app.home');
+            }
         },
         error: function(user, error) {
             alert(angular.toJson(error, true));
@@ -85,13 +89,26 @@ angular.module('starter.controllers',
     }
   };
 
+  var currentUser = ParseSDK.User.current();
+
   $scope.shouldLeftSideMenuBeEnabled = function () {
-    var currentUser = ParseSDK.User.current();
     return currentUser !== null;
   };
 
+  !currentUser || currentUser.fetch({
+    success: function (user) {
+        user.get("selectedProfile").fetch({
+            success: function (profile) {
+                !$scope.menuData && ($scope.menuData = {});
+                $scope.menuData.username = profile.getFirstName() || '';
+            }
+        });
+    }
+  });
+
+  // TODO: complete menu data forming
   $scope.menuData = {
-    username: 'username',
+    username: '',
     profilesCount: 0,
     unreadMessages: 0,
     friendsCount: 0,
