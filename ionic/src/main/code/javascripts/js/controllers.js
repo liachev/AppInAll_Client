@@ -40,11 +40,15 @@ angular.module('starter.controllers',
   $scope.doLogin = function() {
     console.log('Doing login', $scope.loginData);
 
-    // Simulate a login delay. Remove this and replace with your login
-    // code if using a login system
-    $timeout(function() {
-      $scope.closeLogin(); // TODO: complete login
-    }, 1000);
+    ParseSDK.User.logIn($scope.loginData.email, $scope.loginData.password, {
+        success: function(user) {
+            $scope.closeLogin();
+            $state.go('app.home');
+        },
+        error: function(user, error) {
+            alert(angular.toJson(error, true));
+        }
+    });
   };
 
   // Triggered on a button click, or some other target
