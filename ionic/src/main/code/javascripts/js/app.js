@@ -67,6 +67,19 @@ angular.module('starter', [
         templateUrl: "templates/home.html",
         controller: 'HomeCtrl'
       }
+    },
+    resolve: {
+        menu: ['$q', '$http', function ($q, $http) {
+            var defer = $q.defer();
+            $http.get('json/menu_example.json').success(function(result) {
+                console.debug(angular.fromJson(result, true));
+                defer.resolve(angular.fromJson(result));
+            }).error(function(object, code) {
+                console.warn(object);
+                defer.reject(object);
+            });
+            return defer.promise;
+        }]
     }
   })
 
@@ -281,7 +294,6 @@ angular.module('starter', [
     }
   })
 
-
   .state('app.createEvent', {
     url: "/createEvent",
     views: {
@@ -317,15 +329,17 @@ angular.module('starter', [
           }
       }
   })
-      .state('app.eventsOnMap', {
-          url: "/eventsonmap",
-          views: {
-              'menuContent': {
-                  templateUrl: "templates/eventsOnMap.html",
-                  controller: 'eventsOnMapCtrl'
-              }
+
+  .state('app.eventsOnMap', {
+      url: "/eventsonmap",
+      views: {
+          'menuContent': {
+              templateUrl: "templates/eventsOnMap.html",
+              controller: 'eventsOnMapCtrl'
           }
-      })
+      }
+  })
+
   .state('app.tree-view-array', {
     url: "/tree-view-array-example",
     views: {
@@ -411,6 +425,15 @@ angular.module('starter', [
             return "Category";
           }]
         }
+      }
+    }
+  })
+
+  .state('app.non-exists', {
+    url: "/non-exists",
+    views: {
+      'menuContent': {
+        template: "<ion-view view-title=''><ion-content><h3>Not Implemented Yet.</h3></ion-content></ion-view>"
       }
     }
   });
