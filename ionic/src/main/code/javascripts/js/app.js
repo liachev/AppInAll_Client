@@ -50,7 +50,8 @@ angular.module('starter', [
     }
 })
 
-.config(function($stateProvider, $urlRouterProvider, $cordovaFacebookProvider) {
+.config(function($stateProvider, $urlRouterProvider, $cordovaFacebookProvider, $ionicConfigProvider) {
+  $ionicConfigProvider.tabs.position('bottom');
   $stateProvider
 
   .state('app', {
@@ -58,6 +59,52 @@ angular.module('starter', [
     abstract: true,
     templateUrl: "templates/menu.html",
     controller: 'AppCtrl'
+  })
+
+  .state('app.tabs', {
+    url: "/tab",
+    abstract: true,
+    views: {
+      'menuContent': {
+        templateUrl: "templates/eventTabs.html",
+      }
+    }
+  })
+
+  .state('app.tabs.eventByDate', {
+    url: "/eventdate",
+    views: {
+      'list-tab': {
+        templateUrl: "templates/eventsByDate.html",
+        controller: 'EventsCtrl'
+      }
+    }
+  })
+
+  .state('app.tabs.eventsOnMap', {
+    url: "/eventsonmap",
+    views: {
+      'map-tab': {
+        templateUrl: "templates/eventsOnMap.html",
+        controller: 'eventsOnMapCtrl'
+      }
+    }
+  })
+
+  .state('app.tabs.createEvent', {
+    url: "/createEvent",
+    views: {
+      'create-tab': {
+        templateUrl: "templates/createEvent.html",
+        controller: 'CreateEventCtrl',
+        requireLogin: true,
+        resolve: {
+          delay: ['$q', '$http', '$rootScope', function ($q, $http, $scope) {
+            return loadTranslation($q, $http, $scope, 'createEvent');
+          }]
+        }
+      }
+    }
   })
 
   .state('app.home', {
@@ -284,35 +331,9 @@ angular.module('starter', [
     }
   })
 
-  .state('app.eventByDate', {
-    url: "/eventdate",
-    views: {
-      'menuContent': {
-        templateUrl: "templates/eventsByDate.html",
-        controller: 'EventsCtrl'
-      }
-    }
-  })
-
-  .state('app.createEvent', {
-    url: "/createEvent",
-    views: {
-      'menuContent': {
-        templateUrl: "templates/createEvent.html",
-        controller: 'CreateEventCtrl',
-        requireLogin: true,
-        resolve: {
-          delay: ['$q', '$http', '$rootScope', function ($q, $http, $scope) {
-            return loadTranslation($q, $http, $scope, 'createEvent');
-          }]
-        }
-      }
-    }
-  })
-
   .state('app.events', {
-      url: "/events/:category",
-      views: {
+    url: "/events/:category",
+    views: {
           'menuContent': {
               templateUrl: "templates/events.html",
               controller: 'EventsCtrl'
@@ -330,17 +351,7 @@ angular.module('starter', [
       }
   })
 
-  .state('app.eventsOnMap', {
-      url: "/eventsonmap",
-      views: {
-          'menuContent': {
-              templateUrl: "templates/eventsOnMap.html",
-              controller: 'eventsOnMapCtrl'
-          }
-      }
-  })
-
-  .state('app.tree-view-array', {
+ .state('app.tree-view-array', {
     url: "/tree-view-array-example",
     views: {
       'menuContent': {
