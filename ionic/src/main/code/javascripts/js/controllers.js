@@ -89,12 +89,11 @@ angular.module('starter.controllers',
     }
   };
 
-  var currentUser = ParseSDK.User.current();
-
   $scope.shouldLeftSideMenuBeEnabled = function () {
-    return currentUser !== null;
+    return ParseSDK.User.current() !== null;
   };
 
+  var currentUser = ParseSDK.User.current();
   !currentUser || currentUser.fetch({
     success: function (user) {
         user.get("selectedProfile").fetch({
