@@ -6,10 +6,12 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('starter', [
   'ionic',
+  'ngCookies',
   'ngCordova',
   'ngMaterial',
   'ngMdIcons',
   'tabSlideBox',
+  'pascalprecht.translate',
 
   /* controllers */ // TODO: add new controllers to 'ionic/src/main/code/javascripts/js/controllers.js'
   'starter.controllers',
@@ -50,8 +52,32 @@ angular.module('starter', [
     }
 })
 
-.config(function($stateProvider, $urlRouterProvider, $cordovaFacebookProvider, $ionicConfigProvider) {
+.config(function($stateProvider, $urlRouterProvider, $cordovaFacebookProvider, $ionicConfigProvider, $translateProvider) {
   $ionicConfigProvider.tabs.position('bottom');
+
+  $translateProvider
+    .useStaticFilesLoader({
+      files: [{
+          prefix: 'i18n/locale-',
+          suffix: '.json'
+      }]
+    })
+    .registerAvailableLanguageKeys(['en', 'ru'], {
+      'en_US': 'en',
+      'en_UK': 'en',
+      'ru-RU': 'ru'
+    })
+    .preferredLanguage()
+//    .determinePreferredLanguage(function () {
+//      var settings = angular.fromJson(localStorage["settings"]);
+//      // some custom logic's going on in here
+//      return settings && settings.language || 'en'; // FixMe: fix needed
+//    })
+    .fallbackLanguage('en')
+    .useLocalStorage()
+    .useLoaderCache(true)
+    .useMissingTranslationHandlerLog();
+
   $stateProvider
 
   .state('app', {
@@ -119,7 +145,6 @@ angular.module('starter', [
         menu: ['$q', '$http', function ($q, $http) {
             var defer = $q.defer();
             $http.get('json/menu_example.json').success(function(result) {
-                console.debug(angular.fromJson(result, true));
                 defer.resolve(angular.fromJson(result));
             }).error(function(object, code) {
                 console.warn(object);
