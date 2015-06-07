@@ -140,14 +140,14 @@
       "text": "Сохранить"
     },
     "Payment": {
-      "text": "Payment info:",
-      "edit": "edit"
+      "text": "Payment info",
+      "edit": "Изменить"
     },
     "Update": {
       "text": "Обовить"
     },
     "ResetPassword": {
-      "text": "Reset Password",
+      "text": "Сбросить пароль",
       "description": "We will send you an email to your address, with a special password reset link"
     },
     "Agree": {
@@ -155,17 +155,17 @@
       "Privacy_Policy": "Privacy Policy"
     },
     "Regional": {
-      "Time_Zone": "Time Zone",
-      "Date_Format": "Date Format",
-      "Language": "Language",
-      "Distance": "Distance",
-      "Miles": "Miles",
-      "Km": "Km",
+      "Time_Zone": "Часовой пояс",
+      "Date_Format": "Формат времени",
+      "Language": "Язык",
+      "Distance": "Расстояние",
+      "Miles": "Мили",
+      "Km": "Километры",
       "AM_PM": "AM/PM",
       "Military": "Military",
-      "Time_Format": "Time Format",
-      "Currency": "Currency",
-      "Currency_Title": "Please choose a currency"
+      "Time_Format": "Формат времени",
+      "Currency": "Валюта",
+      "Currency_Title": "Пожалуйста, выберите валюту"
     },
     "Connect_with_Facebook": {
       "text": "Connect with Facebook"
@@ -291,7 +291,7 @@
       "text": "Already have an account?"
     },
     "Sign_In": {
-      "text": "Sign In"
+      "text": "Войти"
     }
   },
   "WELCOME_PAGE": {

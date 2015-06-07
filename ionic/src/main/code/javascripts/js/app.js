@@ -67,12 +67,12 @@ angular.module('starter', [
       'en_UK': 'en',
       'ru-RU': 'ru'
     })
-    .preferredLanguage()
-//    .determinePreferredLanguage(function () {
-//      var settings = angular.fromJson(localStorage["settings"]);
-//      // some custom logic's going on in here
-//      return settings && settings.language || 'en'; // FixMe: fix needed
-//    })
+//    .preferredLanguage()
+    .determinePreferredLanguage(function () {
+      var settings = angular.fromJson(localStorage["settings"]);
+      // some custom logic's going on in here
+      return settings && settings.language || 'en'; // FixMe: fix needed
+    })
     .fallbackLanguage('en')
     .useLocalStorage()
     .useLoaderCache(true)
