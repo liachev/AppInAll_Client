@@ -55,6 +55,7 @@
       "buttonDraft": "Keep as a draft"
     },
     "addressModal": {
+      "title": "Address",
       "name": "Enter the venue's name",
       "address_1": "Address 1",
       "address_2": "Address 2",
