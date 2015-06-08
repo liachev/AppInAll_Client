@@ -309,5 +309,16 @@
     "EMAIL_LABEL": "Email",
     "PASSWORD_LABEL": "Password",
     "LOGIN_BUTTON_TEXT": "Log in"
+  },
+  "SIDE_MENU_CONTENT": {
+    "TITLE": "Меню",
+    "PROFILE_MENU_ITEM_TEXT": "Профиль",
+    "MY_LIST_MENU_ITEM_TEXT": "Мой список",
+    "HOME_MENU_ITEM_TEXT": "Домашняя страница",
+    "MESSAGES_MENU_ITEM_TEXT": "Сообщения",
+    "FRIENDS_MENU_ITEM_TEXT": "Друзья",
+    "NEWS_MENU_ITEM_TEXT": "Новости",
+    "FORUM_MENU_ITEM_TEXT": "Форум",
+    "SETTINGS_MENU_ITEM_TEXT": "Настройки"
   }
 }

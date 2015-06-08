@@ -309,5 +309,16 @@
     "EMAIL_LABEL": "Email",
     "PASSWORD_LABEL": "Password",
     "LOGIN_BUTTON_TEXT": "Log in"
+  },
+  "SIDE_MENU_CONTENT": {
+    "TITLE": "Menu",
+    "PROFILE_MENU_ITEM_TEXT": "Profile",
+    "MY_LIST_MENU_ITEM_TEXT": "My List",
+    "HOME_MENU_ITEM_TEXT": "Home",
+    "MESSAGES_MENU_ITEM_TEXT": "Messages",
+    "FRIENDS_MENU_ITEM_TEXT": "Friends",
+    "NEWS_MENU_ITEM_TEXT": "News",
+    "FORUM_MENU_ITEM_TEXT": "Forum",
+    "SETTINGS_MENU_ITEM_TEXT": "Settings"
   }
 }
