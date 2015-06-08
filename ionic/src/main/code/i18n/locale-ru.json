@@ -299,5 +299,8 @@
   },
   "AGREEMENT_PAGE": {
     "AGREED_BUTTON_TEXT": "Согласен"
+  },
+  "HOME_PAGE": {
+    "SEARCH_PLACEHOLDER": "Поиск"
   }
 }

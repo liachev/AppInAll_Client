@@ -299,5 +299,8 @@
   },
   "AGREEMENT_PAGE": {
     "AGREED_BUTTON_TEXT": "Agreed"
+  },
+  "HOME_PAGE": {
+    "SEARCH_PLACEHOLDER": "Search"
   }
 }
