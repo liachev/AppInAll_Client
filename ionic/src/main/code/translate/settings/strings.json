@@ -1,151 +1,151 @@
 {
   "Password": {
-    "text": "Password:"
+    "text": "Deprecated. See angular-translate"
   },
 
   "Save": {
-    "text": "Save"
+    "text": "Deprecated. See angular-translate"
   },
 
   "Payment": {
-    "text": "Payment info:",
-    "edit": "edit"
+    "text": "Deprecated. See angular-translate",
+    "edit": "Deprecated. See angular-translate"
   },
 
   "Update": {
-    "text": "Update"
+    "text": "Deprecated. See angular-translate"
   },
 
   "ResetPassword": {
-    "text": "Reset Password",
+    "text": "Deprecated. See angular-translate",
 
-    "description": "We will send you an email to your address, with a special password reset link"
+    "description": "Deprecated. See angular-translate"
   },
 
   "Agree": {
-    "Terms_of_Use": "Terms of Use",
+    "Terms_of_Use": "Deprecated. See angular-translate",
 
-    "Privacy_Policy": "Privacy Policy"
+    "Privacy_Policy": "Deprecated. See angular-translate"
   },
 
   "Regional": {
-    "Time_Zone": "Time Zone",
+    "Time_Zone": "Deprecated. See angular-translate",
 
-    "Date_Format": "Date Format",
+    "Date_Format": "Deprecated. See angular-translate",
 
-    "Language": "Language",
+    "Language": "Deprecated. See angular-translate",
 
-    "Distance": "Distance",
+    "Distance": "Deprecated. See angular-translate",
 
-    "Miles": "Miles",
+    "Miles": "Deprecated. See angular-translate",
 
-    "Km": "Km",
+    "Km": "Deprecated. See angular-translate",
 
-    "AM_PM": "AM/PM",
+    "AM_PM": "Deprecated. See angular-translate",
 
-    "Military": "Military",
+    "Military": "Deprecated. See angular-translate",
 
-    "Time_Format": "Time Format",
+    "Time_Format": "Deprecated. See angular-translate",
 
-    "Currency": "Currency",
+    "Currency": "Deprecated. See angular-translate",
 
-    "Currency_Title": "Please choose a currency"
+    "Currency_Title": "Deprecated. See angular-translate"
   },
 
   "Connect_with_Facebook": {
-    "text": "Connect with Facebook"
+    "text": "Deprecated. See angular-translate"
   },
 
   "email": {
-    "placeholder": "Your Email",
+    "placeholder": "Deprecated. See angular-translate",
 
     "errorMessages": {
-      "required": "Required.",
+      "required": "Deprecated. See angular-translate",
 
-      "invalid": "Invalid email address.",
+      "invalid": "Deprecated. See angular-translate",
 
-      "alreadyInUse": "E-mail is already in use."
+      "alreadyInUse": "Deprecated. See angular-translate"
     }
   },
 
   "password": {
-    "placeholder": "Choose Password",
+    "placeholder": "Deprecated. See angular-translate",
 
     "errorMessages": {
-      "required": "Required."
+      "required": "Deprecated. See angular-translate"
     }
   },
 
   "confirmPassword": {
-    "placeholder": "Confirm Password",
+    "placeholder": "Deprecated. See angular-translate",
 
     "errorMessages": {
-      "required": "Required.",
+      "required": "Deprecated. See angular-translate",
 
-      "notIdentical": "Must match the previous entry."
+      "notIdentical": "Deprecated. See angular-translate"
     }
   },
 
   "cardName": {
-    "placeholder": "Name on card",
+    "placeholder": "Deprecated. See angular-translate",
 
     "errorMessages": {
-      "required": "Required.",
+      "required": "Deprecated. See angular-translate",
 
-      "pattern": "Only digits and letters allowed."
+      "pattern": "Deprecated. See angular-translate"
     }
   },
 
   "cardNumber": {
-    "placeholder": "Card number",
+    "placeholder": "Deprecated. See angular-translate",
 
     "errorMessages": {
-      "required": "Required.",
+      "required": "Deprecated. See angular-translate",
 
-      "pattern": "Only digits allowed."
+      "pattern": "Deprecated. See angular-translate"
     }
   },
 
   "exMonth": {
-    "text": "Expiry month"
+    "text": "Deprecated. See angular-translate"
   },
 
   "exYear": {
-    "text": "Expiry year"
+    "text": "Deprecated. See angular-translate"
   },
 
   "cardCode": {
-    "placeholder": "Card code",
+    "placeholder": "Deprecated. See angular-translate",
 
     "errorMessages": {
-      "required": "Required.",
+      "required": "Deprecated. See angular-translate",
 
-      "pattern": "Only digits allowed.",
+      "pattern": "Deprecated. See angular-translate",
 
-      "minlength": "Too short."
+      "minlength": "Deprecated. See angular-translate"
     }
   },
 
   "zip": {
-    "placeholder": "Billing ZIP",
+    "placeholder": "Deprecated. See angular-translate",
 
 
     "errorMessages": {
-      "required": "Required."
+      "required": "Deprecated. See angular-translate"
     }
   },
 
   "informationPay": {
-    "text": "The information you enter above will only be shared with WePay -- AppInAll's payment processor"
+    "text": "Deprecated. See angular-translate"
   },
 
   "confirm": {
-    "text": "Confirmation will be sent to "
+    "text": "Deprecated. See angular-translate"
   },
 
   "Buttons": {
-    "Cancel": "Cancel",
+    "Cancel": "Deprecated. See angular-translate",
 
-    "Save": "Save"
+    "Save": "Deprecated. See angular-translate"
   }
 }

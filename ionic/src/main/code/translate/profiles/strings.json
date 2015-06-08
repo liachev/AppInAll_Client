@@ -1,85 +1,85 @@
 {
   "firstName": {
-    "placeholder": "Your First Name",
+    "placeholder": "Deprecated. See angular-translate",
 
     "errorMessages": {
-      "required": "Required.",
+      "required": "Deprecated. See angular-translate",
 
-      "pattern": "Only digits and letters allowed."
+      "pattern": "Deprecated. See angular-translate"
     }
   },
 
   "lastName": {
-    "placeholder": "Your Last Name",
+    "placeholder": "Deprecated. See angular-translate",
 
     "errorMessages": {
-      "required": "Required.",
+      "required": "Deprecated. See angular-translate",
 
-      "pattern": "Only digits and letters allowed."
+      "pattern": "Deprecated. See angular-translate"
     }
   },
 
   "location": {
-    "label": "Location",
+    "label": "Deprecated. See angular-translate",
 
-    "placeholder": "City, Zip Code",
+    "placeholder": "Deprecated. See angular-translate",
 
     "errorMessages": {
-      "required": "Required.",
+      "required": "Deprecated. See angular-translate",
 
-      "invalid": "Invalid location."
+      "invalid": "Deprecated. See angular-translate"
     }
   },
 
   "gender": {
-    "label": "Gender",
+    "label": "Deprecated. See angular-translate",
 
-    "male": "Male",
+    "male": "Deprecated. See angular-translate",
 
-    "female": "Female",
+    "female": "Deprecated. See angular-translate",
 
-    "do_not_show": "Don't show",
+    "do_not_show": "Deprecated. See angular-translate",
 
     "errorMessages": {}
   },
 
   "birthday": {
-    "label": "Birthday",
+    "label": "Deprecated. See angular-translate",
 
-    "placeholder": "yyyy-MM-dd",
+    "placeholder": "Deprecated. See angular-translate",
 
     "errorMessages": {
-      "date": "Not a valid date."
+      "date": "Deprecated. See angular-translate"
     }
   },
 
   "kid": {
-    "label": "Kid",
+    "label": "Deprecated. See angular-translate",
 
-    "text": "Kid's restrictions will be applied",
+    "text": "Deprecated. See angular-translate",
 
     "errorMessages": {}
   },
 
   "interestedIn": {
-    "label": "Interested In",
+    "label": "Deprecated. See angular-translate",
 
-    "edit": "Edit"
+    "edit": "Deprecated. See angular-translate"
   },
 
   "upload_photo": {
-    "label": "Upload Photo"
+    "label": "Deprecated. See angular-translate"
   },
 
   "title": {
-    "add_profile": "Add Profile",
+    "add_profile": "Deprecated. See angular-translate",
 
-    "edit_profile": "Edit Profile"
+    "edit_profile": "Deprecated. See angular-translate"
   },
 
   "buttons": {
-    "save": "Save",
+    "save": "Deprecated. See angular-translate",
 
-    "cancel": "Cancel"
+    "cancel": "Deprecated. See angular-translate"
   }
 }
