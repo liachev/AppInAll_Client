@@ -69,9 +69,7 @@
   },
   "MESSAGES_PAGE": {
     "messageForm": {
-      "attach": "attach",
-      "send": "send",
-      "placeholder": "Message"
+      "placeholder": "Сообщение"
     }
   },
   "PROFILES_PAGE": {

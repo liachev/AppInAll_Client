@@ -69,8 +69,6 @@
   },
   "MESSAGES_PAGE": {
     "messageForm": {
-      "attach": "attach",
-      "send": "send",
       "placeholder": "Message"
     }
   },
