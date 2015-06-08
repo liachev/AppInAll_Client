@@ -302,5 +302,12 @@
   },
   "HOME_PAGE": {
     "SEARCH_PLACEHOLDER": "Search"
+  },
+  "LOGIN_PAGE": {
+    "PAGE_TITLE": "Login",
+    "CLOSE_BUTTON_TEXT": "Close",
+    "EMAIL_LABEL": "Email",
+    "PASSWORD_LABEL": "Password",
+    "LOGIN_BUTTON_TEXT": "Log in"
   }
 }
