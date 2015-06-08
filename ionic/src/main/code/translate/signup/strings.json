@@ -1,81 +1,81 @@
 {
   "firstName": {
-    "placeholder": "Your First Name",
+    "placeholder": "Deprecated. See angular-translate",
 
     "errorMessages": {
-      "required": "Required.",
+      "required": "Deprecated. See angular-translate",
 
-      "pattern": "Only digits and letters allowed."
+      "pattern": "Deprecated. See angular-translate"
     }
   },
 
   "lastName": {
-    "placeholder": "Your Last Name",
+    "placeholder": "Deprecated. See angular-translate",
 
     "errorMessages": {
-      "required": "Required.",
+      "required": "Deprecated. See angular-translate",
 
-      "pattern": "Only digits and letters allowed."
+      "pattern": "Deprecated. See angular-translate"
     }
   },
 
   "email": {
-    "placeholder": "Your Email",
+    "placeholder": "Deprecated. See angular-translate",
 
     "errorMessages": {
-      "required": "Required.",
+      "required": "Deprecated. See angular-translate",
 
-      "invalid": "Invalid email address.",
+      "invalid": "Deprecated. See angular-translate",
 
-      "alreadyInUse": "E-mail is already in use."
+      "alreadyInUse": "Deprecated. See angular-translate"
     }
   },
 
   "password": {
-    "placeholder": "Choose Password",
+    "placeholder": "Deprecated. See angular-translate",
 
     "errorMessages": {
-      "required": "Required."
+      "required": "Deprecated. See angular-translate"
     }
   },
 
   "confirmPassword": {
-    "placeholder": "Confirm Password",
+    "placeholder": "Deprecated. See angular-translate",
 
     "errorMessages": {
-      "required": "Required.",
+      "required": "Deprecated. See angular-translate",
 
-      "notIdentical": "Must match the previous entry."
+      "notIdentical": "Deprecated. See angular-translate"
     }
   },
 
   "isAgree": {
-    "text": "I have read and agree with the",
+    "text": "Deprecated. See angular-translate",
 
-    "and": "and",
+    "and": "Deprecated. See angular-translate",
 
-    "Terms_of_Use": "Terms of Use",
+    "Terms_of_Use": "Deprecated. See angular-translate",
 
-    "Privacy_Policy": "Privacy Policy",
+    "Privacy_Policy": "Deprecated. See angular-translate",
 
     "errorMessages": {
-      "required": "Must Agree"
+      "required": "Deprecated. See angular-translate"
     }
   },
 
   "Connect_with_Facebook": {
-    "text": "Connect with Facebook"
+    "text": "Deprecated. See angular-translate"
   },
 
   "Create_Account": {
-    "text": "Create Account"
+    "text": "Deprecated. See angular-translate"
   },
 
   "Already_have_account": {
-    "text": "Already have an account?"
+    "text": "Deprecated. See angular-translate"
   },
 
   "Sign_In": {
-    "text": "Sign In"
+    "text": "Deprecated. See angular-translate"
   }
 }

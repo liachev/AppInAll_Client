@@ -27,7 +27,7 @@ angular.module('welcomePage.controllers', [])
                 var icSizeList = [512, 144, 96, 48];
                 $scope.welcomePage_iconSize = icSizeList[icSizeList.length-1];
 
-                $http.get('translate/welcomePage.json').success(function(data) {
+                $http.get('json/welcomePage.json').success(function(data) {
                     for(var i = 0; i < data.slider.length; i++)
                         data.slider[i].description = data.slider[i].description.split('\n');
                     $scope.welcomePage_data = data;

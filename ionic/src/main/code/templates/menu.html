@@ -11,53 +11,54 @@
 
     <ion-side-menu side="left" is-enabled="shouldLeftSideMenuBeEnabled()">
         <ion-header-bar class="bar-stable">
-            <h1 class="title">Menu</h1>
+            <h1 class="title" translate="SIDE_MENU_CONTENT.TITLE"></h1>
         </ion-header-bar>
         <ion-content>
             <ion-list>
                 <ion-item nav-clear menu-close ui-sref="app.profiles" class="item-icon-left">
                     <i class="icon ion-person"></i>
-                    Profile <span class="item-note">{{menuData.username}}</span>
+                    <span translate="SIDE_MENU_CONTENT.PROFILE_MENU_ITEM_TEXT"></span>
+                    <span class="item-note">{{menuData.username}}</span>
                 </ion-item>
                 <ion-item nav-clear menu-close ui-sref="app.non-exists" class="item-icon-left"> <!-- TODO: make 'My List' page -->
                     <i class="icon ion-android-list"></i>
-                    My List
+                    <span translate="SIDE_MENU_CONTENT.MY_LIST_MENU_ITEM_TEXT"></span>
                 </ion-item>
                 <ion-item nav-clear menu-close ui-sref="app.home" class="item-icon-left">
                     <i class="icon ion-home"></i>
-                    Home
+                    <span translate="SIDE_MENU_CONTENT.HOME_MENU_ITEM_TEXT"></span>
                 </ion-item>
                 <ion-item nav-clear menu-close ui-sref="app.messages" class="item-icon-left">
                     <i class="icon ion-chatbox-working"></i>
-                    Messages
+                    <span translate="SIDE_MENU_CONTENT.MESSAGES_MENU_ITEM_TEXT"></span>
                     <span class="badge badge-assertive">
                         {{menuData.unreadMessages}}
                     </span>
                 </ion-item>
                 <ion-item nav-clear menu-close ui-sref="app.non-exists" class="item-icon-left"> <!-- TODO: make 'Friends' page -->
                     <i class="icon ion-person-stalker"></i>
-                    Friends
+                    <span translate="SIDE_MENU_CONTENT.FRIENDS_MENU_ITEM_TEXT"></span>
                     <span class="badge badge-assertive">
                         {{menuData.friendsCount}}
                     </span>
                 </ion-item>
                 <ion-item nav-clear menu-close ui-sref="app.non-exists" class="item-icon-left"> <!-- TODO: make 'News' page -->
                     <i class="icon ion-social-rss"></i>
-                    News
+                    <span translate="SIDE_MENU_CONTENT.NEWS_MENU_ITEM_TEXT"></span>
                     <span class="badge badge-assertive">
                         {{menuData.newsCount}}
                     </span>
                 </ion-item>
                 <ion-item nav-clear menu-close ui-sref="app.non-exists" class="item-icon-left"> <!-- TODO: make 'Forum' page -->
                     <i class="icon ion-chatbubbles"></i>
-                    Forum
+                    <span translate="SIDE_MENU_CONTENT.FORUM_MENU_ITEM_TEXT"></span>
                     <span class="badge badge-assertive">
                         {{menuData.forumCount}}
                     </span>
                 </ion-item>
                 <ion-item nav-clear menu-close ui-sref="app.settings" class="item-icon-left">
                     <i class="icon ion-android-settings"></i>
-                    Settings
+                    <span translate="SIDE_MENU_CONTENT.SETTINGS_MENU_ITEM_TEXT"></span>
                 </ion-item>
             </ion-list>
         </ion-content>

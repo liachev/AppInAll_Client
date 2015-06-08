@@ -1,0 +1,327 @@
+{
+  "CREATE_EVENT_PAGE": {
+    "eventName": {
+      "placeholder": "Type a short distinct event name",
+      "errorMessages": {
+        "required": "Required.",
+        "pattern": "Only digits and letters allowed."
+      }
+    },
+    "description": {
+      "label": "Description",
+      "placeholder": "Tell people what's special about this event",
+      "errorMessages": {
+        "required": "Required."
+      }
+    },
+    "activity": {
+      "placeholder": "Please enter an activity name..."
+    },
+    "time": {
+      "start": "Start Time",
+      "end": "End Time"
+    },
+    "upload_photo": {
+      "label": "Upload Photo"
+    },
+    "buttons": {
+      "done": "Done"
+    },
+    "list": {
+      "location": {
+        "label": "Location",
+        "currentLoc": "Current Location:",
+        "address": "Address",
+        "online": "Online Event"
+      },
+      "privacy": "Privacy",
+      "gender": "Gender",
+      "age_group": "Age Group"
+    },
+    "restrictions": {
+      "label": "Restrictions",
+      "link": "More"
+    },
+    "notifications": {
+      "label": "Notifications",
+      "link": "Setup"
+    },
+    "fee": {
+      "label": "Fee",
+      "link": "Edit"
+    },
+    "radio": {
+      "buttonPublish": "Publish",
+      "buttonDraft": "Keep as a draft"
+    },
+    "addressModal": {
+      "title": "Address",
+      "name": "Enter the venue's name",
+      "address_1": "Address 1",
+      "address_2": "Address 2",
+      "city": "City",
+      "state": "State",
+      "zip": "Zip / Postal",
+      "buttons": {
+        "cancel": "Cancel",
+        "apply": "Apply"
+      }
+    }
+  },
+  "MESSAGES_PAGE": {
+    "messageForm": {
+      "placeholder": "Message"
+    }
+  },
+  "PROFILES_PAGE": {
+    "PAGE_TITLE": "Profile",
+    "REORDER_BUTTON_TEXT": "Reorder",
+    "ADD_PROFILE_BUTTON_TEXT": "Add Profile",
+    "firstName": {
+      "placeholder": "Your First Name",
+      "errorMessages": {
+        "required": "Required.",
+        "pattern": "Only digits and letters allowed."
+      }
+    },
+    "lastName": {
+      "placeholder": "Your Last Name",
+      "errorMessages": {
+        "required": "Required.",
+        "pattern": "Only digits and letters allowed."
+      }
+    },
+    "location": {
+      "label": "Location",
+      "placeholder": "City, Zip Code",
+      "errorMessages": {
+        "required": "Required.",
+        "invalid": "Invalid location."
+      }
+    },
+    "gender": {
+      "label": "Gender",
+      "male": "Male",
+      "female": "Female",
+      "do_not_show": "Don't show",
+      "errorMessages": {}
+    },
+    "birthday": {
+      "label": "Birthday",
+      "placeholder": "yyyy-MM-dd",
+      "errorMessages": {
+        "date": "Not a valid date."
+      }
+    },
+    "kid": {
+      "label": "Kid",
+      "text": "Kid's restrictions will be applied",
+      "errorMessages": {}
+    },
+    "interestedIn": {
+      "label": "Interested In",
+      "edit": "Edit"
+    },
+    "upload_photo": {
+      "label": "Upload Photo"
+    },
+    "title": {
+      "add_profile": "Add Profile",
+      "edit_profile": "Edit Profile"
+    },
+    "buttons": {
+      "save": "Save",
+      "cancel": "Cancel"
+    }
+  },
+  "SETTINGS_PAGE": {
+    "Password": {
+      "text": "Password"
+    },
+    "Save": {
+      "text": "Save"
+    },
+    "Payment": {
+      "text": "Payment info",
+      "edit": "edit"
+    },
+    "Update": {
+      "text": "Update"
+    },
+    "ResetPassword": {
+      "text": "Reset Password",
+      "description": "We will send you an email to your address, with a special password reset link"
+    },
+    "Agree": {
+      "Terms_of_Use": "Terms of Use",
+      "Privacy_Policy": "Privacy Policy"
+    },
+    "Regional": {
+      "Time_Zone": "Time Zone",
+      "Date_Format": "Date Format",
+      "Language": "Language",
+      "Distance": "Distance",
+      "Miles": "Miles",
+      "Km": "Km",
+      "AM_PM": "AM/PM",
+      "Military": "Military",
+      "Time_Format": "Time Format",
+      "Currency": "Currency",
+      "Currency_Title": "Please choose a currency"
+    },
+    "Connect_with_Facebook": {
+      "text": "Connect with Facebook"
+    },
+    "email": {
+      "placeholder": "Your Email",
+      "errorMessages": {
+        "required": "Required.",
+        "invalid": "Invalid email address.",
+        "alreadyInUse": "E-mail is already in use."
+      }
+    },
+    "password": {
+      "placeholder": "Choose Password",
+      "errorMessages": {
+        "required": "Required."
+      }
+    },
+    "confirmPassword": {
+      "placeholder": "Confirm Password",
+      "errorMessages": {
+        "required": "Required.",
+        "notIdentical": "Must match the previous entry."
+      }
+    },
+    "cardName": {
+      "placeholder": "Name on card",
+      "errorMessages": {
+        "required": "Required.",
+        "pattern": "Only digits and letters allowed."
+      }
+    },
+    "cardNumber": {
+      "placeholder": "Card number",
+      "errorMessages": {
+        "required": "Required.",
+        "pattern": "Only digits allowed."
+      }
+    },
+    "exMonth": {
+      "text": "Expiry month"
+    },
+    "exYear": {
+      "text": "Expiry year"
+    },
+    "cardCode": {
+      "placeholder": "Card code",
+      "errorMessages": {
+        "required": "Required.",
+        "pattern": "Only digits allowed.",
+        "minlength": "Too short."
+      }
+    },
+    "zip": {
+      "placeholder": "Billing ZIP",
+      "errorMessages": {
+        "required": "Required."
+      }
+    },
+    "informationPay": {
+      "text": "The information you enter above will only be shared with WePay -- AppInAll's payment processor"
+    },
+    "confirm": {
+      "text": "Confirmation will be sent to {{userEmail}}"
+    },
+    "Buttons": {
+      "Cancel": "Cancel",
+      "Save": "Save"
+    }
+  },
+  "SIGN_UP_PAGE": {
+    "firstName": {
+      "placeholder": "Your First Name",
+      "errorMessages": {
+        "required": "Required.",
+        "pattern": "Only digits and letters allowed."
+      }
+    },
+    "lastName": {
+      "placeholder": "Your Last Name",
+      "errorMessages": {
+        "required": "Required.",
+        "pattern": "Only digits and letters allowed."
+      }
+    },
+    "email": {
+      "placeholder": "Your Email",
+      "errorMessages": {
+        "required": "Required.",
+        "invalid": "Invalid email address.",
+        "alreadyInUse": "E-mail is already in use."
+      }
+    },
+    "password": {
+      "placeholder": "Choose Password",
+      "errorMessages": {
+        "required": "Required."
+      }
+    },
+    "confirmPassword": {
+      "placeholder": "Confirm Password",
+      "errorMessages": {
+        "required": "Required.",
+        "notIdentical": "Must match the previous entry."
+      }
+    },
+    "isAgree": {
+      "text": "I have read and agree with the",
+      "and": "and",
+      "Terms_of_Use": "Terms of Use",
+      "Privacy_Policy": "Privacy Policy",
+      "errorMessages": {
+        "required": "Must Agree"
+      }
+    },
+    "Connect_with_Facebook": {
+      "text": "Connect with Facebook"
+    },
+    "Create_Account": {
+      "text": "Create Account"
+    },
+    "Already_have_account": {
+      "text": "Already have an account?"
+    },
+    "Sign_In": {
+      "text": "Sign In"
+    }
+  },
+  "WELCOME_PAGE": {
+    "BROWSE": "Browse",
+    "SIGN_UP": "Sign Up"
+  },
+  "AGREEMENT_PAGE": {
+    "AGREED_BUTTON_TEXT": "Agreed"
+  },
+  "HOME_PAGE": {
+    "SEARCH_PLACEHOLDER": "Search"
+  },
+  "LOGIN_PAGE": {
+    "PAGE_TITLE": "Login",
+    "CLOSE_BUTTON_TEXT": "Close",
+    "EMAIL_LABEL": "Email",
+    "PASSWORD_LABEL": "Password",
+    "LOGIN_BUTTON_TEXT": "Log in"
+  },
+  "SIDE_MENU_CONTENT": {
+    "TITLE": "Menu",
+    "PROFILE_MENU_ITEM_TEXT": "Profile",
+    "MY_LIST_MENU_ITEM_TEXT": "My List",
+    "HOME_MENU_ITEM_TEXT": "Home",
+    "MESSAGES_MENU_ITEM_TEXT": "Messages",
+    "FRIENDS_MENU_ITEM_TEXT": "Friends",
+    "NEWS_MENU_ITEM_TEXT": "News",
+    "FORUM_MENU_ITEM_TEXT": "Forum",
+    "SETTINGS_MENU_ITEM_TEXT": "Settings"
+  }
+}

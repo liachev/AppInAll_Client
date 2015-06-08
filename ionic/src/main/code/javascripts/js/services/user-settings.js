@@ -18,13 +18,13 @@ angular.module('usersettings.services', [])
                             name: results[i].name
                         }
                     }
-                    var defaultLang = 'en-US';
+                    var defaultLang = 'en_US';
                     if (window.cordova) {
                         globalization.getPreferredLanguage().then(
                             function (language) {
                                 var selectedLanguage = defaultLang;
                                 for (i in languages) {
-                                    if (language.value === languages[i].code) {
+                                    if (language.value.replace('-', '_') === languages[i].code) {
                                         selectedLanguage = languages[i].code;
                                         break;
                                     }
