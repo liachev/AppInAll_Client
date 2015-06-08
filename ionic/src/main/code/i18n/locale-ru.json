@@ -228,7 +228,7 @@
       "text": "The information you enter above will only be shared with WePay -- AppInAll's payment processor"
     },
     "confirm": {
-      "text": "Confirmation will be sent to "
+      "text": "Confirmation will be sent to {{userEmail}}"
     },
     "Buttons": {
       "Cancel": "Cancel",
