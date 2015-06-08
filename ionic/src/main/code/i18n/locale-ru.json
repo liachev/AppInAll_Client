@@ -74,6 +74,9 @@
     }
   },
   "PROFILES_PAGE": {
+    "PAGE_TITLE": "Profile",
+    "REORDER_BUTTON_TEXT": "Reorder",
+    "ADD_PROFILE_BUTTON_TEXT": "Add Profile",
     "firstName": {
       "placeholder": "Your First Name",
       "errorMessages": {

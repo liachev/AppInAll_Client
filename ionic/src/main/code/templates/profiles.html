@@ -1,10 +1,9 @@
 <ion-view>
-    <ion-nav-title>Profiles</ion-nav-title>
+    <ion-nav-title>{{'PROFILES_PAGE.PAGE_TITLE' | translate}}s</ion-nav-title>
 
     <ion-nav-buttons side="right">
-        <button class="button" ng-click="data.showReorder = !data.showReorder">
-            Reorder
-        </button>
+        <button class="button" ng-click="data.showReorder = !data.showReorder"
+                translate="PROFILES_PAGE.REORDER_BUTTON_TEXT"></button>
     </ion-nav-buttons>
 
     <ion-content>
@@ -54,7 +53,7 @@
         <h1 class="title">&nbsp;</h1>
 
         <div class="buttons">
-            <button class="button" ng-click="editItem()">Add Profile</button>
+            <button class="button" ng-click="editItem()" translate="PROFILES_PAGE.ADD_PROFILE_BUTTON_TEXT"></button>
         </div>
     </ion-footer-bar>
 </ion-view>
