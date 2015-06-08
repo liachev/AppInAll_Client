@@ -297,5 +297,8 @@
   "WELCOME_PAGE": {
     "BROWSE": "Browse",
     "SIGN_UP": "Sign Up"
+  },
+  "AGREEMENT_PAGE": {
+    "AGREED_BUTTON_TEXT": "Agreed"
   }
 }
