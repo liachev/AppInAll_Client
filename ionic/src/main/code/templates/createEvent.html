@@ -64,7 +64,7 @@
                 </div>
                 <div class="col">
                     <label class="item item-input">
-                        <input id="start" type="datetime-local">
+                        <input id="start" type="datetime-local" ng-model="createEventData.startTime">
                     </label>
                 </div>
                 <div class="col-10 col-center">
@@ -80,11 +80,13 @@
                 {{strings.time.end}}
             </div>
             <div class="col">
-                <input type="text" name="restrictionsStatus" readonly>
+                <label class="item item-input">
+                    <input id="end" type="datetime-local" ng-model="createEventData.endTime">
+                </label>
             </div>
             <div class="col-10 col-center">
                 <div class="buttons">
-                    <button class="button button-icon ion-refresh"ng-click="showAlert()">
+                    <button class="button button-icon ion-refresh">
                     </button>
                 </div>
             </div>
@@ -94,7 +96,7 @@
                 <div class="input-label">
                     {{strings.list.location.label}}
                 </div>
-                <select ng-model="createEventData.location" ng-change="change()">
+                <select ng-model="createEventData.location" ng-change="changeSelect()">
                     <option value="current">{{strings.list.location.currentLoc}}</option>
                     <option value="address">{{strings.list.location.address}}</option>
                     <option value="online">{{strings.list.location.online}}</option>
@@ -145,21 +147,21 @@
                     <input type="text" name="restrictionsStatus" readonly>
                 </div>
                 <div class="col-10 col-center">
-                    <a ng-href="#/app/createEvent" ng-click="showAlert()">{{strings.restrictions.link}}</a>
+                    <a ng-href="#" ng-click="restrictionsOpen()">{{strings.restrictions.link}}</a>
                 </div>
             </div>
 
-            <div class="row">
-                <div class="col">
-                    {{strings.notifications.label}}
+            <label class="item item-input item-select">
+                <div class="input-label">
+                    {{strings.notificationModal.title}}
                 </div>
-                <div class="col">
-                    <input type="text" name="notificationsStatus" readonly>
-                </div>
-                <div class="col-10 col-center">
-                    <a ng-href="#/app/createEvent" ng-click="showAlert()">{{strings.notifications.link}}</a>
-                </div>
-            </div>
+                <select ng-model="createEventData.notificationSelect">
+                    <option value="default">{{strings.notificationModal.selectDefault}}</option>
+                    <option value="01">1</option>
+                    <option value="02">2</option>
+                    <option value="03">3</option>
+                </select>
+            </label>
 
             <div class="row">
                 <div class="col">
@@ -169,19 +171,19 @@
                     <input type="text" name="feeStatus" readonly>
                 </div>
                 <div class="col-10 col-center">
-                    <a ng-href="#/app/createEvent" ng-click="showAlert()">{{strings.fee.link}}</a>
+                    <a ng-href="#" ng-click="feeOpen()">{{strings.fee.link}}</a>
                 </div>
             </div>
 
-            <ion-radio ng-model="createEventData.radio" ng-value="'publish'">{{strings.radio.buttonPublish}}</ion-radio>
-            <ion-radio ng-model="createEventData.radio" ng-value="'draft'">{{strings.radio.buttonDraft}}</ion-radio>
+            <ion-radio ng-model="createEventData.radio" value="publish">{{strings.radio.buttonPublish}}</ion-radio>
+            <ion-radio ng-model="createEventData.radio" value="draft">{{strings.radio.buttonDraft}}</ion-radio>
 
 
             <!--Modal Windows-->
             <script id="addressEdit.html" type="text/ng-template">
                 <ion-modal-view>
                     <ion-header-bar class="bar bar-header bar-positive">
-                        <h1 class="title">Address</h1>
+                        <h1 class="title">{{strings.addressModal.title}}</h1>
                     </ion-header-bar>
                     <ion-content class="padding">
                         <div class="list">
@@ -213,12 +215,93 @@
                                     </label>
                                 </div>
                             </div>
-
-                            <button class="button button-full button-positive" ng-click="addressEditClose()">
-                                {{strings.addressModal.buttons.cancel}}</button>
-                            <button class="button button-full button-positive" ng-click="createContact(newUser)">
-                                {{strings.addressModal.buttons.apply}}</button>
                         </div>
+
+                        <button class="button button-full button-positive" ng-click="addressEditClose()">
+                            {{strings.modalButtons.cancel}}</button>
+                        <button class="button button-full button-positive">
+                            {{strings.modalButtons.apply}}</button>
+                    </ion-content>
+                </ion-modal-view>
+            </script>
+
+            <script id="restrictions.html" type="text/ng-template">
+                <ion-modal-view>
+                    <ion-header-bar class="bar bar-header bar-positive">
+                        <h1 class="title">{{strings.restrictionsModal.title}}</h1>
+                    </ion-header-bar>
+                    <ion-content class="padding">
+                        <div class="list">
+                            <ion-checkbox ng-model="createEventData.IsCheckedRequiresApproval">
+                                {{strings.restrictionsModal.checkbox.requires_approval}}
+                            </ion-checkbox>
+
+                            <div class="item item-divider">
+                                {{strings.restrictionsModal.radio.label}}
+                            </div>
+
+                            <ion-radio ng-model="createEventData.IsCheckedSeats" value="unlimited">
+                                {{strings.restrictionsModal.radio.radioUnlimited}}
+                            </ion-radio>
+
+                            <ion-radio ng-model="createEventData.IsCheckedSeats" value="limited">
+                                {{strings.restrictionsModal.radio.radioMax.onePart}}
+                            </ion-radio>
+
+                            <input type="number" ng-model="createEventData.seatsValue" placeholder="100" ng-disabled="createEventData.IsCheckedSeats !== 'limited'">
+
+                            {{strings.restrictionsModal.radio.radioMax.twoPart}}
+
+                            <ion-checkbox ng-model="createEventData.IsCheckedShowNumber" ng-show="createEventData.IsCheckedSeats == 'limited'">
+                                {{strings.restrictionsModal.checkbox.maxSeats}}
+                            </ion-checkbox>
+
+                        </div>
+                        <button class="button button-full button-positive" ng-click="restrictionsClose()">
+                            {{strings.modalButtons.cancel}}</button>
+
+                        <button class="button button-full button-positive">
+                            {{strings.modalButtons.apply}}</button>
+                    </ion-content>
+                </ion-modal-view>
+            </script>
+
+            <script id="fee.html" type="text/ng-template">
+                <ion-modal-view>
+                    <ion-content>
+                        <div class="list">
+                            <ion-radio ng-model="createEventData.IsCheckedFee" value="free">{{strings.feeModal.radio.free}}</ion-radio>
+
+                            <ion-radio ng-model="createEventData.IsCheckedFee" value="one_time_payment">
+                                {{strings.feeModal.radio.one_time_payment}}
+                            </ion-radio>
+
+                            <input type="number" ng-model="createEventData.OneTimePrise" ng-disabled="createEventData.IsCheckedFee !== 'one_time_payment'">
+
+                            <ion-radio ng-model="createEventData.IsCheckedFee" value="subscription_payment">
+                                {{strings.feeModal.radio.Subscription.text}}
+                            </ion-radio>
+
+                            <input type="number" ng-model="createEventData.SubscriptionPrise" ng-disabled="createEventData.IsCheckedFee !== 'subscription_payment'">
+
+                            {{strings.feeModal.radio.Subscription.every}}
+
+                            <div class="item item-input item-select">
+                                <select ng-model="createEventData.paymentPeriod" ng-disabled="createEventData.IsCheckedFee !== 'subscription_payment'">
+                                    <option ng-repeat="period in periodArr"
+                                            value="{{period.value}}">
+                                        {{period.name}}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+
+
+                        <button class="button button-full button-positive" ng-click="feeClose()">
+                            {{strings.modalButtons.cancel}}</button>
+
+                        <button class="button button-full button-positive">
+                            {{strings.modalButtons.apply}}</button>
                     </ion-content>
                 </ion-modal-view>
             </script>

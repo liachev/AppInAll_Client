@@ -1,0 +1,26 @@
+[
+  {
+    "value": "week",
+    "name": "week"
+  },
+  {
+    "value": "2_weeks",
+    "name": "2 weeks"
+  },
+  {
+    "value": "month",
+    "name": "month"
+  },
+  {
+    "value": "3_months",
+    "name": "3 months"
+  },
+  {
+    "value": "6_months",
+    "name": "6 months"
+  },
+  {
+    "value": "year",
+    "name": "year"
+  }
+]

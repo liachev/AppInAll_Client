@@ -74,7 +74,15 @@
     "buttonDraft": "Keep as a draft"
   },
 
+  "modalButtons": {
+    "cancel": "Cancel",
+
+    "apply": "Apply"
+  },
+
   "addressModal": {
+    "title": "Address",
+
     "name": "Enter the venue's name",
 
     "address_1": "Address 1",
@@ -85,13 +93,66 @@
 
     "state": "State",
 
-    "zip": "Zip / Postal",
+    "zip": "Zip / Postal"
+  },
 
-    "buttons": {
-      "cancel": "Cancel",
+  "restrictionsModal": {
+    "title": "Restrictions",
 
-      "apply": "Apply"
+    "checkbox": {
+      "requires_approval": "Requires Approval",
+
+      "maxSeats": "Show the number of remaining seats on the join page",
+
+      "allowToBring": {
+        "label": "Allow to bring",
+
+        "participants": "participants",
+
+        "guests": "guests"
+      }
+    },
+
+    "radio": {
+      "label": "Total seats",
+
+      "radioUnlimited": "Unlimited",
+
+      "radioMax": {
+        "onePart": "Maximum is",
+
+        "twoPart": "participants"
+      }
     }
-}
+  },
 
+  "notificationModal": {
+    "title": "Notifications",
+
+    "select": "Send notifications",
+
+    "selectDefault": "Never",
+
+    "checkbox": {
+      "first": "A notification to participants who have responded",
+
+      "second": "RSVP notification to participants who have NOT responded"
+    }
+  },
+
+  "feeModal": {
+    "title": "Fee",
+
+    "radio": {
+      "free": "Free",
+
+      "one_time_payment": "One time payment of $",
+
+      "Subscription": {
+        "text": "Subscription of $",
+
+        "every": "every"
+      }
+    }
+  }
 }

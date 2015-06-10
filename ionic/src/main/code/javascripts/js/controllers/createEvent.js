@@ -4,7 +4,11 @@ angular.module('createEvent.controllers', ['ionic'])
     function ($scope, $http, $state, Parse, $ionicModal, $ionicPopup, $timeout) {
         $scope.createEventData = {
             location: "current",
-            radio: "publish"
+            radio: "publish",
+            notificationSelect: "default",
+            paymentPeriod: "month",
+            IsCheckedFee: "free",
+            IsCheckedSeats: "unlimited"
         };
 
         $scope.privacyArr = [];
@@ -46,7 +50,20 @@ angular.module('createEvent.controllers', ['ionic'])
             alert(data || 'error');
         });
 
-        $scope.change = function () {
+        $scope.periodArr = [];
+        $http.get('json/subscription_payment_period.json').success(function (results) {
+            for (var i = 0; i < results.length; i++) {
+                $scope.periodArr[i] = {
+                    value: results[i].value,
+                    name: results[i].name
+                }
+            }
+            $scope.createEventData.age = $scope.ages[0].value;
+        }).error(function (data) {
+            alert(data || 'error');
+        });
+
+        $scope.changeSelect = function () {
             switch ($scope.createEventData.location) {
                 case 'current':
                     $scope.showAlert()
@@ -66,13 +83,37 @@ angular.module('createEvent.controllers', ['ionic'])
         $ionicModal.fromTemplateUrl('addressEdit.html', {
             scope: $scope
         }).then(function(modal) {
-            $scope.modal = modal;
+            $scope.addressModal = modal;
         });
         $scope.addressEditOpen = function() {
-            $scope.modal.show();
+            $scope.addressModal.show();
         };
         $scope.addressEditClose = function() {
-            $scope.modal.hide();
+            $scope.addressModal.hide();
+        };
+
+        $ionicModal.fromTemplateUrl('restrictions.html', {
+            scope: $scope
+        }).then(function(modal) {
+            $scope.restrictionsModal = modal;
+        });
+        $scope.restrictionsOpen = function() {
+            $scope.restrictionsModal.show();
+        };
+        $scope.restrictionsClose = function() {
+            $scope.restrictionsModal.hide();
+        };
+
+        $ionicModal.fromTemplateUrl('fee.html', {
+            scope: $scope
+        }).then(function(modal) {
+            $scope.feeModal = modal;
+        });
+        $scope.feeOpen = function() {
+            $scope.feeModal.show();
+        };
+        $scope.feeClose = function() {
+            $scope.feeModal.hide();
         };
 
         // Popup Windows
