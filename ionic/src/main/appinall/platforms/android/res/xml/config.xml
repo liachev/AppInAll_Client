@@ -36,10 +36,10 @@
     <feature name="Calendar">
         <param name="android-package" value="nl.xservices.plugins.Calendar" />
     </feature>
-    <feature name="Globalization">
-        <param name="android-package" value="org.apache.cordova.globalization.Globalization" />
-    </feature>
     <feature name="InAppBrowser">
         <param name="android-package" value="org.apache.cordova.inappbrowser.InAppBrowser" />
+    </feature>
+    <feature name="Globalization">
+        <param name="android-package" value="org.apache.cordova.globalization.Globalization" />
     </feature>
 </widget>

@@ -179,6 +179,14 @@ module.exports = [
         "id": "nl.x-services.plugins.calendar.tests"
     },
     {
+        "file": "plugins/cordova-plugin-inappbrowser/www/inappbrowser.js",
+        "id": "cordova-plugin-inappbrowser.inappbrowser",
+        "clobbers": [
+            "cordova.InAppBrowser.open",
+            "window.open"
+        ]
+    },
+    {
         "file": "plugins/org.apache.cordova.globalization/www/GlobalizationError.js",
         "id": "org.apache.cordova.globalization.GlobalizationError",
         "clobbers": [
@@ -191,14 +199,6 @@ module.exports = [
         "clobbers": [
             "navigator.globalization"
         ]
-    },
-    {
-        "file": "plugins/cordova-plugin-inappbrowser/www/inappbrowser.js",
-        "id": "cordova-plugin-inappbrowser.inappbrowser",
-        "clobbers": [
-            "cordova.InAppBrowser.open",
-            "window.open"
-        ]
     }
 ];
 module.exports.metadata = 
@@ -210,8 +210,8 @@ module.exports.metadata =
     "com.phonegap.plugins.facebookconnect": "0.11.0",
     "org.apache.cordova.file": "1.3.3",
     "nl.x-services.plugins.calendar": "4.3.1",
-    "org.apache.cordova.globalization": "0.3.4",
-    "cordova-plugin-inappbrowser": "1.0.1-dev"
+    "cordova-plugin-inappbrowser": "1.0.1-dev",
+    "org.apache.cordova.globalization": "0.3.4"
 }
 // BOTTOM OF METADATA
 });
