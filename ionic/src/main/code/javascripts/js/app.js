@@ -23,7 +23,7 @@ angular.module('starter', [
   'appinall.services'
 ])
 
-.run(function ($ionicPlatform, localStorageService, calendarService, UserSettings) {
+.run(function ($ionicPlatform, localStorageService, calendarService, UserSettings, $translate) {
     $ionicPlatform.ready(function () {
         // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
         // for form inputs)
@@ -33,6 +33,17 @@ angular.module('starter', [
         if (window.StatusBar) {
             // org.apache.cordova.statusbar required
             StatusBar.styleDefault();
+        }
+
+        var firstStart = true; // TODO: detect first app start
+        var settings = localStorageService.get("settings");
+        if (firstStart || settings === null) {
+          UserSettings.saveSettings(null).then(function (defaultSettings) { // get default settings
+            console.debug(defaultSettings);
+            var langKey = defaultSettings ? defaultSettings.language : 'en';
+            console.debug('langKey: ' + langKey);
+            $translate.use(langKey);
+          });
         }
     });
     // Parse initialization for logging to parse.com
@@ -44,11 +55,6 @@ angular.module('starter', [
         logging.log("localStorageService is supported");
     } else {
         logging.log("localStorageService is NOT supported");
-    }
-
-    var firstStart = true; // TODO: detect first app start
-    if (firstStart || localStorageService.get("settings") === null) {
-      UserSettings.saveSettings(null); // get default settings
     }
 })
 
@@ -303,6 +309,7 @@ angular.module('starter', [
           delay: ['$q', '$http', '$rootScope', 'UserSettings', function ($q, $http, $scope, settings) {
             settings.getSettings().then(function (data) {
               $scope.settingsData = data;
+              console.debug(angular.fromJson($scope.settingsData));
             });
             return loadTranslation($q, $http, $scope, 'settings');
           }]

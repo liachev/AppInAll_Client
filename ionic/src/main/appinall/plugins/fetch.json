@@ -9,6 +9,8 @@
         "source": {
             "type": "registry",
             "id": "org.apache.cordova.globalization"
-        }
+        },
+        "is_top_level": true,
+        "variables": {}
     }
 }
