@@ -1,7 +1,7 @@
 {
   "messageForm": {
-    "attach": "attach",
-    "send": "send",
-    "placeholder": "Message"
+    "attach": "Deprecated. See angular-translate",
+    "send": "Deprecated. See angular-translate",
+    "placeholder": "Deprecated. See angular-translate"
   }
 }

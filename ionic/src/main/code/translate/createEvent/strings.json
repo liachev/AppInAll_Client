@@ -1,77 +1,77 @@
 {
   "eventName": {
-    "placeholder": "Type a short distinct event name",
+    "placeholder": "Deprecated. See angular-translate",
 
     "errorMessages": {
-      "required": "Required.",
+      "required": "Deprecated. See angular-translate",
 
-      "pattern": "Only digits and letters allowed."
+      "pattern": "Deprecated. See angular-translate"
     }
   },
 
   "description": {
-    "label": "Description",
+    "label": "Deprecated. See angular-translate",
 
-    "placeholder": "Tell people what's special about this event",
+    "placeholder": "Deprecated. See angular-translate",
 
     "errorMessages": {
-      "required": "Required."
+      "required": "Deprecated. See angular-translate"
     }
   },
 
   "activity": {
-    "placeholder": "Please enter an activity name..."
+    "placeholder": "Deprecated. See angular-translate"
   },
 
   "time": {
-    "start": "Start Time",
-    "end": "End Time"
+    "start": "Deprecated. See angular-translate",
+    "end": "Deprecated. See angular-translate"
   },
 
   "upload_photo": {
-    "label": "Upload Photo"
+    "label": "Deprecated. See angular-translate"
   },
 
   "buttons": {
-    "done": "Done"
+    "done": "Deprecated. See angular-translate"
   },
 
   "list": {
     "location": {
-      "label": "Location",
+      "label": "Deprecated. See angular-translate",
 
-      "currentLoc": "Current Location:",
+      "currentLoc": "Deprecated. See angular-translate",
 
-      "address": "Address",
+      "address": "Deprecated. See angular-translate",
 
-      "online": "Online Event"
+      "online": "Deprecated. See angular-translate"
     },
 
-    "privacy": "Privacy",
+    "privacy": "Deprecated. See angular-translate",
 
-    "gender": "Gender",
+    "gender": "Deprecated. See angular-translate",
 
-    "age_group": "Age Group"
+    "age_group": "Deprecated. See angular-translate"
   },
 
   "restrictions": {
-    "label": "Restrictions",
-    "link": "More"
+    "label": "Deprecated. See angular-translate",
+    "link": "Deprecated. See angular-translate"
   },
 
   "notifications": {
-    "label": "Notifications",
-    "link": "Setup"
+    "label": "Deprecated. See angular-translate",
+    "link": "Deprecated. See angular-translate"
   },
 
   "fee": {
-    "label": "Fee",
-    "link": "Edit"
+    "label": "Deprecated. See angular-translate",
+    "link": "Deprecated. See angular-translate"
   },
 
   "radio": {
-    "buttonPublish": "Publish",
-    "buttonDraft": "Keep as a draft"
+    "buttonPublish": "Deprecated. See angular-translate",
+    "buttonDraft": "Deprecated. See angular-translate"
   },
 
   "modalButtons": {
@@ -81,18 +81,23 @@
   },
 
   "addressModal": {
+<<<<<<< HEAD
     "title": "Address",
 
     "name": "Enter the venue's name",
+=======
+    "name": "Deprecated. See angular-translate",
+>>>>>>> remotes/origin/master
 
-    "address_1": "Address 1",
+    "address_1": "Deprecated. See angular-translate",
 
-    "address_2": "Address 2",
+    "address_2": "Deprecated. See angular-translate",
 
-    "city": "City",
+    "city": "Deprecated. See angular-translate",
 
-    "state": "State",
+    "state": "Deprecated. See angular-translate",
 
+<<<<<<< HEAD
     "zip": "Zip / Postal"
   },
 
@@ -123,6 +128,14 @@
 
         "twoPart": "participants"
       }
+=======
+    "zip": "Deprecated. See angular-translate",
+
+    "buttons": {
+      "cancel": "Deprecated. See angular-translate",
+
+      "apply": "Deprecated. See angular-translate"
+>>>>>>> remotes/origin/master
     }
   },
 

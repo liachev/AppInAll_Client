@@ -1,8 +1,12 @@
 <ion-view view-title="Create Event">
     <ion-nav-buttons side="right">
+<<<<<<< HEAD
         <button class="button" type="submit" ng-disabled="createEventForm.$invalid">
             {{strings.buttons.done}}
         </button>
+=======
+        <button class="button" ng-click="showAlert()" translate="CREATE_EVENT_PAGE.buttons.done"></button>
+>>>>>>> remotes/origin/master
     </ion-nav-buttons>
     <form name="createEventForm" ng-submit="createEventForm.$valid && done()" novalidate>
         <ion-content>
@@ -10,15 +14,14 @@
                 <div class="col">
                     <label class="item item-input">
                         <input type="text" name="eventName" ng-model="createEventData.eventName"
-                               placeholder="{{strings.eventName.placeholder}}" ng-pattern="/^\w*$/" required>
+                               placeholder="{{'CREATE_EVENT_PAGE.eventName.placeholder' | translate}}"
+                               ng-pattern="/^\w*$/" required>
                         <span style="color:red"
                               ng-show="createEventForm.eventName.$submitted || createEventForm.eventName.$touched">
-                            <span ng-show="createEventForm.eventName.$error.required">
-                                {{strings.eventName.errorMessages.required}}
-                            </span>
-                            <span ng-show="createEventForm.eventName.$error.pattern">
-                                {{strings.eventName.errorMessages.pattern}}
-                            </span>
+                            <span ng-show="createEventForm.eventName.$error.required"
+                                  translate="CREATE_EVENT_PAGE.eventName.errorMessages.required"></span>
+                            <span ng-show="createEventForm.eventName.$error.pattern"
+                                  translate="CREATE_EVENT_PAGE.eventName.errorMessages.pattern"></span>
                         </span>
                     </label>
                 </div>
@@ -27,7 +30,8 @@
                     <img class="avatar" ng-src="{{createEventData.avatarSrc}}" alt="{{fileProgress}}">
 
                     <h5>
-                        <a href onclick="createEventForm.file.click()">{{strings.upload_photo.label}}</a>
+                        <a href onclick="createEventForm.file.click()"
+                           translate="CREATE_EVENT_PAGE.upload_photo.label"></a>
 
                         <input id="file" type="file" style="display: none;" ng-on-read-file="uploadPhoto($fileContent)"
                                accept="image/*"/>
@@ -36,32 +40,29 @@
             </div>
 
             <div class="item">
-                <div class="row input-label-left">
-                    {{strings.description.label}}
-                </div>
+                <div class="row input-label-left" translate="CREATE_EVENT_PAGE.description.label"></div>
                 <div class="row">
                     <div class="col">
                         <textarea name="description" ng-model="createEventData.description"
-                                  placeholder="{{strings.description.placeholder}}" required></textarea>
+                                  placeholder="{{'CREATE_EVENT_PAGE.description.placeholder' | translate}}"
+                                  required></textarea>
                             <span style="color:red"
                                   ng-show="createEventForm.description.$submitted || createEventForm.description.$touched">
-                                <span ng-show="createEventForm.description.$error.required">
-                                    {{strings.description.errorMessages.required}}
-                                </span>
+                                <span ng-show="createEventForm.description.$error.required"
+                                      translate="CREATE_EVENT_PAGE.description.errorMessages.required"></span>
                     </span>
                     </div>
                 </div>
             </div>
 
             <label class="item item-input">
-                <input type="text" name="activityName" ng-model="createEventData.activityName" ng-click="showAlert()" readonly
-                       placeholder="{{strings.activity.placeholder}}">
+                <input type="text" name="activityName" ng-model="createEventData.activityName" ng-click="showAlert()"
+                       readonly
+                       placeholder="{{'CREATE_EVENT_PAGE.activity.placeholder' | translate}}">
             </label>
 
             <div class="row">
-                <div class="col">
-                    {{strings.time.start}}
-                </div>
+                <div class="col" translate="CREATE_EVENT_PAGE.time.start"></div>
                 <div class="col">
                     <label class="item item-input">
                         <input id="start" type="datetime-local" ng-model="createEventData.startTime">
@@ -69,13 +70,14 @@
                 </div>
                 <div class="col-10 col-center">
                     <div class="buttons">
-                        <button class="button button-icon ion-calendar" >
+                        <button class="button button-icon ion-calendar">
                         </button>
                     </div>
                 </div>
             </div>
 
             <div class="row">
+<<<<<<< HEAD
             <div class="col">
                 {{strings.time.end}}
             </div>
@@ -88,11 +90,22 @@
                 <div class="buttons">
                     <button class="button button-icon ion-refresh">
                     </button>
+=======
+                <div class="col" translate="CREATE_EVENT_PAGE.time.end"></div>
+                <div class="col">
+                    <input type="text" name="restrictionsStatus" readonly>
+                </div>
+                <div class="col-10 col-center">
+                    <div class="buttons">
+                        <button class="button button-icon ion-refresh" ng-click="showAlert()">
+                        </button>
+                    </div>
+>>>>>>> remotes/origin/master
                 </div>
             </div>
-        </div>
 
             <div class="item item-input item-select">
+<<<<<<< HEAD
                 <div class="input-label">
                     {{strings.list.location.label}}
                 </div>
@@ -100,13 +113,18 @@
                     <option value="current">{{strings.list.location.currentLoc}}</option>
                     <option value="address">{{strings.list.location.address}}</option>
                     <option value="online">{{strings.list.location.online}}</option>
+=======
+                <div class="input-label" translate="CREATE_EVENT_PAGE.list.location.label"></div>
+                <select ng-model="createEventData.location" ng-change="change()">
+                    <option value="current" translate="CREATE_EVENT_PAGE.list.location.currentLoc"></option>
+                    <option value="address" translate="CREATE_EVENT_PAGE.list.location.address"></option>
+                    <option value="online" translate="CREATE_EVENT_PAGE.list.location.online"></option>
+>>>>>>> remotes/origin/master
                 </select>
             </div>
 
             <div class="item item-input item-select">
-                <div class="input-label">
-                    {{strings.list.privacy}}
-                </div>
+                <div class="input-label" translate="CREATE_EVENT_PAGE.list.privacy"></div>
                 <select ng-model="createEventData.privacy">
                     <option ng-repeat="privacy in privacyArr"
                             value="{{privacy.value}}">
@@ -116,9 +134,7 @@
             </div>
 
             <div class="item item-input item-select">
-                <div class="input-label">
-                    {{strings.list.gender}}
-                </div>
+                <div class="input-label" translate="CREATE_EVENT_PAGE.list.gender"></div>
                 <select ng-model="createEventData.gender">
                     <option ng-repeat="gender in genderArr"
                             value="{{gender.value}}">
@@ -128,9 +144,7 @@
             </div>
 
             <div class="item item-input item-select">
-                <div class="input-label">
-                    {{strings.list.age_group}}
-                </div>
+                <div class="input-label" translate="CREATE_EVENT_PAGE.list.age_group"></div>
                 <select ng-model="createEventData.age">
                     <option ng-repeat="age in ages"
                             value="{{age.value}}">
@@ -140,13 +154,12 @@
             </div>
 
             <div class="row">
-                <div class="col">
-                    {{strings.restrictions.label}}
-                </div>
+                <div class="col" translate="CREATE_EVENT_PAGE.restrictions.label"></div>
                 <div class="col">
                     <input type="text" name="restrictionsStatus" ng-model="restrictions" readonly>
                 </div>
                 <div class="col-10 col-center">
+<<<<<<< HEAD
                     <a href ng-click="restrictionsOpen()">{{strings.restrictions.link}}</a>
                 </div>
             </div>
@@ -154,6 +167,21 @@
             <label class="item item-input item-select">
                 <div class="input-label">
                     {{strings.notificationModal.title}}
+=======
+                    <a ng-href="#/app/createEvent" ng-click="showAlert()"
+                       translate="CREATE_EVENT_PAGE.restrictions.link"></a>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col" translate="CREATE_EVENT_PAGE.notifications.label"></div>
+                <div class="col">
+                    <input type="text" name="notificationsStatus" readonly>
+                </div>
+                <div class="col-10 col-center">
+                    <a ng-href="#/app/createEvent" ng-click="showAlert()"
+                       translate="CREATE_EVENT_PAGE.notifications.link"></a>
+>>>>>>> remotes/origin/master
                 </div>
                 <select ng-model="createEventData.notificationSelect">
                     <option value="default">{{strings.notificationModal.selectDefault}}</option>
@@ -164,54 +192,75 @@
             </label>
 
             <div class="row">
-                <div class="col">
-                    {{strings.fee.label}}
-                </div>
+                <div class="col" translate="CREATE_EVENT_PAGE.fee.label"></div>
                 <div class="col">
                     <input type="text" name="feeStatus" ng-model="fee" readonly>
                 </div>
                 <div class="col-10 col-center">
+<<<<<<< HEAD
                     <a href ng-click="feeOpen()">{{strings.fee.link}}</a>
                 </div>
             </div>
 
             <ion-radio ng-model="createEventData.radio" value="publish">{{strings.radio.buttonPublish}}</ion-radio>
             <ion-radio ng-model="createEventData.radio" value="draft">{{strings.radio.buttonDraft}}</ion-radio>
+=======
+                    <a ng-href="#/app/createEvent" ng-click="showAlert()" translate="CREATE_EVENT_PAGE.fee.link"></a>
+                </div>
+            </div>
+
+            <ion-radio ng-model="createEventData.radio" ng-value="'publish'">
+                {{'CREATE_EVENT_PAGE.radio.buttonPublish' | translate}}
+            </ion-radio>
+            <ion-radio ng-model="createEventData.radio" ng-value="'draft'">
+                {{'CREATE_EVENT_PAGE.radio.buttonDraft' | translate}}
+            </ion-radio>
+>>>>>>> remotes/origin/master
 
             <ion-item style="overflow: visible; white-space: normal;">{{createEventData | json:4}}</ion-item>
             <!--Modal Windows-->
             <script id="addressEdit.html" type="text/ng-template">
                 <ion-modal-view>
                     <ion-header-bar class="bar bar-header bar-positive">
+<<<<<<< HEAD
                         <h1 class="title">{{strings.addressModal.title}}</h1>
+=======
+                        <h1 class="title" translate="CREATE_EVENT_PAGE.addressModal.title"></h1>
+>>>>>>> remotes/origin/master
                     </ion-header-bar>
                     <ion-content class="padding">
                         <div class="list">
                             <label class="item item-input">
-                                <input ng-model="createEventData.venueName" type="text" placeholder="{{strings.addressModal.name}}">
+                                <input ng-model="createEventData.venueName" type="text"
+                                       placeholder="{{'CREATE_EVENT_PAGE.addressModal.name' | translate}}">
                             </label>
 
                             <label class="item item-input">
-                                <input ng-model="createEventData.address1" type="text" placeholder="{{strings.addressModal.address_1}}">
+                                <input ng-model="createEventData.address1" type="text"
+                                       placeholder="{{'CREATE_EVENT_PAGE.addressModal.address_1' | translate}}">
                             </label>
 
                             <label class="item item-input">
-                                <input ng-model="createEventData.address2" type="text" placeholder="{{strings.addressModal.address_2}}">
+                                <input ng-model="createEventData.address2" type="text"
+                                       placeholder="{{'CREATE_EVENT_PAGE.addressModal.address_2' | translate}}">
                             </label>
 
                             <label class="item item-input">
-                                <input ng-model="createEventData.city" type="text" placeholder="{{strings.addressModal.city}}">
+                                <input ng-model="createEventData.city" type="text"
+                                       placeholder="{{'CREATE_EVENT_PAGE.addressModal.city' | translate}}">
                             </label>
 
                             <div class="row">
                                 <div class="col">
                                     <label class="item item-input">
-                                        <input ng-model="createEventData.state" type="text" placeholder="{{strings.addressModal.state}}">
+                                        <input ng-model="createEventData.state" type="text"
+                                               placeholder="{{'CREATE_EVENT_PAGE.addressModal.state' | translate}}">
                                     </label>
                                 </div>
                                 <div class="col">
                                     <label class="item item-input">
-                                        <input ng-model="createEventData.zip" type="text" placeholder="{{strings.addressModal.zip}}">
+                                        <input ng-model="createEventData.zip" type="text"
+                                               placeholder="{{'CREATE_EVENT_PAGE.addressModal.zip' | translate}}">
                                     </label>
                                 </div>
                             </div>
@@ -256,6 +305,13 @@
                                 {{strings.restrictionsModal.checkbox.maxSeats}}
                             </ion-checkbox>
 
+<<<<<<< HEAD
+=======
+                            <button class="button button-full button-positive" ng-click="addressEditClose()"
+                                    translate="CREATE_EVENT_PAGE.addressModal.buttons.cancel"></button>
+                            <button class="button button-full button-positive" ng-click="createContact(newUser)"
+                                    translate="CREATE_EVENT_PAGE.addressModal.buttons.apply"></button>
+>>>>>>> remotes/origin/master
                         </div>
                         <button class="button button-full button-positive" ng-click="restrictionsClose()">
                             {{strings.modalButtons.cancel}}</button>
@@ -303,7 +359,6 @@
                     </ion-content>
                 </ion-modal-view>
             </script>
-
         </ion-content>
     </form>
 </ion-view>

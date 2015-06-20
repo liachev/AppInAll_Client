@@ -3,35 +3,30 @@
         <ion-content>
             <div class="list">
                 <label class="item item-input">
-                    <input type="text" name="cardName" ng-model="editPaymentData.cardName"
-                           placeholder="{{strings.cardName.placeholder}}" ng-pattern="/^(\w*\s*)+$/" required>
+                    <input type="text" name="cardName" ng-model="editPaymentData.cardName" required
+                           placeholder="{{'SETTINGS_PAGE.cardName.placeholder' | translate}}"
+                           ng-pattern="/^(\w*\s*)+$/">
                     <span style="color:red"
                           ng-show="editPaymentForm.cardName.$submitted || editPaymentForm.cardName.$touched">
-                        <span ng-show="editPaymentForm.cardName.$error.required">
-                            {{strings.cardName.errorMessages.required}}
-                        </span>
-                        <span ng-show="editPaymentForm.cardName.$error.pattern">
-                            {{strings.cardName.errorMessages.pattern}}
-                        </span>
+                        <span ng-show="editPaymentForm.cardName.$error.required"
+                              translate="SETTINGS_PAGE.cardName.errorMessages.required"></span>
+                        <span ng-show="editPaymentForm.cardName.$error.pattern"
+                              translate="SETTINGS_PAGE.cardName.errorMessages.pattern"></span>
                     </span>
                 </label>
                 <label class="item item-input">
                     <input type="text" ng-model="card.number" cc-number name="cardNumber"
-                           placeholder="{{strings.cardNumber.placeholder}}" required>
+                           placeholder="{{'SETTINGS_PAGE.cardNumber.placeholder' | translate}}" required>
                     <span style="color:red"
                           ng-show="editPaymentForm.cardNumber.$submitted || editPaymentForm.cardNumber.$touched">
-                        <span ng-show="editPaymentForm.cardNumber.$error.required">
-                            {{strings.cardNumber.errorMessages.required}}
-                        </span>
-                        <span ng-show="editPaymentForm.cardNumber.$error.pattern">
-                            {{strings.cardNumber.errorMessages.pattern}}
-                        </span>
+                        <span ng-show="editPaymentForm.cardNumber.$error.required"
+                              translate="SETTINGS_PAGE.cardNumber.errorMessages.required"></span>
+                        <span ng-show="editPaymentForm.cardNumber.$error.pattern"
+                              translate="SETTINGS_PAGE.cardNumber.errorMessages.pattern"></span>
                     </span>
                 </label>
                 <label class="item item-input item-select">
-                    <div class="input-label">
-                        {{strings.exMonth.text}}
-                    </div>
+                    <div class="input-label" translate="SETTINGS_PAGE.exMonth.text"></div>
                     <select>
                         <option selected disabled>MM</option>
                         <option value="01">01</option>
@@ -49,9 +44,7 @@
                     </select>
                 </label>
                 <label class="item item-input item-select">
-                    <div class="input-label">
-                        {{strings.exYear.text}}
-                    </div>
+                    <div class="input-label" translate="SETTINGS_PAGE.exYear.text"></div>
                     <select>
                         <option selected disabled>YYYY</option>
                         <option value="15">2015</option>
@@ -70,35 +63,32 @@
                 <label class="item item-input">
                     <input type="text" name="cardCode" ng-model="card.cvc" cc-cvc
                            cc-type="editPaymentForm.cardNumber.$ccType"
-                           placeholder="{{strings.cardCode.placeholder}}" required>
+                           placeholder="{{'SETTINGS_PAGE.cardCode.placeholder' | translate}}" required>
                     <span style="color:red"
                           ng-show="editPaymentForm.cardCode.$submitted || editPaymentForm.cardCode.$touched">
-                        <span ng-show="editPaymentForm.cardCode.$error.required">
-                            {{strings.cardCode.errorMessages.required}}
-                        </span>
-                        <span ng-show="editPaymentForm.cardCode.$error.pattern">
-                            {{strings.cardCode.errorMessages.pattern}}
-                        </span>
-                        <span ng-show="editPaymentForm.cardCode.$error.minlength">
-                            {{strings.cardCode.errorMessages.minlength}}
-                        </span>
+                        <span ng-show="editPaymentForm.cardCode.$error.required"
+                              translate="SETTINGS_PAGE.cardCode.errorMessages.required"></span>
+                        <span ng-show="editPaymentForm.cardCode.$error.pattern"
+                              translate="SETTINGS_PAGE.cardCode.errorMessages.pattern"></span>
+                        <span ng-show="editPaymentForm.cardCode.$error.minlength"
+                              translate="SETTINGS_PAGE.cardCode.errorMessages.minlength"></span>
                     </span>
                 </label>
                 <label class="item item-input">
                     <input type="text" name="zip" ng-model="editPaymentData.zip"
-                           placeholder="{{strings.zip.placeholder}}" required>
+                           placeholder="{{'SETTINGS_PAGE.zip.placeholder' | translate}}" required>
                     <span style="color:red" ng-show="editPaymentForm.zip.$submitted || editPaymentForm.zip.$touched">
-                        <span ng-show="editPaymentForm.zip.$error.required">
-                            {{strings.zip.errorMessages.required}}
-                        </span>
+                        <span ng-show="editPaymentForm.zip.$error.required"
+                              translate="SETTINGS_PAGE.zip.errorMessages.required"></span>
                     </span>
                 </label>
                 <label class="item item-input">
-                    <input type="text" name="informationPay" placeholder="{{strings.informationPay.text}}" readonly>
+                    <input type="text" name="informationPay"
+                           placeholder="{{'SETTINGS_PAGE.informationPay.text' | translate}}" readonly>
                 </label>
                 <label class="item item-input">
-                    <input type="text" name="confirm" placeholder="{{strings.confirm.text + userData.userEmail}}"
-                           readonly>
+                    <input type="text" name="confirm"
+                           placeholder="{{'SETTINGS_PAGE.confirm.text' | translate:userData}}" readonly>
                 </label>
             </div>
             <div>
@@ -110,17 +100,13 @@
         </ion-content>
         <ion-footer-bar align-title="center" class="bar-positive">
             <div class="buttons" ng-click="cancelButtonClick()">
-                <button class="button button-positive">
-                    {{strings.Buttons.Cancel}}
-                </button>
+                <button class="button button-positive" translate="SETTINGS_PAGE.Buttons.Cancel"></button>
             </div>
             <h1 class="title">&nbsp;</h1>
 
             <div class="buttons">
                 <button class="button button-positive" type="submit"
-                        ng-disabled="editPaymentForm.$invalid">
-                    {{strings.Buttons.Save}}
-                </button>
+                        ng-disabled="editPaymentForm.$invalid" translate="SETTINGS_PAGE.Buttons.Save"></button>
             </div>
         </ion-footer-bar>
     </form>

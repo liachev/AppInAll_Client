@@ -1,30 +1,27 @@
 <ion-view view-title="Settings">
     <ion-content>
         <div class="list">
-            <label class="item item-input" ng-if="userData.isConnectedToFB">
-                {{strings.Connect_with_Facebook.text}}
-            </label>
+            <label class="item item-input" ng-if="userData.isConnectedToFB"
+                   translate="SETTINGS_PAGE.Connect_with_Facebook.text"></label>
             <label class="item item-input">
                 <input type="email" name="useremail" ng-model="userData.userEmail" readonly>
             </label>
             <label class="item item-input" ng-if="!userData.isConnectedToFB">
-                <span class="input-label">{{strings.Password.text}}</span>
+                <span class="input-label" translate="SETTINGS_PAGE.Password.text"></span>
                 <input type="password" name="userpsw" ng-model="userData.userPsw" readonly>
             </label>
 
             <div class="item">
-                <a ng-href="#/app/update_signup">{{strings.Update.text}}</a>
+                <a ng-href="#/app/update_signup" translate="SETTINGS_PAGE.Update.text"></a>
             </div>
             <div class="item" ng-controller="AgreementsCtrl">
-                <a href ng-click="getAgreement('Terms of Use')">{{strings.Agree.Terms_of_Use}}</a>
-                <a href ng-click="getAgreement('Privacy Policy')">{{strings.Agree.Privacy_Policy}}</a>
+                <a href ng-click="getAgreement('Terms of Use')" translate="SETTINGS_PAGE.Agree.Terms_of_Use"></a>
+                <a href ng-click="getAgreement('Privacy Policy')" translate="SETTINGS_PAGE.Agree.Privacy_Policy"></a>
             </div>
         </div>
         <div class="list">
             <label class="item item-input item-select">
-                <div class="input-label">
-                    {{strings.Regional.Time_Zone}}
-                </div>
+                <div class="input-label" translate="SETTINGS_PAGE.Regional.Time_Zone"></div>
                 <select ng-model="settingsData.timezone">
                     <option ng-selected="{{settingsData.timezone === timezone.abbr}}"
                             ng-repeat="timezone in settingsData.timezones"
@@ -34,9 +31,7 @@
                 </select>
             </label>
             <label class="item item-input item-select">
-                <div class="input-label">
-                    {{strings.Regional.Date_Format}}
-                </div>
+                <div class="input-label" translate="SETTINGS_PAGE.Regional.Date_Format"></div>
                 <select ng-model="settingsData.date">
                     <option ng-selected="{{format.code === settingsData.date}}"
                             ng-repeat="format in settingsData.formats"
@@ -46,10 +41,8 @@
                 </select>
             </label>
             <label class="item item-input item-select">
-                <div class="input-label">
-                    {{strings.Regional.Language}}
-                </div>
-                <select ng-model="settingsData.language">
+                <div class="input-label" translate="SETTINGS_PAGE.Regional.Language"></div>
+                <select ng-model="settingsData.language" ng-change="changeLanguage()">
                     <option ng-selected="{{language.code === settingsData.language}}"
                             ng-repeat="language in settingsData.languages"
                             value="{{language.code}}">
@@ -58,27 +51,21 @@
                 </select>
             </label>
             <label class="item item-input item-select">
-                <div class="input-label">
-                    {{strings.Regional.Distance}}
-                </div>
+                <div class="input-label" translate="SETTINGS_PAGE.Regional.Distance"></div>
                 <select ng-model="settingsData.distance">
-                    <option value="miles">{{strings.Regional.Miles}}</option>
-                    <option value="km">{{strings.Regional.Km}}</option>
+                    <option value="miles" translate="SETTINGS_PAGE.Regional.Miles"></option>
+                    <option value="km" translate="SETTINGS_PAGE.Regional.Km"></option>
                 </select>
             </label>
             <label class="item item-input item-select">
-                <div class="input-label">
-                    {{strings.Regional.Time_Format}}
-                </div>
+                <div class="input-label" translate="SETTINGS_PAGE.Regional.Time_Format"></div>
                 <select ng-model="settingsData.timeformat">
-                    <option value="am_pm">{{strings.Regional.AM_PM}}</option>
-                    <option value="military">{{strings.Regional.Military}}</option>
+                    <option value="am_pm" translate="SETTINGS_PAGE.Regional.AM_PM"></option>
+                    <option value="military" translate="SETTINGS_PAGE.Regional.Military"></option>
                 </select>
             </label>
             <label class="item item-input item-select">
-                <div class="input-label">
-                    {{strings.Regional.Currency}}
-                </div>
+                <div class="input-label" translate="SETTINGS_PAGE.Regional.Currency"></div>
                 <select ng-model="settingsData.currency">
                     <option ng-selected="{{currency.code === settingsData.currency}}"
                             ng-repeat="currency in settingsData.currencies"
@@ -88,15 +75,12 @@
                 </select>
             </label>
             <label class="item">
-                <button ng-click="saveButtonClick()">
-                    {{strings.Save.text}}
+                <button ng-click="saveButtonClick()" translate="SETTINGS_PAGE.Save.text">
                 </button>
             </label>
         </div>
         <div class="item">
-            <div class="row input-label">
-                {{strings.Payment.text}}
-            </div>
+            <div class="row input-label" translate="SETTINGS_PAGE.Payment.text"></div>
             <div class="row">
                 <div class="col">
                     <input type="text" ng-model="card.type" name="cardtype" readonly>
@@ -105,7 +89,7 @@
                     <input type="text" ng-model="card.number" name="cardnumber" readonly>
                 </div>
                 <div class="col-10 col-center">
-                    <a ng-href="#/app/edit_payment">{{strings.Payment.edit}}</a>
+                    <a ng-href="#/app/edit_payment" translate="SETTINGS_PAGE.Payment.edit"></a>
                 </div>
             </div>
         </div>
