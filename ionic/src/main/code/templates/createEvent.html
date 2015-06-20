@@ -1,6 +1,12 @@
 <ion-view view-title="Create Event">
     <ion-nav-buttons side="right">
+<<<<<<< HEAD
+        <button class="button" type="submit" ng-disabled="createEventForm.$invalid">
+            {{strings.buttons.done}}
+        </button>
+=======
         <button class="button" ng-click="showAlert()" translate="CREATE_EVENT_PAGE.buttons.done"></button>
+>>>>>>> remotes/origin/master
     </ion-nav-buttons>
     <form name="createEventForm" ng-submit="createEventForm.$valid && done()" novalidate>
         <ion-content>
@@ -59,7 +65,7 @@
                 <div class="col" translate="CREATE_EVENT_PAGE.time.start"></div>
                 <div class="col">
                     <label class="item item-input">
-                        <input id="start" type="datetime-local">
+                        <input id="start" type="datetime-local" ng-model="createEventData.startTime">
                     </label>
                 </div>
                 <div class="col-10 col-center">
@@ -71,6 +77,20 @@
             </div>
 
             <div class="row">
+<<<<<<< HEAD
+            <div class="col">
+                {{strings.time.end}}
+            </div>
+            <div class="col">
+                <label class="item item-input">
+                    <input id="end" type="datetime-local" ng-model="createEventData.endTime">
+                </label>
+            </div>
+            <div class="col-10 col-center">
+                <div class="buttons">
+                    <button class="button button-icon ion-refresh">
+                    </button>
+=======
                 <div class="col" translate="CREATE_EVENT_PAGE.time.end"></div>
                 <div class="col">
                     <input type="text" name="restrictionsStatus" readonly>
@@ -80,15 +100,26 @@
                         <button class="button button-icon ion-refresh" ng-click="showAlert()">
                         </button>
                     </div>
+>>>>>>> remotes/origin/master
                 </div>
             </div>
 
             <div class="item item-input item-select">
+<<<<<<< HEAD
+                <div class="input-label">
+                    {{strings.list.location.label}}
+                </div>
+                <select ng-model="createEventData.location" ng-change="changeSelect()">
+                    <option value="current">{{strings.list.location.currentLoc}}</option>
+                    <option value="address">{{strings.list.location.address}}</option>
+                    <option value="online">{{strings.list.location.online}}</option>
+=======
                 <div class="input-label" translate="CREATE_EVENT_PAGE.list.location.label"></div>
                 <select ng-model="createEventData.location" ng-change="change()">
                     <option value="current" translate="CREATE_EVENT_PAGE.list.location.currentLoc"></option>
                     <option value="address" translate="CREATE_EVENT_PAGE.list.location.address"></option>
                     <option value="online" translate="CREATE_EVENT_PAGE.list.location.online"></option>
+>>>>>>> remotes/origin/master
                 </select>
             </div>
 
@@ -125,9 +156,18 @@
             <div class="row">
                 <div class="col" translate="CREATE_EVENT_PAGE.restrictions.label"></div>
                 <div class="col">
-                    <input type="text" name="restrictionsStatus" readonly>
+                    <input type="text" name="restrictionsStatus" ng-model="restrictions" readonly>
                 </div>
                 <div class="col-10 col-center">
+<<<<<<< HEAD
+                    <a href ng-click="restrictionsOpen()">{{strings.restrictions.link}}</a>
+                </div>
+            </div>
+
+            <label class="item item-input item-select">
+                <div class="input-label">
+                    {{strings.notificationModal.title}}
+=======
                     <a ng-href="#/app/createEvent" ng-click="showAlert()"
                        translate="CREATE_EVENT_PAGE.restrictions.link"></a>
                 </div>
@@ -141,15 +181,30 @@
                 <div class="col-10 col-center">
                     <a ng-href="#/app/createEvent" ng-click="showAlert()"
                        translate="CREATE_EVENT_PAGE.notifications.link"></a>
+>>>>>>> remotes/origin/master
                 </div>
-            </div>
+                <select ng-model="createEventData.notificationSelect">
+                    <option value="default">{{strings.notificationModal.selectDefault}}</option>
+                    <option value="01">1</option>
+                    <option value="02">2</option>
+                    <option value="03">3</option>
+                </select>
+            </label>
 
             <div class="row">
                 <div class="col" translate="CREATE_EVENT_PAGE.fee.label"></div>
                 <div class="col">
-                    <input type="text" name="feeStatus" readonly>
+                    <input type="text" name="feeStatus" ng-model="fee" readonly>
                 </div>
                 <div class="col-10 col-center">
+<<<<<<< HEAD
+                    <a href ng-click="feeOpen()">{{strings.fee.link}}</a>
+                </div>
+            </div>
+
+            <ion-radio ng-model="createEventData.radio" value="publish">{{strings.radio.buttonPublish}}</ion-radio>
+            <ion-radio ng-model="createEventData.radio" value="draft">{{strings.radio.buttonDraft}}</ion-radio>
+=======
                     <a ng-href="#/app/createEvent" ng-click="showAlert()" translate="CREATE_EVENT_PAGE.fee.link"></a>
                 </div>
             </div>
@@ -160,12 +215,18 @@
             <ion-radio ng-model="createEventData.radio" ng-value="'draft'">
                 {{'CREATE_EVENT_PAGE.radio.buttonDraft' | translate}}
             </ion-radio>
+>>>>>>> remotes/origin/master
 
+            <ion-item style="overflow: visible; white-space: normal;">{{createEventData | json:4}}</ion-item>
             <!--Modal Windows-->
             <script id="addressEdit.html" type="text/ng-template">
                 <ion-modal-view>
                     <ion-header-bar class="bar bar-header bar-positive">
+<<<<<<< HEAD
+                        <h1 class="title">{{strings.addressModal.title}}</h1>
+=======
                         <h1 class="title" translate="CREATE_EVENT_PAGE.addressModal.title"></h1>
+>>>>>>> remotes/origin/master
                     </ion-header-bar>
                     <ion-content class="padding">
                         <div class="list">
@@ -203,12 +264,98 @@
                                     </label>
                                 </div>
                             </div>
+                        </div>
 
+                        <button class="button button-full button-positive" ng-click="addressEditClose()">
+                            {{strings.modalButtons.cancel}}</button>
+                        <button class="button button-full button-positive" ng-click="addressEditApply()>
+                            {{strings.modalButtons.apply}}</button>
+                    </ion-content>
+                </ion-modal-view>
+            </script>
+
+            <script id="restrictions.html" type="text/ng-template">
+                <ion-modal-view>
+                    <ion-header-bar class="bar bar-header bar-positive">
+                        <h1 class="title">{{strings.restrictionsModal.title}}</h1>
+                    </ion-header-bar>
+                    <ion-content class="padding">
+                        <div class="list">
+                            <ion-checkbox ng-model="createEventData.IsCheckedRequiresApproval">
+                                {{strings.restrictionsModal.checkbox.requires_approval}}
+                            </ion-checkbox>
+
+                            <div class="item item-divider">
+                                {{strings.restrictionsModal.radio.label}}
+                            </div>
+
+                            <ion-radio ng-model="createEventData.IsCheckedSeats" value="unlimited">
+                                {{strings.restrictionsModal.radio.radioUnlimited}}
+                            </ion-radio>
+
+                            <ion-radio ng-model="createEventData.IsCheckedSeats" value="limited">
+                                {{strings.restrictionsModal.radio.radioMax.onePart}}
+                            </ion-radio>
+
+                            <input type="number" ng-model="createEventData.seatsValue" placeholder="100" ng-disabled="createEventData.IsCheckedSeats !== 'limited'">
+
+                            {{strings.restrictionsModal.radio.radioMax.twoPart}}
+
+                            <ion-checkbox ng-model="createEventData.IsCheckedShowNumber" ng-show="createEventData.IsCheckedSeats == 'limited'">
+                                {{strings.restrictionsModal.checkbox.maxSeats}}
+                            </ion-checkbox>
+
+<<<<<<< HEAD
+=======
                             <button class="button button-full button-positive" ng-click="addressEditClose()"
                                     translate="CREATE_EVENT_PAGE.addressModal.buttons.cancel"></button>
                             <button class="button button-full button-positive" ng-click="createContact(newUser)"
                                     translate="CREATE_EVENT_PAGE.addressModal.buttons.apply"></button>
+>>>>>>> remotes/origin/master
                         </div>
+                        <button class="button button-full button-positive" ng-click="restrictionsClose()">
+                            {{strings.modalButtons.cancel}}</button>
+
+                        <button class="button button-full button-positive" ng-click="restrictionsApply()">
+                            {{strings.modalButtons.apply}}</button>
+                    </ion-content>
+                </ion-modal-view>
+            </script>
+
+            <script id="fee.html" type="text/ng-template">
+                <ion-modal-view>
+                    <ion-content>
+                        <div class="list">
+                            <ion-radio ng-model="createEventData.IsCheckedFee" value="free">{{strings.feeModal.radio.free}}</ion-radio>
+
+                            <ion-radio ng-model="createEventData.IsCheckedFee" value="one_time_payment">
+                                {{strings.feeModal.radio.one_time_payment}}
+                            </ion-radio>
+
+                            <input type="number" ng-model="createEventData.OneTimePrise" ng-disabled="createEventData.IsCheckedFee !== 'one_time_payment'">
+
+                            <ion-radio ng-model="createEventData.IsCheckedFee" value="subscription_payment">
+                                {{strings.feeModal.radio.Subscription.text}}
+                            </ion-radio>
+
+                            <input type="number" ng-model="createEventData.SubscriptionPrise" ng-disabled="createEventData.IsCheckedFee !== 'subscription_payment'">
+
+                            <div class="item item-input item-select">
+                                <div class="input-label">
+                                    {{strings.feeModal.radio.Subscription.every}}
+                                </div>
+                                <select ng-model="createEventData.paymentPeriod"
+                                        ng-disabled="createEventData.IsCheckedFee !== 'subscription_payment'"
+                                        ng-options="period.name for period in periodArr track by period.value">
+                                </select>
+                            </div>
+                        </div>
+
+                        <button class="button button-full button-positive" ng-click="feeClose()">
+                            {{strings.modalButtons.cancel}}</button>
+
+                        <button class="button button-full button-positive" ng-click="feeApply()">
+                            {{strings.modalButtons.apply}}</button>
                     </ion-content>
                 </ion-modal-view>
             </script>

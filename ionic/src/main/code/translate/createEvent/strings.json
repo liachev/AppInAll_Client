@@ -74,8 +74,20 @@
     "buttonDraft": "Deprecated. See angular-translate"
   },
 
+  "modalButtons": {
+    "cancel": "Cancel",
+
+    "apply": "Apply"
+  },
+
   "addressModal": {
+<<<<<<< HEAD
+    "title": "Address",
+
+    "name": "Enter the venue's name",
+=======
     "name": "Deprecated. See angular-translate",
+>>>>>>> remotes/origin/master
 
     "address_1": "Deprecated. See angular-translate",
 
@@ -85,13 +97,75 @@
 
     "state": "Deprecated. See angular-translate",
 
+<<<<<<< HEAD
+    "zip": "Zip / Postal"
+  },
+
+  "restrictionsModal": {
+    "title": "Restrictions",
+
+    "checkbox": {
+      "requires_approval": "Requires Approval",
+
+      "maxSeats": "Show the number of remaining seats on the join page",
+
+      "allowToBring": {
+        "label": "Allow to bring",
+
+        "participants": "participants",
+
+        "guests": "guests"
+      }
+    },
+
+    "radio": {
+      "label": "Total seats",
+
+      "radioUnlimited": "Unlimited",
+
+      "radioMax": {
+        "onePart": "Maximum is",
+
+        "twoPart": "participants"
+      }
+=======
     "zip": "Deprecated. See angular-translate",
 
     "buttons": {
       "cancel": "Deprecated. See angular-translate",
 
       "apply": "Deprecated. See angular-translate"
+>>>>>>> remotes/origin/master
     }
-}
+  },
 
+  "notificationModal": {
+    "title": "Notifications",
+
+    "select": "Send notifications",
+
+    "selectDefault": "Never",
+
+    "checkbox": {
+      "first": "A notification to participants who have responded",
+
+      "second": "RSVP notification to participants who have NOT responded"
+    }
+  },
+
+  "feeModal": {
+    "title": "Fee",
+
+    "radio": {
+      "free": "Free",
+
+      "one_time_payment": "One time payment of $",
+
+      "Subscription": {
+        "text": "Subscription of $",
+
+        "every": "every"
+      }
+    }
+  }
 }
