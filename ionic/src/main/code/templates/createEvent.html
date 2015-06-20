@@ -1,6 +1,6 @@
 <ion-view view-title="Create Event">
     <ion-nav-buttons side="right">
-        <button class="button" ng-click="showAlert()">
+        <button class="button" type="submit" ng-disabled="createEventForm.$invalid">
             {{strings.buttons.done}}
         </button>
     </ion-nav-buttons>
@@ -144,10 +144,10 @@
                     {{strings.restrictions.label}}
                 </div>
                 <div class="col">
-                    <input type="text" name="restrictionsStatus" readonly>
+                    <input type="text" name="restrictionsStatus" ng-model="restrictions" readonly>
                 </div>
                 <div class="col-10 col-center">
-                    <a ng-href="#" ng-click="restrictionsOpen()">{{strings.restrictions.link}}</a>
+                    <a href ng-click="restrictionsOpen()">{{strings.restrictions.link}}</a>
                 </div>
             </div>
 
@@ -168,17 +168,17 @@
                     {{strings.fee.label}}
                 </div>
                 <div class="col">
-                    <input type="text" name="feeStatus" readonly>
+                    <input type="text" name="feeStatus" ng-model="fee" readonly>
                 </div>
                 <div class="col-10 col-center">
-                    <a ng-href="#" ng-click="feeOpen()">{{strings.fee.link}}</a>
+                    <a href ng-click="feeOpen()">{{strings.fee.link}}</a>
                 </div>
             </div>
 
             <ion-radio ng-model="createEventData.radio" value="publish">{{strings.radio.buttonPublish}}</ion-radio>
             <ion-radio ng-model="createEventData.radio" value="draft">{{strings.radio.buttonDraft}}</ion-radio>
 
-
+            <ion-item style="overflow: visible; white-space: normal;">{{createEventData | json:4}}</ion-item>
             <!--Modal Windows-->
             <script id="addressEdit.html" type="text/ng-template">
                 <ion-modal-view>
@@ -219,7 +219,7 @@
 
                         <button class="button button-full button-positive" ng-click="addressEditClose()">
                             {{strings.modalButtons.cancel}}</button>
-                        <button class="button button-full button-positive">
+                        <button class="button button-full button-positive" ng-click="addressEditApply()>
                             {{strings.modalButtons.apply}}</button>
                     </ion-content>
                 </ion-modal-view>
@@ -260,7 +260,7 @@
                         <button class="button button-full button-positive" ng-click="restrictionsClose()">
                             {{strings.modalButtons.cancel}}</button>
 
-                        <button class="button button-full button-positive">
+                        <button class="button button-full button-positive" ng-click="restrictionsApply()">
                             {{strings.modalButtons.apply}}</button>
                     </ion-content>
                 </ion-modal-view>
@@ -284,23 +284,21 @@
 
                             <input type="number" ng-model="createEventData.SubscriptionPrise" ng-disabled="createEventData.IsCheckedFee !== 'subscription_payment'">
 
-                            {{strings.feeModal.radio.Subscription.every}}
-
                             <div class="item item-input item-select">
-                                <select ng-model="createEventData.paymentPeriod" ng-disabled="createEventData.IsCheckedFee !== 'subscription_payment'">
-                                    <option ng-repeat="period in periodArr"
-                                            value="{{period.value}}">
-                                        {{period.name}}
-                                    </option>
+                                <div class="input-label">
+                                    {{strings.feeModal.radio.Subscription.every}}
+                                </div>
+                                <select ng-model="createEventData.paymentPeriod"
+                                        ng-disabled="createEventData.IsCheckedFee !== 'subscription_payment'"
+                                        ng-options="period.name for period in periodArr track by period.value">
                                 </select>
                             </div>
                         </div>
 
-
                         <button class="button button-full button-positive" ng-click="feeClose()">
                             {{strings.modalButtons.cancel}}</button>
 
-                        <button class="button button-full button-positive">
+                        <button class="button button-full button-positive" ng-click="feeApply()">
                             {{strings.modalButtons.apply}}</button>
                     </ion-content>
                 </ion-modal-view>
